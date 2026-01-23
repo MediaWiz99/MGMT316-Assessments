@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGMT 316 Assessment Portfolio | Chapman University</title>
+    <style>
+        :root { --chapman-blue: #00205B; --chapman-gold: #C4A000; --gold-light: #F5E6A3; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #00205B 0%, #1a3a7a 100%); 
+            min-height: 100vh; 
+            padding: 40px 20px; 
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        .header { 
+            text-align: center; 
+            color: white; 
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid var(--chapman-gold);
+        }
+        .header .institution { 
+            font-size: 0.95em; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        .header .college { 
+            color: var(--chapman-gold); 
+            font-size: 1em; 
+            margin-bottom: 20px;
+        }
+        .header h1 { 
+            font-size: 2.4em; 
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .header .subtitle { 
+            color: var(--gold-light); 
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+        
+        .instructions {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--chapman-gold);
+        }
+        .instructions h2 {
+            color: var(--chapman-blue);
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+        .instructions ol {
+            margin-left: 20px;
+            color: #333;
+            line-height: 1.8;
+        }
+        .instructions code {
+            background: #e8edf5;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--chapman-blue);
+        }
+        
+        .section-title { 
+            color: var(--chapman-gold); 
+            font-size: 1.1em; 
+            margin: 35px 0 18px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(196, 160, 0, 0.4);
+        }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 18px; 
+        }
+        
+        .card { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 22px 25px; 
+            text-decoration: none; 
+            color: #1a1a2e; 
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e0e0e0;
+            display: block;
+        }
+        .card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: var(--chapman-gold);
+        }
+        .card h3 { 
+            color: var(--chapman-blue); 
+            margin-bottom: 8px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.1em;
+        }
+        .card p { 
+            font-size: 0.85em; 
+            color: #666;
+            line-height: 1.4;
+        }
+        .card .code-prefix {
+            font-family: monospace;
+            background: #e8edf5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            color: var(--chapman-blue);
+            margin-left: auto;
+        }
+        
+        .tracker-card { 
+            background: linear-gradient(135deg, var(--chapman-gold) 0%, #d4b000 100%);
+            border: none;
+            grid-column: 1 / -1;
+        }
+        .tracker-card h3, .tracker-card p { 
+            color: var(--chapman-blue); 
+        }
+        .tracker-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(196, 160, 0, 0.4);
+        }
+        
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: var(--gold-light);
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8em; }
+            .grid { grid-template-columns: 1fr; }
+            .instructions { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="institution">Chapman University</div>
+            <div class="college">Argyros College of Business and Economics</div>
+            <h1>📊 MGMT 316 Assessment Portfolio</h1>
+            <div class="subtitle">Personal Self-Awareness & Leadership Development</div>
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 How to Complete Your Assessments</h2>
+            <ol>
+                <li>Click any assessment below to open it in this window</li>
+                <li>Enter your <strong>full name</strong> and <strong>today's date</strong></li>
+                <li>Answer all questions honestly — there are no right or wrong answers</li>
+                <li>Click <strong>"View Results"</strong> to see your personalized profile</li>
+                <li>Note your <strong>Tracker Code</strong> (shown in the blue summary box, e.g., <code>LSA-CoDe-H85</code>)</li>
+                <li>Click <strong>"Download PDF"</strong> to save your results</li>
+                <li>After completing all 22 assessments, use the <strong>Assessment Tracker</strong> below to compile your complete profile</li>
+            </ol>
+        </div>
+        
+        <h2 class="section-title">Core Leadership Assessments</h2>
+        <div class="grid">
+            <a href="Leadership-Style-Assessment-PDFFix.html" class="card">
+                <h3>👑 Leadership Style <span class="code-prefix">LSA</span></h3>
+                <p>Discover your situational leadership approach using Hersey & Blanchard's model</p>
+            </a>
+            <a href="Communication-Style-Assessment-PDFFix.html" class="card">
+                <h3>💬 Communication Style <span class="code-prefix">CSA</span></h3>
+                <p>Identify how you prefer to give and receive information</p>
+            </a>
+            <a href="Conflict-Management-Fix.html" class="card">
+                <h3>⚔️ Conflict Management <span class="code-prefix">CMA</span></h3>
+                <p>Understand your conflict resolution approach using Thomas-Kilmann TKI</p>
+            </a>
+            <a href="EQ-Assessment-Fix.html" class="card">
+                <h3>❤️ Emotional Intelligence <span class="code-prefix">EIA</span></h3>
+                <p>Measure your EQ across Goleman's five dimensions</p>
+            </a>
+            <a href="Decision-Making-Style-Fix.html" class="card">
+                <h3>🎯 Decision-Making Style <span class="code-prefix">DMS</span></h3>
+                <p>Learn how you approach decisions using Rowe & Boulgarides framework</p>
+            </a>
+            <a href="Motivation-Style-Fix.html" class="card">
+                <h3>🔥 Motivation Style <span class="code-prefix">MSA</span></h3>
+                <p>Discover your primary motivators using McClelland's Acquired Needs</p>
+            </a>
+        </div>
+        
+        <h2 class="section-title">Behavioral & Interpersonal Assessments</h2>
+        <div class="grid">
+            <a href="Stress-Management-Fix.html" class="card">
+                <h3>🧘 Stress Management <span class="code-prefix">SMS</span></h3>
+                <p>Identify your coping strategies using Lazarus & Folkman's framework</p>
+            </a>
+            <a href="Change-Readiness-Fix.html" class="card">
+                <h3>🔄 Change Readiness <span class="code-prefix">CRA</span></h3>
+                <p>Assess your adaptability using Rogers' Diffusion of Innovations</p>
+            </a>
+            <a href="Influence-Style-Fix.html" class="card">
+                <h3>🎭 Influence Style <span class="code-prefix">ISA</span></h3>
+                <p>Discover how you persuade others using Cohen & Bradford's model</p>
+            </a>
+            <a href="Learning-Style-Assessment-Fix.html" class="card">
+                <h3>📚 Learning Style <span class="code-prefix">LRN</span></h3>
+                <p>Understand how you learn best using Kolb's Learning Cycle</p>
+            </a>
+            <a href="Grit-Assessment-Fix.html" class="card">
+                <h3>💪 Grit Assessment <span class="code-prefix">GRT</span></h3>
+                <p>Measure your passion and perseverance using Duckworth's Grit Scale</p>
+            </a>
+            <a href="Psychological-Safety-Assessment-PDFFix.html" class="card">
+                <h3>🛡️ Psychological Safety <span class="code-prefix">PSA</span></h3>
+                <p>Evaluate team safety climate using Edmondson's research</p>
+            </a>
+        </div>
+        
+        <h2 class="section-title">Strategic Thinking Assessments</h2>
+        <div class="grid">
+            <a href="Systems-Thinking-Fix.html" class="card">
+                <h3>🔄 Systems Thinking <span class="code-prefix">SYS</span></h3>
+                <p>Assess your ability to see interconnections using Senge's Fifth Discipline</p>
+            </a>
+            <a href="Strategic-Thinking-Fix.html" class="card">
+                <h3>♟️ Strategic Thinking <span class="code-prefix">STA</span></h3>
+                <p>Evaluate your strategic planning capabilities</p>
+            </a>
+            <a href="Critical-Thinking-Fix.html" class="card">
+                <h3>🧠 Critical Thinking <span class="code-prefix">CTA</span></h3>
+                <p>Measure analytical skills using Paul & Elder Framework</p>
+            </a>
+            <a href="Entrepreneurial-Orientation-Fix.html" class="card">
+                <h3>🚀 Entrepreneurial Orientation <span class="code-prefix">EOA</span></h3>
+                <p>Assess your entrepreneurial mindset using Lumpkin & Dess model</p>
+            </a>
+            <a href="Risk-Tolerance-Fix.html" class="card">
+                <h3>🎲 Risk Tolerance <span class="code-prefix">RTA</span></h3>
+                <p>Understand your risk preferences using DOSPERT Framework</p>
+            </a>
+            <a href="Innovation-Mindset-Fix.html" class="card">
+                <h3>💡 Innovation Mindset <span class="code-prefix">IMA</span></h3>
+                <p>Evaluate your innovation approach using Design Thinking principles</p>
+            </a>
+        </div>
+        
+        <h2 class="section-title">Identity & Values Assessments</h2>
+        <div class="grid">
+            <a href="Management-Personality-Fix.html" class="card">
+                <h3>🧠 Management Personality <span class="code-prefix">MPA</span></h3>
+                <p>Discover your management style quadrant</p>
+            </a>
+            <a href="Values-Discovery-Fix.html" class="card">
+                <h3>💎 Values Discovery <span class="code-prefix">VDA</span></h3>
+                <p>Identify your core personal values that guide decisions</p>
+            </a>
+            <a href="Business-Ethics-Fix.html" class="card">
+                <h3>⚖️ Business Ethics <span class="code-prefix">BEA</span></h3>
+                <p>Understand your ethical decision-making framework</p>
+            </a>
+            <a href="Team-Player-Fix.html" class="card">
+                <h3>🤝 Team Player Style <span class="code-prefix">TPA</span></h3>
+                <p>Identify your team role using Parker's Team Player Survey</p>
+            </a>
+        </div>
+        
+        <h2 class="section-title">Portfolio Compilation Tool</h2>
+        <div class="grid">
+            <a href="Assessment-Tracker-MGMT316.html" class="card tracker-card">
+                <h3>📊 Assessment Tracker — Compile Your Complete Profile</h3>
+                <p>Enter all 22 tracker codes to generate your combined SWOT analysis, identify patterns across assessments, and download a comprehensive PDF report of your leadership development portfolio.</p>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>MGMT 316: Management in Organizations | Professor Chip Henderson</p>
+            <p>© Chapman University — Argyros College of Business and Economics</p>
+        </div>
+    </div>
+</body>
+</html>

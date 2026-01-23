@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Tolerance Assessment | Chapman University</title>
+    <style>
+        :root { --chapman-blue: #00205B; --chapman-gold: #C4A000; --gold-light: #F5E6A3; --blue-light: #E8EDF5; --blue-medium: #1A3A7A; --text-primary: #1a1a2e; --text-secondary: #4a4a5a; --white: #ffffff; --financial: #1565C0; --career: #2E7D32; --social: #C62828; --physical: #7B1FA2; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.7; color: var(--text-primary); background: linear-gradient(135deg, var(--chapman-blue), var(--blue-medium)); min-height: 100vh; padding: 20px; }
+        .container { max-width: 950px; margin: 0 auto; background: var(--white); border-radius: 16px; box-shadow: 0 8px 32px rgba(0,32,91,0.18); overflow: hidden; }
+        .header { background: linear-gradient(135deg, var(--chapman-blue), var(--blue-medium)); color: var(--white); padding: 40px 30px; text-align: center; position: relative; }
+        .header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--chapman-gold), var(--gold-light), var(--chapman-gold)); }
+        .institution { font-size: 0.95em; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; }
+        .college { font-size: 1.1em; color: var(--chapman-gold); margin: 5px 0 20px; font-weight: 600; }
+        h1 { font-size: 2.4em; font-weight: 700; margin-bottom: 12px; }
+        .subtitle { font-size: 1.1em; font-style: italic; color: var(--gold-light); }
+        .content { padding: 35px; }
+        .hidden { display: none !important; }
+        .intro-section { background: linear-gradient(135deg, var(--blue-light), #f8f9fc); border-radius: 14px; padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--chapman-blue); }
+        .intro-section h2 { color: var(--chapman-blue); font-size: 1.4em; margin-bottom: 15px; }
+        .intro-section p { color: var(--text-secondary); margin-bottom: 15px; }
+        .dimensions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 25px 0; }
+        .dim-preview { padding: 20px 12px; border-radius: 12px; text-align: center; color: var(--white); }
+        .dim-preview.financial { background: linear-gradient(135deg, var(--financial), #1976D2); }
+        .dim-preview.career { background: linear-gradient(135deg, var(--career), #43A047); }
+        .dim-preview.social { background: linear-gradient(135deg, var(--social), #D32F2F); }
+        .dim-preview.physical { background: linear-gradient(135deg, var(--physical), #9C27B0); }
+        .dim-preview .icon { font-size: 1.8em; margin-bottom: 6px; }
+        .dim-preview .name { font-weight: 700; font-size: 0.75em; }
+        .quote-box { background: linear-gradient(135deg, #fffef8, #fef9e7); border-left: 5px solid var(--chapman-gold); padding: 25px; margin: 25px 0; border-radius: 0 12px 12px 0; }
+        .quote-box blockquote { font-style: italic; color: var(--text-secondary); }
+        .quote-box cite { display: block; margin-top: 12px; color: var(--chapman-blue); font-weight: 600; font-style: normal; }
+        .assessment-meta { display: flex; gap: 25px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,32,91,0.1); flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
+        .meta-icon { width: 28px; height: 28px; background: var(--chapman-blue); color: var(--white); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .student-info { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
+        .input-group label { font-weight: 600; margin-bottom: 8px; color: var(--chapman-blue); display: block; }
+        .input-group input { padding: 14px 16px; border: 2px solid #e1e5eb; border-radius: 10px; font-size: 16px; width: 100%; }
+        .instructions-box { background: linear-gradient(135deg, #fffef8, #fef9e7); border: 2px solid var(--chapman-gold); border-radius: 12px; padding: 25px; margin-bottom: 30px; }
+        .instructions-box h3 { color: var(--chapman-blue); margin-bottom: 15px; }
+        .scale-display { display: flex; justify-content: space-between; margin-top: 15px; padding: 15px; background: var(--blue-light); border-radius: 10px; }
+        .scale-item { text-align: center; flex: 1; }
+        .scale-number { display: inline-block; width: 36px; height: 36px; line-height: 36px; background: var(--chapman-blue); color: var(--white); border-radius: 50%; font-weight: 700; }
+        .scale-label { font-size: 0.6em; color: var(--text-secondary); display: block; margin-top: 5px; }
+        .progress-container { margin-bottom: 25px; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .progress-bar { width: 100%; height: 10px; background: #e8ecf0; border-radius: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--chapman-blue), var(--chapman-gold)); width: 0%; transition: width 0.5s; }
+        .question-container { background: var(--white); border-radius: 14px; border: 2px solid #e8ecf0; padding: 25px; margin-bottom: 18px; }
+        .question-container.answered { border-color: var(--chapman-gold); background: linear-gradient(135deg, #fffef8, var(--white)); }
+        .question-text { font-size: 1.02em; margin-bottom: 18px; }
+        .question-number { color: var(--chapman-blue); font-weight: 700; margin-right: 8px; }
+        .likert-scale { display: flex; justify-content: space-between; gap: 6px; }
+        .likert-option { flex: 1; text-align: center; }
+        .likert-option input { display: none; }
+        .likert-option label { display: flex; flex-direction: column; align-items: center; padding: 12px 6px; border: 2px solid #e8ecf0; border-radius: 10px; cursor: pointer; background: #fafbfc; }
+        .likert-option input:checked + label { border-color: var(--chapman-blue); background: var(--chapman-blue); color: var(--white); }
+        .likert-number { font-size: 1.2em; font-weight: 700; }
+        .likert-label { font-size: 0.55em; text-transform: uppercase; }
+        .controls { text-align: center; margin: 30px 0; }
+        .btn { border: none; padding: 16px 40px; font-size: 1.05em; font-weight: 600; border-radius: 12px; cursor: pointer; margin: 8px; }
+        .btn-primary { background: linear-gradient(135deg, var(--chapman-blue), var(--blue-medium)); color: var(--white); }
+        .btn-secondary { background: linear-gradient(135deg, var(--chapman-gold), #d4b000); color: var(--chapman-blue); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-outline { background: transparent; border: 2px solid var(--chapman-blue); color: var(--chapman-blue); }
+        .results { display: none; margin-top: 30px; }
+        .results-header { background: linear-gradient(135deg, var(--chapman-blue), var(--blue-medium)); color: var(--white); padding: 40px; text-align: center; border-radius: 16px 16px 0 0; }
+        .results-header h2 { font-size: 1.8em; margin-bottom: 10px; }
+        .results-header .student-name { font-size: 1.3em; color: var(--chapman-gold); }
+        .overall-score { background: linear-gradient(135deg, #34495e, #2c3e50); padding: 40px; text-align: center; }
+        .score-circle { width: 160px; height: 160px; border-radius: 50%; background: conic-gradient(var(--chapman-gold) var(--pct), rgba(255,255,255,0.2) 0); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .score-inner { width: 130px; height: 130px; border-radius: 50%; background: #2c3e50; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--white); }
+        .score-inner .score { font-size: 2.8em; font-weight: 700; }
+        .score-inner .label { font-size: 0.85em; opacity: 0.9; }
+        .level-name { color: var(--chapman-gold); font-size: 1.4em; font-weight: 700; margin-bottom: 10px; }
+        .level-desc { color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto; }
+        .dim-scores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 25px; background: linear-gradient(135deg, #3a5068, #2c3e50); }
+        .dim-score-card { background: rgba(255,255,255,0.1); padding: 20px 15px; border-radius: 14px; text-align: center; color: var(--white); }
+        .dim-score-card.highest { box-shadow: 0 0 0 3px var(--chapman-gold); }
+        .dim-score-card.lowest { border: 2px dashed rgba(255,255,255,0.4); }
+        .dim-score-card .icon { font-size: 1.6em; margin-bottom: 6px; }
+        .dim-score-card .name { font-size: 0.7em; margin-bottom: 8px; }
+        .dim-score-card .score { font-size: 2em; font-weight: 700; }
+        .dim-score-card .max { font-size: 0.7em; opacity: 0.7; }
+        .results-body { background: var(--blue-light); padding: 35px; border-radius: 0 0 16px 16px; }
+        .result-section { background: var(--white); border-radius: 14px; padding: 28px; margin-bottom: 20px; border-left: 5px solid var(--chapman-blue); }
+        .result-section.gold-accent { border-left-color: var(--chapman-gold); }
+        .result-section h4 { color: var(--chapman-blue); margin-bottom: 18px; }
+        .dim-detail { padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+        .dim-detail.financial { background: rgba(21,101,192,0.08); border-left: 4px solid var(--financial); }
+        .dim-detail.career { background: rgba(46,125,50,0.08); border-left: 4px solid var(--career); }
+        .dim-detail.social { background: rgba(198,40,40,0.08); border-left: 4px solid var(--social); }
+        .dim-detail.physical { background: rgba(123,31,162,0.08); border-left: 4px solid var(--physical); }
+        .dim-detail h5 { margin-bottom: 8px; }
+        .dim-detail p { font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px; }
+        .dim-detail ul { list-style: none; padding: 0; }
+        .dim-detail li { padding: 5px 0 5px 20px; position: relative; font-size: 0.85em; }
+        .dim-detail li::before { content: '>'; position: absolute; left: 0; }
+        .reflection-section { background: linear-gradient(135deg, var(--blue-light), #f0f4fa); border-radius: 14px; padding: 30px; margin-top: 25px; border: 2px solid var(--chapman-blue); }
+        .reflection-section h4 { color: var(--chapman-blue); margin-bottom: 20px; text-align: center; }
+        .reflection-questions { counter-reset: reflection; }
+        .reflection-question { padding: 18px 20px 18px 50px; position: relative; background: var(--white); border-radius: 10px; margin-bottom: 12px; }
+        .reflection-question::before { counter-increment: reflection; content: counter(reflection); position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 26px; height: 26px; background: var(--chapman-blue); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .footer { text-align: center; padding: 25px; color: var(--text-secondary); border-top: 1px solid #e8ecf0; margin-top: 30px; }
+        @media (max-width: 768px) { .dimensions-grid, .dim-scores { grid-template-columns: repeat(2, 1fr); } .student-info { grid-template-columns: 1fr; } h1 { font-size: 1.8em; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="institution">Chapman University</div>
+            <div class="college">Argyros College of Business and Economics</div>
+            <h1>Risk Tolerance Assessment</h1>
+            <div class="subtitle">Based on Domain-Specific Risk Taking (DOSPERT) Framework</div>
+        </div>
+        <div class="content">
+            <div id="intro-section">
+                <div class="intro-section">
+                    <h2>🎲 What's Your Risk Profile?</h2>
+                    <p><strong>Risk tolerance</strong> varies across different life domains. You might be a bold investor but cautious in social situations — or vice versa.</p>
+                    <p>The <strong>DOSPERT</strong> framework (Weber et al.) measures risk-taking tendencies across distinct domains.</p>
+                    <div class="dimensions-grid">
+                        <div class="dim-preview financial"><div class="icon">💰</div><div class="name">Financial Risk</div></div>
+                        <div class="dim-preview career"><div class="icon">💼</div><div class="name">Career Risk</div></div>
+                        <div class="dim-preview social"><div class="icon">👥</div><div class="name">Social Risk</div></div>
+                        <div class="dim-preview physical"><div class="icon">🏔️</div><div class="name">Physical Risk</div></div>
+                    </div>
+                    <div class="quote-box">
+                        <blockquote>"Risk comes from not knowing what you're doing."</blockquote>
+                        <cite>— Warren Buffett</cite>
+                    </div>
+                    <div class="assessment-meta">
+                        <div class="meta-item"><div class="meta-icon">⏱</div><span>6-8 minutes</span></div>
+                        <div class="meta-item"><div class="meta-icon">📝</div><span>20 items</span></div>
+                        <div class="meta-item"><div class="meta-icon">🎲</div><span>4 domains</span></div>
+                    </div>
+                </div>
+                <div class="student-info">
+                    <div class="input-group"><label for="studentName">Your Full Name</label><input type="text" id="studentName" placeholder="Enter your full name"></div>
+                    <div class="input-group"><label for="testDate">Assessment Date</label><input type="date" id="testDate"></div>
+                </div>
+                <div class="instructions-box">
+                    <h3>Instructions</h3>
+                    <p>Rate how likely you would be to engage in each activity or behavior.</p>
+                    <div class="scale-display">
+                        <div class="scale-item"><div class="scale-number">1</div><div class="scale-label">Very Unlikely</div></div>
+                        <div class="scale-item"><div class="scale-number">2</div><div class="scale-label">Unlikely</div></div>
+                        <div class="scale-item"><div class="scale-number">3</div><div class="scale-label">Neutral</div></div>
+                        <div class="scale-item"><div class="scale-number">4</div><div class="scale-label">Likely</div></div>
+                        <div class="scale-item"><div class="scale-number">5</div><div class="scale-label">Very Likely</div></div>
+                    </div>
+                </div>
+                <div class="controls"><button class="btn btn-primary" onclick="startAssessment()">Begin Assessment</button></div>
+            </div>
+            <div id="assessment-section" class="hidden">
+                <div class="progress-container">
+                    <div class="progress-label"><span>Progress</span><span id="progressText">0 of 20</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                </div>
+                <div id="questions-container"></div>
+                <div class="controls"><button class="btn btn-primary" id="submitBtn" onclick="calculateResults()" disabled>Discover My Risk Profile</button></div>
+            </div>
+            <div id="results" class="results"></div>
+            <div id="downloadSection" class="hidden controls">
+                <button class="btn btn-secondary" onclick="generatePDF()">Download PDF</button>
+                <button class="btn btn-outline" onclick="restartAssessment()">Retake</button>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Risk Tolerance Assessment - Based on DOSPERT Framework</p>
+            <p>Chapman University - Argyros College of Business</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">Professor Chip Monaco - MGMT 316</p>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const questions = {
+            financial: [
+                { id: 1, text: "Investing 10% of your annual income in a speculative stock.", dim: "financial" },
+                { id: 2, text: "Betting a day's income on a sporting event.", dim: "financial" },
+                { id: 3, text: "Investing in a friend's new business venture.", dim: "financial" },
+                { id: 4, text: "Taking out a loan to invest in what you believe is a sure thing.", dim: "financial" },
+                { id: 5, text: "Using credit to make an investment that might double or lose everything.", dim: "financial" }
+            ],
+            career: [
+                { id: 6, text: "Leaving a stable job to pursue your passion with uncertain income.", dim: "career" },
+                { id: 7, text: "Speaking up against a popular decision at work.", dim: "career" },
+                { id: 8, text: "Taking on a high-visibility project that might fail publicly.", dim: "career" },
+                { id: 9, text: "Moving to a new city for a job opportunity.", dim: "career" },
+                { id: 10, text: "Starting your own business instead of taking a corporate job.", dim: "career" }
+            ],
+            social: [
+                { id: 11, text: "Expressing an unpopular opinion in a group setting.", dim: "social" },
+                { id: 12, text: "Approaching a stranger at a networking event.", dim: "social" },
+                { id: 13, text: "Admitting your mistakes publicly.", dim: "social" },
+                { id: 14, text: "Disagreeing with an authority figure in public.", dim: "social" },
+                { id: 15, text: "Being the first to share a personal story in a group.", dim: "social" }
+            ],
+            physical: [
+                { id: 16, text: "Trying an extreme sport like skydiving or bungee jumping.", dim: "physical" },
+                { id: 17, text: "Driving slightly above the speed limit.", dim: "physical" },
+                { id: 18, text: "Traveling alone to an unfamiliar country.", dim: "physical" },
+                { id: 19, text: "Trying a new physical activity without formal training.", dim: "physical" },
+                { id: 20, text: "Hiking in remote areas without cell service.", dim: "physical" }
+            ]
+        };
+        const dimensionData = {
+            financial: { name: "Financial Risk", icon: "💰", color: "#1565C0", description: "Willingness to take risks with money and investments.", highBehaviors: ["Invests in volatile assets", "Comfortable with speculation", "Bets on uncertain outcomes", "Takes financial gambles"], considerations: ["Ensure adequate emergency fund", "Diversify investments", "Only risk what you can afford to lose", "Consider professional advice"] },
+            career: { name: "Career Risk", icon: "💼", color: "#2E7D32", description: "Willingness to take risks with career and professional reputation.", highBehaviors: ["Pursues unconventional paths", "Speaks truth to power", "Takes on challenging projects", "Changes careers boldly"], considerations: ["Build skills as safety net", "Network extensively", "Have backup plans", "Time risks strategically"] },
+            social: { name: "Social Risk", icon: "👥", color: "#C62828", description: "Willingness to risk disapproval, embarrassment, or conflict.", highBehaviors: ["Voices unpopular opinions", "Initiates conversations", "Shows vulnerability", "Challenges norms"], considerations: ["Read social contexts", "Build psychological safety", "Choose battles wisely", "Practice assertiveness"] },
+            physical: { name: "Physical Risk", icon: "🏔️", color: "#7B1FA2", description: "Willingness to engage in activities that could result in physical harm.", highBehaviors: ["Tries adventure sports", "Explores unknown places", "Pushes physical limits", "Embraces physical challenges"], considerations: ["Get proper training", "Use safety equipment", "Know your limits", "Have emergency plans"] }
+        };
+        const levels = [
+            { min: 80, max: 100, name: "High Risk Tolerance", desc: "You're comfortable taking significant risks across multiple domains." },
+            { min: 60, max: 79, name: "Moderate-High Risk Tolerance", desc: "You take calculated risks, especially in areas you understand well." },
+            { min: 40, max: 59, name: "Moderate Risk Tolerance", desc: "You balance risk and caution, varying by domain." },
+            { min: 20, max: 39, name: "Low Risk Tolerance", desc: "You prefer certainty and security over potential gains from risk." }
+        ];
+        let responses = {};
+        let studentName = '';
+        let surveyDate = '';
+        
+        // Robust auto-date initialization
+        function setTodayDate() {
+            var dateField = document.getElementById('testDate');
+            if (dateField) {
+                dateField.value = new Date().toISOString().split('T')[0];
+            }
+        }
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTodayDate();
+        }
+        document.addEventListener('DOMContentLoaded', setTodayDate);
+        window.addEventListener('load', setTodayDate);
+        function startAssessment() {
+            studentName = document.getElementById('studentName').value.trim();
+            surveyDate = document.getElementById('testDate').value;
+            if (!studentName) { alert('Please enter your name.'); return; }
+            document.getElementById('intro-section').classList.add('hidden');
+            document.getElementById('assessment-section').classList.remove('hidden');
+            renderQuestions();
+        }
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            const allQuestions = [...questions.financial, ...questions.career, ...questions.social, ...questions.physical].sort(() => Math.random() - 0.5);
+            container.innerHTML = allQuestions.map((q, i) => `
+                <div class="question-container" id="q-container-${q.id}">
+                    <div class="question-text"><span class="question-number">${i+1}.</span> ${q.text}</div>
+                    <div class="likert-scale">
+                        ${[1,2,3,4,5].map(val => `
+                            <div class="likert-option">
+                                <input type="radio" name="q${q.id}" id="q${q.id}_${val}" value="${val}" onchange="handleResponse(${q.id}, ${val}, '${q.dim}')">
+                                <label for="q${q.id}_${val}"><span class="likert-number">${val}</span><span class="likert-label">${['Very Unlikely','Unlikely','Neutral','Likely','Very Likely'][val-1]}</span></label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        function handleResponse(id, value, dim) {
+            responses[id] = { value, dim };
+            document.getElementById(`q-container-${id}`).classList.add('answered');
+            updateProgress();
+        }
+        function updateProgress() {
+            const answered = Object.keys(responses).length;
+            document.getElementById('progressFill').style.width = (answered / 20 * 100) + '%';
+            document.getElementById('progressText').textContent = `${answered} of 20`;
+            document.getElementById('submitBtn').disabled = answered < 20;
+        }
+        function calculateResults() {
+            const scores = { financial: 0, career: 0, social: 0, physical: 0 };
+            Object.values(responses).forEach(r => scores[r.dim] += r.value);
+            const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+            displayResults(scores, totalScore);
+        }
+        function displayResults(scores, totalScore) {
+            const level = levels.find(l => totalScore >= l.min && totalScore <= l.max) || levels[3];
+            const pct = (totalScore / 100) * 100;
+            const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const highestDim = sorted[0][0];
+            const lowestDim = sorted[3][0];
+            document.getElementById('results').innerHTML = `
+                <div class="results-header"><h2>Your Risk Tolerance Profile</h2><div class="student-name">${studentName}</div><div class="date">Completed: ${new Date(surveyDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div></div>
+                <div class="overall-score">
+                    <div class="score-circle" style="--pct: ${pct}%;"><div class="score-inner"><div class="score">${totalScore}</div><div class="label">of 100</div></div></div>
+                    <div class="level-name">${level.name}</div>
+                    <div class="level-desc">${level.desc}</div>
+                </div>
+                <div class="dim-scores">
+                    ${['financial', 'career', 'social', 'physical'].map(dim => `
+                        <div class="dim-score-card ${dim === highestDim ? 'highest' : ''} ${dim === lowestDim ? 'lowest' : ''}">
+                            <div class="icon">${dimensionData[dim].icon}</div>
+                            <div class="name">${dimensionData[dim].name}</div>
+                            <div class="score">${scores[dim]}</div>
+                            <div class="max">of 25</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="background: linear-gradient(135deg, #1a3a7a 0%, #00205B 100%); color: white; padding: 25px; border-radius: 14px; margin: 20px 0;">
+                    <h3 style="color: #C4A000; margin-bottom: 15px; font-size: 1.3em;">📋 Assessment Tracker Summary</h3>
+                    <p style="font-size: 0.9em; opacity: 0.9; margin-bottom: 15px;">Copy this code into your Assessment Tracker.</p>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Risk Level</div><div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${level.name}</div></div>
+                            <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Highest Risk Domain</div><div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${dimensionData[highestDim].name}</div></div>
+                            <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Total Score</div><div style="font-size: 1.2em; font-weight: 600;">${totalScore} / 100 (${pct}%)</div></div>
+                            <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Lowest Risk Domain</div><div style="font-size: 1.2em; font-weight: 600;">${dimensionData[lowestDim].name}</div></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
+                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">RTA-${highestDim === 'financial' ? 'Fi' : highestDim === 'career' ? 'Ca' : highestDim === 'social' ? 'So' : 'Ph'}-${level.name.includes('High') ? 'H' : level.name.includes('Moderate') ? 'M' : level.name.includes('Low') ? 'L' : 'C'}${totalScore}</strong>
+                    </div>
+                </div>
+                <div class="results-body">
+                    <div class="result-section"><h4>Domain Profile</h4>
+                        ${['financial', 'career', 'social', 'physical'].map(dim => `
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+                                <span style="width: 120px; font-weight: 600; font-size: 0.85em;">${dimensionData[dim].icon} ${dimensionData[dim].name}</span>
+                                <div style="flex: 1; height: 26px; background: #e8ecf0; border-radius: 13px; overflow: hidden;">
+                                    <div style="height: 100%; width: ${(scores[dim] / 25) * 100}%; background: ${dimensionData[dim].color}; border-radius: 13px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-weight: 600;">${scores[dim]}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="result-section gold-accent"><h4>Highest Risk Area: ${dimensionData[highestDim].name}</h4>
+                        <div class="dim-detail ${highestDim}"><h5 style="color: ${dimensionData[highestDim].color};">${dimensionData[highestDim].icon} ${dimensionData[highestDim].name}</h5><p>${dimensionData[highestDim].description}</p><p><strong>Considerations:</strong></p><ul>${dimensionData[highestDim].considerations.map(c => `<li>${c}</li>`).join('')}</ul></div>
+                    </div>
+                    <div class="result-section"><h4>Lowest Risk Area: ${dimensionData[lowestDim].name}</h4>
+                        <div class="dim-detail ${lowestDim}"><h5 style="color: ${dimensionData[lowestDim].color};">${dimensionData[lowestDim].icon} ${dimensionData[lowestDim].name}</h5><p>${dimensionData[lowestDim].description}</p><p><strong>High Behaviors:</strong></p><ul>${dimensionData[lowestDim].highBehaviors.map(b => `<li>${b}</li>`).join('')}</ul></div>
+                    </div>
+                    <div class="reflection-section"><h4>Reflection Questions</h4><div class="reflection-questions"><div class="reflection-question">What's a risk you took that paid off? What made it worth taking?</div><div class="reflection-question">Where might your risk aversion be holding you back?</div><div class="reflection-question">How does your risk tolerance compare to your peers?</div><div class="reflection-question">What would help you take smarter risks?</div></div></div>
+                </div>
+            `;
+            document.getElementById('assessment-section').classList.add('hidden');
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('downloadSection').classList.remove('hidden');
+            window.riskResults = { scores, totalScore, level, highestDim, lowestDim };
+        }
+        function generatePDF() {
+            var jsPDF = window.jspdf.jsPDF;
+            var doc = new jsPDF();
+            var scores = window.riskResults.scores;
+            var totalScore = window.riskResults.totalScore;
+            var level = window.riskResults.level;
+            var highestDim = window.riskResults.highestDim;
+            var lowestDim = window.riskResults.lowestDim;
+
+            // Colors
+            var chapmanBlue = [0, 32, 91];
+            var chapmanGold = [196, 160, 0];
+            var textDark = [26, 26, 46];
+            var textMuted = [100, 100, 110];
+            var greenColor = [46, 125, 50];
+            var redColor = [198, 40, 40];
+            var blueColor = [21, 101, 192];
+            var orangeColor = [230, 81, 0];
+            var purpleColor = [123, 31, 162];
+
+            // Tracker calculations
+            var dimAbbrev = { financial: 'Fi', career: 'Ca', social: 'So', physical: 'Ph' };
+            var levelAbbrev = level.name.includes('High') ? 'H' : level.name.includes('Low') ? 'L' : 'M';
+            var trackerCode = 'RTA-' + dimAbbrev[highestDim] + '-' + levelAbbrev + totalScore;
+
+            // Helper function
+            function addWrappedText(text, x, startY, maxWidth, lineHeight) {
+                var lines = doc.splitTextToSize(text, maxWidth);
+                var currentY = startY;
+                for (var i = 0; i < lines.length; i++) {
+                    if (currentY > 275) { doc.addPage(); currentY = 20; }
+                    doc.text(lines[i], x, currentY);
+                    currentY += lineHeight;
+                }
+                return currentY;
+            }
+
+            // ===== PAGE 1 =====
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.rect(0, 0, 210, 42, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('CHAPMAN UNIVERSITY', 105, 12, { align: 'center' });
+            doc.setFontSize(9);
+            doc.setTextColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.text('Argyros College of Business and Economics', 105, 18, { align: 'center' });
+            doc.setFontSize(16);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Risk Tolerance Assessment', 105, 28, { align: 'center' });
+            doc.setFontSize(9);
+            doc.text('Based on DOSPERT Framework (Domain-Specific Risk Taking)', 105, 36, { align: 'center' });
+            doc.setFillColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.rect(0, 42, 210, 2, 'F');
+
+            var y = 52;
+            doc.setFontSize(10);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            doc.text('Student: ' + studentName, 20, y);
+            doc.text('Date: ' + new Date(surveyDate).toLocaleDateString(), 140, y);
+            y += 10;
+
+            // Overall Score Banner
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 18, 2, 2, 'F');
+            doc.setFontSize(14);
+            doc.setTextColor(255, 255, 255);
+            doc.text(level.name.toUpperCase() + ': ' + totalScore + '/100', 105, y + 12, { align: 'center' });
+            y += 24;
+
+            doc.setFontSize(9);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            y = addWrappedText(level.desc, 20, y, 170, 4.5);
+            y += 6;
+
+            // Score Distribution Box
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 28, 2, 2, 'F');
+            doc.setFontSize(9);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('DOMAIN SCORES', 25, y + 7);
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            doc.text('Financial Risk: ' + scores.financial + '/25', 25, y + 15);
+            doc.text('Career Risk: ' + scores.career + '/25', 105, y + 15);
+            doc.text('Social Risk: ' + scores.social + '/25', 25, y + 23);
+            doc.text('Physical Risk: ' + scores.physical + '/25', 105, y + 23);
+            y += 34;
+
+            // Tracker Code Box
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Tracker: ' + trackerCode + '  |  Highest Risk: ' + dimensionData[highestDim].name + '  |  Lowest Risk: ' + dimensionData[lowestDim].name, 105, y + 7, { align: 'center' });
+            y += 16;
+
+            // Highest Risk Section
+            doc.setFontSize(10);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('HIGHEST RISK AREA: ' + dimensionData[highestDim].name, 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].description, 20, y, 170, 4);
+            y += 3;
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('High Risk Behaviors:', 20, y);
+            y += 4;
+            for (var i = 0; i < dimensionData[highestDim].highBehaviors.length; i++) {
+                doc.text('- ' + dimensionData[highestDim].highBehaviors[i], 25, y);
+                y += 4;
+            }
+            y += 2;
+            doc.text('Considerations:', 20, y);
+            y += 4;
+            for (var i = 0; i < dimensionData[highestDim].considerations.length; i++) {
+                doc.text('-> ' + dimensionData[highestDim].considerations[i], 25, y);
+                y += 4;
+            }
+            y += 4;
+
+            // Lowest Risk Section
+            doc.setFontSize(10);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('LOWEST RISK AREA: ' + dimensionData[lowestDim].name, 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[lowestDim].description, 20, y, 170, 4);
+            y += 3;
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('High Risk Behaviors (if developed):', 20, y);
+            y += 4;
+            for (var i = 0; i < dimensionData[lowestDim].highBehaviors.length; i++) {
+                doc.text('- ' + dimensionData[lowestDim].highBehaviors[i], 25, y);
+                y += 4;
+            }
+
+            // ===== PAGE 2: SWOT and All Domains =====
+            doc.addPage();
+            y = 20;
+
+            // SWOT Header
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(11);
+            doc.setTextColor(255, 255, 255);
+            doc.text('SWOT ANALYSIS - Risk Profile', 105, y + 7, { align: 'center' });
+            y += 18;
+
+            // SWOT Grid
+            var boxW = 82;
+            var boxH = 26;
+
+            // Strength
+            doc.setFillColor(232, 245, 233);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.setLineWidth(0.5);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('STRENGTH', 25, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var sText = 'Comfortable taking ' + dimensionData[highestDim].name.toLowerCase() + ' for potential rewards';
+            var sLines = doc.splitTextToSize(sText, boxW - 10);
+            for (var i = 0; i < Math.min(sLines.length, 3); i++) {
+                doc.text(sLines[i], 25, y + 12 + (i * 4));
+            }
+
+            // Weakness
+            doc.setFillColor(255, 235, 238);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(redColor[0], redColor[1], redColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('WEAKNESS', 113, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var wText = 'May avoid valuable opportunities in ' + dimensionData[lowestDim].name.toLowerCase();
+            var wLines = doc.splitTextToSize(wText, boxW - 10);
+            for (var i = 0; i < Math.min(wLines.length, 3); i++) {
+                doc.text(wLines[i], 113, y + 12 + (i * 4));
+            }
+
+            y += boxH + 5;
+
+            // Opportunity
+            doc.setFillColor(227, 242, 253);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.text('OPPORTUNITY', 25, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var oText = 'Develop calculated risk-taking in ' + dimensionData[lowestDim].name.toLowerCase();
+            var oLines = doc.splitTextToSize(oText, boxW - 10);
+            for (var i = 0; i < Math.min(oLines.length, 3); i++) {
+                doc.text(oLines[i], 25, y + 12 + (i * 4));
+            }
+
+            // Threat
+            doc.setFillColor(255, 243, 224);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('THREAT', 113, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var tText = 'Overconfidence in high-risk areas could lead to losses';
+            var tLines = doc.splitTextToSize(tText, boxW - 10);
+            for (var i = 0; i < Math.min(tLines.length, 3); i++) {
+                doc.text(tLines[i], 113, y + 12 + (i * 4));
+            }
+
+            y += boxH + 12;
+
+            // All Four Domains
+            doc.setFontSize(11);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('THE FOUR RISK DOMAINS', 20, y);
+            y += 8;
+
+            var dims = ['financial', 'career', 'social', 'physical'];
+            var dimColors = {
+                financial: blueColor,
+                career: greenColor,
+                social: redColor,
+                physical: purpleColor
+            };
+
+            for (var d = 0; d < dims.length; d++) {
+                var dim = dims[d];
+                var dimColor = dimColors[dim];
+                var isHighest = (dim === highestDim);
+                var isLowest = (dim === lowestDim);
+                
+                if (y > 250) { doc.addPage(); y = 20; }
+                
+                doc.setFontSize(9);
+                doc.setTextColor(dimColor[0], dimColor[1], dimColor[2]);
+                var label = dimensionData[dim].name + ': ' + scores[dim] + '/25';
+                if (isHighest) label += ' (Highest)';
+                if (isLowest) label += ' (Lowest)';
+                doc.text(label, 25, y);
+                y += 4;
+                doc.setFontSize(7);
+                doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+                var descLines = doc.splitTextToSize(dimensionData[dim].description, 165);
+                for (var i = 0; i < Math.min(descLines.length, 2); i++) {
+                    doc.text(descLines[i], 25, y);
+                    y += 3.5;
+                }
+                y += 4;
+            }
+
+            y += 6;
+
+            // Risk Management Quote
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('"Risk comes from not knowing what you\'re doing." - Warren Buffett', 105, y + 10, { align: 'center' });
+            y += 24;
+
+            // Reflection Questions
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('REFLECTION QUESTIONS', 105, y + 7, { align: 'center' });
+            y += 16;
+
+            var reflectionQs = [
+                "What's a risk you took that paid off? What made it worth taking?",
+                "Where might your risk aversion be holding you back?",
+                "How does your risk tolerance compare to your peers?",
+                "What would help you take smarter risks?",
+                "How does understanding your risk profile change your decision-making?"
+            ];
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < reflectionQs.length; i++) {
+                if (y > 275) { doc.addPage(); y = 20; }
+                var qLines = doc.splitTextToSize((i + 1) + '. ' + reflectionQs[i], 165);
+                for (var j = 0; j < qLines.length; j++) {
+                    doc.text(qLines[j], 25, y);
+                    y += 4;
+                }
+                y += 2;
+            }
+
+            // Footer on all pages
+            var pageCount = doc.internal.getNumberOfPages();
+            for (var i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+                doc.text('Page ' + i + ' of ' + pageCount, 105, 287, { align: 'center' });
+                doc.text('Chapman University - Argyros College of Business and Economics - MGMT 316', 105, 292, { align: 'center' });
+            }
+
+            doc.save('Risk_Tolerance_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+        function restartAssessment() {
+            responses = {};
+            document.getElementById('studentName').value = '';
+            document.getElementById('testDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('assessment-section').classList.add('hidden');
+            document.getElementById('downloadSection').classList.add('hidden');
+            document.getElementById('intro-section').classList.remove('hidden');
+            document.getElementById('progressFill').style.width = '0%';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

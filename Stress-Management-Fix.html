@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Management Style Assessment | Chapman University</title>
+    <style>
+        :root {
+            --chapman-blue: #00205B;
+            --chapman-gold: #C4A000;
+            --gold-light: #F5E6A3;
+            --blue-light: #E8EDF5;
+            --blue-medium: #1A3A7A;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --white: #ffffff;
+            --problem-solver: #1565C0;
+            --emotion-focused: #7B1FA2;
+            --support-seeker: #2E7D32;
+            --avoider: #E65100;
+            --shadow-subtle: 0 2px 8px rgba(0, 32, 91, 0.08);
+            --shadow-medium: 0 4px 20px rgba(0, 32, 91, 0.12);
+            --shadow-strong: 0 8px 32px rgba(0, 32, 91, 0.18);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 50%, var(--chapman-blue) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-strong);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--chapman-gold) 0%, var(--gold-light) 50%, var(--chapman-gold) 100%);
+        }
+        .institution { font-size: 0.95em; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; margin-bottom: 5px; }
+        .college { font-size: 1.1em; color: var(--chapman-gold); margin-bottom: 20px; font-weight: 600; }
+        h1 { font-size: 2.4em; font-weight: 700; margin-bottom: 12px; }
+        .subtitle { font-size: 1.15em; font-style: italic; color: var(--gold-light); }
+        .content { padding: 35px; }
+        .hidden { display: none !important; }
+
+        /* Intro Section */
+        .intro-section {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f8f9fc 100%);
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--chapman-blue);
+        }
+        .intro-section h2 { color: var(--chapman-blue); font-size: 1.4em; margin-bottom: 15px; }
+        .intro-section p { color: var(--text-secondary); margin-bottom: 15px; }
+
+        /* Style Preview Cards */
+        .styles-preview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .style-preview-card {
+            padding: 20px 12px;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+        .style-preview-card.problem-solver { background: linear-gradient(135deg, var(--problem-solver), #1976D2); }
+        .style-preview-card.emotion-focused { background: linear-gradient(135deg, var(--emotion-focused), #9C27B0); }
+        .style-preview-card.support-seeker { background: linear-gradient(135deg, var(--support-seeker), #43A047); }
+        .style-preview-card.avoider { background: linear-gradient(135deg, var(--avoider), #F57C00); }
+        .style-preview-card .icon { font-size: 2em; margin-bottom: 8px; }
+        .style-preview-card .name { font-size: 0.85em; }
+        .style-preview-card .desc { font-size: 0.65em; opacity: 0.9; margin-top: 4px; }
+
+        /* Framework Box */
+        .framework-box {
+            background: var(--white);
+            border: 2px solid var(--chapman-gold);
+            border-radius: 14px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .framework-box h3 { color: var(--chapman-blue); text-align: center; margin-bottom: 20px; }
+        .coping-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .coping-type {
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--blue-light);
+        }
+        .coping-type h4 { color: var(--chapman-blue); margin-bottom: 10px; font-size: 1em; }
+        .coping-type p { color: var(--text-secondary); font-size: 0.9em; line-height: 1.6; }
+        .coping-type ul { margin-top: 10px; padding-left: 20px; }
+        .coping-type li { color: var(--text-secondary); font-size: 0.85em; margin-bottom: 5px; }
+
+        .assessment-meta {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 32, 91, 0.1);
+            flex-wrap: wrap;
+        }
+        .meta-item { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
+        .meta-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--chapman-blue);
+            color: var(--white);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+        }
+
+        /* Student Info */
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .input-group { display: flex; flex-direction: column; }
+        .input-group label { font-weight: 600; margin-bottom: 8px; color: var(--chapman-blue); }
+        .input-group input {
+            padding: 14px 16px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--chapman-blue);
+            box-shadow: 0 0 0 4px rgba(0, 32, 91, 0.08);
+        }
+
+        /* Instructions */
+        .instructions-box {
+            background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%);
+            border: 2px solid var(--chapman-gold);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .instructions-box h3 { color: var(--chapman-blue); margin-bottom: 15px; }
+        .instructions-box p { color: var(--text-secondary); margin-bottom: 10px; }
+        .scale-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--blue-light);
+            border-radius: 10px;
+        }
+        .scale-item { text-align: center; flex: 1; }
+        .scale-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            background: var(--chapman-blue);
+            color: var(--white);
+            border-radius: 50%;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .scale-label { font-size: 0.7em; color: var(--text-secondary); }
+
+        /* Progress */
+        .progress-container { margin-bottom: 25px; }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e8ecf0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--chapman-blue) 0%, var(--chapman-gold) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Question Container */
+        .question-container {
+            background: var(--white);
+            border-radius: 14px;
+            border: 2px solid #e8ecf0;
+            padding: 25px;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+        }
+        .question-container:hover {
+            border-color: var(--chapman-blue);
+            box-shadow: var(--shadow-medium);
+        }
+        .question-container.answered {
+            border-color: var(--chapman-gold);
+            background: linear-gradient(135deg, #fffef8 0%, var(--white) 100%);
+        }
+        .question-text {
+            font-size: 1.02em;
+            color: var(--text-primary);
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+        .question-number {
+            color: var(--chapman-blue);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Likert Scale */
+        .likert-scale {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+        }
+        .likert-option {
+            flex: 1;
+            text-align: center;
+        }
+        .likert-option input[type="radio"] { display: none; }
+        .likert-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 6px;
+            border: 2px solid #e8ecf0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+        .likert-option label:hover {
+            border-color: var(--chapman-blue);
+            background: var(--blue-light);
+        }
+        .likert-option input[type="radio"]:checked + label {
+            border-color: var(--chapman-blue);
+            background: var(--chapman-blue);
+            color: var(--white);
+        }
+        .likert-number {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .likert-label {
+            font-size: 0.6em;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Buttons */
+        .controls { text-align: center; margin: 30px 0; }
+        .btn {
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(0, 32, 91, 0.3);
+        }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 32, 91, 0.4); }
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--chapman-gold) 0%, #d4b000 100%);
+            color: var(--chapman-blue);
+        }
+        .btn-secondary:hover { transform: translateY(-3px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--chapman-blue);
+            color: var(--chapman-blue);
+        }
+
+        /* Results */
+        .results { display: none; margin-top: 30px; }
+        .results-header {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 40px;
+            text-align: center;
+            border-radius: 16px 16px 0 0;
+        }
+        .results-header h2 { font-size: 1.8em; margin-bottom: 10px; }
+        .results-header .student-name { font-size: 1.3em; color: var(--chapman-gold); margin-bottom: 8px; }
+        .results-header .date { opacity: 0.9; }
+
+        /* Score Cards */
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 30px;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+        .score-card {
+            background: rgba(255,255,255,0.1);
+            padding: 22px 15px;
+            border-radius: 14px;
+            text-align: center;
+            color: var(--white);
+            transition: transform 0.3s ease;
+        }
+        .score-card:hover { transform: scale(1.03); }
+        .score-card.primary { transform: scale(1.08); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .score-card.problem-solver.primary { background: linear-gradient(135deg, var(--problem-solver), #1976D2); }
+        .score-card.emotion-focused.primary { background: linear-gradient(135deg, var(--emotion-focused), #9C27B0); }
+        .score-card.support-seeker.primary { background: linear-gradient(135deg, var(--support-seeker), #43A047); }
+        .score-card.avoider.primary { background: linear-gradient(135deg, var(--avoider), #F57C00); }
+        .score-card.secondary { border: 2px solid var(--chapman-gold); }
+        .score-card .icon { font-size: 1.8em; margin-bottom: 8px; }
+        .score-card h3 { font-size: 0.85em; margin-bottom: 6px; opacity: 0.95; }
+        .score-card .score { font-size: 2em; font-weight: 700; }
+        .score-card .max { font-size: 0.75em; opacity: 0.8; }
+
+        .results-body { background: var(--blue-light); padding: 35px; border-radius: 0 0 16px 16px; }
+
+        /* Type Cards */
+        .type-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-medium);
+            border-top: 5px solid var(--chapman-blue);
+        }
+        .type-card.problem-solver { border-top-color: var(--problem-solver); }
+        .type-card.emotion-focused { border-top-color: var(--emotion-focused); }
+        .type-card.support-seeker { border-top-color: var(--support-seeker); }
+        .type-card.avoider { border-top-color: var(--avoider); }
+
+        .type-header { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
+        .type-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2em;
+            color: var(--white);
+        }
+        .type-icon.problem-solver { background: var(--problem-solver); }
+        .type-icon.emotion-focused { background: var(--emotion-focused); }
+        .type-icon.support-seeker { background: var(--support-seeker); }
+        .type-icon.avoider { background: var(--avoider); }
+        .type-info h3 { font-size: 1.5em; color: var(--chapman-blue); margin-bottom: 4px; }
+        .type-info .type-subtitle { color: var(--chapman-gold); font-weight: 600; }
+        .type-label {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        .type-label.primary { background: var(--chapman-blue); }
+        .type-label.secondary { background: var(--chapman-gold); color: var(--chapman-blue); }
+        .type-description { color: var(--text-secondary); line-height: 1.8; }
+
+        /* Characteristics */
+        .char-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .char-box {
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .char-box.strengths { background: #E8F5E9; border-left: 4px solid var(--support-seeker); }
+        .char-box.challenges { background: #FFF3E0; border-left: 4px solid var(--avoider); }
+        .char-box h5 { margin-bottom: 12px; font-size: 1em; color: var(--text-primary); }
+        .char-box ul { list-style: none; padding: 0; margin: 0; }
+        .char-box li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 0.95em;
+            color: var(--text-secondary);
+        }
+        .char-box.strengths li::before { content: '✓'; position: absolute; left: 0; color: var(--support-seeker); font-weight: bold; }
+        .char-box.challenges li::before { content: '!'; position: absolute; left: 0; color: var(--avoider); font-weight: bold; }
+
+        /* Result Sections */
+        .result-section {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--chapman-blue);
+            box-shadow: var(--shadow-subtle);
+        }
+        .result-section.gold-accent { border-left-color: var(--chapman-gold); }
+        .result-section h4 { color: var(--chapman-blue); margin-bottom: 18px; }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e8ecf0;
+        }
+        .comparison-table th {
+            background: var(--blue-light);
+            color: var(--chapman-blue);
+            font-weight: 600;
+        }
+        .comparison-table td { color: var(--text-secondary); }
+        .comparison-table tr:hover { background: #f8f9fc; }
+
+        /* Strategies Grid */
+        .strategies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .strategy-card {
+            padding: 18px;
+            border-radius: 10px;
+            background: var(--blue-light);
+        }
+        .strategy-card h5 { color: var(--chapman-blue); margin-bottom: 8px; font-size: 0.95em; }
+        .strategy-card p { font-size: 0.9em; color: var(--text-secondary); margin: 0; line-height: 1.5; }
+
+        /* Reflection */
+        .reflection-section {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%);
+            border-radius: 14px;
+            padding: 30px;
+            margin-top: 25px;
+            border: 2px solid var(--chapman-blue);
+        }
+        .reflection-section h4 { color: var(--chapman-blue); margin-bottom: 20px; text-align: center; }
+        .reflection-questions { counter-reset: reflection; }
+        .reflection-question {
+            padding: 18px 20px 18px 50px;
+            position: relative;
+            background: var(--white);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+        .reflection-question::before {
+            counter-increment: reflection;
+            content: counter(reflection);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 26px;
+            height: 26px;
+            background: var(--chapman-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 700;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            border-top: 1px solid #e8ecf0;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .styles-preview, .score-grid { grid-template-columns: repeat(2, 1fr); }
+            .student-info, .char-grid, .strategies-grid, .coping-types { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8em; }
+            .type-header { flex-direction: column; text-align: center; }
+            .likert-scale { flex-wrap: wrap; }
+            .likert-option { min-width: 55px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="institution">Chapman University</div>
+            <div class="college">Argyros College of Business and Economics</div>
+            <h1>Stress Management Style Assessment</h1>
+            <div class="subtitle">Based on Lazarus & Folkman's Coping Theory</div>
+        </div>
+
+        <div class="content">
+            <!-- Intro Section -->
+            <div id="intro-section">
+                <div class="intro-section">
+                    <h2>😰 How Do You Handle Stress?</h2>
+                    <p>Workplace stress is inevitable—deadlines, conflicts, change, and pressure are part of every manager's life. What matters is how you <em>cope</em> with that stress. Your coping style affects your health, performance, relationships, and leadership effectiveness.</p>
+                    <p>This assessment is based on the groundbreaking research of <strong>Richard Lazarus and Susan Folkman</strong>, who identified distinct coping strategies people use when facing stressful situations.</p>
+
+                    <div class="styles-preview">
+                        <div class="style-preview-card problem-solver">
+                            <div class="icon">🔧</div>
+                            <div class="name">Problem-Focused</div>
+                            <div class="desc">Fix the source</div>
+                        </div>
+                        <div class="style-preview-card emotion-focused">
+                            <div class="icon">🧘</div>
+                            <div class="name">Emotion-Focused</div>
+                            <div class="desc">Manage feelings</div>
+                        </div>
+                        <div class="style-preview-card support-seeker">
+                            <div class="icon">🤝</div>
+                            <div class="name">Support-Seeking</div>
+                            <div class="desc">Connect with others</div>
+                        </div>
+                        <div class="style-preview-card avoider">
+                            <div class="icon">🚪</div>
+                            <div class="name">Avoidant</div>
+                            <div class="desc">Distance & escape</div>
+                        </div>
+                    </div>
+
+                    <div class="framework-box">
+                        <h3>📚 The Coping Framework</h3>
+                        <div class="coping-types">
+                            <div class="coping-type">
+                                <h4>🎯 Approach-Oriented Coping</h4>
+                                <p>Directly engaging with the stressor or your emotional response to it.</p>
+                                <ul>
+                                    <li><strong>Problem-Focused:</strong> Taking action to change the situation</li>
+                                    <li><strong>Emotion-Focused:</strong> Managing your emotional response</li>
+                                    <li><strong>Support-Seeking:</strong> Reaching out for help and connection</li>
+                                </ul>
+                            </div>
+                            <div class="coping-type">
+                                <h4>🚫 Avoidance-Oriented Coping</h4>
+                                <p>Creating distance from the stressor or your feelings about it.</p>
+                                <ul>
+                                    <li><strong>Denial:</strong> Refusing to accept the reality</li>
+                                    <li><strong>Distraction:</strong> Focusing on other activities</li>
+                                    <li><strong>Disengagement:</strong> Withdrawing effort or attention</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="assessment-meta">
+                        <div class="meta-item"><div class="meta-icon">⏱</div><span>10-15 minutes</span></div>
+                        <div class="meta-item"><div class="meta-icon">📝</div><span>40 self-assessment items</span></div>
+                        <div class="meta-item"><div class="meta-icon">🎯</div><span>4 coping styles assessed</span></div>
+                    </div>
+                </div>
+
+                <div class="student-info">
+                    <div class="input-group">
+                        <label for="studentName">Your Full Name</label>
+                        <input type="text" id="studentName" placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <label for="testDate">Assessment Date</label>
+                        <input type="date" id="testDate">
+                    </div>
+                </div>
+
+                <div class="instructions-box">
+                    <h3>📌 How to Complete This Assessment</h3>
+                    <p>Think about how you typically respond when facing stressful situations at work or school. Rate each statement based on how often you use that approach.</p>
+                    <div class="scale-display">
+                        <div class="scale-item"><div class="scale-number">1</div><div class="scale-label">Never</div></div>
+                        <div class="scale-item"><div class="scale-number">2</div><div class="scale-label">Rarely</div></div>
+                        <div class="scale-item"><div class="scale-number">3</div><div class="scale-label">Sometimes</div></div>
+                        <div class="scale-item"><div class="scale-number">4</div><div class="scale-label">Often</div></div>
+                        <div class="scale-item"><div class="scale-number">5</div><div class="scale-label">Always</div></div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="startAssessment()">Begin Assessment →</button>
+                </div>
+            </div>
+
+            <!-- Assessment Section -->
+            <div id="assessment-section" class="hidden">
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Assessment Progress</span>
+                        <span id="progressText">0 of 40 questions completed</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div id="questions-container"></div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" id="submitBtn" onclick="calculateResults()" disabled>View My Coping Profile →</button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="results"></div>
+
+            <div id="downloadSection" class="hidden controls">
+                <button class="btn btn-secondary" onclick="generatePDF()">📄 Download PDF Report</button>
+                <button class="btn btn-outline" onclick="restartAssessment()">Take Assessment Again</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Stress Management Style Assessment • Based on Lazarus & Folkman's Coping Theory (1984)</p>
+            <p>Chapman University • Argyros College of Business and Economics</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • MGMT 316</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Questions organized by coping style (10 per style)
+        const questions = {
+            problemSolver: [
+                { id: 1, text: "When facing a problem, I immediately start thinking about possible solutions.", style: "problemSolver" },
+                { id: 2, text: "I create action plans to address stressful situations.", style: "problemSolver" },
+                { id: 3, text: "I break down overwhelming problems into smaller, manageable steps.", style: "problemSolver" },
+                { id: 4, text: "I gather information to better understand what I'm dealing with.", style: "problemSolver" },
+                { id: 5, text: "I focus on what I can control and take action on those things.", style: "problemSolver" },
+                { id: 6, text: "I ask myself 'What can I do to fix this?' when stressed.", style: "problemSolver" },
+                { id: 7, text: "I make changes in my environment or schedule to reduce stress.", style: "problemSolver" },
+                { id: 8, text: "I prioritize tasks to tackle the most important issues first.", style: "problemSolver" },
+                { id: 9, text: "I look for practical ways to improve difficult situations.", style: "problemSolver" },
+                { id: 10, text: "I take concrete steps to address the source of my stress.", style: "problemSolver" }
+            ],
+            emotionFocused: [
+                { id: 11, text: "I try to see the situation from a different, more positive perspective.", style: "emotionFocused" },
+                { id: 12, text: "I remind myself that this difficult time will pass.", style: "emotionFocused" },
+                { id: 13, text: "I look for meaning or lessons in challenging experiences.", style: "emotionFocused" },
+                { id: 14, text: "I practice relaxation techniques like deep breathing or meditation.", style: "emotionFocused" },
+                { id: 15, text: "I accept that some things are beyond my control.", style: "emotionFocused" },
+                { id: 16, text: "I use humor to lighten my mood during stressful times.", style: "emotionFocused" },
+                { id: 17, text: "I focus on staying calm rather than reacting emotionally.", style: "emotionFocused" },
+                { id: 18, text: "I reframe negative thoughts into more balanced ones.", style: "emotionFocused" },
+                { id: 19, text: "I engage in activities that help me process my feelings.", style: "emotionFocused" },
+                { id: 20, text: "I remind myself of times I've successfully handled similar challenges.", style: "emotionFocused" }
+            ],
+            supportSeeker: [
+                { id: 21, text: "I talk to friends or family about what's stressing me.", style: "supportSeeker" },
+                { id: 22, text: "I seek advice from people who have faced similar situations.", style: "supportSeeker" },
+                { id: 23, text: "I ask for help when I feel overwhelmed.", style: "supportSeeker" },
+                { id: 24, text: "I find comfort in spending time with supportive people.", style: "supportSeeker" },
+                { id: 25, text: "I share my feelings with someone I trust.", style: "supportSeeker" },
+                { id: 26, text: "I look for emotional support from others during tough times.", style: "supportSeeker" },
+                { id: 27, text: "I reach out to mentors or colleagues for guidance.", style: "supportSeeker" },
+                { id: 28, text: "I feel better after talking through problems with others.", style: "supportSeeker" },
+                { id: 29, text: "I'm comfortable asking for assistance when I need it.", style: "supportSeeker" },
+                { id: 30, text: "I value others' perspectives when making decisions under pressure.", style: "supportSeeker" }
+            ],
+            avoider: [
+                { id: 31, text: "I try not to think about stressful situations.", style: "avoider" },
+                { id: 32, text: "I distract myself with TV, social media, or other activities.", style: "avoider" },
+                { id: 33, text: "I pretend the problem doesn't exist or isn't that serious.", style: "avoider" },
+                { id: 34, text: "I procrastinate on dealing with stressful tasks.", style: "avoider" },
+                { id: 35, text: "I hope problems will resolve themselves without my intervention.", style: "avoider" },
+                { id: 36, text: "I keep my feelings bottled up inside.", style: "avoider" },
+                { id: 37, text: "I avoid people or situations that cause me stress.", style: "avoider" },
+                { id: 38, text: "I use food, alcohol, or other substances to cope with stress.", style: "avoider" },
+                { id: 39, text: "I give up trying when situations become too difficult.", style: "avoider" },
+                { id: 40, text: "I mentally check out or disengage when facing pressure.", style: "avoider" }
+            ]
+        };
+
+        // Style data
+        const styleData = {
+            problemSolver: {
+                name: "Problem-Focused",
+                icon: "🔧",
+                color: "#1565C0",
+                subtitle: "Take Action, Fix the Source",
+                category: "Approach-Oriented",
+                description: "Problem-focused copers tackle stress by directly addressing its source. You analyze situations, develop action plans, and take concrete steps to resolve issues. This style is highly effective when the stressor is within your control and amenable to change.",
+                strengths: [
+                    "Effective at resolving controllable stressors",
+                    "Develops practical solutions quickly",
+                    "Maintains sense of agency and control",
+                    "Builds confidence through action",
+                    "Prevents problems from escalating"
+                ],
+                challenges: [
+                    "May struggle with uncontrollable situations",
+                    "Can become frustrated when action isn't possible",
+                    "Might neglect emotional processing",
+                    "May overlook need for support",
+                    "Can burn out from constant problem-solving"
+                ],
+                whenEffective: "When you have control over the situation and action can change the outcome",
+                whenLessEffective: "When the stressor is beyond your control (illness, loss, others' behavior)",
+                strategies: [
+                    "Recognize when problems are outside your control",
+                    "Allow yourself to feel emotions, not just fix things",
+                    "Ask for support, not just solutions",
+                    "Practice acceptance alongside action"
+                ]
+            },
+            emotionFocused: {
+                name: "Emotion-Focused",
+                icon: "🧘",
+                color: "#7B1FA2",
+                subtitle: "Manage Feelings, Reframe Thoughts",
+                category: "Approach-Oriented",
+                description: "Emotion-focused copers manage stress by regulating their emotional response. You use reframing, acceptance, relaxation, and meaning-making to change how you feel about situations you can't change. This style is highly adaptive for uncontrollable stressors.",
+                strengths: [
+                    "Maintains emotional equilibrium under pressure",
+                    "Adapts well to uncontrollable situations",
+                    "Finds meaning in difficult experiences",
+                    "Recovers well from setbacks",
+                    "Models emotional regulation for others"
+                ],
+                challenges: [
+                    "May not take action when action is needed",
+                    "Could be seen as passive or accepting of problems",
+                    "Might suppress feelings rather than process them",
+                    "May delay necessary confrontation",
+                    "Can become overly philosophical about solvable problems"
+                ],
+                whenEffective: "When you cannot control the stressor and must adapt to it",
+                whenLessEffective: "When direct action could solve the problem",
+                strategies: [
+                    "Distinguish between situations requiring action vs. acceptance",
+                    "Take action when you can, adjust emotions when you can't",
+                    "Ensure you're processing emotions, not avoiding them",
+                    "Combine with problem-solving for best results"
+                ]
+            },
+            supportSeeker: {
+                name: "Support-Seeking",
+                icon: "🤝",
+                color: "#2E7D32",
+                subtitle: "Connect, Share, Get Help",
+                category: "Approach-Oriented",
+                description: "Support-seekers cope with stress by connecting with others. You seek emotional support, practical advice, and assistance from your network. This style leverages social resources and builds strong relationships while distributing the burden of stress.",
+                strengths: [
+                    "Builds strong support networks",
+                    "Gains diverse perspectives on problems",
+                    "Doesn't carry burdens alone",
+                    "Models vulnerability and connection",
+                    "Often finds solutions through collaboration"
+                ],
+                challenges: [
+                    "May become over-dependent on others",
+                    "Could struggle when support isn't available",
+                    "Might burden relationships with constant venting",
+                    "May seek reassurance rather than solutions",
+                    "Can neglect developing independent coping skills"
+                ],
+                whenEffective: "When emotional support or practical assistance is available and helpful",
+                whenLessEffective: "When you need to develop independent coping or when support is unavailable",
+                strategies: [
+                    "Balance seeking support with independent coping",
+                    "Be specific about what you need (advice vs. listening)",
+                    "Reciprocate support to maintain relationships",
+                    "Develop internal resources alongside external ones"
+                ]
+            },
+            avoider: {
+                name: "Avoidant",
+                icon: "🚪",
+                color: "#E65100",
+                subtitle: "Distance, Distract, Disengage",
+                category: "Avoidance-Oriented",
+                description: "Avoidant copers create distance from stressors through denial, distraction, or disengagement. While this can provide short-term relief, chronic avoidance often allows problems to grow and prevents emotional processing. Some strategic avoidance is healthy, but it shouldn't be the primary strategy.",
+                strengths: [
+                    "Provides temporary relief from overwhelming stress",
+                    "Can protect from immediate overload",
+                    "Useful when nothing can be done immediately",
+                    "Allows time for emotions to settle",
+                    "Strategic avoidance can be adaptive"
+                ],
+                challenges: [
+                    "Problems often grow when ignored",
+                    "Prevents learning from difficulties",
+                    "Can lead to unhealthy escape behaviors",
+                    "Emotions may build up and explode later",
+                    "May damage relationships and performance"
+                ],
+                whenEffective: "Briefly, when overwhelmed and needing recovery time",
+                whenLessEffective: "As a primary or chronic coping strategy",
+                strategies: [
+                    "Use avoidance strategically, not habitually",
+                    "Set time limits on distraction and return to issues",
+                    "Identify what you're avoiding and why",
+                    "Develop active coping skills as alternatives"
+                ],
+                isAvoidant: true
+            }
+        };
+
+        let responses = {};
+        let studentName = '';
+        let surveyDate = '';
+
+        // Robust auto-date initialization with multiple fallbacks
+        function setTodayDate() {
+            var dateField = document.getElementById('testDate');
+            if (dateField && !dateField.value) {
+                dateField.value = new Date().toISOString().split('T')[0];
+            }
+        }
+        setTodayDate();
+        document.addEventListener('DOMContentLoaded', setTodayDate);
+        window.addEventListener('load', setTodayDate);
+        requestAnimationFrame(setTodayDate);
+        setTimeout(setTodayDate, 0);
+        setTimeout(setTodayDate, 100);
+        setTimeout(setTodayDate, 500);
+
+        function startAssessment() {
+            studentName = document.getElementById('studentName').value.trim();
+            surveyDate = document.getElementById('testDate').value;
+            if (!studentName) { alert('Please enter your name.'); return; }
+            if (!surveyDate) { alert('Please select a date.'); return; }
+            
+            document.getElementById('intro-section').classList.add('hidden');
+            document.getElementById('assessment-section').classList.remove('hidden');
+            renderQuestions();
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            let html = '';
+            let questionNum = 1;
+
+            // Combine and shuffle questions
+            const allQuestions = [
+                ...questions.problemSolver,
+                ...questions.emotionFocused,
+                ...questions.supportSeeker,
+                ...questions.avoider
+            ].sort(() => Math.random() - 0.5);
+
+            allQuestions.forEach(q => {
+                html += `
+                    <div class="question-container" id="q-container-${q.id}">
+                        <div class="question-text">
+                            <span class="question-number">${questionNum}.</span>
+                            ${q.text}
+                        </div>
+                        <div class="likert-scale">
+                            ${[1,2,3,4,5].map(val => `
+                                <div class="likert-option">
+                                    <input type="radio" name="q${q.id}" id="q${q.id}_${val}" value="${val}" data-style="${q.style}" onchange="handleResponse(${q.id}, ${val}, '${q.style}')">
+                                    <label for="q${q.id}_${val}">
+                                        <span class="likert-number">${val}</span>
+                                        <span class="likert-label">${['Never', 'Rarely', 'Sometimes', 'Often', 'Always'][val-1]}</span>
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                questionNum++;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function handleResponse(questionId, value, style) {
+            responses[questionId] = { value, style };
+            document.getElementById(`q-container-${questionId}`).classList.add('answered');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answered = Object.keys(responses).length;
+            const total = 40;
+            const progress = (answered / total) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${answered} of ${total} questions completed`;
+            document.getElementById('submitBtn').disabled = answered < total;
+        }
+
+        function calculateResults() {
+            if (Object.keys(responses).length < 40) {
+                alert('Please answer all questions before viewing results.');
+                return;
+            }
+
+            const scores = {
+                problemSolver: 0,
+                emotionFocused: 0,
+                supportSeeker: 0,
+                avoider: 0
+            };
+
+            Object.values(responses).forEach(r => {
+                scores[r.style] += r.value;
+            });
+
+            displayResults(scores);
+        }
+
+        function displayResults(scores) {
+            const maxScore = 50; // 10 questions × 5 max
+            
+            // Sort styles by score
+            const sortedStyles = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const primaryStyle = sortedStyles[0][0];
+            const secondaryStyle = sortedStyles[1][0];
+            const primary = styleData[primaryStyle];
+            const secondary = styleData[secondaryStyle];
+
+            // Calculate approach vs avoidance scores
+            const approachScore = scores.problemSolver + scores.emotionFocused + scores.supportSeeker;
+            const avoidanceScore = scores.avoider;
+            const approachPct = Math.round((approachScore / (approachScore + avoidanceScore)) * 100);
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div class="results-header">
+                    <h2>😌 Your Stress Coping Profile</h2>
+                    <div class="student-name">${studentName}</div>
+                    <div class="date">Completed: ${new Date(surveyDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                </div>
+
+                <div class="score-grid">
+                    <div class="score-card problem-solver ${primaryStyle === 'problemSolver' ? 'primary' : secondaryStyle === 'problemSolver' ? 'secondary' : ''}">
+                        <div class="icon">🔧</div>
+                        <h3>Problem-Focused</h3>
+                        <div class="score">${scores.problemSolver}</div>
+                        <div class="max">of ${maxScore}</div>
+                    </div>
+                    <div class="score-card emotion-focused ${primaryStyle === 'emotionFocused' ? 'primary' : secondaryStyle === 'emotionFocused' ? 'secondary' : ''}">
+                        <div class="icon">🧘</div>
+                        <h3>Emotion-Focused</h3>
+                        <div class="score">${scores.emotionFocused}</div>
+                        <div class="max">of ${maxScore}</div>
+                    </div>
+                    <div class="score-card support-seeker ${primaryStyle === 'supportSeeker' ? 'primary' : secondaryStyle === 'supportSeeker' ? 'secondary' : ''}">
+                        <div class="icon">🤝</div>
+                        <h3>Support-Seeking</h3>
+                        <div class="score">${scores.supportSeeker}</div>
+                        <div class="max">of ${maxScore}</div>
+                    </div>
+                    <div class="score-card avoider ${primaryStyle === 'avoider' ? 'primary' : secondaryStyle === 'avoider' ? 'secondary' : ''}">
+                        <div class="icon">🚪</div>
+                        <h3>Avoidant</h3>
+                        <div class="score">${scores.avoider}</div>
+                        <div class="max">of ${maxScore}</div>
+                    </div>
+                </div>
+
+                <!-- TRACKER SUMMARY SECTION -->
+                <div style="background: linear-gradient(135deg, #1a3a7a 0%, #00205B 100%); color: white; padding: 25px; border-radius: 14px; margin: 20px 0;">
+                    <h3 style="color: #C4A000; margin-bottom: 15px; font-size: 1.3em;">📋 Assessment Tracker Summary</h3>
+                    <p style="font-size: 0.9em; opacity: 0.9; margin-bottom: 15px;">Copy this code into your Assessment Tracker.</p>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Primary Style</div>
+                                <div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${primary.name}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Secondary Style</div>
+                                <div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${secondary.name}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Approach %</div>
+                                <div style="font-size: 1.2em; font-weight: 600;">${approachPct}%</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Category</div>
+                                <div style="font-size: 1.2em; font-weight: 600;">${primary.category}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
+                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">SMS-${primaryStyle === 'problemSolver' ? 'PF' : primaryStyle === 'emotionFocused' ? 'EF' : primaryStyle === 'supportSeeker' ? 'SS' : 'Av'}${secondaryStyle === 'problemSolver' ? 'PF' : secondaryStyle === 'emotionFocused' ? 'EF' : secondaryStyle === 'supportSeeker' ? 'SS' : 'Av'}-${approachPct}</strong>
+                    </div>
+                </div>
+
+                <div class="results-body">
+                    <!-- Approach vs Avoidance Summary -->
+                    <div class="result-section">
+                        <h4>📊 Approach vs. Avoidance Balance</h4>
+                        <div style="margin-top: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span style="font-weight: 600; color: var(--support-seeker);">Approach-Oriented (${approachPct}%)</span>
+                                <span style="font-weight: 600; color: var(--avoider);">Avoidance-Oriented (${100-approachPct}%)</span>
+                            </div>
+                            <div style="height: 30px; background: #e8ecf0; border-radius: 15px; overflow: hidden; display: flex;">
+                                <div style="width: ${approachPct}%; background: linear-gradient(90deg, var(--problem-solver), var(--support-seeker)); border-radius: 15px 0 0 15px;"></div>
+                                <div style="width: ${100-approachPct}%; background: var(--avoider); border-radius: 0 15px 15px 0;"></div>
+                            </div>
+                            <p style="margin-top: 15px; color: var(--text-secondary); font-size: 0.95em;">
+                                ${approachPct >= 70 ? 
+                                    "You primarily use approach-oriented coping strategies, which is generally associated with better long-term outcomes. You actively engage with stressors rather than avoiding them." :
+                                    approachPct >= 50 ?
+                                    "You use a mix of approach and avoidance strategies. Consider when avoidance serves you well versus when it allows problems to grow." :
+                                    "You rely significantly on avoidance coping. While this provides short-term relief, developing more approach-oriented strategies can improve long-term wellbeing."
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="type-card ${primaryStyle.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}">
+                        <div class="type-label primary">Primary Coping Style</div>
+                        <div class="type-header">
+                            <div class="type-icon ${primaryStyle.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}">${primary.icon}</div>
+                            <div class="type-info">
+                                <h3>${primary.name} Coping</h3>
+                                <div class="type-subtitle">${primary.subtitle}</div>
+                            </div>
+                        </div>
+                        <span style="display: inline-block; background: ${primary.category === 'Approach-Oriented' ? '#E8F5E9' : '#FFF3E0'}; color: ${primary.category === 'Approach-Oriented' ? 'var(--support-seeker)' : 'var(--avoider)'}; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 15px;">${primary.category}</span>
+                        <p class="type-description">${primary.description}</p>
+                        <div class="char-grid">
+                            <div class="char-box strengths">
+                                <h5>✓ Strengths</h5>
+                                <ul>${primary.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
+                            </div>
+                            <div class="char-box challenges">
+                                <h5>⚠️ Watch Out For</h5>
+                                <ul>${primary.challenges.map(c => `<li>${c}</li>`).join('')}</ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-section gold-accent">
+                        <h4>⏱️ When ${primary.name} Coping Works Best</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                            <div style="padding: 20px; background: #E8F5E9; border-radius: 12px;">
+                                <h5 style="color: var(--support-seeker); margin-bottom: 10px;">✓ Most Effective When</h5>
+                                <p style="color: var(--text-secondary); font-size: 0.95em; line-height: 1.6;">${primary.whenEffective}</p>
+                            </div>
+                            <div style="padding: 20px; background: #FFF3E0; border-radius: 12px;">
+                                <h5 style="color: var(--avoider); margin-bottom: 10px;">⚠️ Less Effective When</h5>
+                                <p style="color: var(--text-secondary); font-size: 0.95em; line-height: 1.6;">${primary.whenLessEffective}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-card ${secondaryStyle.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}" style="border-top-width: 3px;">
+                        <div class="type-label secondary">Secondary Coping Style</div>
+                        <div class="type-header">
+                            <div class="type-icon ${secondaryStyle.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}">${secondary.icon}</div>
+                            <div class="type-info">
+                                <h3>${secondary.name} Coping</h3>
+                                <div class="type-subtitle">${secondary.subtitle}</div>
+                            </div>
+                        </div>
+                        <p class="type-description">${secondary.description}</p>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>📋 Comparing Coping Styles</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Style</th>
+                                    <th>Focus</th>
+                                    <th>Best For</th>
+                                    <th>Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong style="color: var(--problem-solver);">🔧 Problem-Focused</strong></td>
+                                    <td>Change the situation</td>
+                                    <td>Controllable stressors</td>
+                                    <td>Neglecting emotions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--emotion-focused);">🧘 Emotion-Focused</strong></td>
+                                    <td>Change your response</td>
+                                    <td>Uncontrollable stressors</td>
+                                    <td>Inaction when action needed</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--support-seeker);">🤝 Support-Seeking</strong></td>
+                                    <td>Connect with others</td>
+                                    <td>Complex situations</td>
+                                    <td>Over-dependence</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--avoider);">🚪 Avoidant</strong></td>
+                                    <td>Create distance</td>
+                                    <td>Brief recovery periods</td>
+                                    <td>Problems escalating</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>🎯 Development Strategies for ${primary.name} Copers</h4>
+                        <div class="strategies-grid">
+                            ${primary.strategies.map((s, i) => `
+                                <div class="strategy-card">
+                                    <h5>Strategy ${i + 1}</h5>
+                                    <p>${s}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>📊 Your Coping Style Distribution</h4>
+                        <div style="display: grid; gap: 12px; margin-top: 15px;">
+                            ${Object.entries(scores).map(([style, score]) => {
+                                const data = styleData[style];
+                                const percentage = (score / maxScore) * 100;
+                                return `
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <span style="width: 130px; font-weight: 600; color: var(--text-secondary); font-size: 0.9em;">${data.icon} ${data.name}</span>
+                                        <div style="flex: 1; height: 26px; background: #e8ecf0; border-radius: 13px; overflow: hidden;">
+                                            <div style="height: 100%; width: ${percentage}%; background: ${data.color}; border-radius: 13px; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; color: white; font-weight: 600; font-size: 0.85em; min-width: 45px;">${score}</div>
+                                        </div>
+                                        <span style="width: 50px; text-align: right; color: var(--text-secondary); font-size: 0.9em;">${percentage.toFixed(0)}%</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <div class="result-section gold-accent">
+                        <h4>💡 The Key Insight: Flexible Coping</h4>
+                        <div style="background: linear-gradient(135deg, #fffef8, #fef9e7); padding: 20px; border-radius: 12px; border-left: 4px solid var(--chapman-gold);">
+                            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 15px;"><strong>The most effective copers are flexible.</strong> They match their coping strategy to the demands of the situation:</p>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0; color: var(--problem-solver);">🔧</span><strong>Controllable stressors</strong> → Problem-focused coping (take action)</li>
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0; color: var(--emotion-focused);">🧘</span><strong>Uncontrollable stressors</strong> → Emotion-focused coping (adapt and accept)</li>
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0; color: var(--support-seeker);">🤝</span><strong>Complex situations</strong> → Support-seeking (get perspective and help)</li>
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0; color: var(--avoider);">🚪</span><strong>Overwhelming moments</strong> → Brief avoidance (recover, then re-engage)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="reflection-section">
+                        <h4>🤔 Reflection Questions</h4>
+                        <div class="reflection-questions">
+                            <div class="reflection-question">Think of a recent stressful situation. Which coping style did you use? Was it effective for that situation?</div>
+                            <div class="reflection-question">When has your primary coping style (${primary.name}) served you well? When has it created problems?</div>
+                            <div class="reflection-question">What types of stressors trigger your avoidance tendencies?</div>
+                            <div class="reflection-question">How might you develop more flexibility in matching coping strategies to situations?</div>
+                            <div class="reflection-question">As a future manager, how might your coping style affect your team during stressful times?</div>
+                            <div class="reflection-question">What one change to your coping approach would have the biggest positive impact?</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('assessment-section').classList.add('hidden');
+            resultsDiv.style.display = 'block';
+            document.getElementById('downloadSection').classList.remove('hidden');
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+
+            window.stressResults = { scores, primaryStyle, secondaryStyle, approachPct };
+        }
+
+        function generatePDF() {
+            var jsPDF = window.jspdf.jsPDF;
+            var doc = new jsPDF();
+            var scores = window.stressResults.scores;
+            var primaryStyle = window.stressResults.primaryStyle;
+            var secondaryStyle = window.stressResults.secondaryStyle;
+            var approachPct = window.stressResults.approachPct;
+            var primary = styleData[primaryStyle];
+            var secondary = styleData[secondaryStyle];
+            var maxScore = 50;
+
+            // Colors
+            var chapmanBlue = [0, 32, 91];
+            var chapmanGold = [196, 160, 0];
+            var textDark = [26, 26, 46];
+            var textMuted = [100, 100, 110];
+            var greenColor = [46, 125, 50];
+            var redColor = [198, 40, 40];
+            var blueColor = [21, 101, 192];
+            var orangeColor = [230, 81, 0];
+            var purpleColor = [123, 31, 162];
+
+            // Tracker code generation
+            var styleAbbrev = { problemSolver: 'PF', emotionFocused: 'EF', supportSeeker: 'SS', avoider: 'Av' };
+            var trackerCode = 'SMS-' + styleAbbrev[primaryStyle] + styleAbbrev[secondaryStyle] + '-' + approachPct;
+
+            // Helper function
+            function addWrappedText(text, x, startY, maxWidth, lineHeight) {
+                var lines = doc.splitTextToSize(text, maxWidth);
+                var currentY = startY;
+                for (var i = 0; i < lines.length; i++) {
+                    if (currentY > 275) { doc.addPage(); currentY = 20; }
+                    doc.text(lines[i], x, currentY);
+                    currentY += lineHeight;
+                }
+                return currentY;
+            }
+
+            // ===== PAGE 1 =====
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.rect(0, 0, 210, 42, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('CHAPMAN UNIVERSITY', 105, 12, { align: 'center' });
+            doc.setFontSize(9);
+            doc.setTextColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.text('Argyros College of Business and Economics', 105, 18, { align: 'center' });
+            doc.setFontSize(15);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Stress Management Style Assessment', 105, 28, { align: 'center' });
+            doc.setFontSize(9);
+            doc.text("Based on Lazarus & Folkman's Coping Theory", 105, 36, { align: 'center' });
+            doc.setFillColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.rect(0, 42, 210, 2, 'F');
+
+            var y = 52;
+            doc.setFontSize(10);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            doc.text('Student: ' + studentName, 20, y);
+            doc.text('Date: ' + new Date(surveyDate).toLocaleDateString(), 140, y);
+            y += 10;
+
+            // Primary Style Banner
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 18, 2, 2, 'F');
+            doc.setFontSize(14);
+            doc.setTextColor(255, 255, 255);
+            doc.text('PRIMARY: ' + primary.name.toUpperCase() + ' COPING', 105, y + 12, { align: 'center' });
+            y += 24;
+
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.text(primary.subtitle + ' (' + primary.category + ')', 105, y, { align: 'center' });
+            y += 6;
+
+            doc.setFontSize(9);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('Secondary: ' + secondary.name + ' Coping (' + secondary.category + ')', 105, y, { align: 'center' });
+            y += 8;
+
+            // Score Box
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 22, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('COPING STYLE SCORES (10 questions each, max 50)', 25, y + 6);
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            doc.text('Problem-Focused: ' + scores.problemSolver, 25, y + 12);
+            doc.text('Emotion-Focused: ' + scores.emotionFocused, 80, y + 12);
+            doc.text('Support-Seeking: ' + scores.supportSeeker, 135, y + 12);
+            doc.text('Avoidant: ' + scores.avoider, 25, y + 18);
+            doc.text('Approach: ' + approachPct + '%', 80, y + 18);
+            doc.text('Avoidance: ' + (100 - approachPct) + '%', 135, y + 18);
+            y += 28;
+
+            // Tracker Code Box
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Tracker: ' + trackerCode + '  |  Primary: ' + primary.name + '  |  Secondary: ' + secondary.name, 105, y + 7, { align: 'center' });
+            y += 16;
+
+            // Description
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(primary.description, 20, y, 170, 4);
+            y += 5;
+
+            // Strengths
+            doc.setFontSize(10);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('STRENGTHS', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < Math.min(4, primary.strengths.length); i++) {
+                doc.text('- ' + primary.strengths[i], 25, y);
+                y += 4;
+            }
+            y += 3;
+
+            // Challenges
+            doc.setFontSize(10);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('WATCH OUT FOR', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < Math.min(4, primary.challenges.length); i++) {
+                doc.text('- ' + primary.challenges[i], 25, y);
+                y += 4;
+            }
+            y += 3;
+
+            // When Effective
+            doc.setFontSize(10);
+            doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.text('WHEN MOST EFFECTIVE', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(primary.whenEffective, 20, y, 170, 4);
+            y += 3;
+
+            // When Less Effective
+            doc.setFontSize(10);
+            doc.setTextColor(purpleColor[0], purpleColor[1], purpleColor[2]);
+            doc.text('WHEN LESS EFFECTIVE', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(primary.whenLessEffective, 20, y, 170, 4);
+
+            // ===== PAGE 2: SWOT and All Styles =====
+            doc.addPage();
+            y = 20;
+
+            // SWOT Header
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(11);
+            doc.setTextColor(255, 255, 255);
+            doc.text('SWOT ANALYSIS - Stress Management Profile', 105, y + 7, { align: 'center' });
+            y += 18;
+
+            // SWOT Grid
+            var boxW = 82;
+            var boxH = 26;
+
+            // Strength
+            doc.setFillColor(232, 245, 233);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.setLineWidth(0.5);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('STRENGTH', 25, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var sText = 'Strong ' + primary.name.toLowerCase() + ' coping provides reliable stress management approach';
+            var sLines = doc.splitTextToSize(sText, boxW - 10);
+            for (var i = 0; i < Math.min(sLines.length, 3); i++) {
+                doc.text(sLines[i], 25, y + 12 + (i * 4));
+            }
+
+            // Weakness
+            doc.setFillColor(255, 235, 238);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(redColor[0], redColor[1], redColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('WEAKNESS', 113, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var wText = primary.challenges[0];
+            var wLines = doc.splitTextToSize(wText, boxW - 10);
+            for (var i = 0; i < Math.min(wLines.length, 3); i++) {
+                doc.text(wLines[i], 113, y + 12 + (i * 4));
+            }
+
+            y += boxH + 5;
+
+            // Opportunity
+            doc.setFillColor(227, 242, 253);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.text('OPPORTUNITY', 25, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var oText = 'Develop ' + secondary.name.toLowerCase() + ' coping for greater flexibility';
+            var oLines = doc.splitTextToSize(oText, boxW - 10);
+            for (var i = 0; i < Math.min(oLines.length, 3); i++) {
+                doc.text(oLines[i], 25, y + 12 + (i * 4));
+            }
+
+            // Threat
+            doc.setFillColor(255, 243, 224);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('THREAT', 113, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var tText = 'Over-reliance on one coping style may fail when situation requires different approach';
+            var tLines = doc.splitTextToSize(tText, boxW - 10);
+            for (var i = 0; i < Math.min(tLines.length, 3); i++) {
+                doc.text(tLines[i], 113, y + 12 + (i * 4));
+            }
+
+            y += boxH + 12;
+
+            // Coping Theory Model
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 20, 2, 2, 'F');
+            doc.setFontSize(9);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text("LAZARUS & FOLKMAN'S COPING FRAMEWORK", 105, y + 6, { align: 'center' });
+            doc.setFontSize(7);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('APPROACH: Problem-Focused + Emotion-Focused + Support-Seeking (Active engagement)', 105, y + 12, { align: 'center' });
+            doc.text('AVOIDANCE: Distancing, denial, disengagement (May be adaptive short-term only)', 105, y + 17, { align: 'center' });
+            y += 26;
+
+            // All Four Styles
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('THE FOUR COPING STYLES', 20, y);
+            y += 7;
+
+            var styles = ['problemSolver', 'emotionFocused', 'supportSeeker', 'avoider'];
+            var styleColors = {
+                problemSolver: blueColor,
+                emotionFocused: purpleColor,
+                supportSeeker: greenColor,
+                avoider: orangeColor
+            };
+
+            for (var s = 0; s < styles.length; s++) {
+                var style = styles[s];
+                var styleColor = styleColors[style];
+                var isYours = (style === primaryStyle);
+                
+                if (y > 245) { doc.addPage(); y = 20; }
+                
+                doc.setFontSize(8);
+                doc.setTextColor(styleColor[0], styleColor[1], styleColor[2]);
+                doc.text(styleData[style].name + (isYours ? ' (Your Primary)' : '') + ': ' + scores[style] + '/50 [' + styleData[style].category + ']', 25, y);
+                y += 4;
+                doc.setFontSize(7);
+                doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+                doc.text(styleData[style].subtitle, 25, y);
+                y += 5;
+            }
+
+            y += 6;
+
+            // Reflection Questions
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('REFLECTION QUESTIONS', 105, y + 7, { align: 'center' });
+            y += 16;
+
+            var reflectionQs = [
+                "Which coping style did you use in a recent stressful situation? Was it effective?",
+                "When has " + primary.name.toLowerCase() + " coping served you well? When has it created problems?",
+                "What types of stressors trigger your avoidance tendencies?",
+                "How might you develop more flexibility in your coping approach?",
+                "What is one strategy from your secondary style you could practice this week?"
+            ];
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < reflectionQs.length; i++) {
+                if (y > 275) { doc.addPage(); y = 20; }
+                var qLines = doc.splitTextToSize((i + 1) + '. ' + reflectionQs[i], 165);
+                for (var j = 0; j < qLines.length; j++) {
+                    doc.text(qLines[j], 25, y);
+                    y += 4;
+                }
+                y += 2;
+            }
+
+            // Footer on all pages
+            var pageCount = doc.internal.getNumberOfPages();
+            for (var i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+                doc.text('Page ' + i + ' of ' + pageCount, 105, 287, { align: 'center' });
+                doc.text('Chapman University - Argyros College of Business and Economics - MGMT 316', 105, 292, { align: 'center' });
+            }
+
+            doc.save('Stress_Management_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+
+        function restartAssessment() {
+            responses = {};
+            document.getElementById('studentName').value = '';
+            document.getElementById('testDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('assessment-section').classList.add('hidden');
+            document.getElementById('downloadSection').classList.add('hidden');
+            document.getElementById('intro-section').classList.remove('hidden');
+            document.getElementById('progressFill').style.width = '0%';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
