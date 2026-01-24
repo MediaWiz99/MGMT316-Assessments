@@ -420,20 +420,21 @@
         
         // Parser functions for each assessment type
         function parseLSA(code) {
-            // LSA-{Primary}{Secondary}-{Level}{Score} e.g., LSA-CoDe-H85
-            const match = code.match(/LSA-([A-Z][a-z])([A-Z][a-z])-([A-Z])(\d+)/i);
+            // LSA-{Primary}{Secondary}-{Clarity} e.g., LSA-CoDe-S
+            const match = code.match(/LSA-([A-Z][a-z])([A-Z][a-z])-([SMB])/i);
             if (!match) return null;
             const styles = { Di: 'Directing', Co: 'Coaching', Su: 'Supporting', De: 'Delegating' };
-            const levels = { H: 'High Versatility', M: 'Moderate Versatility', D: 'Developing' };
-            return { primary: styles[match[1]] || match[1], secondary: styles[match[2]] || match[2], level: levels[match[3]] || match[3], score: parseInt(match[4]) };
+            const levels = { S: 'Strong Clarity', M: 'Moderate Clarity', B: 'Balanced' };
+            return { primary: styles[match[1]] || match[1], secondary: styles[match[2]] || match[2], level: levels[match[3].toUpperCase()] || match[3] };
         }
         
         function parseCSA(code) {
-            // CSA-{Primary}{Secondary}-{Score} e.g., CSA-AnIn-78
-            const match = code.match(/CSA-([A-Z][a-z])([A-Z][a-z])-(\d+)/i);
+            // CSA-{Primary}{Secondary}-{Clarity} e.g., CSA-AnIn-S
+            const match = code.match(/CSA-([A-Z][a-z])([A-Z][a-z])-([SMB])/i);
             if (!match) return null;
             const styles = { An: 'Analytical', In: 'Intuitive', Fu: 'Functional', Pe: 'Personal' };
-            return { primary: styles[match[1]] || match[1], secondary: styles[match[2]] || match[2], score: parseInt(match[3]) };
+            const levels = { S: 'Strong Clarity', M: 'Moderate Clarity', B: 'Balanced' };
+            return { primary: styles[match[1]] || match[1], secondary: styles[match[2]] || match[2], level: levels[match[3].toUpperCase()] || match[3] };
         }
         
         function parseCMA(code) {
@@ -495,11 +496,12 @@
         }
         
         function parseLRN(code) {
-            // LRN-{Primary}{Secondary}-{Score} e.g., LRN-AsDi-88
-            const match = code.match(/LRN-([A-Z][a-z])([A-Z][a-z])-(\d+)/i);
+            // LRN-{Style}-{Clarity} e.g., LRN-Di-S
+            const match = code.match(/LRN-([A-Z][a-z])-([SMB])/i);
             if (!match) return null;
             const styles = { Di: 'Diverging', As: 'Assimilating', Co: 'Converging', Ac: 'Accommodating' };
-            return { primary: styles[match[1]] || match[1], secondary: styles[match[2]] || match[2], score: parseInt(match[3]) };
+            const levels = { S: 'Strong Clarity', M: 'Moderate Clarity', B: 'Balanced' };
+            return { primary: styles[match[1]] || match[1], level: levels[match[2].toUpperCase()] || match[2] };
         }
         
         function parseGRT(code) {
@@ -512,11 +514,11 @@
         }
         
         function parsePSA(code) {
-            // PSA-{Level}{Score} e.g., PSA-H85
-            const match = code.match(/PSA-([A-Z])(\d+)/i);
+            // PSA-{Level}-{Score} e.g., PSA-H-85
+            const match = code.match(/PSA-([A-Z])-(\d+)/i);
             if (!match) return null;
             const levels = { H: 'High Safety', M: 'Moderate Safety', L: 'Low Safety' };
-            return { level: levels[match[1]] || match[1], score: parseInt(match[2]) };
+            return { level: levels[match[1].toUpperCase()] || match[1], score: parseInt(match[2]) };
         }
         
         function parseSYS(code) {
