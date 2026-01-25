@@ -2188,8 +2188,7 @@
             doc.text('Tracker: ' + trackerCode + '  |  Primary: ' + primaryType + '  |  Secondary: ' + (secondaryType || 'None'), 105, y + 7, { align: 'center' });
             y += 14;
 
-            // Scores
-            const scoreItems = document.querySelectorAll('.score-item');
+            // Scores (reusing scoreItems from above)
             let scoreText = 'Scores: ';
             scoreItems.forEach((item, index) => {
                 const label = item.querySelector('.score-letter').textContent;
