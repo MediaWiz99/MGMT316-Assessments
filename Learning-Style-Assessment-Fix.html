@@ -1482,10 +1482,10 @@
             const dominantMode = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0].toUpperCase();
             const processing = acCE <= 0 ? 'Feeling' : 'Thinking';
             const perception = aeRO <= 0 ? 'Watching' : 'Doing';
-            const styleAbbrev = { diverging: 'Dv', assimilating: 'As', converging: 'Cv', accommodating: 'Ac' };
+            const styleAbbrev = { diverging: 'Di', assimilating: 'As', converging: 'Co', accommodating: 'Ac' };
             const clarity = Math.abs(acCE) + Math.abs(aeRO);
             const clarityLevel = clarity >= 20 ? 'Strong' : clarity >= 10 ? 'Moderate' : 'Balanced';
-            const trackerCode = 'LSA-' + styleAbbrev[styleKey] + '-' + clarityLevel.charAt(0);
+            const trackerCode = 'LRN-' + styleAbbrev[styleKey] + '-' + clarityLevel.charAt(0);
 
             // Helper function
             function addWrappedText(text, x, startY, maxWidth, lineHeight) {
