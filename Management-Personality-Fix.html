@@ -1654,28 +1654,18 @@
                 if (answer) counts[answer]++;
             }
 
-            let maxCount = Math.max(counts.a, counts.b, counts.c, counts.d);
-            let primaryType = '';
-            let secondaryType = '';
-            
             const typeMap = { a: 'Director', b: 'Innovator', c: 'Visionary', d: 'Developer' };
             
-            // Find primary
-            for (let key of ['a', 'b', 'c', 'd']) {
-                if (counts[key] === maxCount) {
-                    primaryType = typeMap[key];
-                    break;
-                }
-            }
-
-            // Find secondary
-            let secondaryCount = 0;
-            for (let key of ['a', 'b', 'c', 'd']) {
-                if (counts[key] < maxCount && counts[key] > secondaryCount) {
-                    secondaryCount = counts[key];
-                    secondaryType = typeMap[key];
-                }
-            }
+            // Sort all types by score (highest first), then by key for consistent tie-breaking
+            const sortedTypes = Object.entries(counts)
+                .map(([key, count]) => ({ key, count, type: typeMap[key] }))
+                .sort((a, b) => b.count - a.count || a.key.localeCompare(b.key));
+            
+            // Primary is the highest scoring type
+            const primaryType = sortedTypes[0].type;
+            
+            // Secondary is the second highest (handles ties correctly)
+            const secondaryType = sortedTypes[1].count > 0 ? sortedTypes[1].type : '';
 
             displayResults(primaryType, secondaryType, counts, studentName, testDate);
         }
