@@ -970,6 +970,17 @@
                 tolerance: "Low tolerance for ambiguity",
                 focus: "Task/Technical focus",
                 description: "Directive decision-makers are efficient, practical, and action-oriented. You prefer structure, clear guidelines, and quick results. You're comfortable making decisions with limited information and value speed over exhaustive analysis. You tend to be autocratic and expect others to follow your directives.",
+                profileSummary: "You are a decisive, action-oriented decision-maker who values efficiency and clarity. You prefer to make quick decisions based on practical considerations and move forward.",
+                decisionProcess: "Rapid assessment → Select most practical option → Implement immediately → Adjust based on results",
+                communicationStyle: "Direct, brief, and action-focused. You state decisions clearly and expect execution. You prefer bullet points over lengthy explanations.",
+                motivatedBy: "Efficiency, getting results, solving problems quickly, taking action, and maintaining control over outcomes.",
+                stressResponse: "Under pressure, you may become more autocratic, make decisions faster with even less input, or become impatient with those who want more deliberation.",
+                blindSpots: "May miss important nuances by deciding too quickly; can alienate team members by not including them; may solve the wrong problem by not fully understanding the situation.",
+                worksWith: {
+                    analytical: "They can provide data you might skip; give them time to research while you handle urgent matters",
+                    conceptual: "They see possibilities you might miss; let them brainstorm while you focus on execution",
+                    behavioral: "They understand the people impact; consult them on decisions affecting team morale"
+                },
                 strengths: [
                     "Makes decisions quickly and confidently",
                     "Efficient with time and resources",
@@ -990,7 +1001,11 @@
                     "Seek input from others, especially on people-related decisions",
                     "Consider long-term implications, not just immediate results",
                     "Be open to creative alternatives even when a quick solution exists"
-                ]
+                ],
+                swotStrength: "Decisive action and efficient execution in time-sensitive situations",
+                swotWeakness: "May miss important information or alienate others by excluding them",
+                swotOpportunity: "Develop consultative skills for decisions requiring buy-in",
+                swotThreat: "Risk of poor decisions from insufficient analysis; damaged relationships"
             },
             analytical: {
                 name: "Analytical",
@@ -1000,6 +1015,17 @@
                 tolerance: "High tolerance for ambiguity",
                 focus: "Task/Technical focus",
                 description: "Analytical decision-makers are thorough, logical, and data-driven. You enjoy digging into details, analyzing options, and finding the optimal solution through careful examination of facts. You're comfortable with complex problems and prefer to have extensive information before deciding.",
+                profileSummary: "You are a methodical, data-driven decision-maker who values thoroughness and accuracy. You prefer to gather comprehensive information before committing to a course of action.",
+                decisionProcess: "Define problem → Gather extensive data → Analyze all options → Select optimal solution based on evidence",
+                communicationStyle: "Detailed, fact-based, and logical. You present evidence and reasoning systematically. You may include more information than others need.",
+                motivatedBy: "Finding the optimal solution, being accurate, understanding deeply, making well-justified decisions, and solving complex problems.",
+                stressResponse: "Under pressure, you may request more data, resist making decisions with incomplete information, or become frustrated when forced to act without adequate analysis.",
+                blindSpots: "May analyze past the decision point; can miss opportunities that require quick action; may undervalue intuition and emotional factors.",
+                worksWith: {
+                    directive: "They can push you to decide when you have enough information; let them handle time-sensitive execution",
+                    conceptual: "They can help you see possibilities beyond the data; balance their creativity with your analysis",
+                    behavioral: "They see people factors you might miss; include their perspective on human impact"
+                },
                 strengths: [
                     "Makes well-researched, informed decisions",
                     "Excellent at solving complex problems",
@@ -1020,7 +1046,11 @@
                     "Recognize when 'good enough' information is sufficient",
                     "Consider people and relationships, not just data",
                     "Trust your judgment when data is incomplete"
-                ]
+                ],
+                swotStrength: "Well-researched decisions that minimize risk and maximize outcomes",
+                swotWeakness: "May miss opportunities through over-analysis or delay",
+                swotOpportunity: "Develop ability to act on imperfect information when timing matters",
+                swotThreat: "Risk of analysis paralysis; competitors may act while you analyze"
             },
             conceptual: {
                 name: "Conceptual",
@@ -1030,6 +1060,17 @@
                 tolerance: "High tolerance for ambiguity",
                 focus: "People/Social focus",
                 description: "Conceptual decision-makers are creative, visionary, and focused on possibilities. You enjoy exploring ideas, considering the big picture, and finding innovative solutions. You're comfortable with ambiguity and prefer to involve others in brainstorming and creative problem-solving.",
+                profileSummary: "You are an innovative, big-picture decision-maker who values creativity and possibility. You prefer to explore multiple options and think long-term.",
+                decisionProcess: "Envision possibilities → Brainstorm with others → Explore creative options → Select innovative solution that serves the vision",
+                communicationStyle: "Visionary, story-based, and expansive. You paint pictures of possibilities and inspire others with ideas. You may jump between topics as connections emerge.",
+                motivatedBy: "Innovation, seeing the big picture, creating something new, exploring possibilities, and inspiring others with vision.",
+                stressResponse: "Under pressure, you may generate more ideas rather than committing, become frustrated with constraints, or disengage from problems that seem too mundane.",
+                blindSpots: "May overlook practical implementation challenges; can pursue too many ideas at once; may frustrate others who need concrete direction.",
+                worksWith: {
+                    directive: "They can translate your vision into action; let them handle execution details",
+                    analytical: "They can test your ideas against data; their analysis strengthens your concepts",
+                    behavioral: "Natural allies—they bring people along while you set the vision"
+                },
                 strengths: [
                     "Sees the big picture and long-term implications",
                     "Generates creative, innovative solutions",
@@ -1050,7 +1091,11 @@
                     "Don't let creativity delay necessary decisions",
                     "Ground ideas in data and realistic constraints",
                     "Follow through on ideas, not just generate them"
-                ]
+                ],
+                swotStrength: "Innovative solutions and inspiring vision that transforms organizations",
+                swotWeakness: "May struggle with practical execution and focus",
+                swotOpportunity: "Partner with detail-oriented implementers to bring visions to life",
+                swotThreat: "Risk of being seen as unrealistic; ideas may not survive contact with reality"
             },
             behavioral: {
                 name: "Behavioral",
@@ -1060,6 +1105,17 @@
                 tolerance: "Low tolerance for ambiguity",
                 focus: "People/Social focus",
                 description: "Behavioral decision-makers are supportive, people-oriented, and consultative. You value harmony, prefer to involve others in decisions, and consider how choices affect people. You work well in teams and seek consensus, though you may avoid conflict.",
+                profileSummary: "You are a collaborative, people-centered decision-maker who values inclusion and relationships. You prefer to make decisions that have team support and consider human impact.",
+                decisionProcess: "Consult stakeholders → Consider people impact → Build consensus → Decide in ways that maintain relationships",
+                communicationStyle: "Warm, inclusive, and consultative. You ask for input, acknowledge concerns, and explain how decisions affect people.",
+                motivatedBy: "Team harmony, helping others, being inclusive, maintaining relationships, and creating supportive environments.",
+                stressResponse: "Under pressure, you may over-consult, avoid making unpopular decisions, or struggle when forced to act against team preferences.",
+                blindSpots: "May prioritize harmony over optimal outcomes; can take too long seeking consensus; may avoid necessary but unpopular decisions.",
+                worksWith: {
+                    directive: "They can make tough calls you avoid; learn from their decisiveness",
+                    analytical: "They provide data to support your people decisions; their logic complements your intuition",
+                    conceptual: "Natural allies—you implement their vision by bringing people along"
+                },
                 strengths: [
                     "Considers impact on people and relationships",
                     "Builds buy-in through inclusion",
@@ -1080,7 +1136,11 @@
                     "Don't let the desire for harmony prevent necessary changes",
                     "Balance people concerns with business requirements",
                     "Be willing to make unpopular but necessary decisions"
-                ]
+                ],
+                swotStrength: "Builds commitment and reduces resistance through inclusive decision-making",
+                swotWeakness: "May avoid necessary difficult decisions to maintain harmony",
+                swotOpportunity: "Develop comfort with making unpopular calls when necessary",
+                swotThreat: "Risk of suboptimal decisions from over-prioritizing consensus"
             }
         };
 
