@@ -708,6 +708,16 @@
                 color: "#C62828",
                 subtitle: "The Drive to Excel",
                 description: "People with a high need for Achievement are driven to excel, to accomplish challenging goals, and to do things better than before. You set high standards for yourself and others, seek personal responsibility for outcomes, and want regular feedback on your performance. You're motivated by the satisfaction of accomplishment itself.",
+                profileSummary: "You are driven by the satisfaction of accomplishment. You set challenging goals, seek feedback on your performance, and take personal responsibility for results.",
+                decisionStyle: "Goal-focused and results-oriented. You evaluate options based on what will lead to achievement and measurable progress.",
+                communicationStyle: "Direct and performance-focused. You talk about goals, metrics, progress, and results. You prefer conversations that lead to action.",
+                motivatedBy: "Challenging goals with clear success criteria, opportunities to demonstrate competence, feedback on performance, and visible accomplishments.",
+                stressResponse: "Under pressure, you may take on too much yourself, become impatient with obstacles or slower colleagues, or push harder at the expense of relationships.",
+                blindSpots: "May not recognize when your drive alienates others; can miss that some important work isn't measurable; may undervalue team contributions to your success.",
+                worksWith: {
+                    affiliation: "They build the relationships you may neglect; let them help you bring people along",
+                    power: "Natural competitors; channel rivalry productively or establish clear domains"
+                },
                 characteristics: ["Goal-oriented", "Self-motivated", "Prefers moderate risk", "Seeks feedback", "Results-focused"],
                 strengths: [
                     "Sets and achieves ambitious goals",
@@ -725,7 +735,11 @@
                 ],
                 asManager: "High-achievers often struggle as managers because they want to do things themselves rather than develop others. Focus on setting clear goals for your team and measuring progress, but resist the urge to do everything yourself.",
                 motivators: ["Challenging goals", "Performance feedback", "Recognition for excellence", "Opportunities to improve", "Visible results"],
-                careerFit: "Entrepreneurship, sales, research, engineering, individual contributor roles with clear metrics"
+                careerFit: "Entrepreneurship, sales, research, engineering, individual contributor roles with clear metrics",
+                swotStrength: "Driven goal achievement and consistent delivery of results",
+                swotWeakness: "May neglect relationships and team development in pursuit of personal achievement",
+                swotOpportunity: "Develop others' achievement motivation; measure success through team outcomes",
+                swotThreat: "Risk of burnout, isolation, or being seen as poor team player"
             },
             affiliation: {
                 name: "Affiliation",
@@ -734,6 +748,16 @@
                 color: "#2E7D32",
                 subtitle: "The Desire for Belonging",
                 description: "People with a high need for Affiliation are driven by relationships, social acceptance, and being part of a group. You value harmony, cooperation, and being liked by others. You're energized by social interaction and prefer collaborative over competitive environments. You prioritize people over tasks.",
+                profileSummary: "You are driven by relationships and belonging. You value harmony, seek to be liked and accepted, and create strong interpersonal connections.",
+                decisionStyle: "Relationship-aware and consensus-seeking. You consider how decisions affect people and group harmony.",
+                communicationStyle: "Warm, inclusive, and relationship-focused. You connect personally, show interest in others, and prefer collaborative discussions.",
+                motivatedBy: "Social acceptance, being part of a valued team, harmonious relationships, opportunities to help others, and feeling included.",
+                stressResponse: "Under pressure, you may avoid necessary conflict, defer to others to maintain relationships, or become anxious about social standing.",
+                blindSpots: "May prioritize being liked over being effective; can avoid giving honest feedback to preserve relationships; may not assert your own needs.",
+                worksWith: {
+                    achievement: "They push for results you might soften; help them see the people side of performance",
+                    power: "They may seem too political; help them build genuine relationships"
+                },
                 characteristics: ["Relationship-focused", "Cooperative", "Avoids conflict", "Team-oriented", "Supportive"],
                 strengths: [
                     "Builds strong workplace relationships",
@@ -751,7 +775,11 @@
                 ],
                 asManager: "High-affiliators make supportive managers but may struggle with accountability and tough decisions. Practice having difficult conversations and remember that honest feedback, even when uncomfortable, helps people grow.",
                 motivators: ["Team environment", "Social interaction", "Harmony and cooperation", "Being liked and accepted", "Helping others"],
-                careerFit: "Human resources, customer service, healthcare, counseling, team facilitation, non-profit work"
+                careerFit: "Human resources, customer service, healthcare, counseling, team facilitation, non-profit work",
+                swotStrength: "Creates strong relationships and collaborative team cultures",
+                swotWeakness: "May avoid conflict and difficult decisions to preserve harmony",
+                swotOpportunity: "Develop comfort with constructive conflict and accountability",
+                swotThreat: "Risk of being seen as conflict-avoidant or unable to make tough calls"
             },
             power: {
                 name: "Power",
@@ -760,6 +788,16 @@
                 color: "#7B1FA2",
                 subtitle: "The Need to Influence",
                 description: "People with a high need for Power are driven to influence, lead, and have impact on others. You seek positions of authority and status, enjoy competition, and want to control resources and outcomes. McClelland distinguished between 'personalized power' (self-serving) and 'socialized power' (using influence to benefit others).",
+                profileSummary: "You are driven by influence and impact. You seek leadership roles, enjoy competition, and want to shape outcomes and direct resources.",
+                decisionStyle: "Decisive and authoritative. You're comfortable making calls and expect others to follow. You think about power dynamics and influence.",
+                communicationStyle: "Confident, directive, and persuasive. You speak with authority, build coalitions, and communicate in ways that establish your position.",
+                motivatedBy: "Authority, leadership opportunities, status and recognition, influence over outcomes, competitive victories, and organizational impact.",
+                stressResponse: "Under pressure, you may become more controlling, engage in political maneuvering, or compete more intensely for position.",
+                blindSpots: "May not recognize when influence tactics damage trust; can prioritize power over substance; may undervalue peer relationships.",
+                worksWith: {
+                    achievement: "Natural competitors; direct competition productively toward shared goals",
+                    affiliation: "They build genuine relationships where you build coalitions; learn from their authenticity"
+                },
                 characteristics: ["Influential", "Competitive", "Status-conscious", "Decisive", "Leadership-oriented"],
                 strengths: [
                     "Natural leadership presence",
@@ -777,7 +815,11 @@
                 ],
                 asManager: "High-power individuals are drawn to management, but success depends on whether you use 'socialized power' (benefiting the organization) or 'personalized power' (benefiting yourself). The best leaders use their influence to develop others and achieve collective goals.",
                 motivators: ["Leadership opportunities", "Authority and status", "Influence over decisions", "Recognition of position", "Competitive situations"],
-                careerFit: "Executive leadership, politics, law, sales management, entrepreneurship, public speaking"
+                careerFit: "Executive leadership, politics, law, sales management, entrepreneurship, public speaking",
+                swotStrength: "Natural leadership presence and ability to drive organizational change",
+                swotWeakness: "May be perceived as political or self-serving",
+                swotOpportunity: "Channel power toward developing others and collective success (socialized power)",
+                swotThreat: "Risk of being seen as self-serving; may damage relationships through power plays"
             }
         };
 
@@ -899,9 +941,11 @@
                 power: Math.round((scores.power / total) * 100)
             };
             
-            // Generate tracker code
+            // Generate tracker code with explanation
             const needAbbrev = { achievement: 'Ac', affiliation: 'Af', power: 'Po' };
+            const needNames = { achievement: 'Achievement', affiliation: 'Affiliation', power: 'Power' };
             const trackerCode = 'MSA-' + needAbbrev[primaryNeed] + needAbbrev[secondaryNeed] + '-' + total;
+            const codeExplanation = `Motivation: ${needNames[primaryNeed]} (primary) + ${needNames[secondaryNeed]} (secondary) | Total: ${total}`;
 
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = `
@@ -958,8 +1002,33 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">${trackerCode}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Motivational Need</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${primary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Motivational Need</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${secondary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Motivation Profile</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${primary.title || 'Driven'}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Total Score</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${total} / 180</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Need Scores:</strong> Achievement: ${scores.achievement} | Affiliation: ${scores.affiliation} | Power: ${scores.power}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1208,7 +1277,9 @@
 
             // Tracker code generation
             var needAbbrev = { achievement: 'Ac', affiliation: 'Af', power: 'Po' };
+            var needNames = { achievement: 'Achievement', affiliation: 'Affiliation', power: 'Power' };
             var trackerCode = 'MSA-' + needAbbrev[primaryNeed] + needAbbrev[secondaryNeed] + '-' + scores[primaryNeed];
+            var codeExplanation = needNames[primaryNeed] + ' (primary) + ' + needNames[secondaryNeed] + ' (secondary) | Score: ' + scores[primaryNeed];
 
             // Helper function
             function addWrappedText(text, x, startY, maxWidth, lineHeight) {
@@ -1279,11 +1350,13 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Primary: ' + primary.name + '  |  Secondary: ' + secondary.name, 105, y + 7, { align: 'center' });
-            y += 16;
+            doc.text('Your Result: ' + codeExplanation, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode, 105, y + 12, { align: 'center' });
+            y += 22;
 
             // Description
             doc.setFontSize(8);

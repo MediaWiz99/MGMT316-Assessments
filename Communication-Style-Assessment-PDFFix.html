@@ -842,6 +842,15 @@
                     "Seek first to understand, then to be understood",
                     "Stay calm under pressure"
                 ],
+                decisionStyle: "Balanced and inclusive. You seek input while maintaining the confidence to make decisions and stand behind them. You value diverse perspectives but don't defer your judgment.",
+                motivatedBy: "Mutual respect, clear communication, authentic relationships, solving problems collaboratively, and creating environments where everyone can speak honestly.",
+                stressResponse: "Under pressure, you may occasionally slip into more aggressive tones or become frustrated when others don't communicate as directly. Generally maintains composure.",
+                blindSpots: "May underestimate how intimidating directness can feel to passive communicators. Can occasionally come across as overly confident in cultures that value indirect communication.",
+                worksWith: {
+                    aggressive: "Help them channel their directness respectfully; model how to be direct without being disrespectful",
+                    passive: "Create safety for them to speak up; explicitly invite their input and validate their contributions",
+                    passiveAggressive: "Address issues directly and create space for honest disagreement to prevent indirect expression"
+                },
                 swotStrength: "Clear, respectful communication that builds trust and resolves conflicts effectively",
                 swotWeakness: "May occasionally need to adapt approach for highly emotional or sensitive situations",
                 swotOpportunity: "Model and coach others in assertive communication to elevate team effectiveness",
@@ -875,6 +884,15 @@
                     "Practice active listening without interrupting",
                     "Seek to understand others' perspectives"
                 ],
+                decisionStyle: "Unilateral and forceful. You make decisions quickly and expect compliance. You may dismiss input that contradicts your view and push through opposition.",
+                motivatedBy: "Control, winning, being right, achieving results quickly, and demonstrating power or competence over others.",
+                stressResponse: "Under pressure, aggression intensifies. You may raise your voice, become more dismissive, interrupt more frequently, and resort to personal attacks or blame.",
+                blindSpots: "Often unaware of the fear you create or the honest feedback you're missing. May believe you're being 'direct' when you're actually being hostile. Underestimates relationship damage.",
+                worksWith: {
+                    assertive: "Learn from their ability to be direct while maintaining respect and relationships",
+                    passive: "Your style may completely silence them; consciously create space and soften approach",
+                    passiveAggressive: "Your aggression may be triggering their indirect resistance; de-escalation creates safer dialogue"
+                },
                 swotStrength: "Directness and willingness to speak up—can be channeled positively with skill development",
                 swotWeakness: "Communication style damages relationships, trust, and team psychological safety",
                 swotOpportunity: "Develop emotional regulation and assertive (vs. aggressive) communication techniques",
@@ -908,6 +926,15 @@
                     "Use 'I think' and 'I feel' to own your perspective",
                     "Recognize that your needs matter too"
                 ],
+                decisionStyle: "Deferential and avoidant. You let others make decisions to avoid conflict or potential rejection. When forced to decide, you may seek excessive reassurance or defer responsibility.",
+                motivatedBy: "Harmony, approval from others, avoiding conflict or rejection, being liked, and not causing problems or inconvenience.",
+                stressResponse: "Under pressure, you withdraw further, become even more agreeable, apologize more, and may experience internal anxiety while appearing calm externally.",
+                blindSpots: "May not realize that silence isn't neutral—it can be interpreted as agreement or lack of engagement. Underestimates how much others want to hear your perspective.",
+                worksWith: {
+                    assertive: "Let them model direct communication; practice speaking up in their supportive presence",
+                    aggressive: "May need to set boundaries or remove yourself from interactions that feel unsafe",
+                    passiveAggressive: "Avoid joining in indirect complaints; practice direct expression together"
+                },
                 swotStrength: "Consideration for others and conflict avoidance—foundation for diplomatic communication",
                 swotWeakness: "Fails to advocate for self or share important perspectives; builds internal resentment",
                 swotOpportunity: "Develop assertive skills to express needs while maintaining relationship focus",
@@ -941,6 +968,15 @@
                     "Say what you mean and mean what you say",
                     "Practice direct, honest feedback"
                 ],
+                decisionStyle: "Outwardly compliant, inwardly resistant. You may agree to decisions verbally but undermine them through procrastination, 'forgetting,' or selective execution.",
+                motivatedBy: "Avoiding direct confrontation while still expressing frustration, maintaining self-image as 'nice' while getting revenge, and controlling situations indirectly.",
+                stressResponse: "Under pressure, sarcasm and indirect resistance increase. You may become more silent, procrastinate more deliberately, or complain more to third parties.",
+                blindSpots: "Often unaware of how transparent your patterns are to others. May believe you're hiding frustration when it's obvious. Doesn't recognize how this erodes trust over time.",
+                worksWith: {
+                    assertive: "Let them create safety for direct conversation; practice expressing frustrations honestly",
+                    aggressive: "Your styles can escalate conflict dangerously; focus on de-escalation and direct dialogue",
+                    passive: "May enable each other's avoidance; both need to develop direct expression skills"
+                },
                 swotStrength: "Awareness of frustrations and concerns—energy that can be redirected to direct communication",
                 swotWeakness: "Indirect expression of hostility creates confusion and prevents genuine resolution",
                 swotOpportunity: "Develop self-awareness about frustration triggers and skills for direct expression",
@@ -1149,10 +1185,33 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-family: monospace; font-size: 0.85em;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
-                        <span style="opacity: 0.7; margin-left: 15px;">|</span>
-                        <span style="opacity: 0.7; margin-left: 15px;">Raw:</span> <strong>As${scores.assertive}-Ag${scores.aggressive}-Pa${scores.passive}-PA${scores.passiveAggressive}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Communication Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${primary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Communication Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${secondary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Style Clarity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${styleClarity} (${primaryPct}%)</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Communication Profile</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${primary.profileType || 'Direct'}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Style Scores:</strong> Assertive: ${scores.assertive} | Aggressive: ${scores.aggressive} | Passive: ${scores.passive} | Passive-Aggressive: ${scores.passiveAggressive}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1484,11 +1543,13 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Raw: As' + scores.assertive + '-Ag' + scores.aggressive + '-Pa' + scores.passive + '-PA' + scores.passiveAggressive + '  |  Assertive Score: ' + assertivePct + '%', 105, y + 7, { align: 'center' });
-            y += 16;
+            doc.text('Your Result: ' + primary.name + ' (primary) + ' + secondary.name + ' (secondary) | ' + styleClarity, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Assertive: ' + assertivePct + '%', 105, y + 12, { align: 'center' });
+            y += 22;
 
             // Profile Summary
             doc.setFontSize(10);

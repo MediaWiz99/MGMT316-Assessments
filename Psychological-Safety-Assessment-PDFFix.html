@@ -236,10 +236,17 @@
                 color: "#1565C0", 
                 description: "The extent to which team members feel comfortable voicing opinions, concerns, and ideas — even when they differ from the majority.", 
                 profileSummary: "This dimension measures how freely team members can express their thoughts, concerns, and dissenting opinions without fear of negative consequences.",
+                decisionStyle: "Open and collaborative. Decisions benefit from hearing all perspectives before committing.",
+                communicationStyle: "Encourages open dialogue, invites dissent, and creates space for challenging conversations.",
+                motivatedBy: "Hearing all perspectives, avoiding blind spots, and making fully informed decisions.",
+                stressResponse: "When this dimension is low, stress causes people to silence themselves; issues build up until they explode.",
+                blindSpots: "Without strong voice, leaders may not know what's really happening until problems are severe.",
                 highBehaviors: ["Raises concerns early and often", "Shares dissenting views respectfully", "Asks questions without hesitation", "Offers suggestions for improvement"], 
                 building: ["Invite quiet voices into discussions", "Thank people for sharing concerns", "Model vulnerability by sharing your own uncertainties", "Create explicit time for questions"],
-                swotHigh: "Team has strong voice—members speak up freely, enabling early problem detection",
-                swotLow: "Limited voice creates blind spots; issues go unreported until they become crises"
+                swotStrength: "Team has strong voice—members speak up freely, enabling early problem detection",
+                swotWeakness: "Limited voice creates blind spots; issues go unreported until they become crises",
+                swotOpportunity: "Create explicit mechanisms for surfacing concerns and dissenting views",
+                swotThreat: "Risk of groupthink and missed warning signs when voice is suppressed"
             },
             risk: { 
                 name: "Risk Taking", 
@@ -247,10 +254,17 @@
                 color: "#2E7D32", 
                 description: "The degree to which team members feel safe taking interpersonal risks like trying new things, proposing bold ideas, or challenging the status quo.", 
                 profileSummary: "This dimension measures willingness to experiment, innovate, and try new approaches even when failure is possible.",
+                decisionStyle: "Experimental and innovative. Decisions embrace calculated risks and novel approaches.",
+                communicationStyle: "Encourages bold ideas, celebrates intelligent failures, and creates safety for experimentation.",
+                motivatedBy: "Innovation, pushing boundaries, and finding better ways to work.",
+                stressResponse: "When this dimension is low, stress causes retreat to safe, proven approaches; innovation dies.",
+                blindSpots: "Without risk-taking, teams may miss breakthrough opportunities and become stagnant.",
                 highBehaviors: ["Proposes innovative solutions", "Volunteers for challenging tasks", "Experiments without fear of failure", "Challenges conventional approaches"], 
                 building: ["Celebrate intelligent failures", "Reward effort and learning, not just outcomes", "Share your own failed experiments", "Create low-stakes opportunities to try new things"],
-                swotHigh: "Team embraces innovation—members try new approaches and challenge status quo",
-                swotLow: "Risk aversion limits innovation; team sticks to safe, proven approaches only"
+                swotStrength: "Team embraces innovation—members try new approaches and challenge status quo",
+                swotWeakness: "Risk aversion limits innovation; team sticks to safe, proven approaches only",
+                swotOpportunity: "Create safe-to-fail experiments that encourage innovation",
+                swotThreat: "Risk of competitive obsolescence from failure to innovate"
             },
             mistakes: { 
                 name: "Learning from Mistakes", 
@@ -258,10 +272,17 @@
                 color: "#7B1FA2", 
                 description: "How the team treats errors and failures — as punishable offenses or as valuable learning opportunities.", 
                 profileSummary: "This dimension measures whether mistakes are treated as learning opportunities or as failures to be punished or hidden.",
+                decisionStyle: "Learning-oriented. Decisions are informed by lessons from past mistakes and failures.",
+                communicationStyle: "Open about errors, conducts blameless retrospectives, and focuses on improvement.",
+                motivatedBy: "Continuous improvement, learning from experience, and building better systems.",
+                stressResponse: "When this dimension is low, stress causes cover-ups; mistakes are hidden rather than learned from.",
+                blindSpots: "Without learning from mistakes, teams repeat errors and fail to improve processes.",
                 highBehaviors: ["Openly discusses mistakes", "Conducts blameless post-mortems", "Asks for help without embarrassment", "Views failures as data for improvement"], 
                 building: ["Conduct blame-free retrospectives", "Share your own mistakes openly", "Focus on systems, not individuals", "Ask 'What can we learn?' not 'Who's at fault?'"],
-                swotHigh: "Team learns rapidly—mistakes become fuel for continuous improvement",
-                swotLow: "Mistakes are hidden; team repeats errors and fails to improve processes"
+                swotStrength: "Team learns rapidly—mistakes become fuel for continuous improvement",
+                swotWeakness: "Mistakes are hidden; team repeats errors and fails to improve processes",
+                swotOpportunity: "Implement blameless post-mortems to accelerate learning",
+                swotThreat: "Risk of repeated failures and stagnation without learning"
             },
             inclusion: { 
                 name: "Inclusion & Belonging", 
@@ -269,17 +290,24 @@
                 color: "#C62828", 
                 description: "The sense that all team members are valued, respected, and genuinely belong — regardless of their background or role.", 
                 profileSummary: "This dimension measures whether all team members feel valued, respected, and that they genuinely belong.",
+                decisionStyle: "Inclusive and equitable. Decisions consider all perspectives and value diverse contributions.",
+                communicationStyle: "Welcoming, respectful, and actively inclusive of all team members.",
+                motivatedBy: "Team cohesion, respect, and ensuring everyone can contribute their best.",
+                stressResponse: "When this dimension is low, stress exacerbates exclusion; marginalized voices become further silenced.",
+                blindSpots: "Without inclusion, teams miss valuable perspectives and undermine diverse talent.",
                 highBehaviors: ["Actively includes all team members", "Shows genuine interest in others", "Gives credit generously", "Supports teammates' success"], 
                 building: ["Learn about team members as people", "Ensure everyone has a voice in meetings", "Recognize contributions publicly", "Address exclusionary behavior immediately"],
-                swotHigh: "Strong belonging—all members feel valued, driving retention and engagement",
-                swotLow: "Exclusion or favoritism damages morale and drives turnover"
+                swotStrength: "Strong belonging—all members feel valued, driving retention and engagement",
+                swotWeakness: "Exclusion or favoritism damages morale and drives turnover",
+                swotOpportunity: "Build intentional inclusion practices into team routines",
+                swotThreat: "Risk of losing diverse talent and perspectives"
             }
         };
         const levels = [
-            { min: 64, max: 80, name: "High Psychological Safety", zone: "learning", desc: "Your team has a strong foundation of trust and openness. Team members feel safe to speak up, take risks, and learn from mistakes." },
-            { min: 48, max: 63, name: "Moderate Psychological Safety", zone: "learning", desc: "Your team has decent psychological safety but room to grow. Some members may still hold back or feel uncertain about speaking up." },
-            { min: 32, max: 47, name: "Limited Psychological Safety", zone: "anxiety", desc: "Your team struggles with psychological safety. Many members likely hold back ideas or concerns due to fear of negative consequences." },
-            { min: 16, max: 31, name: "Low Psychological Safety", zone: "comfort", desc: "Your team lacks psychological safety. Members likely stay silent to avoid risk, which limits learning and innovation." }
+            { min: 64, max: 80, name: "High Psychological Safety", zone: "learning", desc: "Your team has a strong foundation of trust and openness. Team members feel safe to speak up, take risks, and learn from mistakes.", swotStrength: "Strong psychological safety enables innovation, learning, and high performance", swotWeakness: "May need to maintain vigilance to preserve safety culture", swotOpportunity: "Model psychological safety for other teams", swotThreat: "Risk of complacency; safety must be actively maintained" },
+            { min: 48, max: 63, name: "Moderate Psychological Safety", zone: "learning", desc: "Your team has decent psychological safety but room to grow. Some members may still hold back or feel uncertain about speaking up.", swotStrength: "Foundation exists for building stronger safety culture", swotWeakness: "Uneven safety may silence some voices", swotOpportunity: "Focus on specific dimensions needing improvement", swotThreat: "Risk of regression without continued attention" },
+            { min: 32, max: 47, name: "Limited Psychological Safety", zone: "anxiety", desc: "Your team struggles with psychological safety. Many members likely hold back ideas or concerns due to fear of negative consequences.", swotStrength: "Awareness of the problem is the first step to improvement", swotWeakness: "Limited safety significantly impacts performance and retention", swotOpportunity: "Focused intervention can yield significant improvement", swotThreat: "Risk of talent loss and chronic underperformance" },
+            { min: 16, max: 31, name: "Low Psychological Safety", zone: "comfort", desc: "Your team lacks psychological safety. Members likely stay silent to avoid risk, which limits learning and innovation.", swotStrength: "Clear need creates urgency for change", swotWeakness: "Low safety creates significant risk and dysfunction", swotOpportunity: "Rebuilding safety can transform team performance", swotThreat: "Serious risk of team dysfunction, turnover, and failure" }
         ];
         let responses = {};
         let studentName = '';
@@ -402,10 +430,13 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-family: monospace; font-size: 0.85em;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
-                        <span style="opacity: 0.7; margin-left: 15px;">|</span>
-                        <span style="opacity: 0.7; margin-left: 15px;">Raw:</span> <strong>V${scores.voice}-R${scores.risk}-M${scores.mistakes}-I${scores.inclusion}</strong>
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 0.85em;">
+                        <div style="margin-bottom: 8px;"><strong>Your Result:</strong> Psychological Safety Level: ${safetyLevel} | Strongest: ${dimensionData[highestDim].name} | Score: ${totalScore}/100</div>
+                        <div style="font-family: monospace; opacity: 0.8;">
+                            <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
+                            <span style="opacity: 0.7; margin-left: 15px;">|</span>
+                            <span style="opacity: 0.7; margin-left: 15px;">Raw:</span> <strong>V${scores.voice}-R${scores.risk}-M${scores.mistakes}-I${scores.inclusion}</strong>
+                        </div>
                     </div>
                 </div>
                 
@@ -586,10 +617,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Raw: V' + scores.voice + '-R' + scores.risk + '-M' + scores.mistakes + '-I' + scores.inclusion + '  |  Level: ' + safetyLevel, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + safetyLevel + ' | Strongest: ' + dimensionData[highestDim].name + ' | Score: ' + totalScore + '/100', 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Profile Summary

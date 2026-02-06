@@ -206,16 +206,84 @@
             ]
         };
         const dimensionData = {
-            analysis: { name: "Analysis", icon: "🔍", color: "#1565C0", description: "Breaking down information into parts, identifying relationships, and clarifying meaning.", highBehaviors: ["Decomposes complex problems", "Identifies key components", "Distinguishes facts from opinions", "Clarifies concepts"], development: ["Practice breaking problems into parts", "Ask 'What are the key elements?'", "Create visual diagrams of relationships", "Define terms before using them"] },
-            evaluation: { name: "Evaluation", icon: "⚖️", color: "#2E7D32", description: "Assessing the credibility of sources, quality of evidence, and strength of arguments.", highBehaviors: ["Checks source credibility", "Questions evidence quality", "Identifies logical fallacies", "Weighs competing arguments"], development: ["Always check multiple sources", "Learn common logical fallacies", "Ask 'How do we know this?'", "Practice steelmanning arguments"] },
-            inference: { name: "Inference", icon: "💡", color: "#C62828", description: "Drawing reasonable conclusions, identifying assumptions, and predicting implications.", highBehaviors: ["Draws logical conclusions", "Considers alternatives", "Identifies assumptions", "Anticipates consequences"], development: ["Practice 'If...then' reasoning", "Ask 'What are we assuming?'", "Consider multiple explanations", "Think through implications"] },
-            openness: { name: "Open-Mindedness", icon: "🌐", color: "#7B1FA2", description: "Willingness to consider other perspectives, change views, and acknowledge uncertainty.", highBehaviors: ["Genuinely considers alternatives", "Changes mind with evidence", "Seeks challenging views", "Admits uncertainty"], development: ["Actively seek opposing views", "Practice saying 'I might be wrong'", "Steelman opposing arguments", "Cultivate intellectual humility"] }
+            analysis: { 
+                name: "Analysis", 
+                icon: "🔍", 
+                color: "#1565C0", 
+                description: "Breaking down information into parts, identifying relationships, and clarifying meaning.",
+                profileSummary: "You break down complex information systematically. You identify key components and clarify concepts before proceeding.",
+                decisionStyle: "Decompositional and systematic. You break decisions into parts and understand relationships before choosing.",
+                communicationStyle: "Precise and structured. You clarify terms, break down complex ideas, and ensure understanding before moving forward.",
+                motivatedBy: "Understanding complexity, getting to the essence of issues, creating clarity from confusion, and making sense of information.",
+                stressResponse: "Under pressure, you may over-analyze details, struggle to see the whole, or get lost in decomposition without synthesis.",
+                blindSpots: "May miss the forest for the trees; can over-complicate by breaking things down too much; may struggle with ambiguous situations.",
+                highBehaviors: ["Decomposes complex problems", "Identifies key components", "Distinguishes facts from opinions", "Clarifies concepts"], 
+                development: ["Practice breaking problems into parts", "Ask 'What are the key elements?'", "Create visual diagrams of relationships", "Define terms before using them"],
+                swotStrength: "Breaks down complexity to create clarity and understanding",
+                swotWeakness: "May over-analyze or miss big picture",
+                swotOpportunity: "Pair analysis with synthesis for complete thinking",
+                swotThreat: "Risk of analysis paralysis or missing urgent action needs"
+            },
+            evaluation: { 
+                name: "Evaluation", 
+                icon: "⚖️", 
+                color: "#2E7D32", 
+                description: "Assessing the credibility of sources, quality of evidence, and strength of arguments.",
+                profileSummary: "You assess evidence and arguments rigorously. You check sources, question claims, and identify logical weaknesses.",
+                decisionStyle: "Evidence-based and skeptical. You evaluate the quality of information before using it to make decisions.",
+                communicationStyle: "Questioning and evidence-focused. You ask for sources, challenge weak arguments, and distinguish strong from weak evidence.",
+                motivatedBy: "Finding the truth, avoiding being fooled, making well-supported judgments, and maintaining intellectual integrity.",
+                stressResponse: "Under pressure, you may become overly skeptical, demand too much evidence, or struggle to act on imperfect information.",
+                blindSpots: "May dismiss valid intuitions; can appear distrustful or overly critical; may struggle when evidence is unavailable.",
+                highBehaviors: ["Checks source credibility", "Questions evidence quality", "Identifies logical fallacies", "Weighs competing arguments"], 
+                development: ["Always check multiple sources", "Learn common logical fallacies", "Ask 'How do we know this?'", "Practice steelmanning arguments"],
+                swotStrength: "Rigorous evaluation prevents poor decisions based on weak evidence",
+                swotWeakness: "May be overly skeptical or slow to act",
+                swotOpportunity: "Balance skepticism with appropriate trust and action",
+                swotThreat: "Risk of decision paralysis from impossible evidence standards"
+            },
+            inference: { 
+                name: "Inference", 
+                icon: "💡", 
+                color: "#C62828", 
+                description: "Drawing reasonable conclusions, identifying assumptions, and predicting implications.",
+                profileSummary: "You draw logical conclusions and see implications. You identify assumptions and anticipate consequences of decisions.",
+                decisionStyle: "Logical and implication-aware. You trace conclusions from evidence and consider what assumptions underlie your reasoning.",
+                communicationStyle: "Reasoning-focused and forward-looking. You explain your logic and help others see implications and consequences.",
+                motivatedBy: "Reaching sound conclusions, uncovering hidden assumptions, predicting outcomes, and reasoning clearly.",
+                stressResponse: "Under pressure, you may make logical leaps without checking assumptions, or become rigid in your reasoning.",
+                blindSpots: "May miss emotional or irrational factors; can be overconfident in logical conclusions; may overlook hidden assumptions.",
+                highBehaviors: ["Draws logical conclusions", "Considers alternatives", "Identifies assumptions", "Anticipates consequences"], 
+                development: ["Practice 'If...then' reasoning", "Ask 'What are we assuming?'", "Consider multiple explanations", "Think through implications"],
+                swotStrength: "Sound reasoning leads to valid conclusions and good predictions",
+                swotWeakness: "May be overconfident in logic or miss non-logical factors",
+                swotOpportunity: "Test assumptions more rigorously before drawing conclusions",
+                swotThreat: "Risk of flawed conclusions from unchecked assumptions"
+            },
+            openness: { 
+                name: "Open-Mindedness", 
+                icon: "🌐", 
+                color: "#7B1FA2", 
+                description: "Willingness to consider other perspectives, change views, and acknowledge uncertainty.",
+                profileSummary: "You remain open to other perspectives and new evidence. You're willing to change your mind and acknowledge uncertainty.",
+                decisionStyle: "Flexible and humble. You hold conclusions tentatively and remain open to revising them based on new information.",
+                communicationStyle: "Curious and non-defensive. You seek out challenging views and engage with disagreement constructively.",
+                motivatedBy: "Finding the truth regardless of source, learning from others, avoiding confirmation bias, and intellectual growth.",
+                stressResponse: "Under pressure, you may become less open, more defensive, or struggle to maintain intellectual humility.",
+                blindSpots: "May be so open that you struggle to commit to positions; can appear wishy-washy; may defer too much to others.",
+                highBehaviors: ["Genuinely considers alternatives", "Changes mind with evidence", "Seeks challenging views", "Admits uncertainty"], 
+                development: ["Actively seek opposing views", "Practice saying 'I might be wrong'", "Steelman opposing arguments", "Cultivate intellectual humility"],
+                swotStrength: "Intellectual humility leads to better decisions and continuous learning",
+                swotWeakness: "May struggle to take firm positions when needed",
+                swotOpportunity: "Balance openness with confident action when evidence supports it",
+                swotThreat: "Risk of appearing indecisive or lacking conviction"
+            }
         };
         const levels = [
-            { min: 80, max: 100, name: "Master Critical Thinker", desc: "You consistently apply rigorous critical thinking across analysis, evaluation, inference, and openness." },
-            { min: 60, max: 79, name: "Strong Critical Thinker", desc: "You have well-developed critical thinking with room to strengthen specific areas." },
-            { min: 40, max: 59, name: "Developing Critical Thinker", desc: "Your critical thinking is building. Focus on questioning assumptions and evaluating evidence." },
-            { min: 20, max: 39, name: "Emerging Critical Thinker", desc: "Critical thinking can be developed with practice. Start by questioning your own assumptions." }
+            { min: 80, max: 100, name: "Master Critical Thinker", desc: "You consistently apply rigorous critical thinking across analysis, evaluation, inference, and openness.", swotStrength: "Exceptional critical thinking across all dimensions", swotWeakness: "May frustrate less rigorous colleagues", swotOpportunity: "Model and teach critical thinking to others", swotThreat: "Risk of frustration in environments that don't value rigor" },
+            { min: 60, max: 79, name: "Strong Critical Thinker", desc: "You have well-developed critical thinking with room to strengthen specific areas.", swotStrength: "Strong critical thinking foundation", swotWeakness: "Some dimensions need development", swotOpportunity: "Focus on strengthening weaker dimensions", swotThreat: "May be limited by underdeveloped areas" },
+            { min: 40, max: 59, name: "Developing Critical Thinker", desc: "Your critical thinking is building. Focus on questioning assumptions and evaluating evidence.", swotStrength: "Growing critical thinking awareness", swotWeakness: "May miss important flaws in reasoning", swotOpportunity: "Significant room for development", swotThreat: "May make avoidable reasoning errors" },
+            { min: 20, max: 39, name: "Emerging Critical Thinker", desc: "Critical thinking can be developed with practice. Start by questioning your own assumptions.", swotStrength: "Potential to develop strong critical thinking", swotWeakness: "Significant gaps in reasoning skills", swotOpportunity: "Critical thinking can be learned", swotThreat: "Serious risk of poor decisions from weak reasoning" }
         ];
         let responses = {};
         let studentName = '';
@@ -309,8 +377,18 @@
                             <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Growth Area</div><div style="font-size: 1.2em; font-weight: 600;">${dimensionData[lowestDim].name}</div></div>
                         </div>
                     </div>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">CTA-${highestDim === 'analysis' ? 'An' : highestDim === 'evaluation' ? 'Ev' : highestDim === 'inference' ? 'In' : 'Op'}-${level.name.includes('Master') ? 'M' : level.name.includes('Strong') ? 'S' : level.name.includes('Developing') ? 'D' : 'E'}${totalScore}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 12px 0; font-size: 1em;">📋 Your Results Summary</h4>
+                        <div style="font-size: 0.9em; margin-bottom: 10px;">
+                            <strong>Critical Thinking Level:</strong> ${level.name} | <strong>Strongest:</strong> ${dimensionData[highestDim].name} | <strong>Growth Area:</strong> ${dimensionData[lowestDim].name}
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Dimension Scores:</strong> Analysis: ${scores.analysis} | Evaluation: ${scores.evaluation} | Inference: ${scores.inference} | Open-Mindedness: ${scores.openness}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Critical Thinking: ${dimensionData[highestDim].name} (strongest) | ${level.name} | Score: ${totalScore}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">CTA-${highestDim === 'analysis' ? 'An' : highestDim === 'evaluation' ? 'Ev' : highestDim === 'inference' ? 'In' : 'Op'}-${level.name.includes('Master') ? 'M' : level.name.includes('Strong') ? 'S' : level.name.includes('Developing') ? 'D' : 'E'}${totalScore}</code></div>
+                        </div>
                     </div>
                 </div>
                 <div class="results-body">
@@ -428,11 +506,13 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Strongest: ' + dimensionData[highestDim].name + '  |  Growth: ' + dimensionData[lowestDim].name, 105, y + 7, { align: 'center' });
-            y += 16;
+            doc.text('Your Result: ' + level.name + ' | Strongest: ' + dimensionData[highestDim].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Growth Area: ' + dimensionData[lowestDim].name, 105, y + 12, { align: 'center' });
+            y += 22;
 
             // Strength Section
             var strengthColor = highestDim === 'analysis' ? blueColor : highestDim === 'evaluation' ? greenColor : highestDim === 'inference' ? redColor : purpleColor;

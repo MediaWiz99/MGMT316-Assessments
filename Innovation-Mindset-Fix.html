@@ -206,16 +206,84 @@
             ]
         };
         const dimensionData = {
-            curiosity: { name: "Curiosity", icon: "🔍", color: "#1565C0", description: "Deep desire to understand problems, question assumptions, and explore new domains.", highBehaviors: ["Asks probing questions", "Explores widely", "Seeks first principles", "Embraces not knowing"], development: ["Practice asking 'Why?' 5 times", "Read outside your field", "Interview users and experts", "Keep a curiosity journal"] },
-            experiment: { name: "Experimentation", icon: "🧪", color: "#2E7D32", description: "Preference for testing ideas through action rather than extensive planning.", highBehaviors: ["Builds prototypes early", "Tests assumptions quickly", "Learns from failures", "Iterates rapidly"], development: ["Start with MVPs", "Set up small experiments", "Measure and learn", "Fail fast, learn faster"] },
-            resilience: { name: "Resilience", icon: "💪", color: "#C62828", description: "Ability to persist through setbacks, embrace ambiguity, and learn from failure.", highBehaviors: ["Bounces back from setbacks", "Uses criticism constructively", "Tolerates ambiguity", "Maintains motivation"], development: ["Reframe failures as learning", "Build support networks", "Practice self-compassion", "Celebrate small wins"] },
-            collaborate: { name: "Collaboration", icon: "🤝", color: "#7B1FA2", description: "Commitment to diverse perspectives, shared creation, and psychological safety.", highBehaviors: ["Seeks diverse input", "Builds on others' ideas", "Creates safety for ideas", "Shares openly"], development: ["Practice 'Yes, and...'", "Invite opposing views", "Credit others generously", "Build trust first"] }
+            curiosity: { 
+                name: "Curiosity", 
+                icon: "🔍", 
+                color: "#1565C0", 
+                description: "Deep desire to understand problems, question assumptions, and explore new domains.",
+                profileSummary: "You ask probing questions and explore widely. You seek to understand problems deeply before jumping to solutions.",
+                decisionStyle: "Question-driven and exploratory. You gather understanding from multiple angles before deciding.",
+                communicationStyle: "Inquisitive and open. You ask questions, explore perspectives, and draw out information from others.",
+                motivatedBy: "Understanding deeply, discovering new things, questioning assumptions, and learning across domains.",
+                stressResponse: "Under pressure, you may ask too many questions when action is needed, or become frustrated when exploration is cut short.",
+                blindSpots: "May delay action with endless questioning; can frustrate action-oriented colleagues; may explore tangents instead of focusing.",
+                highBehaviors: ["Asks probing questions", "Explores widely", "Seeks first principles", "Embraces not knowing"], 
+                development: ["Practice asking 'Why?' 5 times", "Read outside your field", "Interview users and experts", "Keep a curiosity journal"],
+                swotStrength: "Deep understanding leads to better problem definition and solutions",
+                swotWeakness: "May delay action with excessive exploration",
+                swotOpportunity: "Pair curiosity with bias toward action",
+                swotThreat: "Risk of analysis paralysis or going down rabbit holes"
+            },
+            experiment: { 
+                name: "Experimentation", 
+                icon: "🧪", 
+                color: "#2E7D32", 
+                description: "Preference for testing ideas through action rather than extensive planning.",
+                profileSummary: "You test ideas quickly through action. You build prototypes, run experiments, and iterate based on real feedback.",
+                decisionStyle: "Action-oriented and empirical. You make decisions through testing rather than extensive analysis.",
+                communicationStyle: "Prototype-focused and iterative. You show rather than tell, and present experiments and learnings.",
+                motivatedBy: "Testing ideas quickly, learning through doing, iterating toward solutions, and validating assumptions empirically.",
+                stressResponse: "Under pressure, you may experiment when decisive action is needed, or struggle with situations requiring careful planning.",
+                blindSpots: "May experiment without clear hypotheses; can waste resources on poorly designed tests; may resist necessary planning.",
+                highBehaviors: ["Builds prototypes early", "Tests assumptions quickly", "Learns from failures", "Iterates rapidly"], 
+                development: ["Start with MVPs", "Set up small experiments", "Measure and learn", "Fail fast, learn faster"],
+                swotStrength: "Rapid learning through action and iteration",
+                swotWeakness: "May experiment without sufficient planning",
+                swotOpportunity: "Design experiments more rigorously for better learning",
+                swotThreat: "Risk of wasted resources on unfocused experimentation"
+            },
+            resilience: { 
+                name: "Resilience", 
+                icon: "💪", 
+                color: "#C62828", 
+                description: "Ability to persist through setbacks, embrace ambiguity, and learn from failure.",
+                profileSummary: "You bounce back from setbacks and persist through ambiguity. You treat failures as learning opportunities.",
+                decisionStyle: "Persistent and learning-oriented. You factor in your ability to recover and adapt when evaluating risky options.",
+                communicationStyle: "Constructive and growth-focused. You frame setbacks as learning opportunities and encourage persistence.",
+                motivatedBy: "Overcoming obstacles, proving resilience, learning from failure, and achieving through persistence.",
+                stressResponse: "You handle setbacks well, but may persist too long on failing approaches or struggle to recognize when to pivot.",
+                blindSpots: "May persist when pivoting would be wiser; can normalize failure instead of preventing it; may not adequately process setbacks.",
+                highBehaviors: ["Bounces back from setbacks", "Uses criticism constructively", "Tolerates ambiguity", "Maintains motivation"], 
+                development: ["Reframe failures as learning", "Build support networks", "Practice self-compassion", "Celebrate small wins"],
+                swotStrength: "Persistence through setbacks leads to eventual success",
+                swotWeakness: "May persist too long on failing approaches",
+                swotOpportunity: "Balance persistence with knowing when to pivot",
+                swotThreat: "Risk of sunk cost thinking or burnout"
+            },
+            collaborate: { 
+                name: "Collaboration", 
+                icon: "🤝", 
+                color: "#7B1FA2", 
+                description: "Commitment to diverse perspectives, shared creation, and psychological safety.",
+                profileSummary: "You seek diverse perspectives and build on others' ideas. You create psychological safety for innovation.",
+                decisionStyle: "Inclusive and building-oriented. You gather diverse input and synthesize multiple perspectives.",
+                communicationStyle: "Open and generative. You share ideas freely, build on others' contributions, and create safety for new thinking.",
+                motivatedBy: "Co-creation, diverse perspectives, building something together, and creating environments where innovation thrives.",
+                stressResponse: "Under pressure, you may over-consult, struggle to move forward without consensus, or become frustrated with isolated thinkers.",
+                blindSpots: "May slow down for collaboration when speed is needed; can defer too much to group thinking; may struggle with independent work.",
+                highBehaviors: ["Seeks diverse input", "Builds on others' ideas", "Creates safety for ideas", "Shares openly"], 
+                development: ["Practice 'Yes, and...'", "Invite opposing views", "Credit others generously", "Build trust first"],
+                swotStrength: "Diverse input and psychological safety drive better innovation",
+                swotWeakness: "May slow innovation seeking consensus",
+                swotOpportunity: "Balance collaboration with decisive action",
+                swotThreat: "Risk of lowest-common-denominator solutions"
+            }
         };
         const levels = [
-            { min: 80, max: 100, name: "Innovation Champion", desc: "You embody the innovation mindset — curious, experimental, resilient, and collaborative." },
-            { min: 60, max: 79, name: "Innovation Ready", desc: "You have strong innovation capabilities with room to strengthen specific areas." },
-            { min: 40, max: 59, name: "Innovation Developing", desc: "You're building innovation skills. Focus on the dimensions where you score lowest." },
-            { min: 20, max: 39, name: "Innovation Emerging", desc: "Innovation mindset can be developed with practice. Start with curiosity and experimentation." }
+            { min: 80, max: 100, name: "Innovation Champion", desc: "You embody the innovation mindset — curious, experimental, resilient, and collaborative.", swotStrength: "Full innovation mindset drives breakthrough thinking", swotWeakness: "May struggle in stable, risk-averse environments", swotOpportunity: "Lead innovation efforts and develop innovation capability in others", swotThreat: "Risk of frustration in environments that don't value innovation" },
+            { min: 60, max: 79, name: "Innovation Ready", desc: "You have strong innovation capabilities with room to strengthen specific areas.", swotStrength: "Solid innovation foundation with clear strengths", swotWeakness: "Some innovation dimensions need development", swotOpportunity: "Focus on developing weaker dimensions", swotThreat: "May be limited by underdeveloped areas" },
+            { min: 40, max: 59, name: "Innovation Developing", desc: "You're building innovation skills. Focus on the dimensions where you score lowest.", swotStrength: "Growing innovation awareness provides foundation", swotWeakness: "Significant gaps in innovation capability", swotOpportunity: "Targeted development can yield significant gains", swotThreat: "May struggle in roles requiring innovation" },
+            { min: 20, max: 39, name: "Innovation Emerging", desc: "Innovation mindset can be developed with practice. Start with curiosity and experimentation.", swotStrength: "Potential to develop innovation capability", swotWeakness: "Innovation mindset currently underdeveloped", swotOpportunity: "Innovation skills can be learned", swotThreat: "May be left behind in innovative organizations" }
         ];
         let responses = {};
         let studentName = '';
@@ -309,8 +377,18 @@
                             <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Growth Area</div><div style="font-size: 1.2em; font-weight: 600;">${dimensionData[lowestDim].name}</div></div>
                         </div>
                     </div>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">IMA-${highestDim === 'curiosity' ? 'Cu' : highestDim === 'experiment' ? 'Ex' : highestDim === 'resilience' ? 'Re' : 'Co'}-${level.name.includes('High') ? 'H' : level.name.includes('Moderate') ? 'M' : level.name.includes('Developing') ? 'D' : 'E'}${totalScore}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 12px 0; font-size: 1em;">📋 Your Results Summary</h4>
+                        <div style="font-size: 0.9em; margin-bottom: 10px;">
+                            <strong>Innovation Level:</strong> ${level.name} | <strong>Strongest:</strong> ${dimensionData[highestDim].name} | <strong>Growth Area:</strong> ${dimensionData[lowestDim].name}
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Dimension Scores:</strong> Curiosity: ${scores.curiosity} | Experimentation: ${scores.experiment} | Resilience: ${scores.resilience} | Collaboration: ${scores.collaborate}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Innovation Mindset: ${dimensionData[highestDim].name} (strongest) | ${level.name} | Score: ${totalScore}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">IMA-${highestDim === 'curiosity' ? 'Cu' : highestDim === 'experiment' ? 'Ex' : highestDim === 'resilience' ? 'Re' : 'Co'}-${level.name.includes('High') ? 'H' : level.name.includes('Moderate') ? 'M' : level.name.includes('Developing') ? 'D' : 'E'}${totalScore}</code></div>
+                        </div>
                     </div>
                 </div>
                 <div class="results-body">
@@ -437,10 +515,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Strongest: ' + dimensionData[highestDim].name + '  |  Growth: ' + dimensionData[lowestDim].name, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + level.name + ' | Strongest: ' + dimensionData[highestDim].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Growth Area: ' + dimensionData[lowestDim].name, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Strength Section

@@ -1735,30 +1735,135 @@
             // Determine value categories for the top 3
             const valueCategories = {
                 // Achievement/Success oriented
-                achievement: ['Achievement', 'Success', 'Excellence', 'Competency', 'Recognition', 'Fame', 'Status', 'Wealth', 'Power'],
+                achievement: {
+                    values: ['Achievement', 'Success', 'Excellence', 'Competency', 'Recognition', 'Fame', 'Status', 'Wealth', 'Power'],
+                    name: 'Achievement-Oriented',
+                    profileSummary: 'You are driven by accomplishment and success. You find meaning in achieving goals, demonstrating competence, and being recognized for your efforts.',
+                    decisionStyle: 'Goal-focused and results-oriented. You evaluate options based on their potential for achievement and advancement.',
+                    communicationStyle: 'Performance-focused and ambitious. You discuss goals, metrics, and achievements.',
+                    motivatedBy: 'Reaching goals, demonstrating excellence, earning recognition, and advancing toward success.',
+                    stressResponse: 'Under pressure, you may push too hard, sacrifice relationships for results, or feel inadequate when not achieving.',
+                    blindSpots: 'May neglect relationships and wellbeing in pursuit of achievement; can define self-worth too heavily through accomplishments.',
+                    swotStrength: 'Driven achievement creates results and demonstrates competence',
+                    swotWeakness: 'May sacrifice other important values for achievement',
+                    swotOpportunity: 'Define success broadly to include relationships and wellbeing',
+                    swotThreat: 'Risk of burnout or empty success without meaning'
+                },
                 // Relationship oriented
-                relationship: ['Family', 'Friendships', 'Love', 'Intimacy', 'Belonging', 'Connection', 'Community', 'Loyalty', 'Teamwork'],
+                relationship: {
+                    values: ['Family', 'Friendships', 'Love', 'Intimacy', 'Belonging', 'Connection', 'Community', 'Loyalty', 'Teamwork'],
+                    name: 'Relationship-Oriented',
+                    profileSummary: 'You prioritize connections with others. You find meaning through deep relationships, belonging, and contributing to communities you care about.',
+                    decisionStyle: 'People-centered and loyalty-focused. You evaluate options based on their impact on relationships and community.',
+                    communicationStyle: 'Warm, inclusive, and relationship-focused. You prioritize connection and belonging in interactions.',
+                    motivatedBy: 'Building deep connections, supporting loved ones, belonging to meaningful communities, and maintaining loyalty.',
+                    stressResponse: 'Under pressure, you may sacrifice personal needs for relationships, or feel lost when disconnected from others.',
+                    blindSpots: 'May lose individual identity in relationships; can neglect personal goals for others; may struggle with necessary conflict.',
+                    swotStrength: 'Deep relationships create support, meaning, and belonging',
+                    swotWeakness: 'May neglect personal development for relationship maintenance',
+                    swotOpportunity: 'Maintain individual identity while nurturing relationships',
+                    swotThreat: 'Risk of codependency or loss of self in service of others'
+                },
                 // Personal Growth oriented
-                growth: ['Growth', 'Learning', 'Knowledge', 'Curiosity', 'Wisdom', 'Challenge', 'Creativity', 'Openness'],
+                growth: {
+                    values: ['Growth', 'Learning', 'Knowledge', 'Curiosity', 'Wisdom', 'Challenge', 'Creativity', 'Openness'],
+                    name: 'Growth-Oriented',
+                    profileSummary: 'You are driven by continuous development and learning. You find meaning in expanding your knowledge, skills, and understanding of the world.',
+                    decisionStyle: 'Learning-focused and development-oriented. You evaluate options based on their potential for growth and new understanding.',
+                    communicationStyle: 'Curious, questioning, and exploratory. You seek to learn from others and share discoveries.',
+                    motivatedBy: 'Learning new things, developing skills, gaining wisdom, and continuously improving yourself.',
+                    stressResponse: 'Under pressure, you may retreat into learning rather than acting, or feel frustrated when growth is blocked.',
+                    blindSpots: 'May value learning over doing; can become a perpetual student without applying knowledge; may neglect practical realities.',
+                    swotStrength: 'Continuous growth creates adaptability and expanding capability',
+                    swotWeakness: 'May prioritize learning over action or practical results',
+                    swotOpportunity: 'Apply growth mindset to all life areas including relationships',
+                    swotThreat: 'Risk of endless preparation without execution'
+                },
                 // Service/Impact oriented
-                service: ['Service', 'Contribution', 'Compassion', 'Generosity', 'Citizenship', 'Justice', 'Equality', 'Stewardship'],
+                service: {
+                    values: ['Service', 'Contribution', 'Compassion', 'Generosity', 'Citizenship', 'Justice', 'Equality', 'Stewardship'],
+                    name: 'Service-Oriented',
+                    profileSummary: 'You are driven by making a positive difference. You find meaning through contributing to others and causes larger than yourself.',
+                    decisionStyle: 'Impact-focused and others-oriented. You evaluate options based on their potential to help others and improve the world.',
+                    communicationStyle: 'Compassionate, cause-driven, and inspiring. You rally others around meaningful purposes.',
+                    motivatedBy: 'Making a difference, helping others, contributing to worthy causes, and leaving the world better.',
+                    stressResponse: 'Under pressure, you may neglect self-care for service, or feel despair when unable to make an impact.',
+                    blindSpots: 'May neglect own needs in service of others; can burn out from giving too much; may judge those who seem less service-oriented.',
+                    swotStrength: 'Service creates meaning and positive impact on others and world',
+                    swotWeakness: 'May neglect self-care and personal needs',
+                    swotOpportunity: 'Sustain impact by maintaining personal wellbeing',
+                    swotThreat: 'Risk of burnout or martyrdom'
+                },
                 // Integrity oriented
-                integrity: ['Honesty', 'Integrity', 'Authenticity', 'Truth', 'Trustworthiness', 'Reliability', 'Responsibility', 'Fairness'],
+                integrity: {
+                    values: ['Honesty', 'Integrity', 'Authenticity', 'Truth', 'Trustworthiness', 'Reliability', 'Responsibility', 'Fairness'],
+                    name: 'Integrity-Oriented',
+                    profileSummary: 'You are driven by living according to your principles. You find meaning in being honest, authentic, and consistent in your values.',
+                    decisionStyle: 'Principle-driven and ethics-focused. You evaluate options based on their alignment with your moral standards.',
+                    communicationStyle: 'Honest, direct, and authentic. You speak truth and expect the same from others.',
+                    motivatedBy: 'Living consistently with principles, being trustworthy, acting fairly, and maintaining moral standards.',
+                    stressResponse: 'Under pressure, you may become rigid about principles, or feel deep distress when forced to compromise values.',
+                    blindSpots: 'May be inflexible when situations call for nuance; can judge others harshly; may struggle with necessary compromises.',
+                    swotStrength: 'Strong principles create trustworthiness and moral clarity',
+                    swotWeakness: 'May be inflexible when situations require nuance',
+                    swotOpportunity: 'Apply integrity while allowing for complexity and growth',
+                    swotThreat: 'Risk of rigidity or alienating others with judgment'
+                },
                 // Freedom oriented
-                freedom: ['Freedom', 'Autonomy', 'Independence', 'Adventure', 'Boldness', 'Flexibility', 'Adaptability'],
+                freedom: {
+                    values: ['Freedom', 'Autonomy', 'Independence', 'Adventure', 'Boldness', 'Flexibility', 'Adaptability'],
+                    name: 'Freedom-Oriented',
+                    profileSummary: 'You are driven by independence and choice. You find meaning in having autonomy, pursuing adventure, and maintaining flexibility.',
+                    decisionStyle: 'Independence-focused and option-preserving. You evaluate choices based on how much freedom they maintain.',
+                    communicationStyle: 'Independent and boundary-setting. You advocate for choice and resist constraints on yourself and others.',
+                    motivatedBy: 'Having choices, maintaining independence, pursuing adventure, and avoiding unnecessary constraints.',
+                    stressResponse: 'Under pressure, you may resist reasonable commitments, or feel trapped by necessary responsibilities.',
+                    blindSpots: 'May avoid beneficial commitments; can struggle with interdependence; may resist structure that could help.',
+                    swotStrength: 'Independence creates flexibility and authentic living',
+                    swotWeakness: 'May avoid beneficial commitments and interdependence',
+                    swotOpportunity: 'Find freedom within chosen commitments',
+                    swotThreat: 'Risk of isolation or missed opportunities from avoiding commitment'
+                },
                 // Security oriented
-                security: ['Security', 'Stability', 'Financial Stability', 'Health', 'Home', 'Order', 'Peace'],
+                security: {
+                    values: ['Security', 'Stability', 'Financial Stability', 'Health', 'Home', 'Order', 'Peace'],
+                    name: 'Security-Oriented',
+                    profileSummary: 'You are driven by stability and safety. You find meaning in creating secure foundations, maintaining order, and protecting what matters.',
+                    decisionStyle: 'Risk-aware and stability-focused. You evaluate options based on their safety and predictability.',
+                    communicationStyle: 'Cautious, planning-focused, and protective. You discuss risks and build in safeguards.',
+                    motivatedBy: 'Creating stability, protecting loved ones, maintaining health, and building secure foundations.',
+                    stressResponse: 'Under pressure, you may become overly cautious, or feel significant anxiety when stability is threatened.',
+                    blindSpots: 'May miss opportunities from excessive caution; can resist beneficial changes; may over-prepare for unlikely risks.',
+                    swotStrength: 'Security focus creates stable foundations for yourself and others',
+                    swotWeakness: 'May miss opportunities from excessive risk aversion',
+                    swotOpportunity: 'Take calculated risks while maintaining core security',
+                    swotThreat: 'Risk of stagnation or missed growth from excessive caution'
+                },
                 // Spiritual/Purpose oriented
-                spiritual: ['Faith', 'Spirituality', 'Meaning', 'Purpose', 'Gratitude', 'Grace', 'Peace']
+                spiritual: {
+                    values: ['Faith', 'Spirituality', 'Meaning', 'Purpose', 'Gratitude', 'Grace', 'Peace'],
+                    name: 'Spiritual-Oriented',
+                    profileSummary: 'You are driven by connection to something greater. You find meaning through spiritual practice, purpose, and inner peace.',
+                    decisionStyle: 'Purpose-driven and meaning-focused. You evaluate options based on their alignment with your deeper purpose.',
+                    communicationStyle: 'Reflective, grateful, and purpose-oriented. You bring depth and meaning to conversations.',
+                    motivatedBy: 'Finding deeper meaning, connecting to purpose, experiencing inner peace, and living with gratitude.',
+                    stressResponse: 'Under pressure, you may retreat into spiritual practice, or feel existential distress when meaning is unclear.',
+                    blindSpots: 'May seem disconnected from practical realities; can struggle with mundane necessities; may judge less spiritual approaches.',
+                    swotStrength: 'Spiritual orientation creates resilience, peace, and deeper meaning',
+                    swotWeakness: 'May neglect practical matters for spiritual pursuits',
+                    swotOpportunity: 'Integrate spirituality with practical living',
+                    swotThreat: 'Risk of disconnection from practical realities or relationships'
+                }
             };
             
             // Determine primary value orientation
             let valueOrientation = 'Balanced';
             const top3Names = [rankedValues[1].name, rankedValues[2].name, rankedValues[3].name];
-            for (const [category, vals] of Object.entries(valueCategories)) {
+            for (const [category, data] of Object.entries(valueCategories)) {
+                const vals = data.values || data;
                 const matches = top3Names.filter(n => vals.includes(n)).length;
                 if (matches >= 2) {
-                    valueOrientation = category.charAt(0).toUpperCase() + category.slice(1) + '-Oriented';
+                    valueOrientation = data.name || (category.charAt(0).toUpperCase() + category.slice(1) + '-Oriented');
                     break;
                 }
             }
@@ -1811,10 +1916,33 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-family: monospace; font-size: 0.85em;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
-                        <span style="opacity: 0.7; margin-left: 15px;">|</span>
-                        <span style="opacity: 0.7; margin-left: 15px;">Top 3:</span> <strong>${rankedValues[1].name.substring(0,3)}-${rankedValues[2].name.substring(0,3)}-${rankedValues[3].name.substring(0,3)}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Top Core Value</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${rankedValues[1].name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Second Core Value</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${rankedValues[2].name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Third Core Value</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${rankedValues[3].name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Values Clarity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${clarity}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Your Top 3 Values:</strong> ${rankedValues[1].name} → ${rankedValues[2].name} → ${rankedValues[3].name}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -1911,10 +2039,12 @@
             
             // Tracker Code Bar
             doc.setFillColor(...chapmanBlue);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
-            doc.setFontSize(9);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Top Value: ' + rankedValues[1].name + '  |  Values Selected: ' + selectedValues.length, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: Core Values - #1 ' + rankedValues[1].name + ', #2 ' + rankedValues[2].name + ', #3 ' + rankedValues[3].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Values Selected: ' + selectedValues.length, 105, y + 12, { align: 'center' });
             y += 17;
 
             // Top 3 Header

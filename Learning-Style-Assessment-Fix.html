@@ -869,6 +869,16 @@
                     "Take time to reflect before acting"
                 ],
                 careers: "Counseling, HR, arts, humanities, customer service, organizational development",
+                decisionStyle: "Reflective and inclusive. You prefer to gather multiple perspectives and explore all possibilities before deciding. You may delay decisions to ensure you've considered every angle.",
+                communicationStyle: "Empathetic and exploratory. You ask open-ended questions, value emotional expression, and prefer discussions that explore meaning and feelings.",
+                motivatedBy: "Personal meaning, creative expression, understanding people, generating new ideas, and making emotional connections to learning.",
+                stressResponse: "Under pressure, you may become overwhelmed by too many options, struggle to commit to a single direction, or retreat into reflection rather than action.",
+                blindSpots: "May over-emphasize feelings over facts; can struggle with closure and decisive action; may generate ideas without following through on implementation.",
+                worksWith: {
+                    assimilating: "They can help structure your ideas into coherent frameworks; you help them see the human dimensions",
+                    converging: "They can push you toward practical application; you help them consider multiple perspectives",
+                    accommodating: "They can model action-orientation; you help them reflect before leaping"
+                },
                 swotStrength: "Creative idea generation and multi-perspective thinking",
                 swotWeakness: "May struggle with decisive action and implementation",
                 swotOpportunity: "Develop decision-making frameworks to move from ideas to action",
@@ -902,6 +912,16 @@
                     "Seek structured learning environments"
                 ],
                 careers: "Research, planning, academia, science, information technology, finance",
+                decisionStyle: "Analytical and systematic. You gather comprehensive information, build logical frameworks, and make decisions based on careful analysis of data and theory.",
+                communicationStyle: "Precise and structured. You prefer organized presentations, logical arguments, and written communication that allows for careful review.",
+                motivatedBy: "Understanding, intellectual challenges, building comprehensive knowledge, creating elegant theories, and achieving precision in analysis.",
+                stressResponse: "Under pressure, you may retreat into analysis, request more data to delay action, or become frustrated with those who want to act without sufficient information.",
+                blindSpots: "May prioritize theory over practical reality; can miss interpersonal dynamics while focused on logical analysis; may undervalue experiential learning.",
+                worksWith: {
+                    diverging: "They help you see emotional and creative dimensions; you help them organize their ideas systematically",
+                    converging: "Natural partners—you build the theory, they apply it; ensure you value their practical feedback",
+                    accommodating: "They can push you out of analysis paralysis; you help them understand why things work"
+                },
                 swotStrength: "Theoretical understanding and systematic analysis",
                 swotWeakness: "May over-analyze and delay practical application",
                 swotOpportunity: "Develop comfort with ambiguity and imperfect information",
@@ -935,6 +955,16 @@
                     "Set specific goals and measure results"
                 ],
                 careers: "Engineering, technology, medicine, physical sciences, specialist roles",
+                decisionStyle: "Pragmatic and solution-focused. You quickly identify the most practical option based on technical analysis and move to implementation with minimal deliberation.",
+                communicationStyle: "Direct and task-focused. You prefer concise, factual exchanges that lead to actionable conclusions. You may be impatient with extended discussion.",
+                motivatedBy: "Solving problems, finding practical applications, achieving results, mastering technical challenges, and seeing theories work in practice.",
+                stressResponse: "Under pressure, you may become overly focused on the technical solution while ignoring interpersonal concerns, or push too quickly to closure without sufficient input.",
+                blindSpots: "May undervalue creative alternatives or people-focused considerations; can miss the 'big picture' while focused on immediate solutions; may dismiss ideas that can't be immediately applied.",
+                worksWith: {
+                    diverging: "They help you see creative alternatives; you help them move from ideas to implementation",
+                    assimilating: "Natural partners—they provide theory, you apply it; don't dismiss their need for complete analysis",
+                    accommodating: "Both action-oriented; you bring technical rigor, they bring adaptability and people skills"
+                },
                 swotStrength: "Practical problem-solving and efficient implementation",
                 swotWeakness: "May overlook interpersonal dynamics and creative alternatives",
                 swotOpportunity: "Develop people skills to enhance technical effectiveness",
@@ -968,6 +998,16 @@
                     "Learn from mistakes through iteration"
                 ],
                 careers: "Marketing, sales, management, entrepreneurship, action-oriented roles",
+                decisionStyle: "Intuitive and action-biased. You trust your gut, consult people you trust, and make decisions quickly so you can learn from results rather than extended analysis.",
+                communicationStyle: "Energetic and people-focused. You prefer interactive, relationship-based communication and learn best through conversation and collaboration.",
+                motivatedBy: "New experiences, taking action, influencing outcomes, working with people, adapting to challenges, and learning through trial and error.",
+                stressResponse: "Under pressure, you may act too quickly without sufficient analysis, rely too heavily on others for information, or become frustrated with those who want more planning.",
+                blindSpots: "May repeat preventable mistakes by not learning from theory; can undervalue careful analysis; may rely too heavily on intuition when data would help.",
+                worksWith: {
+                    diverging: "They help you reflect before acting; you help them move from ideas to action",
+                    assimilating: "They can provide the theory you skip; listen to their analysis even when eager to act",
+                    converging: "Both action-oriented; they bring technical precision, you bring adaptability and people skills"
+                },
                 swotStrength: "Action orientation and adaptability in uncertain situations",
                 swotWeakness: "May act before fully understanding; may repeat preventable mistakes",
                 swotOpportunity: "Develop analytical skills to complement action orientation",
@@ -1221,10 +1261,33 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-family: monospace; font-size: 0.85em;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
-                        <span style="opacity: 0.7; margin-left: 15px;">|</span>
-                        <span style="opacity: 0.7; margin-left: 15px;">Raw:</span> <strong>CE${scores.ce}-RO${scores.ro}-AC${scores.ac}-AE${scores.ae}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Your Learning Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${style.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Style Clarity</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${clarityLevel}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Learning Mode</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${style.dominant[0]}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Learning Mode</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${style.dominant[1]}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Mode Scores:</strong> Concrete Experience: ${scores.ce} | Reflective Observation: ${scores.ro} | Abstract Conceptualization: ${scores.ac} | Active Experimentation: ${scores.ae}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1562,10 +1625,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Raw: CE' + scores.ce + '-RO' + scores.ro + '-AC' + scores.ac + '-AE' + scores.ae + '  |  Clarity: ' + clarityLevel, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + primary.name + ' Learning Style | ' + clarityLevel, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Profile Summary

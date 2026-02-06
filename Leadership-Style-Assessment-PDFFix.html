@@ -658,19 +658,19 @@
                         <h3>📊 The Situational Leadership Model</h3>
                         <div class="model-grid">
                             <div class="model-cell s2">
-                                <div class="cell-title">S2: Coaching</div>
+                                <div class="cell-title">Coaching</div>
                                 <div class="cell-desc">Explain decisions & provide opportunity for clarification</div>
                             </div>
                             <div class="model-cell s3">
-                                <div class="cell-title">S3: Supporting</div>
+                                <div class="cell-title">Supporting</div>
                                 <div class="cell-desc">Share ideas & facilitate decision-making</div>
                             </div>
                             <div class="model-cell s1">
-                                <div class="cell-title">S1: Directing</div>
+                                <div class="cell-title">Directing</div>
                                 <div class="cell-desc">Provide specific instructions & closely supervise</div>
                             </div>
                             <div class="model-cell s4">
-                                <div class="cell-title">S4: Delegating</div>
+                                <div class="cell-title">Delegating</div>
                                 <div class="cell-desc">Turn over responsibility for decisions & implementation</div>
                             </div>
                         </div>
@@ -985,6 +985,16 @@
                     "Can create dependency on the leader"
                 ],
                 readinessMatch: "R1: Unable and Insecure OR Unable but Confident (Enthusiastic Beginner)",
+                decisionStyle: "Centralized and decisive. You prefer to make decisions yourself based on your assessment of the situation, then communicate them clearly to your team with specific instructions for execution.",
+                communicationStyle: "Direct, task-focused, and one-way. You provide clear instructions, set expectations explicitly, and focus communication on what needs to be done, by whom, and by when.",
+                motivatedBy: "Order, clarity, achieving concrete results, meeting deadlines, and seeing plans executed precisely as designed.",
+                stressResponse: "Under pressure, you may become overly controlling, micromanage details that could be delegated, dismiss input from others, or become impatient with questions or requests for explanation.",
+                blindSpots: "May not recognize when team members have developed beyond needing close direction. Can miss the demotivating effect of over-supervision on capable employees. May undervalue relationship-building.",
+                worksWith: {
+                    coaching: "Coaching leaders can help you develop patience for the teaching moments that build long-term capability",
+                    supporting: "Supporting leaders model how to build confidence through encouragement rather than just instruction",
+                    delegating: "Delegating leaders can show you how to let go and trust proven performers to deliver"
+                },
                 swotStrength: "Provides clear structure and decisive direction when situations require it",
                 swotWeakness: "May over-direct experienced employees or stifle initiative and development",
                 swotOpportunity: "Develop coaching and supporting skills to match style to follower readiness",
@@ -1023,6 +1033,16 @@
                     "Requires strong communication skills"
                 ],
                 readinessMatch: "R2: Unable but Confident OR Able but Insecure (Disillusioned Learner)",
+                decisionStyle: "Collaborative but guided. You make decisions but take time to explain your reasoning, solicit input, and help team members understand the 'why' behind directions.",
+                communicationStyle: "Two-way and developmental. You balance giving direction with asking questions, explaining rationale, and encouraging dialogue. You teach while you lead.",
+                motivatedBy: "Developing others, seeing people grow, building capability, solving problems together, and creating 'aha moments' for your team.",
+                stressResponse: "Under pressure, you may try to over-explain, struggle to make quick decisions without buy-in, or invest too much time in development when action is urgently needed.",
+                blindSpots: "May not recognize when someone needs direction without explanation, or when they're ready to work independently. Can under-estimate the time cost of your coaching investment.",
+                worksWith: {
+                    directing: "Directing leaders can show you when decisive action trumps developmental conversation",
+                    supporting: "Supporting leaders model how to step back once capability is built",
+                    delegating: "Delegating leaders demonstrate the end-state of successful development"
+                },
                 swotStrength: "Develops people while providing needed direction; builds capability and confidence",
                 swotWeakness: "Time-intensive; may over-invest in situations not requiring development focus",
                 swotOpportunity: "Master the art of knowing when to coach vs. support or delegate",
@@ -1061,6 +1081,16 @@
                     "Requires time investment in relationships"
                 ],
                 readinessMatch: "R3: Able but Insecure OR Able but Unwilling (Capable but Cautious Performer)",
+                decisionStyle: "Facilitative and shared. You prefer to let capable team members make decisions while you provide encouragement, remove obstacles, and offer guidance only when asked.",
+                communicationStyle: "Warm, encouraging, and listener-focused. You ask questions, validate feelings, celebrate progress, and focus on building confidence through positive reinforcement.",
+                motivatedBy: "Relationships, team harmony, seeing others gain confidence, creating psychologically safe environments, and being a trusted resource.",
+                stressResponse: "Under pressure, you may avoid making necessary decisions, struggle to provide critical feedback, or prioritize maintaining relationships over achieving results.",
+                blindSpots: "May not recognize when team members need more direction than encouragement. Can enable avoidance by being too accommodating. May delay difficult conversations.",
+                worksWith: {
+                    directing: "Directing leaders can show you when structure and clear direction are what someone actually needs",
+                    coaching: "Coaching leaders model how to combine support with developmental guidance",
+                    delegating: "Delegating leaders demonstrate how to support without hovering"
+                },
                 swotStrength: "Builds confidence and autonomy in capable team members; strong relationships",
                 swotWeakness: "May under-direct when structure is needed; can enable avoidance",
                 swotOpportunity: "Develop ability to shift to directing/coaching when situations require",
@@ -1099,6 +1129,16 @@
                     "Can seem disengaged or uncaring"
                 ],
                 readinessMatch: "R4: Able and Confident (Self-Reliant Achiever)",
+                decisionStyle: "Empowering and hands-off. You delegate decision authority to proven performers and trust their judgment. You focus on outcomes rather than methods.",
+                communicationStyle: "Minimal and outcome-focused. You check in periodically on results, remain available as a resource, but avoid unnecessary oversight or direction.",
+                motivatedBy: "Efficiency, leveraging talent, seeing self-sufficient teams, freeing your bandwidth for strategic work, and developing future leaders.",
+                stressResponse: "Under pressure, you may become too distant, miss early warning signs of problems, or fail to provide support when a normally independent person hits an unexpected obstacle.",
+                blindSpots: "May assume competence that doesn't exist on new tasks. Can miss when high performers need recognition or connection. May be perceived as disengaged or uncaring.",
+                worksWith: {
+                    directing: "Directing leaders can show you when a situation calls for hands-on involvement",
+                    coaching: "Coaching leaders model how to stay connected while empowering autonomy",
+                    supporting: "Supporting leaders demonstrate the relationship maintenance high performers still need"
+                },
                 swotStrength: "Maximizes autonomy for high performers; efficient use of leadership bandwidth",
                 swotWeakness: "May under-support when team members need help; can miss early warning signs",
                 swotOpportunity: "Develop sensitivity to when delegation isn't working and intervention is needed",
@@ -1228,9 +1268,11 @@
             const flexibilityIndex = 20 - (sortedStyles[0][1] - sortedStyles[3][1]);
             const flexibilityLevel = flexibilityIndex >= 15 ? 'High' : flexibilityIndex >= 10 ? 'Moderate' : 'Low';
             
-            // Generate tracker code
+            // Generate tracker code with human-readable explanation
             const styleAbbrev = { directing: 'S1', coaching: 'S2', supporting: 'S3', delegating: 'S4' };
+            const styleNames = { directing: 'Directing', coaching: 'Coaching', supporting: 'Supporting', delegating: 'Delegating' };
             const trackerCode = `LSA-${styleAbbrev[primaryStyle]}${styleAbbrev[secondaryStyle]}-${styleClarity.charAt(0)}`;
+            const codeExplanation = `Leadership Style: ${styleNames[primaryStyle]} (primary) + ${styleNames[secondaryStyle]} (secondary) | ${styleClarity}`;
 
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = `
@@ -1243,22 +1285,22 @@
                 <div class="score-grid">
                     <div class="score-card directing ${primaryStyle === 'directing' ? 'primary' : secondaryStyle === 'directing' ? 'secondary' : ''}">
                         <div class="icon">📋</div>
-                        <h3>S1: Directing</h3>
+                        <h3>Directing</h3>
                         <div class="score">${scores.directing}</div>
                     </div>
                     <div class="score-card coaching ${primaryStyle === 'coaching' ? 'primary' : secondaryStyle === 'coaching' ? 'secondary' : ''}">
                         <div class="icon">🎯</div>
-                        <h3>S2: Coaching</h3>
+                        <h3>Coaching</h3>
                         <div class="score">${scores.coaching}</div>
                     </div>
                     <div class="score-card supporting ${primaryStyle === 'supporting' ? 'primary' : secondaryStyle === 'supporting' ? 'secondary' : ''}">
                         <div class="icon">🤝</div>
-                        <h3>S3: Supporting</h3>
+                        <h3>Supporting</h3>
                         <div class="score">${scores.supporting}</div>
                     </div>
                     <div class="score-card delegating ${primaryStyle === 'delegating' ? 'primary' : secondaryStyle === 'delegating' ? 'secondary' : ''}">
                         <div class="icon">🚀</div>
-                        <h3>S4: Delegating</h3>
+                        <h3>Delegating</h3>
                         <div class="score">${scores.delegating}</div>
                     </div>
                 </div>
@@ -1311,10 +1353,33 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-family: monospace; font-size: 0.85em;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
-                        <span style="opacity: 0.7; margin-left: 15px;">|</span>
-                        <span style="opacity: 0.7; margin-left: 15px;">Raw:</span> <strong>S1-${scores.directing}-S2-${scores.coaching}-S3-${scores.supporting}-S4-${scores.delegating}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Leadership Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${primary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Leadership Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${secondary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Style Clarity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${styleClarity} (${primaryPct}%)</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Leadership Flexibility</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${flexibility}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Your Scores:</strong> Directing: ${scores.directing} | Coaching: ${scores.coaching} | Supporting: ${scores.supporting} | Delegating: ${scores.delegating}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1326,22 +1391,22 @@
                             <div class="sit-ylabel">Supportive Behavior →</div>
                             <div class="sit-cell s2 ${primaryStyle === 'coaching' ? 'highlight' : ''}">
                                 <div class="cell-icon">🎯</div>
-                                <div class="cell-name">S2: Coaching</div>
+                                <div class="cell-name">Coaching</div>
                                 <div class="cell-score">${scores.coaching}</div>
                             </div>
                             <div class="sit-cell s3 ${primaryStyle === 'supporting' ? 'highlight' : ''}">
                                 <div class="cell-icon">🤝</div>
-                                <div class="cell-name">S3: Supporting</div>
+                                <div class="cell-name">Supporting</div>
                                 <div class="cell-score">${scores.supporting}</div>
                             </div>
                             <div class="sit-cell s1 ${primaryStyle === 'directing' ? 'highlight' : ''}">
                                 <div class="cell-icon">📋</div>
-                                <div class="cell-name">S1: Directing</div>
+                                <div class="cell-name">Directing</div>
                                 <div class="cell-score">${scores.directing}</div>
                             </div>
                             <div class="sit-cell s4 ${primaryStyle === 'delegating' ? 'highlight' : ''}">
                                 <div class="cell-icon">🚀</div>
-                                <div class="cell-name">S4: Delegating</div>
+                                <div class="cell-name">Delegating</div>
                                 <div class="cell-score">${scores.delegating}</div>
                             </div>
                             <div class="sit-xlabel">Directive Behavior →</div>
@@ -1432,24 +1497,24 @@
                         <p style="color: var(--text-secondary); margin-bottom: 20px;">The key to Situational Leadership is matching your style to the readiness level of the person you're leading. Here's how the four readiness levels match to leadership styles:</p>
                         <div class="readiness-grid">
                             <div class="readiness-card r1">
-                                <div class="r-level">R1: Low Readiness</div>
+                                <div class="r-level">Low Readiness</div>
                                 <div class="r-desc">Unable & Insecure</div>
-                                <div class="r-style">→ S1: Directing</div>
+                                <div class="r-style">→ Use Directing</div>
                             </div>
                             <div class="readiness-card r2">
-                                <div class="r-level">R2: Low-Moderate</div>
+                                <div class="r-level">Low-Moderate Readiness</div>
                                 <div class="r-desc">Unable but Willing</div>
-                                <div class="r-style">→ S2: Coaching</div>
+                                <div class="r-style">→ Use Coaching</div>
                             </div>
                             <div class="readiness-card r3">
-                                <div class="r-level">R3: Moderate-High</div>
+                                <div class="r-level">Moderate-High Readiness</div>
                                 <div class="r-desc">Able but Insecure</div>
-                                <div class="r-style">→ S3: Supporting</div>
+                                <div class="r-style">→ Use Supporting</div>
                             </div>
                             <div class="readiness-card r4">
-                                <div class="r-level">R4: High Readiness</div>
+                                <div class="r-level">High Readiness</div>
                                 <div class="r-desc">Able & Confident</div>
-                                <div class="r-style">→ S4: Delegating</div>
+                                <div class="r-style">→ Use Delegating</div>
                             </div>
                         </div>
                     </div>
@@ -1558,7 +1623,9 @@
             const flexIndex = 20 - (Math.max(...Object.values(scores)) - Math.min(...Object.values(scores)));
             const flexibility = flexIndex >= 15 ? 'High' : flexIndex >= 10 ? 'Moderate' : 'Low';
             const styleAbbrev = { directing: 'S1', coaching: 'S2', supporting: 'S3', delegating: 'S4' };
+            const styleNames = { directing: 'Directing', coaching: 'Coaching', supporting: 'Supporting', delegating: 'Delegating' };
             const trackerCode = 'LSA-' + styleAbbrev[primaryStyle] + styleAbbrev[secondaryStyle] + '-' + styleClarity.charAt(0);
+            const codeExplanation = styleNames[primaryStyle] + ' (primary) + ' + styleNames[secondaryStyle] + ' (secondary) | ' + styleClarity;
 
             // Helper function to add text with word wrap
             function addWrappedText(text, x, startY, maxWidth, lineHeight) {
@@ -1633,11 +1700,13 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Raw: S1-' + scores.directing + '-S2-' + scores.coaching + '-S3-' + scores.supporting + '-S4-' + scores.delegating + '  |  Flexibility: ' + flexibility, 105, y + 7, { align: 'center' });
-            y += 16;
+            doc.text('Your Result: ' + codeExplanation, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Scores: S1-' + scores.directing + ' S2-' + scores.coaching + ' S3-' + scores.supporting + ' S4-' + scores.delegating + '  |  Flexibility: ' + flexibility, 105, y + 12, { align: 'center' });
+            y += 22;
 
             // Profile Summary
             doc.setFontSize(10);

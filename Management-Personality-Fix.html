@@ -1847,6 +1847,7 @@
             // Generate tracker-friendly summary code with 2-letter abbreviations
             const typeAbbrev = { 'Director': 'Di', 'Innovator': 'In', 'Visionary': 'Vi', 'Developer': 'Dv' };
             const trackerCode = 'MPA-' + typeAbbrev[primaryType] + (secondaryType ? typeAbbrev[secondaryType] : 'XX') + '-' + styleIntensity.charAt(0);
+            const codeExplanation = `Management Style: ${primaryType} (primary)${secondaryType ? ` + ${secondaryType} (secondary)` : ''} | ${styleIntensity}`;
 
             resultsDiv.innerHTML = `
                 <div class="results-header">
@@ -1916,10 +1917,33 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-family: monospace; font-size: 0.85em;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
-                        <span style="opacity: 0.7; margin-left: 15px;">|</span>
-                        <span style="opacity: 0.7; margin-left: 15px;">Raw Scores:</span> <strong>D${counts.a}-I${counts.b}-V${counts.c}-P${counts.d}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Management Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${primaryType}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Management Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${secondaryType || 'None'}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Style Clarity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${styleIntensity} (${maxPct}%)</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Core Strength</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${primary.superpower}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Type Scores:</strong> Director: ${counts.a}/18 | Innovator: ${counts.b}/18 | Visionary: ${counts.c}/18 | Developer: ${counts.d}/18
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
                     </div>
                 </div>
 
@@ -2137,6 +2161,7 @@
             const maxPct = Math.round((maxScore / total) * 100);
             const styleIntensity = maxPct >= 50 ? 'Strong' : maxPct >= 35 ? 'Moderate' : 'Balanced';
             const trackerCode = 'MPA-' + (typeAbbrev[primaryType] || 'XX') + (secondaryType ? (typeAbbrev[secondaryType] || 'XX') : 'XX') + '-' + styleIntensity.charAt(0);
+            const codeExplanation = primaryType + ' (primary)' + (secondaryType ? ' + ' + secondaryType + ' (secondary)' : '') + ' | ' + styleIntensity;
 
             // Header
             doc.setFillColor(...chapmanBlue);
@@ -2172,11 +2197,13 @@
             
             // Tracker Code Bar
             doc.setFillColor(...chapmanBlue);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
-            doc.setFontSize(9);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Primary: ' + primaryType + '  |  Secondary: ' + (secondaryType || 'None'), 105, y + 7, { align: 'center' });
-            y += 14;
+            doc.text('Your Result: ' + codeExplanation, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode, 105, y + 12, { align: 'center' });
+            y += 20;
 
             // Scores (reusing scoreItems from above)
             let scoreText = 'Scores: ';

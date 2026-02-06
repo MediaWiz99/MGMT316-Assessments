@@ -211,16 +211,84 @@
             ]
         };
         const dimensionData = {
-            holistic: { name: "Holistic Perspective", icon: "🌐", color: "#1565C0", description: "The ability to see the whole system rather than just individual parts — understanding that the whole is greater than the sum of its parts.", highBehaviors: ["Considers organizational context", "Takes multiple stakeholder views", "Avoids tunnel vision", "Sees forest and trees"], development: ["Practice zooming out before diving in", "Ask 'What else might be affected?'", "Create stakeholder maps", "Study how departments interconnect"] },
-            interconnections: { name: "Seeing Interconnections", icon: "🔗", color: "#2E7D32", description: "The ability to recognize relationships, dependencies, and feedback loops between different elements of a system.", highBehaviors: ["Traces problems to root causes", "Maps relationships between factors", "Sees hidden connections", "Understands ripple effects"], development: ["Draw causal loop diagrams", "Ask 'What led to this?'", "Look for patterns across situations", "Practice 'Five Whys' analysis"] },
-            dynamics: { name: "Understanding Dynamics", icon: "📈", color: "#C62828", description: "The ability to understand how systems change over time — recognizing delays, feedback loops, and emergent patterns.", highBehaviors: ["Anticipates delayed effects", "Recognizes recurring patterns", "Understands feedback loops", "Thinks in time horizons"], development: ["Consider short and long-term effects", "Look for vicious and virtuous cycles", "Study how situations evolved historically", "Model scenarios over time"] },
-            leverage: { name: "Finding Leverage Points", icon: "🎯", color: "#7B1FA2", description: "The ability to identify where small, focused actions can produce significant, lasting change in a system.", highBehaviors: ["Finds high-impact intervention points", "Questions quick fixes", "Focuses on structure over blame", "Seeks sustainable solutions"], development: ["Ask 'Where is the real leverage here?'", "Challenge symptomatic solutions", "Look for structural causes", "Study Meadows' leverage points"] }
+            holistic: { 
+                name: "Holistic Perspective", 
+                icon: "🌐", 
+                color: "#1565C0", 
+                description: "The ability to see the whole system rather than just individual parts — understanding that the whole is greater than the sum of its parts.",
+                profileSummary: "You see the big picture and understand how parts relate to the whole. You naturally consider broader context before diving into details.",
+                decisionStyle: "Context-aware and integrative. You consider how decisions fit within larger systems and affect multiple stakeholders.",
+                communicationStyle: "Expansive and contextualizing. You help others see the bigger picture and how their work connects to organizational goals.",
+                motivatedBy: "Understanding complexity, seeing how things connect, solving problems at the system level, and creating comprehensive solutions.",
+                stressResponse: "Under pressure, you may become overwhelmed by seeing too much complexity, or struggle to prioritize when everything seems connected.",
+                blindSpots: "May struggle with detailed execution; can see so much context that decision-making becomes difficult.",
+                highBehaviors: ["Considers organizational context", "Takes multiple stakeholder views", "Avoids tunnel vision", "Sees forest and trees"], 
+                development: ["Practice zooming out before diving in", "Ask 'What else might be affected?'", "Create stakeholder maps", "Study how departments interconnect"],
+                swotStrength: "Sees big picture and avoids narrow solutions",
+                swotWeakness: "May struggle with detailed implementation",
+                swotOpportunity: "Pair holistic view with execution focus",
+                swotThreat: "Risk of analysis paralysis from seeing too much complexity"
+            },
+            interconnections: { 
+                name: "Seeing Interconnections", 
+                icon: "🔗", 
+                color: "#2E7D32", 
+                description: "The ability to recognize relationships, dependencies, and feedback loops between different elements of a system.",
+                profileSummary: "You see how things connect and influence each other. You trace causes and effects across system boundaries.",
+                decisionStyle: "Relational and analytical. You map how decisions ripple through connected elements before acting.",
+                communicationStyle: "Connection-focused and explanatory. You help others see relationships and dependencies they might miss.",
+                motivatedBy: "Discovering hidden connections, understanding root causes, seeing how changes propagate, and explaining complex relationships.",
+                stressResponse: "Under pressure, you may over-complicate by seeing too many connections, or struggle when connections aren't clear.",
+                blindSpots: "May miss simple solutions by looking for complex connections; can see relationships that aren't actually meaningful.",
+                highBehaviors: ["Traces problems to root causes", "Maps relationships between factors", "Sees hidden connections", "Understands ripple effects"], 
+                development: ["Draw causal loop diagrams", "Ask 'What led to this?'", "Look for patterns across situations", "Practice 'Five Whys' analysis"],
+                swotStrength: "Sees relationships and root causes others miss",
+                swotWeakness: "May over-complicate simple situations",
+                swotOpportunity: "Use connection-mapping to prevent unintended consequences",
+                swotThreat: "Risk of seeing connections that aren't meaningful"
+            },
+            dynamics: { 
+                name: "Understanding Dynamics", 
+                icon: "📈", 
+                color: "#C62828", 
+                description: "The ability to understand how systems change over time — recognizing delays, feedback loops, and emergent patterns.",
+                profileSummary: "You understand how systems evolve over time. You anticipate delays, recognize patterns, and think about long-term dynamics.",
+                decisionStyle: "Temporal and pattern-oriented. You consider how situations will evolve and factor in delays and feedback effects.",
+                communicationStyle: "Temporal and scenario-based. You help others think about how situations might develop over time.",
+                motivatedBy: "Understanding change patterns, anticipating future states, recognizing recurring dynamics, and modeling how systems evolve.",
+                stressResponse: "Under pressure, you may focus too much on long-term dynamics when immediate action is needed, or become anxious about future scenarios.",
+                blindSpots: "May miss urgent present needs while focused on future dynamics; can over-weight worst-case scenarios.",
+                highBehaviors: ["Anticipates delayed effects", "Recognizes recurring patterns", "Understands feedback loops", "Thinks in time horizons"], 
+                development: ["Consider short and long-term effects", "Look for vicious and virtuous cycles", "Study how situations evolved historically", "Model scenarios over time"],
+                swotStrength: "Anticipates how systems will evolve over time",
+                swotWeakness: "May miss present needs while focused on future dynamics",
+                swotOpportunity: "Use temporal thinking for better long-term planning",
+                swotThreat: "Risk of ignoring urgent present needs"
+            },
+            leverage: { 
+                name: "Finding Leverage Points", 
+                icon: "🎯", 
+                color: "#7B1FA2", 
+                description: "The ability to identify where small, focused actions can produce significant, lasting change in a system.",
+                profileSummary: "You find the highest-impact intervention points. You look for where small changes can produce large, sustainable effects.",
+                decisionStyle: "Strategic and impact-focused. You prioritize interventions that offer the best leverage for sustainable change.",
+                communicationStyle: "Strategic and persuasive. You help others focus on high-leverage actions rather than symptoms.",
+                motivatedBy: "Finding efficient solutions, creating lasting change, avoiding wasted effort, and achieving disproportionate impact.",
+                stressResponse: "Under pressure, you may resist quick fixes even when they're appropriate, or become frustrated when forced to address symptoms.",
+                blindSpots: "May dismiss necessary short-term fixes while searching for leverage; can miss simple solutions that work.",
+                highBehaviors: ["Finds high-impact intervention points", "Questions quick fixes", "Focuses on structure over blame", "Seeks sustainable solutions"], 
+                development: ["Ask 'Where is the real leverage here?'", "Challenge symptomatic solutions", "Look for structural causes", "Study Meadows' leverage points"],
+                swotStrength: "Finds high-impact actions that create sustainable change",
+                swotWeakness: "May dismiss needed short-term fixes",
+                swotOpportunity: "Combine leverage thinking with pragmatic action",
+                swotThreat: "Risk of perfect being enemy of good"
+            }
         };
         const levels = [
-            { min: 80, max: 100, name: "Systems Master", desc: "You naturally think in systems — seeing wholes, connections, dynamics, and leverage points with ease." },
-            { min: 60, max: 79, name: "Systems Thinker", desc: "You have strong systems thinking abilities with room to deepen specific dimensions." },
-            { min: 40, max: 59, name: "Developing Systems View", desc: "You're building systems thinking skills. Practice looking for connections and patterns." },
-            { min: 20, max: 39, name: "Linear Thinker", desc: "You tend toward linear, cause-effect thinking. Systems thinking can be developed with practice." }
+            { min: 80, max: 100, name: "Systems Master", desc: "You naturally think in systems — seeing wholes, connections, dynamics, and leverage points with ease.", swotStrength: "Exceptional systems perspective that sees complexity clearly", swotWeakness: "May struggle in environments that don't value systems thinking", swotOpportunity: "Teach and model systems thinking for others", swotThreat: "Risk of frustration when others don't see systems" },
+            { min: 60, max: 79, name: "Systems Thinker", desc: "You have strong systems thinking abilities with room to deepen specific dimensions.", swotStrength: "Strong systems perspective that informs good decisions", swotWeakness: "Some dimensions may need development", swotOpportunity: "Deepen weaker dimensions for comprehensive systems thinking", swotThreat: "May miss important factors if weaker dimensions aren't developed" },
+            { min: 40, max: 59, name: "Developing Systems View", desc: "You're building systems thinking skills. Practice looking for connections and patterns.", swotStrength: "Emerging systems awareness provides foundation to build on", swotWeakness: "May miss important systemic factors", swotOpportunity: "Significant room for development through practice", swotThreat: "May make decisions without considering systemic effects" },
+            { min: 20, max: 39, name: "Linear Thinker", desc: "You tend toward linear, cause-effect thinking. Systems thinking can be developed with practice.", swotStrength: "Clear, direct thinking has value in simple situations", swotWeakness: "May miss complexity and create unintended consequences", swotOpportunity: "Systems thinking can be learned with practice", swotThreat: "Serious risk of poor decisions in complex environments" }
         ];
         let responses = {};
         let studentName = '';
@@ -314,8 +382,33 @@
                             <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Growth Area</div><div style="font-size: 1.2em; font-weight: 600;">${dimensionData[lowestDim].name}</div></div>
                         </div>
                     </div>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">SYS-${highestDim === 'holistic' ? 'Ho' : highestDim === 'interconnections' ? 'In' : highestDim === 'dynamics' ? 'Dy' : 'Le'}-${level.name.includes('High') ? 'H' : level.name.includes('Moderate') ? 'M' : level.name.includes('Developing') ? 'D' : 'E'}${totalScore}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Systems Thinking Level</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${level.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Total Score</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${totalScore} / 100 (${pct}%)</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Strongest Dimension</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${dimensionData[highestDim].name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Growth Opportunity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${dimensionData[lowestDim].name}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Dimension Scores:</strong> Holistic Thinking: ${scores.holistic} | Interconnections: ${scores.interconnections} | Dynamic Thinking: ${scores.dynamics} | Leverage Points: ${scores.leverage}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Systems Thinking: ${level.name} | Strongest: ${dimensionData[highestDim].name} | Score: ${totalScore}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">SYS-${highestDim === 'holistic' ? 'Ho' : highestDim === 'interconnections' ? 'In' : highestDim === 'dynamics' ? 'Dy' : 'Le'}-${level.name.includes('High') ? 'H' : level.name.includes('Moderate') ? 'M' : level.name.includes('Developing') ? 'D' : 'E'}${totalScore}</code></div>
+                        </div>
                     </div>
                 </div>
                 <div class="results-body">
@@ -443,10 +536,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Strongest: ' + dimensionData[highestDim].name + '  |  Growth: ' + dimensionData[lowestDim].name, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + level.name + ' | Strongest: ' + dimensionData[highestDim].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Growth Area: ' + dimensionData[lowestDim].name, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Strength Section

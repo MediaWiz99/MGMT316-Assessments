@@ -211,16 +211,84 @@
             ]
         };
         const dimensionData = {
-            vision: { name: "Visionary Foresight", icon: "🔭", color: "#1565C0", description: "The ability to envision the future, anticipate trends, and see possibilities before others do.", highBehaviors: ["Thinks in 5-10 year horizons", "Anticipates industry shifts", "Creates compelling futures", "Connects present to future"], development: ["Read about emerging trends", "Practice scenario planning", "Study disruptive innovations", "Talk to futurists and visionaries"] },
-            analysis: { name: "Analytical Rigor", icon: "📊", color: "#2E7D32", description: "The ability to gather data, apply frameworks, and systematically assess situations before deciding.", highBehaviors: ["Uses data to drive decisions", "Applies strategic frameworks", "Conducts competitive analysis", "Identifies root causes"], development: ["Learn strategic frameworks (SWOT, Porter's Five Forces)", "Practice data-driven decision making", "Study competitor strategies", "Develop analytical models"] },
-            agility: { name: "Adaptive Agility", icon: "🔄", color: "#C62828", description: "The ability to remain flexible, pivot when necessary, and thrive in uncertain environments.", highBehaviors: ["Embraces change and uncertainty", "Experiments and iterates", "Pivots without losing direction", "Stays calm in ambiguity"], development: ["Practice comfort with uncertainty", "Run small experiments", "Build contingency plans", "Study agile methodologies"] },
-            execution: { name: "Strategic Execution", icon: "🎯", color: "#7B1FA2", description: "The ability to translate strategy into action — aligning resources, making trade-offs, and driving results.", highBehaviors: ["Creates clear action plans", "Aligns resources to priorities", "Makes difficult trade-offs", "Tracks and measures progress"], development: ["Break strategy into milestones", "Practice saying no to distractions", "Build accountability systems", "Connect daily work to strategy"] }
+            vision: { 
+                name: "Visionary Foresight", 
+                icon: "🔭", 
+                color: "#1565C0", 
+                description: "The ability to envision the future, anticipate trends, and see possibilities before others do.",
+                profileSummary: "You see beyond the present to envision future possibilities. You anticipate trends and create compelling visions of what could be.",
+                decisionStyle: "Future-oriented and possibility-focused. You evaluate options based on their potential to create desired future states.",
+                communicationStyle: "Inspiring and future-focused. You paint pictures of possibilities and help others see beyond current constraints.",
+                motivatedBy: "Shaping the future, seeing possibilities before others, creating something new, and inspiring others with vision.",
+                stressResponse: "Under pressure, you may retreat into visionary thinking when practical action is needed, or become frustrated when others don't see the future you envision.",
+                blindSpots: "May struggle with present realities while focused on future; can lose credibility if visions aren't grounded in execution capability.",
+                highBehaviors: ["Thinks in 5-10 year horizons", "Anticipates industry shifts", "Creates compelling futures", "Connects present to future"], 
+                development: ["Read about emerging trends", "Practice scenario planning", "Study disruptive innovations", "Talk to futurists and visionaries"],
+                swotStrength: "Sees future possibilities and inspires others with vision",
+                swotWeakness: "May struggle with present execution demands",
+                swotOpportunity: "Pair vision with analytical rigor and execution focus",
+                swotThreat: "Risk of losing credibility if visions don't translate to results"
+            },
+            analysis: { 
+                name: "Analytical Rigor", 
+                icon: "📊", 
+                color: "#2E7D32", 
+                description: "The ability to gather data, apply frameworks, and systematically assess situations before deciding.",
+                profileSummary: "You bring rigor and data to strategic decisions. You apply frameworks systematically and base decisions on evidence.",
+                decisionStyle: "Data-driven and framework-based. You gather evidence, apply analytical tools, and make decisions based on systematic assessment.",
+                communicationStyle: "Structured and evidence-based. You present analysis clearly and use frameworks to help others understand situations.",
+                motivatedBy: "Finding the right answer, applying rigorous analysis, making well-informed decisions, and being seen as thorough and credible.",
+                stressResponse: "Under pressure, you may over-analyze, delay decisions for more data, or struggle when situations are too ambiguous for clean analysis.",
+                blindSpots: "May miss opportunities waiting for perfect data; can over-complicate decisions that need quick action.",
+                highBehaviors: ["Uses data to drive decisions", "Applies strategic frameworks", "Conducts competitive analysis", "Identifies root causes"], 
+                development: ["Learn strategic frameworks (SWOT, Porter's Five Forces)", "Practice data-driven decision making", "Study competitor strategies", "Develop analytical models"],
+                swotStrength: "Rigorous analysis leads to well-informed decisions",
+                swotWeakness: "May over-analyze or miss opportunities requiring speed",
+                swotOpportunity: "Balance analysis with bias toward action",
+                swotThreat: "Risk of analysis paralysis in fast-moving environments"
+            },
+            agility: { 
+                name: "Adaptive Agility", 
+                icon: "🔄", 
+                color: "#C62828", 
+                description: "The ability to remain flexible, pivot when necessary, and thrive in uncertain environments.",
+                profileSummary: "You adapt quickly to changing circumstances. You embrace uncertainty and pivot without losing direction.",
+                decisionStyle: "Flexible and iterative. You make decisions that preserve optionality and adjust course based on feedback.",
+                communicationStyle: "Adaptive and experimental. You frame strategies as hypotheses to test and create openness to change.",
+                motivatedBy: "Navigating uncertainty, finding new paths forward, experimenting and learning, and thriving where others struggle.",
+                stressResponse: "You handle uncertainty well, but may change direction too quickly or struggle when situations require sustained commitment.",
+                blindSpots: "May pivot too quickly without giving strategies time to work; can appear inconsistent or lacking conviction.",
+                highBehaviors: ["Embraces change and uncertainty", "Experiments and iterates", "Pivots without losing direction", "Stays calm in ambiguity"], 
+                development: ["Practice comfort with uncertainty", "Run small experiments", "Build contingency plans", "Study agile methodologies"],
+                swotStrength: "Thrives in uncertainty and adapts quickly to change",
+                swotWeakness: "May change direction too often or appear inconsistent",
+                swotOpportunity: "Balance agility with strategic persistence",
+                swotThreat: "Risk of abandoning good strategies too soon"
+            },
+            execution: { 
+                name: "Strategic Execution", 
+                icon: "🎯", 
+                color: "#7B1FA2", 
+                description: "The ability to translate strategy into action — aligning resources, making trade-offs, and driving results.",
+                profileSummary: "You translate strategy into results. You align resources, make trade-offs, and drive disciplined execution.",
+                decisionStyle: "Results-focused and prioritizing. You make decisions that focus resources on strategic priorities and create accountability.",
+                communicationStyle: "Clear and action-oriented. You connect daily work to strategy and create clarity about what matters most.",
+                motivatedBy: "Seeing strategies succeed, achieving measurable results, creating accountability, and bridging vision and reality.",
+                stressResponse: "Under pressure, you may focus too narrowly on execution and miss strategic shifts, or become frustrated with visionary thinking that lacks plans.",
+                blindSpots: "May execute efficiently on wrong strategies; can be so focused on current execution that you miss needed pivots.",
+                highBehaviors: ["Creates clear action plans", "Aligns resources to priorities", "Makes difficult trade-offs", "Tracks and measures progress"], 
+                development: ["Break strategy into milestones", "Practice saying no to distractions", "Build accountability systems", "Connect daily work to strategy"],
+                swotStrength: "Translates strategy into measurable results",
+                swotWeakness: "May execute on outdated strategies or miss needed pivots",
+                swotOpportunity: "Pair execution focus with strategic sensing",
+                swotThreat: "Risk of efficient execution of wrong strategy"
+            }
         };
         const levels = [
-            { min: 80, max: 100, name: "Strategic Leader", desc: "You think and act strategically — combining vision, analysis, agility, and execution at a high level." },
-            { min: 60, max: 79, name: "Strategic Thinker", desc: "You have strong strategic capabilities with opportunities to deepen specific areas." },
-            { min: 40, max: 59, name: "Developing Strategist", desc: "You're building strategic thinking skills. Focus on integrating vision with execution." },
-            { min: 20, max: 39, name: "Tactical Thinker", desc: "You tend toward tactical, day-to-day thinking. Strategic capability can be developed." }
+            { min: 80, max: 100, name: "Strategic Leader", desc: "You think and act strategically — combining vision, analysis, agility, and execution at a high level.", swotStrength: "Comprehensive strategic capability across all dimensions", swotWeakness: "May intimidate or outpace less strategic colleagues", swotOpportunity: "Develop and mentor strategic capability in others", swotThreat: "Risk of frustration in environments that don't value strategy" },
+            { min: 60, max: 79, name: "Strategic Thinker", desc: "You have strong strategic capabilities with opportunities to deepen specific areas.", swotStrength: "Strong strategic foundation with clear strengths", swotWeakness: "Some strategic dimensions need development", swotOpportunity: "Focus on developing weaker dimensions", swotThreat: "May be limited by underdeveloped dimensions" },
+            { min: 40, max: 59, name: "Developing Strategist", desc: "You're building strategic thinking skills. Focus on integrating vision with execution.", swotStrength: "Growing strategic awareness provides foundation", swotWeakness: "Strategic gaps may limit effectiveness", swotOpportunity: "Significant room for strategic development", swotThreat: "May struggle in roles requiring strategic leadership" },
+            { min: 20, max: 39, name: "Tactical Thinker", desc: "You tend toward tactical, day-to-day thinking. Strategic capability can be developed.", swotStrength: "Tactical focus delivers in operational roles", swotWeakness: "May miss strategic implications of decisions", swotOpportunity: "Strategic thinking can be learned", swotThreat: "Career advancement may be limited without strategic development" }
         ];
         let responses = {};
         let studentName = '';
@@ -316,8 +384,18 @@
                             <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Growth Area</div><div style="font-size: 1.2em; font-weight: 600;">${dimensionData[lowestDim].name}</div></div>
                         </div>
                     </div>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">STA-${highestDim === 'vision' ? 'Vi' : highestDim === 'analysis' ? 'An' : highestDim === 'agility' ? 'Ag' : 'Ex'}-${level.name.includes('Leader') ? 'L' : level.name.includes('Thinker') && !level.name.includes('Tactical') ? 'T' : level.name.includes('Developing') ? 'D' : 'C'}${totalScore}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 12px 0; font-size: 1em;">📋 Your Results Summary</h4>
+                        <div style="font-size: 0.9em; margin-bottom: 10px;">
+                            <strong>Strategic Thinking Level:</strong> ${level.name} | <strong>Strongest:</strong> ${dimensionData[highestDim].name} | <strong>Growth Area:</strong> ${dimensionData[lowestDim].name}
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Dimension Scores:</strong> Vision: ${scores.vision} | Analysis: ${scores.analysis} | Agility: ${scores.agility} | Execution: ${scores.execution}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Strategic Profile: ${level.name} | Strongest: ${dimensionData[highestDim].name} | Score: ${totalScore}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">STA-${highestDim === 'vision' ? 'Vi' : highestDim === 'analysis' ? 'An' : highestDim === 'agility' ? 'Ag' : 'Ex'}-${level.name.includes('Leader') ? 'L' : level.name.includes('Thinker') && !level.name.includes('Tactical') ? 'T' : level.name.includes('Developing') ? 'D' : 'C'}${totalScore}</code></div>
+                        </div>
                     </div>
                 </div>
                 <div class="results-body">
@@ -443,10 +521,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Strength: ' + dimensionData[highestDim].name + '  |  Growth: ' + dimensionData[lowestDim].name, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + level.name + ' | Strength: ' + dimensionData[highestDim].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Growth Area: ' + dimensionData[lowestDim].name, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Level Description

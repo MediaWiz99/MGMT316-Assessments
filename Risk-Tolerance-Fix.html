@@ -206,16 +206,84 @@
             ]
         };
         const dimensionData = {
-            financial: { name: "Financial Risk", icon: "💰", color: "#1565C0", description: "Willingness to take risks with money and investments.", highBehaviors: ["Invests in volatile assets", "Comfortable with speculation", "Bets on uncertain outcomes", "Takes financial gambles"], considerations: ["Ensure adequate emergency fund", "Diversify investments", "Only risk what you can afford to lose", "Consider professional advice"] },
-            career: { name: "Career Risk", icon: "💼", color: "#2E7D32", description: "Willingness to take risks with career and professional reputation.", highBehaviors: ["Pursues unconventional paths", "Speaks truth to power", "Takes on challenging projects", "Changes careers boldly"], considerations: ["Build skills as safety net", "Network extensively", "Have backup plans", "Time risks strategically"] },
-            social: { name: "Social Risk", icon: "👥", color: "#C62828", description: "Willingness to risk disapproval, embarrassment, or conflict.", highBehaviors: ["Voices unpopular opinions", "Initiates conversations", "Shows vulnerability", "Challenges norms"], considerations: ["Read social contexts", "Build psychological safety", "Choose battles wisely", "Practice assertiveness"] },
-            physical: { name: "Physical Risk", icon: "🏔️", color: "#7B1FA2", description: "Willingness to engage in activities that could result in physical harm.", highBehaviors: ["Tries adventure sports", "Explores unknown places", "Pushes physical limits", "Embraces physical challenges"], considerations: ["Get proper training", "Use safety equipment", "Know your limits", "Have emergency plans"] }
+            financial: { 
+                name: "Financial Risk", 
+                icon: "💰", 
+                color: "#1565C0", 
+                description: "Willingness to take risks with money and investments.",
+                profileSummary: "You're comfortable taking financial risks. You're willing to invest in uncertain outcomes for potential higher returns.",
+                decisionStyle: "Opportunity-focused and return-oriented. You evaluate financial decisions based on upside potential, not just downside protection.",
+                communicationStyle: "Investment-minded and opportunity-focused. You discuss financial decisions in terms of potential gains and acceptable losses.",
+                motivatedBy: "Building wealth, achieving financial independence, capitalizing on opportunities, and growing assets aggressively.",
+                stressResponse: "You handle financial volatility well, but may take excessive risks when confident or double down on losing positions.",
+                blindSpots: "May underestimate downside risks; can bet too much on uncertain outcomes; may not maintain adequate safety reserves.",
+                highBehaviors: ["Invests in volatile assets", "Comfortable with speculation", "Bets on uncertain outcomes", "Takes financial gambles"], 
+                considerations: ["Ensure adequate emergency fund", "Diversify investments", "Only risk what you can afford to lose", "Consider professional advice"],
+                swotStrength: "Willingness to pursue high-return opportunities others avoid",
+                swotWeakness: "May take excessive risks without adequate protection",
+                swotOpportunity: "Develop better risk assessment while maintaining risk tolerance",
+                swotThreat: "Risk of significant financial loss from inadequate risk management"
+            },
+            career: { 
+                name: "Career Risk", 
+                icon: "💼", 
+                color: "#2E7D32", 
+                description: "Willingness to take risks with career and professional reputation.",
+                profileSummary: "You take bold career risks. You pursue unconventional paths and are willing to sacrifice security for opportunity.",
+                decisionStyle: "Growth-oriented and opportunity-seeking. You evaluate career decisions based on potential upside and learning, not just stability.",
+                communicationStyle: "Bold and ambitious. You discuss career moves in terms of growth potential and aren't afraid to voice unconventional ideas.",
+                motivatedBy: "Career growth, making an impact, pursuing meaningful work, and achieving professional breakthroughs.",
+                stressResponse: "You handle career uncertainty well, but may take risks that damage relationships or reputation without adequate consideration.",
+                blindSpots: "May underestimate reputational risks; can burn bridges unnecessarily; may not build adequate career safety nets.",
+                highBehaviors: ["Pursues unconventional paths", "Speaks truth to power", "Takes on challenging projects", "Changes careers boldly"], 
+                considerations: ["Build skills as safety net", "Network extensively", "Have backup plans", "Time risks strategically"],
+                swotStrength: "Bold career moves that accelerate growth and impact",
+                swotWeakness: "May take risks that damage reputation or relationships",
+                swotOpportunity: "Build stronger networks to support bold career moves",
+                swotThreat: "Risk of career setback from poorly timed or executed risks"
+            },
+            social: { 
+                name: "Social Risk", 
+                icon: "👥", 
+                color: "#C62828", 
+                description: "Willingness to risk disapproval, embarrassment, or conflict.",
+                profileSummary: "You take social risks readily. You voice unpopular opinions, show vulnerability, and aren't paralyzed by fear of disapproval.",
+                decisionStyle: "Authenticity-focused and courageous. You make choices based on what's right rather than what's socially safe.",
+                communicationStyle: "Direct and authentic. You speak your mind, challenge consensus, and aren't afraid to be different.",
+                motivatedBy: "Authenticity, having impact, standing up for beliefs, and not being constrained by social expectations.",
+                stressResponse: "You handle social pressure well, but may be unnecessarily provocative or damage relationships through excessive directness.",
+                blindSpots: "May underestimate social consequences; can alienate potential allies; may confuse being controversial with being right.",
+                highBehaviors: ["Voices unpopular opinions", "Initiates conversations", "Shows vulnerability", "Challenges norms"], 
+                considerations: ["Read social contexts", "Build psychological safety", "Choose battles wisely", "Practice assertiveness"],
+                swotStrength: "Authenticity and courage to challenge consensus",
+                swotWeakness: "May damage relationships through excessive directness",
+                swotOpportunity: "Develop social intelligence to complement social courage",
+                swotThreat: "Risk of isolation or damaged relationships"
+            },
+            physical: { 
+                name: "Physical Risk", 
+                icon: "🏔️", 
+                color: "#7B1FA2", 
+                description: "Willingness to engage in activities that could result in physical harm.",
+                profileSummary: "You embrace physical challenges and risk. You pursue adventure and are energized by activities that test physical limits.",
+                decisionStyle: "Adventure-oriented and thrill-seeking. You evaluate physical activities based on experience and growth, not just safety.",
+                communicationStyle: "Adventurous and challenge-focused. You discuss physical activities in terms of experiences and pushing limits.",
+                motivatedBy: "Adventure, physical challenge, testing limits, experiencing the thrill of risk, and proving physical capability.",
+                stressResponse: "You handle physical danger well, but may take unnecessary risks or underestimate physical limitations.",
+                blindSpots: "May underestimate physical dangers; can push beyond safe limits; may not adequately prepare or use safety measures.",
+                highBehaviors: ["Tries adventure sports", "Explores unknown places", "Pushes physical limits", "Embraces physical challenges"], 
+                considerations: ["Get proper training", "Use safety equipment", "Know your limits", "Have emergency plans"],
+                swotStrength: "Embraces physical challenges that build experience and confidence",
+                swotWeakness: "May take unnecessary physical risks",
+                swotOpportunity: "Channel physical risk tolerance into calculated adventures",
+                swotThreat: "Risk of injury from inadequate preparation or safety"
+            }
         };
         const levels = [
-            { min: 80, max: 100, name: "High Risk Tolerance", desc: "You're comfortable taking significant risks across multiple domains." },
-            { min: 60, max: 79, name: "Moderate-High Risk Tolerance", desc: "You take calculated risks, especially in areas you understand well." },
-            { min: 40, max: 59, name: "Moderate Risk Tolerance", desc: "You balance risk and caution, varying by domain." },
-            { min: 20, max: 39, name: "Low Risk Tolerance", desc: "You prefer certainty and security over potential gains from risk." }
+            { min: 80, max: 100, name: "High Risk Tolerance", desc: "You're comfortable taking significant risks across multiple domains.", swotStrength: "Pursues opportunities others avoid across multiple domains", swotWeakness: "May take excessive risks without adequate protection", swotOpportunity: "Develop better risk assessment across all domains", swotThreat: "Risk of significant losses from insufficient risk management" },
+            { min: 60, max: 79, name: "Moderate-High Risk Tolerance", desc: "You take calculated risks, especially in areas you understand well.", swotStrength: "Takes calculated risks in areas of confidence", swotWeakness: "Risk tolerance may vary unpredictably across domains", swotOpportunity: "Extend calculated risk-taking to more domains", swotThreat: "May miss opportunities in risk-averse domains" },
+            { min: 40, max: 59, name: "Moderate Risk Tolerance", desc: "You balance risk and caution, varying by domain.", swotStrength: "Balanced approach to risk and security", swotWeakness: "May miss opportunities requiring higher risk tolerance", swotOpportunity: "Develop comfort with calculated risks in key domains", swotThreat: "May be outpaced by higher-risk-tolerant competitors" },
+            { min: 20, max: 39, name: "Low Risk Tolerance", desc: "You prefer certainty and security over potential gains from risk.", swotStrength: "Protects against downside and maintains stability", swotWeakness: "May miss significant opportunities", swotOpportunity: "Develop comfort with small, calculated risks", swotThreat: "Risk of stagnation from excessive caution" }
         ];
         let responses = {};
         let studentName = '';
@@ -309,8 +377,18 @@
                             <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Lowest Risk Domain</div><div style="font-size: 1.2em; font-weight: 600;">${dimensionData[lowestDim].name}</div></div>
                         </div>
                     </div>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">RTA-${highestDim === 'financial' ? 'Fi' : highestDim === 'career' ? 'Ca' : highestDim === 'social' ? 'So' : 'Ph'}-${level.name.includes('High') ? 'H' : level.name.includes('Moderate') ? 'M' : level.name.includes('Low') ? 'L' : 'C'}${totalScore}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 12px 0; font-size: 1em;">📋 Your Results Summary</h4>
+                        <div style="font-size: 0.9em; margin-bottom: 10px;">
+                            <strong>Risk Profile:</strong> ${level.name} | <strong>Highest Risk Area:</strong> ${dimensionData[highestDim].name} | <strong>Lowest Risk Area:</strong> ${dimensionData[lowestDim].name}
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Domain Scores:</strong> Financial: ${scores.financial} | Career: ${scores.career} | Social: ${scores.social} | Physical: ${scores.physical}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Risk Profile: ${level.name} | Highest Tolerance: ${dimensionData[highestDim].name} | Score: ${totalScore}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">RTA-${highestDim === 'financial' ? 'Fi' : highestDim === 'career' ? 'Ca' : highestDim === 'social' ? 'So' : 'Ph'}-${level.name.includes('High') ? 'H' : level.name.includes('Moderate') ? 'M' : level.name.includes('Low') ? 'L' : 'C'}${totalScore}</code></div>
+                        </div>
                     </div>
                 </div>
                 <div class="results-body">
@@ -428,10 +506,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Highest Risk: ' + dimensionData[highestDim].name + '  |  Lowest Risk: ' + dimensionData[lowestDim].name, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + level.name + ' | Highest Risk Tolerance: ' + dimensionData[highestDim].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Lowest: ' + dimensionData[lowestDim].name, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Highest Risk Section

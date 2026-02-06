@@ -229,16 +229,54 @@
             ]
         };
         const dimensionData = {
-            passion: { name: "Consistency of Interest", shortName: "Passion", icon: "❤️", color: "#1565C0", subtitle: "Long-term dedication to goals", description: "Passion in grit refers to consistency of interests over time — sustained commitment to the same goals year after year.", highSigns: ["Maintains focus on goals for years", "Doesn't get distracted by new shiny objects", "Has a clear sense of direction", "Connects daily tasks to long-term aspirations", "Remains committed when progress is slow"], development: ["Identify your ultimate concern or top-level goal", "Create a goal hierarchy connecting daily tasks to big goals", "Practice saying no to distractions", "Reflect regularly on why your goals matter", "Find mentors who model sustained passion"] },
-            perseverance: { name: "Perseverance of Effort", shortName: "Perseverance", icon: "🔥", color: "#C62828", subtitle: "Working hard despite obstacles", description: "Perseverance is the tendency to work hard and bounce back from setbacks — sustained effort over time.", highSigns: ["Finishes what they start", "Works hard without immediate rewards", "Bounces back quickly from setbacks", "Maintains effort when things get boring or hard", "Views obstacles as challenges to overcome"], development: ["Practice deliberate effort on difficult tasks", "Reframe setbacks as learning opportunities", "Build a growth mindset about effort", "Celebrate small wins", "Find accountability partners"] }
+            passion: { 
+                name: "Consistency of Interest", 
+                shortName: "Passion", 
+                icon: "❤️", 
+                color: "#1565C0", 
+                subtitle: "Long-term dedication to goals", 
+                description: "Passion in grit refers to consistency of interests over time — sustained commitment to the same goals year after year.",
+                profileSummary: "You maintain focus on long-term goals without being distracted by new interests. Your consistency creates compound progress over time.",
+                decisionStyle: "Long-term focused and consistent. You evaluate choices based on alignment with your enduring interests and ultimate goals.",
+                communicationStyle: "Purpose-driven and focused. You talk about goals in terms of long-term vision and sustained commitment.",
+                motivatedBy: "Making progress toward meaningful long-term goals, seeing the connection between daily work and big aspirations, and maintaining direction.",
+                stressResponse: "You may struggle when forced to abandon long-held goals; can become frustrated when circumstances require pivoting.",
+                blindSpots: "May persist with goals that should be revised; can miss opportunities by being too focused; may not recognize when it's wise to change direction.",
+                highSigns: ["Maintains focus on goals for years", "Doesn't get distracted by new shiny objects", "Has a clear sense of direction", "Connects daily tasks to long-term aspirations", "Remains committed when progress is slow"], 
+                development: ["Identify your ultimate concern or top-level goal", "Create a goal hierarchy connecting daily tasks to big goals", "Practice saying no to distractions", "Reflect regularly on why your goals matter", "Find mentors who model sustained passion"],
+                swotStrength: "Sustained focus creates compound progress toward meaningful goals",
+                swotWeakness: "May persist when pivoting would be wiser; can miss adjacent opportunities",
+                swotOpportunity: "Pair consistency with regular reflection on whether goals still fit",
+                swotThreat: "Risk of tunnel vision or burnout from inflexible commitment"
+            },
+            perseverance: { 
+                name: "Perseverance of Effort", 
+                shortName: "Perseverance", 
+                icon: "🔥", 
+                color: "#C62828", 
+                subtitle: "Working hard despite obstacles", 
+                description: "Perseverance is the tendency to work hard and bounce back from setbacks — sustained effort over time.",
+                profileSummary: "You work hard and bounce back from setbacks. Your persistence allows you to overcome obstacles that stop others.",
+                decisionStyle: "Effort-oriented and resilient. You factor in your ability to persist through difficulty when evaluating challenges.",
+                communicationStyle: "Determined and action-focused. You speak in terms of effort, persistence, and working through obstacles.",
+                motivatedBy: "Overcoming challenges, finishing what you start, proving doubters wrong, and the satisfaction of hard-won achievement.",
+                stressResponse: "You push through stress with effort, which builds resilience but can lead to burnout if not balanced with recovery.",
+                blindSpots: "May not recognize when working harder isn't the answer; can burn out by not knowing when to rest; may undervalue working smarter.",
+                highSigns: ["Finishes what they start", "Works hard without immediate rewards", "Bounces back quickly from setbacks", "Maintains effort when things get boring or hard", "Views obstacles as challenges to overcome"], 
+                development: ["Practice deliberate effort on difficult tasks", "Reframe setbacks as learning opportunities", "Build a growth mindset about effort", "Celebrate small wins", "Find accountability partners"],
+                swotStrength: "Resilient effort that overcomes obstacles stopping others",
+                swotWeakness: "May work harder when working smarter would help; risk of burnout",
+                swotOpportunity: "Pair persistence with strategic thinking about when to persist vs. pivot",
+                swotThreat: "Risk of exhaustion from sustained effort without adequate recovery"
+            }
         };
         const gritLevels = [
-            { min: 4.5, max: 5.0, name: "Extremely Gritty", percentile: "Top 10%", desc: "You demonstrate exceptional passion and perseverance for long-term goals." },
-            { min: 4.0, max: 4.49, name: "Very Gritty", percentile: "Top 20%", desc: "You show strong grit — committed to goals and resilient in setbacks." },
-            { min: 3.5, max: 3.99, name: "Gritty", percentile: "Top 40%", desc: "You have above-average grit with room to strengthen consistency or effort." },
-            { min: 3.0, max: 3.49, name: "Moderately Gritty", percentile: "Average", desc: "Typical grit levels with opportunity to develop both passion and perseverance." },
-            { min: 2.5, max: 2.99, name: "Somewhat Gritty", percentile: "Below Average", desc: "Your grit is developing. Focus on building consistency and persistence." },
-            { min: 1.0, max: 2.49, name: "Building Grit", percentile: "Growth Opportunity", desc: "Grit can be developed. Find a passion worth pursuing and build persistence habits." }
+            { min: 4.5, max: 5.0, name: "Extremely Gritty", percentile: "Top 10%", desc: "You demonstrate exceptional passion and perseverance for long-term goals.", swotStrength: "Exceptional sustained commitment and resilience for long-term achievement", swotWeakness: "May struggle with flexibility when goals need adjustment", swotOpportunity: "Model and develop grit in others", swotThreat: "Risk of burnout or inflexibility" },
+            { min: 4.0, max: 4.49, name: "Very Gritty", percentile: "Top 20%", desc: "You show strong grit — committed to goals and resilient in setbacks.", swotStrength: "Strong ability to sustain effort and focus over time", swotWeakness: "May need to ensure goals are still worth pursuing", swotOpportunity: "Take on challenges that require sustained commitment", swotThreat: "Watch for signs of burnout from persistent effort" },
+            { min: 3.5, max: 3.99, name: "Gritty", percentile: "Top 40%", desc: "You have above-average grit with room to strengthen consistency or effort.", swotStrength: "Solid foundation of persistence and focus", swotWeakness: "Room to develop either passion or perseverance further", swotOpportunity: "Identify which dimension needs development and target it", swotThreat: "May not reach full potential without focused development" },
+            { min: 3.0, max: 3.49, name: "Moderately Gritty", percentile: "Average", desc: "Typical grit levels with opportunity to develop both passion and perseverance.", swotStrength: "Average grit provides foundation to build on", swotWeakness: "May struggle with long-term commitments or bouncing back", swotOpportunity: "Significant room for grit development in both dimensions", swotThreat: "May be outpaced by grittier competitors" },
+            { min: 2.5, max: 2.99, name: "Somewhat Gritty", percentile: "Below Average", desc: "Your grit is developing. Focus on building consistency and persistence.", swotStrength: "Self-awareness about grit level creates development opportunity", swotWeakness: "May struggle to see projects through or maintain focus", swotOpportunity: "Focused grit development can yield significant gains", swotThreat: "May struggle in roles requiring sustained effort" },
+            { min: 1.0, max: 2.49, name: "Building Grit", percentile: "Growth Opportunity", desc: "Grit can be developed. Find a passion worth pursuing and build persistence habits.", swotStrength: "Fresh perspective without rigid attachments to old goals", swotWeakness: "May struggle significantly with long-term commitments", swotOpportunity: "Grit can be learned—start with finding meaningful goals", swotThreat: "Career and life goals at risk without grit development" }
         ];
         let responses = {};
         let studentName = '';
@@ -329,8 +367,33 @@
                             <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Percentile</div><div style="font-size: 1.2em; font-weight: 600;">${level.percentile}</div></div>
                         </div>
                     </div>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">GRT-${strongerDim === 'passion' ? 'Pa' : 'Pe'}-${level.name.includes('Extremely') ? 'E' : level.name.includes('Very') ? 'V' : level.name.includes('Gritty') && !level.name.includes('Moderately') ? 'G' : level.name.includes('Moderately') ? 'M' : 'S'}${Math.round(gritScore * 10)}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Grit Level</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${level.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Grit Score</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${gritScore.toFixed(2)} / 5.0</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Stronger Dimension</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${strongerDim === 'passion' ? 'Passion (Consistency of Interests)' : 'Perseverance (Persistence of Effort)'}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Percentile Ranking</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${level.percentile}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Dimension Scores:</strong> Passion: ${passionAvg.toFixed(2)} | Perseverance: ${perseveranceAvg.toFixed(2)}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Grit Level: ${level.name} | Stronger Dimension: ${strongerDim === 'passion' ? 'Passion' : 'Perseverance'} | Score: ${gritScore.toFixed(1)}/5.0</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">GRT-${strongerDim === 'passion' ? 'Pa' : 'Pe'}-${level.name.includes('Extremely') ? 'E' : level.name.includes('Very') ? 'V' : level.name.includes('Gritty') && !level.name.includes('Moderately') ? 'G' : level.name.includes('Moderately') ? 'M' : 'S'}${Math.round(gritScore * 10)}</code></div>
+                        </div>
                     </div>
                 </div>
                 <div class="results-body">
@@ -436,10 +499,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Stronger: ' + dimensionData[strongerDim].shortName + '  |  Growth: ' + dimensionData[weakerDim].shortName, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + level.name + ' | Stronger: ' + dimensionData[strongerDim].shortName, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Growth Area: ' + dimensionData[weakerDim].shortName, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Stronger Dimension Section

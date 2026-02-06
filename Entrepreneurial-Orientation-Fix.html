@@ -216,17 +216,102 @@
             ]
         };
         const dimensionData = {
-            innovate: { name: "Innovativeness", icon: "💡", color: "#1565C0", description: "Tendency to support new ideas, experimentation, and creative processes.", highBehaviors: ["Generates novel ideas", "Experiments freely", "Champions change", "Embraces creativity"], development: ["Schedule brainstorming time", "Study design thinking", "Prototype quickly", "Learn from failures"] },
-            proactive: { name: "Proactiveness", icon: "🎯", color: "#2E7D32", description: "Forward-looking perspective that anticipates and acts on future opportunities.", highBehaviors: ["Anticipates trends", "Acts before forced", "Shapes markets", "Initiates change"], development: ["Scan for weak signals", "Act on opportunities early", "Build scenario plans", "Network for intelligence"] },
-            risktake: { name: "Risk-Taking", icon: "🎲", color: "#C62828", description: "Willingness to commit resources to projects with uncertain outcomes.", highBehaviors: ["Takes calculated risks", "Tolerates uncertainty", "Bets on potential", "Acts despite ambiguity"], development: ["Assess risk/reward ratios", "Start with small bets", "Build risk portfolio", "Learn from failures"] },
-            autonomy: { name: "Autonomy", icon: "🦅", color: "#7B1FA2", description: "Independent action by individuals or teams to bring concepts to fruition.", highBehaviors: ["Self-directed", "Takes ownership", "Decides independently", "Trusts own judgment"], development: ["Seek ownership opportunities", "Build decision confidence", "Take initiative on projects", "Develop self-reliance"] },
-            compete: { name: "Competitive Aggressiveness", icon: "⚔️", color: "#E65100", description: "Intensity of effort to outperform rivals in the marketplace.", highBehaviors: ["Monitors competitors", "Responds quickly", "Fights for position", "Drives to win"], development: ["Study competitors deeply", "Respond to threats quickly", "Build competitive intelligence", "Develop winning mindset"] }
+            innovate: { 
+                name: "Innovativeness", 
+                icon: "💡", 
+                color: "#1565C0", 
+                description: "Tendency to support new ideas, experimentation, and creative processes.",
+                profileSummary: "You generate and champion new ideas. You experiment freely and embrace creative approaches to solving problems.",
+                decisionStyle: "Creative and experimental. You evaluate options based on their novelty and potential for breakthrough outcomes.",
+                communicationStyle: "Idea-focused and enthusiastic. You share creative concepts, propose experiments, and build excitement for innovation.",
+                motivatedBy: "Creating something new, solving problems creatively, challenging the status quo, and seeing innovative ideas succeed.",
+                stressResponse: "Under pressure, you may generate more ideas rather than executing, or become frustrated when forced into conventional approaches.",
+                blindSpots: "May prioritize novelty over effectiveness; can struggle with routine execution; may alienate those who prefer proven approaches.",
+                highBehaviors: ["Generates novel ideas", "Experiments freely", "Champions change", "Embraces creativity"], 
+                development: ["Schedule brainstorming time", "Study design thinking", "Prototype quickly", "Learn from failures"],
+                swotStrength: "Generates creative solutions and drives innovation",
+                swotWeakness: "May struggle with routine execution",
+                swotOpportunity: "Pair innovation with disciplined implementation",
+                swotThreat: "Risk of innovation without execution"
+            },
+            proactive: { 
+                name: "Proactiveness", 
+                icon: "🎯", 
+                color: "#2E7D32", 
+                description: "Forward-looking perspective that anticipates and acts on future opportunities.",
+                profileSummary: "You anticipate opportunities and act before being forced to. You shape your environment rather than merely responding to it.",
+                decisionStyle: "Forward-looking and opportunity-focused. You act on emerging trends before they become obvious to others.",
+                communicationStyle: "Future-oriented and action-focused. You talk about opportunities and mobilize action before problems arrive.",
+                motivatedBy: "Being ahead of the curve, shaping outcomes rather than reacting, seizing opportunities early, and leading change.",
+                stressResponse: "Under pressure, you may act too quickly on incomplete information, or become frustrated when forced to wait.",
+                blindSpots: "May act before fully understanding situations; can miss important details in rush to act; may exhaust resources on premature moves.",
+                highBehaviors: ["Anticipates trends", "Acts before forced", "Shapes markets", "Initiates change"], 
+                development: ["Scan for weak signals", "Act on opportunities early", "Build scenario plans", "Network for intelligence"],
+                swotStrength: "Seizes opportunities before competitors",
+                swotWeakness: "May act too quickly without full information",
+                swotOpportunity: "Balance proactiveness with appropriate analysis",
+                swotThreat: "Risk of premature action on false signals"
+            },
+            risktake: { 
+                name: "Risk-Taking", 
+                icon: "🎲", 
+                color: "#C62828", 
+                description: "Willingness to commit resources to projects with uncertain outcomes.",
+                profileSummary: "You take calculated risks and tolerate uncertainty. You're willing to bet on potential even when outcomes aren't guaranteed.",
+                decisionStyle: "Risk-tolerant and opportunity-focused. You evaluate upside potential, not just downside risk, and act despite uncertainty.",
+                communicationStyle: "Bold and opportunity-focused. You frame uncertain situations in terms of potential and encourage calculated bets.",
+                motivatedBy: "Big potential payoffs, the excitement of uncertainty, proving doubters wrong, and achieving outsized returns.",
+                stressResponse: "You handle uncertainty well, but may take excessive risks under pressure or become impatient with risk-averse colleagues.",
+                blindSpots: "May underestimate downside risks; can bet too much on uncertain outcomes; may not adequately protect against failure.",
+                highBehaviors: ["Takes calculated risks", "Tolerates uncertainty", "Bets on potential", "Acts despite ambiguity"], 
+                development: ["Assess risk/reward ratios", "Start with small bets", "Build risk portfolio", "Learn from failures"],
+                swotStrength: "Willing to pursue opportunities others avoid",
+                swotWeakness: "May take excessive or poorly calculated risks",
+                swotOpportunity: "Develop better risk assessment while maintaining risk tolerance",
+                swotThreat: "Risk of catastrophic loss from insufficient risk management"
+            },
+            autonomy: { 
+                name: "Autonomy", 
+                icon: "🦅", 
+                color: "#7B1FA2", 
+                description: "Independent action by individuals or teams to bring concepts to fruition.",
+                profileSummary: "You act independently and take ownership. You trust your own judgment and don't wait for permission to pursue opportunities.",
+                decisionStyle: "Independent and ownership-focused. You make decisions based on your own assessment rather than waiting for direction.",
+                communicationStyle: "Self-directed and confident. You communicate decisions rather than seeking approval, and take responsibility for outcomes.",
+                motivatedBy: "Freedom to act, owning your outcomes, being trusted to decide, and achieving through independent action.",
+                stressResponse: "Under pressure, you may resist collaboration or oversight, or struggle when forced to work within constraints.",
+                blindSpots: "May not seek valuable input; can alienate team members; may miss how your actions affect others.",
+                highBehaviors: ["Self-directed", "Takes ownership", "Decides independently", "Trusts own judgment"], 
+                development: ["Seek ownership opportunities", "Build decision confidence", "Take initiative on projects", "Develop self-reliance"],
+                swotStrength: "Takes ownership and acts decisively",
+                swotWeakness: "May not leverage others' input effectively",
+                swotOpportunity: "Balance autonomy with collaboration",
+                swotThreat: "Risk of isolation or missing important perspectives"
+            },
+            compete: { 
+                name: "Competitive Aggressiveness", 
+                icon: "⚔️", 
+                color: "#E65100", 
+                description: "Intensity of effort to outperform rivals in the marketplace.",
+                profileSummary: "You compete intensely to win. You monitor competitors closely and respond aggressively to competitive threats.",
+                decisionStyle: "Competition-focused and winning-oriented. You evaluate options based on competitive advantage and beating rivals.",
+                communicationStyle: "Competitive and urgent. You frame situations in terms of winning and losing, and rally effort against competitors.",
+                motivatedBy: "Winning against competitors, gaining market position, defeating rivals, and being recognized as the best.",
+                stressResponse: "Under pressure, you may become overly aggressive, focus too much on competitors, or take win-at-all-costs approaches.",
+                blindSpots: "May focus too much on competitors instead of customers; can create destructive competition; may burn relationships.",
+                highBehaviors: ["Monitors competitors", "Responds quickly", "Fights for position", "Drives to win"], 
+                development: ["Study competitors deeply", "Respond to threats quickly", "Build competitive intelligence", "Develop winning mindset"],
+                swotStrength: "Intense competitive drive that wins market battles",
+                swotWeakness: "May over-focus on competitors instead of creating value",
+                swotOpportunity: "Balance competitive focus with customer and innovation focus",
+                swotThreat: "Risk of destructive competition or damaged relationships"
+            }
         };
         const levels = [
-            { min: 100, max: 125, name: "High Entrepreneurial Orientation", desc: "You exhibit strong entrepreneurial tendencies across all dimensions — a natural entrepreneur." },
-            { min: 75, max: 99, name: "Entrepreneurial", desc: "You have solid entrepreneurial orientation with particular strengths in some areas." },
-            { min: 50, max: 74, name: "Moderate EO", desc: "You show selective entrepreneurial behaviors. Consider which dimensions to develop." },
-            { min: 25, max: 49, name: "Low EO", desc: "You prefer stability over entrepreneurial risk. EO can be developed if desired." }
+            { min: 100, max: 125, name: "High Entrepreneurial Orientation", desc: "You exhibit strong entrepreneurial tendencies across all dimensions — a natural entrepreneur.", swotStrength: "Strong entrepreneurial drive across all dimensions", swotWeakness: "May struggle in stable, bureaucratic environments", swotOpportunity: "Channel EO into high-impact ventures", swotThreat: "Risk of frustration in risk-averse organizations" },
+            { min: 75, max: 99, name: "Entrepreneurial", desc: "You have solid entrepreneurial orientation with particular strengths in some areas.", swotStrength: "Solid entrepreneurial foundation with clear strengths", swotWeakness: "Some dimensions may limit entrepreneurial effectiveness", swotOpportunity: "Develop weaker dimensions for comprehensive EO", swotThreat: "May be limited by underdeveloped dimensions" },
+            { min: 50, max: 74, name: "Moderate EO", desc: "You show selective entrepreneurial behaviors. Consider which dimensions to develop.", swotStrength: "Selective entrepreneurial tendencies provide foundation", swotWeakness: "Significant EO gaps may limit effectiveness", swotOpportunity: "Focus development on key missing dimensions", swotThreat: "May struggle in entrepreneurial roles" },
+            { min: 25, max: 49, name: "Low EO", desc: "You prefer stability over entrepreneurial risk. EO can be developed if desired.", swotStrength: "Stability preference can be valuable in right contexts", swotWeakness: "Low EO limits entrepreneurial effectiveness", swotOpportunity: "EO can be developed with deliberate practice", swotThreat: "May miss opportunities requiring entrepreneurial action" }
         ];
         let responses = {};
         let studentName = '';
@@ -320,8 +405,18 @@
                             <div><div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase;">Growth Area</div><div style="font-size: 1.2em; font-weight: 600;">${dimensionData[lowestDim].name}</div></div>
                         </div>
                     </div>
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(196, 160, 0, 0.3); border-radius: 8px; font-family: monospace; font-size: 1.1em; text-align: center;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3; font-size: 1.2em;">EOA-${highestDim === 'innovate' ? 'In' : highestDim === 'proactive' ? 'Pr' : highestDim === 'risktake' ? 'Ri' : highestDim === 'autonomy' ? 'Au' : 'Co'}-${level.name.includes('High') ? 'H' : level.name.includes('Entrepreneurial') ? 'E' : level.name.includes('Moderate') ? 'M' : 'L'}${totalScore}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 12px 0; font-size: 1em;">📋 Your Results Summary</h4>
+                        <div style="font-size: 0.9em; margin-bottom: 10px;">
+                            <strong>Entrepreneurial Level:</strong> ${level.name} | <strong>Strongest:</strong> ${dimensionData[highestDim].name} | <strong>Growth Area:</strong> ${dimensionData[lowestDim].name}
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Dimension Scores:</strong> Innovativeness: ${scores.innovate} | Proactiveness: ${scores.proactive} | Risk-Taking: ${scores.risktake} | Autonomy: ${scores.autonomy} | Competitive: ${scores.compete}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Entrepreneurial Orientation: ${dimensionData[highestDim].name} (strongest) | ${level.name} | Score: ${totalScore}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">EOA-${highestDim === 'innovate' ? 'In' : highestDim === 'proactive' ? 'Pr' : highestDim === 'risktake' ? 'Ri' : highestDim === 'autonomy' ? 'Au' : 'Co'}-${level.name.includes('High') ? 'H' : level.name.includes('Entrepreneurial') ? 'E' : level.name.includes('Moderate') ? 'M' : 'L'}${totalScore}</code></div>
+                        </div>
                     </div>
                 </div>
                 <div class="results-body">
@@ -440,10 +535,12 @@
 
             // Tracker Code Box
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Strongest: ' + dimensionData[highestDim].name + '  |  Growth: ' + dimensionData[lowestDim].name, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + level.name + ' | Strongest: ' + dimensionData[highestDim].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Growth Area: ' + dimensionData[lowestDim].name, 105, y + 12, { align: 'center' });
             y += 16;
 
             // Strength Section

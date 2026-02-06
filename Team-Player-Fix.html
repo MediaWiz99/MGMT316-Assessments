@@ -681,6 +681,16 @@
                     "May resist flexible approaches to problems"
                 ],
                 characteristics: ["Dependable", "Responsible", "Organized", "Thorough", "Quality-focused"],
+                decisionStyle: "Data-driven and thorough. You prefer to gather complete information, analyze carefully, and make decisions based on evidence rather than intuition or group pressure.",
+                communicationStyle: "Precise and fact-focused. You contribute through sharing information, data, and analysis. You prefer structured discussions with clear agendas.",
+                motivatedBy: "Excellence, accuracy, recognition for expertise, completing quality work, and being the reliable person others can depend on.",
+                stressResponse: "Under pressure, you may become overly focused on details, resist shortcuts that compromise quality, or withdraw to work independently rather than collaborate.",
+                blindSpots: "May not recognize when 'good enough' is sufficient; can miss the human side of team dynamics while focused on task quality; may not see how perfectionism affects others.",
+                worksWith: {
+                    collaborator: "They help you see the strategic picture; you help them ground vision in quality execution",
+                    communicator: "They remind you to attend to relationships; you help them focus on deliverable quality",
+                    challenger: "Natural quality alliance; ensure mutual challenge doesn't become mutual criticism"
+                },
                 swotStrength: "Delivers reliable, high-quality work; teams can count on your expertise and thoroughness",
                 swotWeakness: "May prioritize task perfection over team relationships and flexibility",
                 swotOpportunity: "Develop big-picture awareness and invest in team process alongside task excellence",
@@ -710,6 +720,16 @@
                     "May be perceived as too future-focused"
                 ],
                 characteristics: ["Visionary", "Flexible", "Goal-focused", "Strategic", "Committed"],
+                decisionStyle: "Mission-aligned and strategic. You evaluate decisions against long-term goals and team vision. You're willing to be flexible on methods as long as objectives are achieved.",
+                communicationStyle: "Big-picture and rallying. You connect daily work to larger purpose, share the vision, and help others see how their contributions matter to team success.",
+                motivatedBy: "Shared success, meaningful work, achieving team goals, being part of something larger than yourself, and seeing the team accomplish its mission.",
+                stressResponse: "Under pressure, you may become overly focused on the goal at the expense of individual concerns, push too hard for alignment, or dismiss short-term obstacles.",
+                blindSpots: "May overlook immediate execution challenges while focused on strategy; can miss individual struggles in pursuit of team goals; may not question whether the mission itself is right.",
+                worksWith: {
+                    contributor: "They ground your vision in quality execution; help them see how their work connects to the bigger picture",
+                    communicator: "They ensure the team stays healthy while pursuing goals; together you balance results and relationships",
+                    challenger: "They test your strategic assumptions; value their questions even when inconvenient"
+                },
                 swotStrength: "Maintains strategic focus and rallies teams around shared vision and goals",
                 swotWeakness: "May neglect short-term tasks and immediate individual needs",
                 swotOpportunity: "Balance big-picture thinking with attention to execution details and team process",
@@ -739,6 +759,16 @@
                     "May not give enough emphasis to long-range planning"
                 ],
                 characteristics: ["Supportive", "Encouraging", "Enthusiastic", "Humorous", "Inclusive"],
+                decisionStyle: "Consensus-seeking and inclusive. You prefer decisions that everyone can support and invest time in ensuring all voices are heard before moving forward.",
+                communicationStyle: "Warm, inclusive, and facilitative. You draw others out, ensure quieter voices are heard, and use humor and encouragement to maintain positive energy.",
+                motivatedBy: "Team harmony, helping others succeed, positive relationships, being valued for creating good team dynamics, and seeing everyone contribute.",
+                stressResponse: "Under pressure, you may avoid necessary confrontations, smooth over real problems, or become anxious when team conflict emerges.",
+                blindSpots: "May prioritize feeling good over being effective; can enable underperformance by avoiding difficult feedback; may not recognize when the team needs challenge rather than comfort.",
+                worksWith: {
+                    contributor: "You help them connect with the team; they help you stay grounded in task requirements",
+                    collaborator: "Together you balance relationships and results; they provide direction, you ensure buy-in",
+                    challenger: "Essential balance—you soften their directness while they push through your conflict avoidance"
+                },
                 swotStrength: "Creates positive team climate and ensures inclusive, effective collaboration",
                 swotWeakness: "May prioritize harmony over necessary confrontation or task completion",
                 swotOpportunity: "Develop comfort with productive conflict and balance process with results focus",
@@ -768,6 +798,16 @@
                     "Can be too direct in communicating with teammates"
                 ],
                 characteristics: ["Candid", "Honest", "Principled", "Assertive", "Courageous"],
+                decisionStyle: "Critical and questioning. You challenge assumptions, demand evidence, and push for rigorous evaluation of alternatives before committing to decisions.",
+                communicationStyle: "Direct and candid. You say what others may be thinking but won't say. You ask tough questions and share honest assessments even when uncomfortable.",
+                motivatedBy: "Truth, integrity, high standards, intellectual honesty, preventing mistakes, and ensuring the team does the right thing the right way.",
+                stressResponse: "Under pressure, you may become more confrontational, dig in on positions, or challenge so intensely that you damage relationships or team morale.",
+                blindSpots: "May not recognize when challenging becomes destructive; can undervalue team harmony and relationships; may not see how your style affects others' willingness to participate.",
+                worksWith: {
+                    contributor: "Natural quality alliance—you both demand excellence; ensure mutual standards don't become mutual criticism",
+                    collaborator: "You test their strategic assumptions; they help you see when to support rather than challenge",
+                    communicator: "Essential balance—they help you challenge diplomatically; you push through their conflict avoidance"
+                },
                 swotStrength: "Prevents groupthink and ensures teams consider risks and alternatives",
                 swotWeakness: "May damage relationships or team morale with excessive challenge",
                 swotOpportunity: "Develop diplomatic challenge skills and know when to support vs. question",
@@ -1012,10 +1052,33 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 15px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-family: monospace; font-size: 0.85em;">
-                        <span style="opacity: 0.7;">Tracker Code:</span> <strong style="color: #F5E6A3;">${trackerCode}</strong> 
-                        <span style="opacity: 0.7; margin-left: 15px;">|</span>
-                        <span style="opacity: 0.7; margin-left: 15px;">Raw:</span> <strong>Ct${scores.contributor}-Cl${scores.collaborator}-Cm${scores.communicator}-Ch${scores.challenger}</strong>
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Team Role</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${primary.title}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Team Role</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${secondary.title}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Style Clarity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${styleClarity}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Collaboration Style</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${primary.collaborationStyle || 'Team-Oriented'}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Role Scores:</strong> Contributor: ${scores.contributor} | Collaborator: ${scores.collaborator} | Communicator: ${scores.communicator} | Challenger: ${scores.challenger}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -1194,10 +1257,12 @@
             
             // Tracker Code Bar
             doc.setFillColor(...chapmanBlue);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
-            doc.setFontSize(9);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(8);
             doc.setTextColor(255, 255, 255);
-            doc.text('Tracker: ' + trackerCode + '  |  Primary: ' + primary.title + '  |  Secondary: ' + secondary.title, 105, y + 7, { align: 'center' });
+            doc.text('Your Result: ' + primary.title + ' (primary) + ' + secondary.title + ' (secondary)', 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode, 105, y + 12, { align: 'center' });
             y += 14;
 
             // Scores
