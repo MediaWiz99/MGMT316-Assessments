@@ -739,6 +739,85 @@
             generateAnalysis();
         }
         
+        function generateDeepProfileSection(results) {
+            const p = parsedResults;
+            let deepProfiles = [];
+            
+            // Get deep profile data for key assessments
+            if (p.leadership && deepProfileData.leadership && deepProfileData.leadership[p.leadership.primary]) {
+                const profile = deepProfileData.leadership[p.leadership.primary];
+                deepProfiles.push({
+                    title: '👑 Leadership Deep Profile',
+                    type: p.leadership.primary,
+                    ...profile
+                });
+            }
+            
+            if (p.conflict && deepProfileData.conflict && deepProfileData.conflict[p.conflict.primary]) {
+                const profile = deepProfileData.conflict[p.conflict.primary];
+                deepProfiles.push({
+                    title: '⚔️ Conflict Management Profile',
+                    type: p.conflict.primary,
+                    ...profile
+                });
+            }
+            
+            if (p.motivation && deepProfileData.motivation && deepProfileData.motivation[p.motivation.primary]) {
+                const profile = deepProfileData.motivation[p.motivation.primary];
+                deepProfiles.push({
+                    title: '🔥 Motivation Profile',
+                    type: p.motivation.primary,
+                    ...profile
+                });
+            }
+            
+            if (deepProfiles.length === 0) {
+                return '';
+            }
+            
+            return `
+                <div class="insights-section" style="margin-top: 25px; background: linear-gradient(135deg, #f0f4f8, #e8edf5); border-color: var(--chapman-blue);">
+                    <h3 style="color: var(--chapman-blue);">🔬 Deep Profile Analysis</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9em;">
+                        Detailed behavioral insights based on your primary assessment results
+                    </p>
+                    ${deepProfiles.map(profile => `
+                        <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid var(--chapman-blue);">
+                            <h4 style="color: var(--chapman-blue); margin-bottom: 15px;">${profile.title}: ${profile.type}</h4>
+                            
+                            <div style="margin-bottom: 12px;">
+                                <strong style="color: var(--chapman-blue);">📋 Profile Summary</strong>
+                                <p style="font-size: 0.9em; color: var(--text-secondary); margin-top: 4px;">${profile.profileSummary}</p>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
+                                <div style="background: var(--blue-light); padding: 12px; border-radius: 8px;">
+                                    <strong style="color: var(--chapman-blue); font-size: 0.85em;">🎯 Decision Style</strong>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary); margin-top: 4px;">${profile.decisionStyle}</p>
+                                </div>
+                                <div style="background: var(--blue-light); padding: 12px; border-radius: 8px;">
+                                    <strong style="color: var(--chapman-blue); font-size: 0.85em;">💬 Communication Style</strong>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary); margin-top: 4px;">${profile.communicationStyle}</p>
+                                </div>
+                                <div style="background: var(--blue-light); padding: 12px; border-radius: 8px;">
+                                    <strong style="color: var(--chapman-blue); font-size: 0.85em;">⚡ Motivated By</strong>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary); margin-top: 4px;">${profile.motivatedBy}</p>
+                                </div>
+                                <div style="background: #fff3e0; padding: 12px; border-radius: 8px;">
+                                    <strong style="color: var(--orange); font-size: 0.85em;">😰 Under Stress</strong>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary); margin-top: 4px;">${profile.stressResponse}</p>
+                                </div>
+                                <div style="background: #ffebee; padding: 12px; border-radius: 8px;">
+                                    <strong style="color: var(--red); font-size: 0.85em;">👁️ Blind Spots</strong>
+                                    <p style="font-size: 0.85em; color: var(--text-secondary); margin-top: 4px;">${profile.blindSpots}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
         function generateAnalysis() {
             const results = Object.values(parsedResults);
             if (results.length === 0) return;
@@ -816,6 +895,8 @@
                     `).join('')}
                 </div>
                 
+                ${generateDeepProfileSection(results)}
+                
                 <div class="action-buttons">
                     <button class="btn btn-primary" onclick="generateComprehensiveReport()">📄 Download Full PDF Report</button>
                     <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Summary</button>
@@ -825,6 +906,718 @@
             document.getElementById('analysisResults').innerHTML = analysisHTML;
         }
         
+        // Comprehensive profile descriptions for rich insights
+        const profileDescriptions = {
+            leadership: {
+                'Directing': {
+                    strength: 'You excel at providing clear direction and structure, making decisive calls when teams need guidance, and establishing expectations that drive accountability.',
+                    weakness: 'May be perceived as controlling or micromanaging; team members might feel their expertise is undervalued or their autonomy is limited.',
+                    opportunity: 'Develop coaching skills to help team members grow while maintaining necessary structure. Learn to delegate more as trust builds.',
+                    threat: 'High-performing team members may disengage if they feel over-supervised. In rapidly changing environments, top-down direction may slow response times.'
+                },
+                'Coaching': {
+                    strength: 'You naturally invest in others\' development while maintaining focus on results. Your two-way communication style builds both competence and commitment.',
+                    weakness: 'Coaching takes time; may struggle with urgent deadlines or when working with highly experienced team members who need less guidance.',
+                    opportunity: 'Your developmental approach positions you well for mentorship roles. Consider formalizing your coaching through leadership development programs.',
+                    threat: 'Fast-paced environments may not allow time for your preferred developmental approach. Some team members may resist being "coached."'
+                },
+                'Supporting': {
+                    strength: 'You create psychologically safe environments where team members feel valued and heard. Your collaborative approach builds strong team cohesion and loyalty.',
+                    weakness: 'May avoid necessary confrontation or difficult decisions. Teams may lack clear direction when facing ambiguous situations.',
+                    opportunity: 'Your supportive style is highly valued in knowledge work environments. Develop strategic assertiveness for situations requiring decisive leadership.',
+                    threat: 'May be perceived as indecisive or lacking conviction. In crisis situations, teams may need more directive leadership than you naturally provide.'
+                },
+                'Delegating': {
+                    strength: 'You empower others by trusting their expertise and giving them autonomy. This approach develops leadership capabilities in your team members.',
+                    weakness: 'Less experienced team members may flounder without guidance. May appear disengaged or uninvested in outcomes.',
+                    opportunity: 'Your hands-off style works exceptionally well with senior talent. Focus on creating systems for accountability without micromanagement.',
+                    threat: 'Quality may suffer if team members are not ready for full autonomy. Accountability gaps may develop without proper monitoring systems.'
+                }
+            },
+            conflict: {
+                'Competing': {
+                    strength: 'You stand firm on important issues and protect critical interests when stakes are high. Your assertiveness ensures your perspective is heard.',
+                    weakness: 'Win-lose approach may damage relationships and create resentment. Others may avoid sharing concerns or problems with you.',
+                    opportunity: 'Channel competitive drive into collaborative problem-solving. Your assertiveness is valuable when advocating for ethical standards.',
+                    threat: 'Reputation as combative may limit collaborative opportunities. In diverse teams, dominance behaviors may create exclusion.'
+                },
+                'Collaborating': {
+                    strength: 'You naturally seek win-win solutions that address everyone\'s concerns. Your integrative approach often produces creative, higher-quality outcomes.',
+                    weakness: 'Collaboration is time-intensive and not always practical. May over-invest in minor issues that don\'t warrant extensive problem-solving.',
+                    opportunity: 'Your collaborative skills are increasingly valuable in cross-functional, diverse work environments. Consider roles in facilitation or mediation.',
+                    threat: 'Others may exploit your collaborative nature. In competitive environments, pure collaboration may put you at a disadvantage.'
+                },
+                'Compromising': {
+                    strength: 'You efficiently find middle ground that allows all parties to move forward. Your practical approach keeps relationships intact while making progress.',
+                    weakness: 'Split-the-difference solutions may satisfy no one fully. Important principles may be sacrificed for expediency.',
+                    opportunity: 'Your pragmatism is valuable in time-pressured negotiations. Develop skills to identify when compromise versus collaboration is appropriate.',
+                    threat: 'May leave underlying issues unresolved, leading to recurring conflicts. Sophisticated negotiators may take advantage of your tendency to meet in the middle.'
+                },
+                'Avoiding': {
+                    strength: 'You choose your battles wisely and don\'t escalate minor disagreements. This discretion preserves relationships and maintains team harmony.',
+                    weakness: 'Unaddressed issues tend to grow. Others may feel their concerns are dismissed or that important conversations aren\'t happening.',
+                    opportunity: 'Develop comfort with productive conflict. Practice framing disagreements as collaborative problem-solving rather than confrontation.',
+                    threat: 'Avoided conflicts often resurface at worse times. Credibility may suffer if you\'re perceived as unwilling to address difficult issues.'
+                },
+                'Accommodating': {
+                    strength: 'You maintain important relationships by recognizing when others\' needs should take priority. Your flexibility creates goodwill and cooperation.',
+                    weakness: 'Your own needs and ideas may be consistently underrepresented. Others may take your accommodation for granted.',
+                    opportunity: 'Your relationship-first approach is valuable for building coalitions. Learn to advocate more strongly when your expertise is needed.',
+                    threat: 'Pattern of accommodation may lead to resentment or burnout. May be overlooked for leadership roles if perceived as lacking conviction.'
+                }
+            },
+            motivation: {
+                'Achievement': {
+                    strength: 'You are driven by excellence, mastery, and accomplishment. This internal motivation makes you a high performer who consistently raises the bar.',
+                    weakness: 'May take on too much personally, struggle to delegate, or become frustrated with "good enough." Can be perceived as overly competitive.',
+                    opportunity: 'Seek roles with clear metrics and advancement paths. Your drive positions you well for entrepreneurial or high-performance environments.',
+                    threat: 'Risk of burnout from relentless pursuit of goals. In collaborative cultures, individual achievement focus may create tension.'
+                },
+                'Affiliation': {
+                    strength: 'You build strong relationships and create cohesive teams. Your focus on connection makes you effective at collaboration and maintaining morale.',
+                    weakness: 'May avoid necessary confrontation to preserve relationships. Decision-making may be influenced by desire for approval rather than optimal outcomes.',
+                    opportunity: 'Your relationship orientation is invaluable for networking, team leadership, and roles requiring stakeholder management.',
+                    threat: 'May struggle in competitive or isolated roles. Difficult decisions that affect relationships may cause significant stress.'
+                },
+                'Power': {
+                    strength: 'You are driven to make an impact and influence outcomes. This motivation makes you effective at driving change and taking on leadership responsibilities.',
+                    weakness: 'May be perceived as political or self-serving. Can dominate discussions or overlook input from others.',
+                    opportunity: 'Channel power motivation toward empowering others and championing important causes. Your influence drive is essential for organizational leadership.',
+                    threat: 'Without ethical grounding, power motivation can lead to poor decisions. May alienate colleagues who feel overshadowed.'
+                }
+            },
+            personality: {
+                'Director': {
+                    strength: 'You are results-oriented and decisive, excelling at setting clear goals and holding people accountable. Your direct approach cuts through ambiguity.',
+                    weakness: 'May overlook people dynamics in pursuit of results. Directness can be perceived as abrasive or intimidating.',
+                    opportunity: 'Your task focus is valuable in turnaround situations. Develop emotional intelligence to balance results with relationships.',
+                    threat: 'May drive away talented team members who need more support. In relationship-intensive roles, your directness may backfire.'
+                },
+                'Innovator': {
+                    strength: 'You thrive on generating new ideas and finding creative solutions to complex problems. Your innovative thinking drives competitive advantage.',
+                    weakness: 'May struggle with implementation and follow-through. Can become frustrated with routine tasks or resistance to new ideas.',
+                    opportunity: 'Seek roles in strategy, R&D, or transformation initiatives. Your creativity is increasingly valued in disrupted industries.',
+                    threat: 'Innovation without execution creates frustration. May be perceived as impractical or unable to deliver on ideas.'
+                },
+                'Visionary': {
+                    strength: 'You see the big picture and inspire others with compelling visions of the future. Your strategic perspective helps organizations navigate change.',
+                    weakness: 'May overlook important details or lose patience with operational realities. Others may struggle to translate vision into action.',
+                    opportunity: 'Your ability to articulate future direction is rare and valuable. Partner with execution-oriented colleagues to bring visions to life.',
+                    threat: 'Visionary leaders need followers; may struggle if unable to connect with pragmatic concerns of team members.'
+                },
+                'Developer': {
+                    strength: 'You invest in growing others and building strong teams. Your people-first approach creates loyal, capable organizations.',
+                    weakness: 'May prioritize development over performance in situations requiring immediate results. Can struggle with accountability conversations.',
+                    opportunity: 'Your developmental focus is essential for succession planning and building organizational capability. Consider HR leadership or executive coaching.',
+                    threat: 'In performance-driven cultures, developmental patience may be seen as lack of urgency.'
+                }
+            },
+            ethics: {
+                'Consequentialist': {
+                    strength: 'You evaluate decisions based on outcomes and impact, making you skilled at utilitarian analysis and considering stakeholder effects comprehensively.',
+                    weakness: 'May rationalize questionable means if ends seem beneficial. Can struggle when outcomes are uncertain or unmeasurable.',
+                    opportunity: 'Your outcome-orientation is valuable in business strategy. Develop deontological guardrails to protect against "ends justify means" reasoning.',
+                    threat: 'Purely consequentialist thinking can lead to ethical blind spots. Others may question your commitment to principles.'
+                },
+                'Deontologist': {
+                    strength: 'You maintain strong principles and consistent ethical standards regardless of circumstances. This reliability builds trust and organizational integrity.',
+                    weakness: 'May appear inflexible when context suggests exceptions. Can struggle when duties conflict with each other.',
+                    opportunity: 'Your principled approach is valuable in compliance, governance, and roles requiring ethical leadership. You can be trusted to uphold standards.',
+                    threat: 'Rigid rule-following may miss the spirit of ethics in novel situations. May conflict with pragmatic colleagues.'
+                },
+                'Virtue Ethicist': {
+                    strength: 'You focus on character and ask "what would a person of integrity do?" This approach builds ethical culture and inspires others through example.',
+                    weakness: 'Virtue guidance can be ambiguous in complex situations. May lack clear decision frameworks when virtues conflict.',
+                    opportunity: 'Your character-based approach is powerful for leadership development and culture-building. Model the virtues you want to see.',
+                    threat: 'Without clear frameworks, virtue ethics may produce inconsistent decisions. May struggle to articulate reasoning to analytically-minded colleagues.'
+                },
+                'Care Ethicist': {
+                    strength: 'You consider relationships and responsibilities to specific people in ethical decisions. This produces contextually appropriate, compassionate responses.',
+                    weakness: 'May show favoritism or inconsistency across relationships. Can struggle with decisions affecting strangers equally.',
+                    opportunity: 'Your relational focus is valuable in stakeholder management and team leadership. Extend care principles to broader communities.',
+                    threat: 'Care-based decisions may be perceived as biased. May struggle with policies requiring equal treatment regardless of relationship.'
+                }
+            },
+            teamplayer: {
+                'Contributor': {
+                    strength: 'You provide reliable, high-quality technical expertise that teams depend on. Your task focus ensures deliverables meet standards.',
+                    weakness: 'May undervalue interpersonal dynamics or relationship-building. Can become isolated from team processes while focused on your work.',
+                    opportunity: 'Your expertise is foundational to team success. Develop facilitation skills to share knowledge more broadly.',
+                    threat: 'Purely task-focused contribution may limit leadership opportunities. Teams may not recognize your contributions if you\'re not engaged in collaborative processes.'
+                },
+                'Collaborator': {
+                    strength: 'You keep teams focused on shared goals and big-picture outcomes. Your integrative thinking helps align individual efforts toward collective success.',
+                    weakness: 'May overlook important details in pursuit of overall direction. Can become frustrated with team members focused on narrower concerns.',
+                    opportunity: 'Your goal-orientation positions you for project leadership and cross-functional coordination roles.',
+                    threat: 'May be perceived as insufficiently detail-oriented. Team members may feel their specific concerns are dismissed.'
+                },
+                'Communicator': {
+                    strength: 'You build consensus and maintain positive team dynamics. Your process awareness ensures all voices are heard and decisions have buy-in.',
+                    weakness: 'Focus on process may slow decisions. May avoid necessary task-focus in favor of relationship maintenance.',
+                    opportunity: 'Your communication skills are essential for diverse, distributed teams. Consider facilitation or change management roles.',
+                    threat: 'May be seen as more concerned with feelings than results. In fast-paced environments, consensus-building may be impractical.'
+                },
+                'Challenger': {
+                    strength: 'You push teams to question assumptions and consider alternatives. Your willingness to disagree prevents groupthink and improves decision quality.',
+                    weakness: 'Challenging without building relationships can create defensiveness. May be perceived as negative or obstructionist.',
+                    opportunity: 'Your critical thinking is valuable in strategy and risk management. Learn to challenge in ways that feel collaborative rather than adversarial.',
+                    threat: 'Reputation as contrarian may reduce influence. Teams may stop inviting your input to avoid conflict.'
+                }
+            },
+            learning: {
+                'Diverging': {
+                    strength: 'You excel at viewing situations from multiple perspectives and generating creative ideas. Brainstorming and imaginative exploration come naturally.',
+                    weakness: 'May struggle to move from idea generation to decision and action. Can be overwhelmed by too many possibilities.',
+                    opportunity: 'Your creative thinking is valuable in design, marketing, and innovation roles. Pair with Converging types for implementation.',
+                    threat: 'In action-oriented environments, reflective ideation may be seen as indecisive or impractical.'
+                },
+                'Assimilating': {
+                    strength: 'You synthesize diverse information into coherent theories and models. Your logical, organized approach produces clear frameworks.',
+                    weakness: 'May over-analyze at the expense of action. Can dismiss practical experience that doesn\'t fit theoretical models.',
+                    opportunity: 'Your analytical skills suit research, strategy, and planning roles. Ensure theories are tested against real-world results.',
+                    threat: 'Pure analysis without action may limit impact. Colleagues may find theoretical focus disconnected from practical concerns.'
+                },
+                'Converging': {
+                    strength: 'You find practical applications for ideas and solve problems efficiently. Your focus on "what works" produces results.',
+                    weakness: 'May rush to solutions without adequate exploration. Can dismiss creative alternatives that seem impractical.',
+                    opportunity: 'Your practical focus is valuable in technical, engineering, and operations roles. You translate ideas into reality.',
+                    threat: 'Narrow focus on solutions may miss important context or alternative approaches. May undervalue ideation and reflection.'
+                },
+                'Accommodating': {
+                    strength: 'You learn by doing and adapt quickly based on experience. Your hands-on approach and comfort with risk enables rapid experimentation.',
+                    weakness: 'May act before adequately planning or analyzing. Can rely too heavily on gut feeling over systematic thinking.',
+                    opportunity: 'Your action-orientation suits entrepreneurial, sales, and fast-paced roles. Balance intuition with reflection for continuous improvement.',
+                    threat: 'Trial-and-error learning may be costly in high-stakes situations. Analytical colleagues may question your "leap first" approach.'
+                }
+            },
+            communication: {
+                'Analytical': {
+                    strength: 'You communicate with precision, data, and logical structure. Your detailed approach builds credibility and ensures nothing important is missed.',
+                    weakness: 'May overwhelm others with too much detail. Can appear cold or impersonal when emotional connection is needed.',
+                    opportunity: 'Your thoroughness is valued in technical, legal, and financial communications. Develop skills to adapt depth for different audiences.',
+                    threat: 'May lose audience attention with excessive detail. Relationships may suffer if emotional needs are consistently unaddressed.'
+                },
+                'Intuitive': {
+                    strength: 'You communicate the big picture effectively and cut through complexity to core issues. Your direct approach saves time and maintains focus.',
+                    weakness: 'May skip important details that others need. Can appear dismissive of thorough analysis.',
+                    opportunity: 'Your executive communication style positions you well for leadership presentations. Pair with Analytical types for comprehensive coverage.',
+                    threat: 'Missing details can lead to implementation failures. Some stakeholders may feel their concerns are glossed over.'
+                },
+                'Functional': {
+                    strength: 'You communicate with clear process, steps, and timelines. Your organized approach ensures nothing falls through the cracks.',
+                    weakness: 'Step-by-step detail may frustrate those wanting the bottom line first. Can appear rigid when flexibility is needed.',
+                    opportunity: 'Your systematic communication excels in project management and operations. Develop skills to lead with conclusions when appropriate.',
+                    threat: 'May be perceived as bureaucratic. Fast-paced environments may not allow for your preferred methodical approach.'
+                },
+                'Personal': {
+                    strength: 'You communicate with warmth and emotional intelligence. Your relational approach builds trust and psychological safety.',
+                    weakness: 'May prioritize relationship over content clarity. Can struggle to deliver difficult messages directly.',
+                    opportunity: 'Your connecting style is essential for team leadership and stakeholder relationships. Develop assertiveness for difficult conversations.',
+                    threat: 'May be perceived as lacking substance. Professional contexts may require more task-focused communication.'
+                }
+            },
+            eq: {
+                'Self-Awareness': {
+                    strength: 'You accurately recognize your own emotions and their effects. This foundation enables authentic leadership and continuous growth.',
+                    weakness: 'High self-awareness without action can become rumination. May over-analyze personal reactions.',
+                    opportunity: 'Your self-insight positions you for coaching and mentoring roles. Use awareness as foundation for developing other EQ dimensions.',
+                    threat: 'Self-focus without external awareness may miss important social cues. Can become overly self-critical.'
+                },
+                'Self-Regulation': {
+                    strength: 'You manage disruptive emotions effectively and maintain composure under pressure. This creates stability for those around you.',
+                    weakness: 'Excessive control may suppress authentic expression. Others may find you hard to read.',
+                    opportunity: 'Your emotional steadiness is valuable in crisis leadership. Develop skills to strategically show vulnerability.',
+                    threat: 'Suppressed emotions may build up over time. May be perceived as inauthentic or robotic.'
+                },
+                'Motivation': {
+                    strength: 'You are driven by internal standards of excellence and persist despite obstacles. Your passion energizes teams.',
+                    weakness: 'High internal drive may lead to burnout. May hold others to impossibly high standards.',
+                    opportunity: 'Your drive positions you for challenging, high-impact roles. Learn to calibrate expectations for different contexts.',
+                    threat: 'Relentless pursuit of excellence may damage relationships or health. May struggle with roles requiring patience.'
+                },
+                'Empathy': {
+                    strength: 'You sense others\' emotions and perspectives accurately. This enables you to build deep connections and respond appropriately to needs.',
+                    weakness: 'May absorb others\' emotions excessively. Can struggle with decisions that negatively affect individuals.',
+                    opportunity: 'Your empathy is foundational for inclusive leadership and stakeholder management. Set boundaries to protect your energy.',
+                    threat: 'Emotional absorption may lead to burnout. May avoid necessary difficult decisions that hurt individuals.'
+                },
+                'Social Skills': {
+                    strength: 'You build rapport quickly and navigate social situations effectively. Your interpersonal savvy enables influence and collaboration.',
+                    weakness: 'May prioritize social harmony over honest feedback. Can appear political or inauthentic.',
+                    opportunity: 'Your social skills position you for networking, sales, and collaborative leadership. Ensure substance backs your style.',
+                    threat: 'May be perceived as superficial or manipulative. Relationships built on charm alone may lack depth.'
+                }
+            },
+            decision: {
+                'Directive': {
+                    strength: 'You make quick, efficient decisions with available information. Your action-orientation keeps things moving.',
+                    weakness: 'May oversimplify complex issues. Can appear autocratic or dismissive of others\' input.',
+                    opportunity: 'Your decisiveness is valuable in crisis and time-pressured situations. Develop skills to slow down for strategic decisions.',
+                    threat: 'Rushed decisions may miss important factors. Team may disengage if consistently excluded from decisions.'
+                },
+                'Analytical': {
+                    strength: 'You thoroughly analyze options and data before deciding. Your careful approach reduces errors and builds confidence in outcomes.',
+                    weakness: 'Analysis paralysis can delay important decisions. May frustrate action-oriented colleagues.',
+                    opportunity: 'Your rigor is valuable for high-stakes, complex decisions. Learn to identify when "good enough" information is sufficient.',
+                    threat: 'Competitors may out-pace you while you analyze. Team may lose momentum waiting for perfect information.'
+                },
+                'Conceptual': {
+                    strength: 'You consider broad context, creative options, and long-term implications. Your big-picture thinking produces innovative solutions.',
+                    weakness: 'May overlook practical constraints or implementation details. Can become lost in possibilities.',
+                    opportunity: 'Your strategic thinking is valuable for vision-setting and innovation. Partner with implementers for execution.',
+                    threat: 'Ideas without execution build frustration. May lose credibility if concepts consistently fail to materialize.'
+                },
+                'Behavioral': {
+                    strength: 'You consider people impact and seek consensus in decisions. Your inclusive approach builds buy-in and team commitment.',
+                    weakness: 'Consensus-seeking can slow decisions and produce watered-down outcomes. May avoid necessary unpopular choices.',
+                    opportunity: 'Your people-focus is valuable for change management and team leadership. Develop comfort with unilateral decisions when needed.',
+                    threat: 'Pleasing everyone may please no one. Leadership opportunities may require decisions some will oppose.'
+                }
+            },
+            stress: {
+                'Problem-Focused': {
+                    strength: 'You address stressors directly by taking action to change the situation. This proactive approach often resolves issues efficiently.',
+                    weakness: 'May struggle when stressors are outside your control. Can become frustrated when problems persist despite effort.',
+                    opportunity: 'Your action-orientation is valuable in crisis management. Develop acceptance skills for uncontrollable situations.',
+                    threat: 'Trying to fix unfixable problems creates exhaustion. May neglect emotional needs while problem-solving.'
+                },
+                'Emotion-Focused': {
+                    strength: 'You manage stress by regulating your emotional response, enabling resilience when situations cannot be changed.',
+                    weakness: 'May process emotions without addressing root causes. Can appear to avoid problems.',
+                    opportunity: 'Your emotional regulation supports long-term resilience. Balance with problem-focused strategies when action is possible.',
+                    threat: 'Unaddressed problems may grow. Colleagues may perceive emotional coping as avoidance.'
+                },
+                'Support-Seeking': {
+                    strength: 'You manage stress by connecting with others, sharing burdens and gaining perspective.',
+                    weakness: 'May become overly dependent on others. Can transfer stress to your support network.',
+                    opportunity: 'Your relational coping builds strong support systems. Develop self-soothing skills for independent resilience.',
+                    threat: 'Support network may become depleted. May struggle when isolated or when others are unavailable.'
+                },
+                'Avoidant': {
+                    strength: 'You create distance from stressors, which can provide short-term relief and prevent overreaction.',
+                    weakness: 'Avoided problems typically grow. May miss opportunities to address issues when they are manageable.',
+                    opportunity: 'Develop active coping strategies while maintaining your ability to detach strategically.',
+                    threat: 'Chronic avoidance creates larger problems. May be perceived as disengaged or unreliable under pressure.'
+                }
+            },
+            change: {
+                'Change Champion': {
+                    strength: 'You embrace change enthusiastically and help others see possibilities in new situations.',
+                    weakness: 'May underestimate others\' need for stability. Can move too fast for teams to follow.',
+                    opportunity: 'Your change-positive orientation is invaluable in transformation initiatives. Learn to pace change for organizational readiness.',
+                    threat: 'Constant change enthusiasm may exhaust teams. May be seen as dismissive of legitimate concerns.'
+                },
+                'Change Adapter': {
+                    strength: 'You adapt to change effectively once you understand the rationale and have time to process.',
+                    weakness: 'May appear slow to embrace new directions initially. Can seem skeptical of change.',
+                    opportunity: 'Your thoughtful adaptation models healthy change acceptance. Help others process change at appropriate pace.',
+                    threat: 'In fast-changing environments, processing time may not be available. May be left behind by rapid changes.'
+                },
+                'Change Skeptic': {
+                    strength: 'You question change carefully, identifying potential problems and ensuring changes are worthwhile.',
+                    weakness: 'May appear resistant or negative. Can slow necessary changes with excessive questioning.',
+                    opportunity: 'Your critical eye is valuable for risk assessment. Frame questions constructively to maintain influence.',
+                    threat: 'May be excluded from change planning. Reputation as blocker may limit career opportunities.'
+                },
+                'Change Resistant': {
+                    strength: 'You maintain stability and protect against unnecessary disruption.',
+                    weakness: 'May resist even beneficial changes. Can become isolated in changing environments.',
+                    opportunity: 'Identify what specifically triggers resistance and address underlying concerns. Seek smaller changes to build comfort.',
+                    threat: 'Resistance to change may limit career options. Organizations may move forward without you.'
+                }
+            },
+            influence: {
+                'Rationalizing': {
+                    strength: 'You influence through logic, data, and well-structured arguments. Your evidence-based approach builds credibility.',
+                    weakness: 'May neglect emotional and relational aspects of influence. Can appear cold or lecturing.',
+                    opportunity: 'Your analytical influence is powerful with technical audiences. Develop emotional appeals to broaden influence.',
+                    threat: 'Logic alone rarely changes minds. May lose to less rational but more emotionally compelling appeals.'
+                },
+                'Asserting': {
+                    strength: 'You influence through direct, confident advocacy of your position. Your clarity makes expectations unambiguous.',
+                    weakness: 'May appear aggressive or dominating. Can shut down dialogue and creative alternatives.',
+                    opportunity: 'Your assertiveness is valuable in urgent situations. Develop collaborative influence for relationship-intensive contexts.',
+                    threat: 'Assertive influence may create resistance and resentment. May win battles but lose wars.'
+                },
+                'Negotiating': {
+                    strength: 'You influence through give-and-take, finding trades that create value for all parties.',
+                    weakness: 'May appear transactional or political. Can miss opportunities for collaborative win-wins.',
+                    opportunity: 'Your deal-making skills are valuable in complex stakeholder situations. Ensure trades align with values.',
+                    threat: 'Pure negotiation may erode trust. Important relationships require more than fair trades.'
+                },
+                'Inspiring': {
+                    strength: 'You influence through vision, values, and emotional connection. Your passion motivates others to action.',
+                    weakness: 'Inspiration without substance can appear hollow. May neglect practical concerns.',
+                    opportunity: 'Your inspirational influence is powerful for leadership and change. Ensure vision is backed by credible plans.',
+                    threat: 'Failed promises damage credibility. Cynical audiences may dismiss emotional appeals.'
+                },
+                'Bridging': {
+                    strength: 'You influence by building coalitions and connecting diverse stakeholders around shared interests.',
+                    weakness: 'Coalition building is slow. May appear indecisive while building consensus.',
+                    opportunity: 'Your bridging skills are essential in matrixed, diverse organizations. Develop direct influence for urgent situations.',
+                    threat: 'Coalitions can collapse. May lose to those with stronger individual influence.'
+                }
+            },
+            grit: {
+                'High Passion': {
+                    strength: 'Your deep, enduring interest in your goals provides sustained motivation that outlasts temporary enthusiasm.',
+                    weakness: 'May become too narrowly focused. Can miss valuable adjacent opportunities.',
+                    opportunity: 'Channel passion toward goals worthy of long-term commitment. Let passion guide career choices.',
+                    threat: 'If passion fades, may lose motivation entirely. Single-minded focus may create blind spots.'
+                },
+                'High Perseverance': {
+                    strength: 'You persist through setbacks, maintaining effort even when progress is slow or obstacles mount.',
+                    weakness: 'May persist on wrong paths. Can become stubborn when flexibility is needed.',
+                    opportunity: 'Your perseverance is valuable for ambitious, long-term goals. Develop discernment about when to persist versus pivot.',
+                    threat: 'Persisting on dead ends wastes resources. May miss signs that a different approach is needed.'
+                },
+                'Balanced Grit': {
+                    strength: 'You combine enduring interest with sustained effort, the formula for achievement in challenging domains.',
+                    weakness: 'High grit in wrong direction can be counterproductive. Need clear goals worthy of commitment.',
+                    opportunity: 'Your grit predicts success in demanding fields. Choose goals that warrant your considerable perseverance.',
+                    threat: 'Grit alone is not enough—direction and adaptation also matter.'
+                }
+            },
+            psych_safety: {
+                'Speaking Up': {
+                    strength: 'You are comfortable voicing opinions, questions, and concerns in group settings.',
+                    weakness: 'Speaking up without skill can create conflict. May dominate discussions.',
+                    opportunity: 'Use your voice to help others speak up too. Model constructive candor.',
+                    threat: 'In psychologically unsafe cultures, speaking up may create backlash.'
+                },
+                'Risk Taking': {
+                    strength: 'You are willing to propose ideas, take initiative, and experiment even with risk of failure.',
+                    weakness: 'Risk tolerance without judgment can be reckless. May underestimate downside.',
+                    opportunity: 'Your willingness to take risks enables innovation. Help create safety for others to take smart risks.',
+                    threat: 'In blame-oriented cultures, risk-taking may backfire. Protect against excessive exposure.'
+                },
+                'Learning from Mistakes': {
+                    strength: 'You approach failures as learning opportunities rather than sources of shame.',
+                    weakness: 'Learning orientation without accountability can enable repeat mistakes.',
+                    opportunity: 'Model growth mindset and help teams build learning cultures. Extract maximum value from setbacks.',
+                    threat: 'Some environments punish failure regardless of learning. Understand cultural context.'
+                },
+                'Inclusion': {
+                    strength: 'You value diverse perspectives and create space for different voices.',
+                    weakness: 'Inclusion without direction can slow decisions. May struggle to move forward with disagreement.',
+                    opportunity: 'Your inclusive orientation builds diverse, innovative teams. Develop skills to integrate diverse input into decisions.',
+                    threat: 'Inclusion efforts may be perceived as tokenism if not genuine.'
+                }
+            },
+            systems: {
+                'Holistic Thinking': {
+                    strength: 'You see whole systems rather than isolated parts, understanding how components interact.',
+                    weakness: 'May struggle with detail-level execution. Can appear to lack focus.',
+                    opportunity: 'Your systems view is valuable for strategy and organizational design. Partner with detail-oriented implementers.',
+                    threat: 'Big-picture thinking without execution may limit impact. Others may not see what you see.'
+                },
+                'Pattern Recognition': {
+                    strength: 'You identify recurring dynamics and underlying structures that others miss.',
+                    weakness: 'May see patterns that are not there. Can overcomplicate straightforward situations.',
+                    opportunity: 'Your pattern recognition enables diagnosis and prediction. Validate patterns with data.',
+                    threat: 'Overconfident pattern matching can mislead. Test mental models against reality.'
+                },
+                'Dynamic Thinking': {
+                    strength: 'You understand how systems evolve over time and anticipate downstream effects.',
+                    weakness: 'May over-emphasize long-term at expense of immediate needs. Can appear abstract.',
+                    opportunity: 'Your temporal awareness prevents short-term thinking traps. Help others see time horizons.',
+                    threat: 'Organizations often reward short-term results. Long-term thinking may not be valued.'
+                },
+                'Leverage Points': {
+                    strength: 'You identify high-impact intervention points where small changes create big effects.',
+                    weakness: 'May over-rely on clever solutions versus sustained effort. Can appear to seek shortcuts.',
+                    opportunity: 'Your leverage thinking maximizes impact. Combine with persistent execution.',
+                    threat: 'Leverage points are often counterintuitive. Others may resist non-obvious interventions.'
+                }
+            },
+            strategic: {
+                'Vision': {
+                    strength: 'You create compelling pictures of the future that inspire and direct action.',
+                    weakness: 'Vision without execution is fantasy. May neglect operational realities.',
+                    opportunity: 'Your visionary capacity is essential for leadership. Partner with operators for implementation.',
+                    threat: 'Failed visions damage credibility. Ensure visions are grounded in feasibility.'
+                },
+                'Analysis': {
+                    strength: 'You thoroughly assess situations, options, and implications before committing.',
+                    weakness: 'Analysis can become paralysis. May miss windows of opportunity.',
+                    opportunity: 'Your analytical rigor prevents costly mistakes. Learn to act on incomplete information.',
+                    threat: 'Perfect analysis is impossible. Competitors may act while you analyze.'
+                },
+                'Agility': {
+                    strength: 'You adapt strategy quickly as conditions change, pivoting without losing momentum.',
+                    weakness: 'Too much pivoting creates whiplash. May abandon strategies prematurely.',
+                    opportunity: 'Your adaptability suits dynamic environments. Distinguish strategy pivots from tactical adjustments.',
+                    threat: 'Constant changes may confuse teams. Need stability for execution.'
+                },
+                'Execution': {
+                    strength: 'You translate strategy into disciplined action, ensuring plans become reality.',
+                    weakness: 'Execution focus may miss need for strategy updates. Can become rigid.',
+                    opportunity: 'Your execution capability is rare and valuable. Combine with strategic awareness.',
+                    threat: 'Executing wrong strategy well is still failure. Stay connected to strategic context.'
+                }
+            },
+            critical: {
+                'Analysis': {
+                    strength: 'You break down complex information into component parts for clear understanding.',
+                    weakness: 'May get lost in analysis. Can miss synthesis and big-picture implications.',
+                    opportunity: 'Your analytical skills suit research and problem diagnosis. Develop synthesis and recommendation skills.',
+                    threat: 'Analysis without synthesis is incomplete. Others may not value detailed breakdowns.'
+                },
+                'Evaluation': {
+                    strength: 'You assess arguments, evidence, and claims against clear criteria.',
+                    weakness: 'Constant evaluation can appear overly critical. May discourage idea-sharing.',
+                    opportunity: 'Your evaluation skills are valuable for quality assurance and decision-making. Frame feedback constructively.',
+                    threat: 'Evaluative mindset may shut down creativity. Balance critique with encouragement.'
+                },
+                'Inference': {
+                    strength: 'You draw sound conclusions from available evidence, even incomplete information.',
+                    weakness: 'Inferences can be wrong. May overreach from limited data.',
+                    opportunity: 'Your inferential reasoning enables prediction and planning. Validate inferences when possible.',
+                    threat: 'Confident wrong inferences can mislead. Maintain appropriate uncertainty.'
+                },
+                'Open-Mindedness': {
+                    strength: 'You consider alternative perspectives and change your mind based on evidence.',
+                    weakness: 'May appear indecisive. Can struggle to commit when multiple views are valid.',
+                    opportunity: 'Your open-mindedness enables learning and adaptation. Develop decision-making frameworks.',
+                    threat: 'Open-mindedness without conclusion is inaction. At some point, commit and act.'
+                }
+            },
+            entrepreneurial: {
+                'Innovativeness': {
+                    strength: 'You generate creative ideas and novel approaches to problems.',
+                    weakness: 'Innovation without implementation is ideation. May lack follow-through.',
+                    opportunity: 'Your innovative capacity is valuable in dynamic industries. Partner with executors.',
+                    threat: 'Too many ideas without results damages credibility.'
+                },
+                'Proactiveness': {
+                    strength: 'You anticipate future needs and act before being required to.',
+                    weakness: 'Proactive action may jump the gun. Can create problems by acting too early.',
+                    opportunity: 'Your anticipatory orientation creates competitive advantage. Validate timing with market signals.',
+                    threat: 'Being too early is same as being wrong. Balance proactivity with market readiness.'
+                },
+                'Risk-Taking': {
+                    strength: 'You are willing to commit resources to uncertain opportunities.',
+                    weakness: 'Risk-taking without judgment is gambling. May underestimate downside.',
+                    opportunity: 'Your risk tolerance enables entrepreneurial action. Develop risk assessment skills.',
+                    threat: 'Failed risks deplete resources. Manage exposure carefully.'
+                },
+                'Autonomy': {
+                    strength: 'You thrive with independence and self-direction.',
+                    weakness: 'High autonomy needs may conflict with organizational norms. Can appear difficult to manage.',
+                    opportunity: 'Seek roles with appropriate independence. Consider entrepreneurship.',
+                    threat: 'Organizational roles may constrain autonomy needs. May struggle with corporate politics.'
+                },
+                'Competitive Aggressiveness': {
+                    strength: 'You compete vigorously to win in market situations.',
+                    weakness: 'Excessive competitiveness may damage relationships. Can create enemies.',
+                    opportunity: 'Channel competitive drive into market success. Compete on value, not destruction.',
+                    threat: 'Aggressive competition invites retaliation. Sustainable success requires some cooperation.'
+                }
+            },
+            risk: {
+                'Financial': {
+                    strength: 'You are comfortable taking calculated financial risks for potential returns.',
+                    weakness: 'High financial risk tolerance may expose you to significant losses.',
+                    opportunity: 'Your financial risk tolerance suits entrepreneurship and investment. Develop risk assessment skills.',
+                    threat: 'Financial losses can be catastrophic. Protect against tail risks.'
+                },
+                'Career': {
+                    strength: 'You are willing to take career risks for growth opportunities.',
+                    weakness: 'Career risks have real consequences. May underestimate downside.',
+                    opportunity: 'Your career risk tolerance enables bold moves. Calculate carefully.',
+                    threat: 'Failed career risks may be difficult to recover from. Have contingency plans.'
+                },
+                'Social': {
+                    strength: 'You are comfortable risking social standing for authenticity or impact.',
+                    weakness: 'Social risks can damage relationships and reputation.',
+                    opportunity: 'Your willingness to stand out enables leadership. Be strategic about social risks.',
+                    threat: 'Social capital, once lost, is hard to rebuild. Protect important relationships.'
+                },
+                'Physical': {
+                    strength: 'You are comfortable with physical risks and challenges.',
+                    weakness: 'Physical risk-taking can result in injury. May underestimate danger.',
+                    opportunity: 'Your physical courage suits demanding roles. Manage risk exposure.',
+                    threat: 'Physical consequences can be permanent. Value your health.'
+                }
+            },
+            innovation: {
+                'Curiosity': {
+                    strength: 'You ask questions, explore possibilities, and seek to understand deeply.',
+                    weakness: 'Curiosity without focus can scatter attention. May struggle to prioritize.',
+                    opportunity: 'Your curiosity drives learning and discovery. Channel toward important questions.',
+                    threat: 'Curiosity can lead to tangents. Maintain strategic focus.'
+                },
+                'Experimentation': {
+                    strength: 'You test ideas through action, learning from results.',
+                    weakness: 'Experimentation without analysis may repeat mistakes. Can appear unfocused.',
+                    opportunity: 'Your experimental mindset enables innovation. Develop experimental design skills.',
+                    threat: 'Failed experiments have costs. Manage experimental risk.'
+                },
+                'Resilience': {
+                    strength: 'You bounce back from setbacks and persist through challenges.',
+                    weakness: 'Resilience without adaptation may repeat ineffective approaches.',
+                    opportunity: 'Your resilience enables long-term success. Combine with learning orientation.',
+                    threat: 'Resilience should not become stubbornness. Know when to change course.'
+                },
+                'Collaboration': {
+                    strength: 'You build on others\' ideas and combine perspectives for better solutions.',
+                    weakness: 'Collaboration takes time. May struggle with independent work.',
+                    opportunity: 'Your collaborative innovation creates synergies. Develop skills for rapid collaboration.',
+                    threat: 'Dependence on others may limit solo contribution.'
+                }
+            },
+            values: {
+                'Achievement': {
+                    strength: 'You are driven by accomplishment, mastery, and measurable success.',
+                    weakness: 'Achievement focus may crowd out other values. Can become exhausting.',
+                    opportunity: 'Pursue goals that align achievement with deeper meaning. Define success broadly.',
+                    threat: 'Achievement without fulfillment is hollow. Question what success really means to you.'
+                },
+                'Relationship': {
+                    strength: 'You prioritize connection, belonging, and meaningful relationships.',
+                    weakness: 'Relationship focus may conflict with task demands. Can struggle with difficult decisions affecting people.',
+                    opportunity: 'Build your life around quality relationships. Let connections guide career choices.',
+                    threat: 'Over-dependence on others may limit independence. Maintain healthy boundaries.'
+                },
+                'Growth': {
+                    strength: 'You are driven by learning, development, and self-improvement.',
+                    weakness: 'Growth focus may create chronic dissatisfaction with present. Can become restless.',
+                    opportunity: 'Pursue roles with continuous learning. Never stop developing.',
+                    threat: 'Growth obsession may prevent appreciation of current achievements.'
+                },
+                'Service': {
+                    strength: 'You are motivated by helping others and making a positive difference.',
+                    weakness: 'Service focus may lead to self-neglect. Can enable others\' dependency.',
+                    opportunity: 'Pursue work with clear positive impact. Let service orientation guide career.',
+                    threat: 'Giving without receiving leads to depletion. Practice self-care.'
+                },
+                'Integrity': {
+                    strength: 'You prioritize honesty, consistency, and alignment between values and actions.',
+                    weakness: 'Rigid integrity may conflict with pragmatic demands. Can appear inflexible.',
+                    opportunity: 'Your integrity builds trust and reputation. Protect it fiercely.',
+                    threat: 'Ethical environments are not guaranteed. May face difficult integrity tests.'
+                },
+                'Freedom': {
+                    strength: 'You value autonomy, independence, and self-determination.',
+                    weakness: 'Freedom focus may conflict with organizational commitments. Can appear unreliable.',
+                    opportunity: 'Structure life and career to maximize autonomy. Consider entrepreneurship.',
+                    threat: 'Freedom has costs. Total independence may limit opportunities.'
+                },
+                'Security': {
+                    strength: 'You value stability, predictability, and protection from risk.',
+                    weakness: 'Security focus may prevent necessary risks. Can limit growth.',
+                    opportunity: 'Build security foundations that enable calculated risk-taking.',
+                    threat: 'Excessive security seeking may create stagnation.'
+                }
+            }
+        };
+
+        // Extended deep profile data for rich insights
+        const deepProfileData = {
+            leadership: {
+                'Directing': {
+                    profileSummary: 'You provide clear structure and decisive guidance. Your task-focused approach ensures teams know exactly what is expected and when.',
+                    decisionStyle: 'Quick and decisive. You prefer to make calls based on available information rather than waiting for perfect data.',
+                    communicationStyle: 'Direct and instruction-oriented. You communicate clear expectations and specific feedback.',
+                    motivatedBy: 'Results, efficiency, and seeing tasks completed successfully.',
+                    stressResponse: 'Under pressure, you may become more controlling and less patient with questions or delays.',
+                    blindSpots: 'May miss team morale issues or individual development needs when focused on task completion.'
+                },
+                'Coaching': {
+                    profileSummary: 'You invest in developing others while maintaining focus on results. Your approach builds both competence and confidence.',
+                    decisionStyle: 'Collaborative with guidance. You include others in decisions while providing structure and direction.',
+                    communicationStyle: 'Two-way and developmental. You combine direction with dialogue to build understanding.',
+                    motivatedBy: 'Seeing others grow and succeed, building capability while achieving results.',
+                    stressResponse: 'Under pressure, you may revert to more directive behaviors or become frustrated with slow learners.',
+                    blindSpots: 'May over-invest in development when simple direction would be more efficient.'
+                },
+                'Supporting': {
+                    profileSummary: 'You create safe, collaborative environments where team members feel valued and heard.',
+                    decisionStyle: 'Facilitative and inclusive. You prefer decisions that emerge from team consensus.',
+                    communicationStyle: 'Empathetic and encouraging. You listen actively and validate others\' contributions.',
+                    motivatedBy: 'Team harmony, collaboration, and creating positive work environments.',
+                    stressResponse: 'Under pressure, you may avoid necessary confrontation or delay difficult decisions.',
+                    blindSpots: 'May prioritize harmony over performance, or miss when team members need more direction.'
+                },
+                'Delegating': {
+                    profileSummary: 'You empower others through trust and autonomy, enabling them to develop leadership capabilities.',
+                    decisionStyle: 'Hands-off. You delegate decision authority to those closest to the work.',
+                    communicationStyle: 'Minimal and strategic. You communicate goals and trust others to determine how.',
+                    motivatedBy: 'Others\' independence and self-sufficiency, building the next generation of leaders.',
+                    stressResponse: 'Under pressure, you may disengage further or become frustrated when required to intervene.',
+                    blindSpots: 'May miss when team members need more guidance or when accountability gaps emerge.'
+                }
+            },
+            conflict: {
+                'Competing': {
+                    profileSummary: 'You advocate strongly for your position and protect important interests when stakes are high.',
+                    decisionStyle: 'Decisive and position-driven. You prefer clear outcomes over prolonged negotiation.',
+                    communicationStyle: 'Assertive and direct. You state your position clearly and defend it vigorously.',
+                    motivatedBy: 'Winning, protecting important interests, and achieving your goals.',
+                    stressResponse: 'Under pressure, you may become more aggressive or dismiss opposing viewpoints.',
+                    blindSpots: 'May damage relationships or miss creative solutions while focused on winning.'
+                },
+                'Collaborating': {
+                    profileSummary: 'You seek win-win solutions that fully address all parties\' concerns.',
+                    decisionStyle: 'Integrative and thorough. You invest time to find solutions that satisfy everyone.',
+                    communicationStyle: 'Open and exploratory. You ask questions to understand underlying interests.',
+                    motivatedBy: 'Finding creative solutions, maintaining relationships while achieving outcomes.',
+                    stressResponse: 'Under pressure, you may struggle with time constraints or become frustrated when collaboration is not reciprocated.',
+                    blindSpots: 'May over-invest in collaboration when a quicker resolution would be appropriate.'
+                },
+                'Compromising': {
+                    profileSummary: 'You find practical middle ground that allows all parties to move forward.',
+                    decisionStyle: 'Pragmatic and efficient. You seek acceptable solutions rather than optimal ones.',
+                    communicationStyle: 'Fair and balanced. You acknowledge multiple perspectives and seek trades.',
+                    motivatedBy: 'Progress, fairness, and maintaining working relationships.',
+                    stressResponse: 'Under pressure, you may rush to split the difference without fully exploring options.',
+                    blindSpots: 'May settle for suboptimal solutions when better outcomes were achievable.'
+                },
+                'Avoiding': {
+                    profileSummary: 'You choose your battles wisely, not escalating minor disagreements.',
+                    decisionStyle: 'Selective engagement. You prefer to let some conflicts resolve naturally.',
+                    communicationStyle: 'Indirect or delayed. You may change subjects or defer difficult conversations.',
+                    motivatedBy: 'Preserving relationships, avoiding unnecessary tension, and maintaining peace.',
+                    stressResponse: 'Under pressure, you may withdraw further or become increasingly unavailable.',
+                    blindSpots: 'May allow problems to grow by not addressing them early.'
+                },
+                'Accommodating': {
+                    profileSummary: 'You prioritize relationships by putting others\' needs first when appropriate.',
+                    decisionStyle: 'Deferential. You yield to others\' preferences to maintain goodwill.',
+                    communicationStyle: 'Agreeable and supportive. You validate others\' positions readily.',
+                    motivatedBy: 'Harmony, helping others, and being liked.',
+                    stressResponse: 'Under pressure, you may over-commit to others\' demands or suppress your own needs.',
+                    blindSpots: 'May fail to advocate for your own legitimate interests or ideas.'
+                }
+            },
+            motivation: {
+                'Achievement': {
+                    profileSummary: 'You are driven by excellence, mastery, and the satisfaction of accomplishment.',
+                    decisionStyle: 'Goal-oriented. You choose options that maximize achievement and challenge.',
+                    communicationStyle: 'Results-focused. You talk about goals, metrics, and accomplishments.',
+                    motivatedBy: 'Challenging goals, measurable success, and recognition for achievement.',
+                    stressResponse: 'Under pressure, you may become overly focused on results and impatient with obstacles.',
+                    blindSpots: 'May overwork, neglect relationships, or miss the value of the journey.'
+                },
+                'Affiliation': {
+                    profileSummary: 'You are driven by connection, belonging, and meaningful relationships.',
+                    decisionStyle: 'Relationship-aware. You consider how decisions affect people and connections.',
+                    communicationStyle: 'Warm and personal. You focus on relationships and shared experiences.',
+                    motivatedBy: 'Acceptance, friendship, collaboration, and being part of a team.',
+                    stressResponse: 'Under pressure, you may prioritize harmony over necessary action or conflict.',
+                    blindSpots: 'May avoid difficult conversations or decisions that could affect relationships.'
+                },
+                'Power': {
+                    profileSummary: 'You are driven by impact, influence, and the ability to shape outcomes.',
+                    decisionStyle: 'Strategic and political. You consider how decisions affect your influence.',
+                    communicationStyle: 'Persuasive and authoritative. You seek to influence and convince.',
+                    motivatedBy: 'Control, influence, status, and making a significant impact.',
+                    stressResponse: 'Under pressure, you may become more controlling or political.',
+                    blindSpots: 'May focus on power accumulation over collective success.'
+                }
+            }
+        };
+        
         function generateSWOT(results) {
             const swot = {
                 strengths: [],
@@ -833,171 +1626,316 @@
                 threats: []
             };
             
-            // Analyze patterns across assessments
-            const hasLeadership = parsedResults.leadership;
-            const hasEQ = parsedResults.eq;
-            const hasConflict = parsedResults.conflict;
-            const hasChange = parsedResults.change;
-            const hasStrategic = parsedResults.strategic;
-            const hasGrit = parsedResults.grit;
-            const hasInfluence = parsedResults.influence;
-            const hasMotivation = parsedResults.motivation;
-            const hasTeamPlayer = parsedResults.teamplayer;
-            const hasEthics = parsedResults.ethics;
-            const hasPersonality = parsedResults.personality;
-            const hasValues = parsedResults.values;
+            const p = parsedResults;
             
-            // Generate contextual strengths
-            if (hasLeadership) {
-                swot.strengths.push(`Strong ${hasLeadership.primary} leadership style provides clear approach`);
+            // Generate rich, personalized strengths
+            if (p.leadership && profileDescriptions.leadership[p.leadership.primary]) {
+                swot.strengths.push(profileDescriptions.leadership[p.leadership.primary].strength);
             }
-            if (hasEQ && hasEQ.level && (hasEQ.level.includes('High') || hasEQ.level.includes('Exceptional'))) {
-                swot.strengths.push('High emotional intelligence supports effective relationships');
+            if (p.conflict && profileDescriptions.conflict[p.conflict.primary]) {
+                swot.strengths.push(profileDescriptions.conflict[p.conflict.primary].strength);
             }
-            if (hasGrit && hasGrit.score >= 4.0) {
-                swot.strengths.push('Strong grit and perseverance for long-term goals');
+            if (p.motivation && profileDescriptions.motivation[p.motivation.primary]) {
+                swot.strengths.push(profileDescriptions.motivation[p.motivation.primary].strength);
             }
-            if (hasInfluence) {
-                swot.strengths.push(`${hasInfluence.primary} influence style enables persuasion`);
+            if (p.personality && profileDescriptions.personality[p.personality.primary]) {
+                swot.strengths.push(profileDescriptions.personality[p.personality.primary].strength);
             }
-            if (hasStrategic) {
-                swot.strengths.push(`${hasStrategic.primary} strategic strength aids decision-making`);
+            if (p.ethics && profileDescriptions.ethics[p.ethics.primary]) {
+                swot.strengths.push(profileDescriptions.ethics[p.ethics.primary].strength);
             }
-            if (hasTeamPlayer) {
-                swot.strengths.push(`${hasTeamPlayer.primary} team role contributes to group effectiveness`);
+            if (p.teamplayer && profileDescriptions.teamplayer[p.teamplayer.primary]) {
+                swot.strengths.push(profileDescriptions.teamplayer[p.teamplayer.primary].strength);
             }
-            if (hasEthics && hasEthics.level && hasEthics.level.includes('Strong')) {
-                swot.strengths.push(`Clear ${hasEthics.primary} ethical framework guides decisions`);
-            }
-            if (hasPersonality) {
-                swot.strengths.push(`${hasPersonality.primary} management style provides focused approach`);
-            }
-            if (hasValues) {
-                swot.strengths.push(`Strong ${hasValues.primary} values provide authentic foundation`);
+            if (p.learning && profileDescriptions.learning[p.learning.primary]) {
+                swot.strengths.push(profileDescriptions.learning[p.learning.primary].strength);
             }
             
-            // Generate contextual weaknesses
-            if (hasConflict && hasConflict.primary === 'Avoiding') {
-                swot.weaknesses.push('Tendency to avoid conflict may leave issues unresolved');
+            // EQ-based strength
+            if (p.eq && p.eq.level) {
+                if (p.eq.level.includes('High') || p.eq.level.includes('Exceptional')) {
+                    swot.strengths.push(`Your high emotional intelligence, particularly in ${p.eq.primary}, enables you to navigate complex interpersonal dynamics, build trust quickly, and lead with empathy. This is a foundational leadership capability that amplifies all your other skills.`);
+                }
             }
-            if (hasChange && hasChange.level && hasChange.level.includes('Resistant')) {
-                swot.weaknesses.push('Lower change readiness may slow adaptation');
-            }
-            if (hasTeamPlayer && hasTeamPlayer.primary === 'Challenger') {
-                swot.weaknesses.push('Challenger style may create friction without balance');
-            }
-            if (results.length < 5) {
-                swot.weaknesses.push('Incomplete profile - continue assessments for full picture');
-            }
-            swot.weaknesses.push('Over-reliance on dominant styles may create blind spots');
             
-            // Generate opportunities
-            swot.opportunities.push('Develop secondary styles for greater versatility');
-            if (hasMotivation) {
-                swot.opportunities.push(`Leverage ${hasMotivation.primary} drive in career choices`);
+            // Grit-based strength
+            if (p.grit && p.grit.score >= 4.0) {
+                swot.strengths.push(`Your exceptional grit score indicates remarkable perseverance and passion for long-term goals. You have the psychological resilience to overcome setbacks and maintain focus through challenges that derail others.`);
             }
-            swot.opportunities.push('Cross-train in growth areas identified across assessments');
-            swot.opportunities.push('Apply self-awareness insights to team dynamics');
             
-            // Generate threats
-            swot.threats.push('Style inflexibility in rapidly changing environments');
-            if (hasEQ && hasEQ.level && hasEQ.level.includes('Developing')) {
-                swot.threats.push('EQ gaps may impact leadership effectiveness under stress');
+            // Generate rich, personalized weaknesses/growth areas
+            if (p.leadership && profileDescriptions.leadership[p.leadership.primary]) {
+                swot.weaknesses.push(profileDescriptions.leadership[p.leadership.primary].weakness);
             }
-            swot.threats.push('Unconscious bias toward preferred approaches');
-            swot.threats.push('Misreading situations that require different styles');
+            if (p.conflict && profileDescriptions.conflict[p.conflict.primary]) {
+                swot.weaknesses.push(profileDescriptions.conflict[p.conflict.primary].weakness);
+            }
+            if (p.personality && profileDescriptions.personality[p.personality.primary]) {
+                swot.weaknesses.push(profileDescriptions.personality[p.personality.primary].weakness);
+            }
+            
+            // EQ-based weakness
+            if (p.eq && p.eq.level && (p.eq.level.includes('Developing') || p.eq.level.includes('Building'))) {
+                swot.weaknesses.push(`Your emotional intelligence is still developing, particularly in ${p.eq.primary}. This growth area may affect your ability to read social cues, manage stress responses, or connect authentically with colleagues under pressure.`);
+            }
+            
+            // Low grit consideration
+            if (p.grit && p.grit.score < 3.0) {
+                swot.weaknesses.push(`Your grit score suggests you may struggle with sustained effort toward long-term goals, particularly when progress is slow or obstacles accumulate. Building perseverance habits will be important for career achievement.`);
+            }
+            
+            // Pattern-based weakness
+            if (results.length >= 3) {
+                swot.weaknesses.push(`Like all leaders, your dominant styles create blind spots. Your pattern suggests you may undervalue approaches opposite to your preferences. Actively seek input from people who think differently to ensure balanced decisions.`);
+            }
+            
+            // Generate rich opportunities
+            if (p.leadership && profileDescriptions.leadership[p.leadership.primary]) {
+                swot.opportunities.push(profileDescriptions.leadership[p.leadership.primary].opportunity);
+            }
+            if (p.motivation && profileDescriptions.motivation[p.motivation.primary]) {
+                swot.opportunities.push(profileDescriptions.motivation[p.motivation.primary].opportunity);
+            }
+            if (p.ethics && profileDescriptions.ethics[p.ethics.primary]) {
+                swot.opportunities.push(profileDescriptions.ethics[p.ethics.primary].opportunity);
+            }
+            if (p.learning && profileDescriptions.learning[p.learning.primary]) {
+                swot.opportunities.push(profileDescriptions.learning[p.learning.primary].opportunity);
+            }
+            
+            // Cross-assessment opportunity
+            if (p.leadership && p.personality) {
+                swot.opportunities.push(`Your ${p.leadership.primary} leadership style combined with ${p.personality.primary} management personality creates a distinctive leadership brand. Consider how to articulate this combination to mentors, sponsors, and in career positioning.`);
+            }
+            
+            // Generate rich threats
+            if (p.leadership && profileDescriptions.leadership[p.leadership.primary]) {
+                swot.threats.push(profileDescriptions.leadership[p.leadership.primary].threat);
+            }
+            if (p.conflict && profileDescriptions.conflict[p.conflict.primary]) {
+                swot.threats.push(profileDescriptions.conflict[p.conflict.primary].threat);
+            }
+            if (p.personality && profileDescriptions.personality[p.personality.primary]) {
+                swot.threats.push(profileDescriptions.personality[p.personality.primary].threat);
+            }
+            
+            // General strategic threat
+            swot.threats.push(`The rapidly changing business environment requires style flexibility. If you become too attached to your preferred approaches, you risk becoming ineffective when situations demand different responses.`);
+            
+            // Default content if insufficient data
+            if (swot.strengths.length === 0) {
+                swot.strengths.push('Complete more assessments to generate personalized strength insights based on your unique profile.');
+            }
+            if (swot.weaknesses.length === 0) {
+                swot.weaknesses.push('Complete more assessments to identify specific growth areas tailored to your leadership profile.');
+            }
+            if (swot.opportunities.length === 0) {
+                swot.opportunities.push('Complete more assessments to discover personalized development opportunities aligned with your strengths.');
+            }
+            if (swot.threats.length === 0) {
+                swot.threats.push('Complete more assessments to understand potential blind spots and challenges specific to your style.');
+            }
             
             return swot;
         }
         
         function generateInsights(results) {
             const insights = [];
+            const p = parsedResults;
             
-            // Leadership + Influence synergy
-            if (parsedResults.leadership && parsedResults.influence) {
+            // Leadership + Influence synergy - deep analysis
+            if (p.leadership && p.influence) {
                 insights.push({
-                    title: '👑 Leadership-Influence Synergy',
-                    description: `Your ${parsedResults.leadership.primary} leadership combined with ${parsedResults.influence.primary} influence creates a distinctive approach. Consider how these complement each other in team settings.`
+                    title: '👑 Leadership-Influence Integration',
+                    description: `Your ${p.leadership.primary} leadership approach combined with ${p.influence.primary} influence style creates a distinctive leadership signature. ${
+                        p.leadership.primary === 'Coaching' && p.influence.primary === 'Inspiring' ? 
+                        'This powerful combination allows you to develop others while motivating them toward shared goals—a hallmark of transformational leadership.' :
+                        p.leadership.primary === 'Directing' && p.influence.primary === 'Asserting' ?
+                        'This combination creates a strong, authoritative presence that is effective in crisis situations, though you may need to consciously dial back for collaborative settings.' :
+                        p.leadership.primary === 'Supporting' && p.influence.primary === 'Bridging' ?
+                        'This combination makes you exceptional at building coalitions and creating inclusive environments where diverse perspectives thrive.' :
+                        `Consider how these two styles interact: when does this combination serve you well, and when might you need to consciously adjust your approach?`
+                    }`
                 });
             }
             
-            // EQ + Conflict pattern
-            if (parsedResults.eq && parsedResults.conflict) {
+            // EQ + Conflict pattern - deep analysis
+            if (p.eq && p.conflict) {
+                const eqLevel = p.eq.level || '';
+                const isHighEQ = eqLevel.includes('High') || eqLevel.includes('Exceptional');
                 insights.push({
-                    title: '❤️ Emotional Intelligence in Conflict',
-                    description: `Your ${parsedResults.eq.primary} EQ strength paired with ${parsedResults.conflict.primary} conflict style suggests you ${parsedResults.conflict.primary === 'Collaborating' ? 'naturally seek win-win solutions' : 'may benefit from more collaborative approaches in tense situations'}.`
+                    title: '❤️ Emotional Intelligence & Conflict Dynamics',
+                    description: `Your ${p.eq.primary} emotional intelligence strength paired with ${p.conflict.primary} conflict style ${
+                        isHighEQ && p.conflict.primary === 'Collaborating' ?
+                        'is an exceptional combination. You can read emotional undercurrents in disagreements while working toward solutions that address everyone\'s core concerns. This is rare and valuable.' :
+                        isHighEQ && p.conflict.primary === 'Avoiding' ?
+                        'creates an interesting tension. While you can read situations accurately, you may use that awareness to sidestep rather than address issues. Your EQ strength could actually enable more effective direct conversations.' :
+                        p.conflict.primary === 'Competing' ?
+                        `means you should pay attention to when assertiveness crosses into aggression. Your ${p.eq.primary} awareness can help you read the room and adjust intensity.` :
+                        `suggests opportunities to leverage emotional awareness in navigating disagreements. Notice how emotions—yours and others'—influence conflict dynamics.`
+                    }`
                 });
             }
             
-            // Strategic + Decision-Making
-            if (parsedResults.strategic && parsedResults.decision) {
+            // Strategic + Decision-Making - deep analysis
+            if (p.strategic && p.decision) {
                 insights.push({
-                    title: '♟️ Strategic Decision Pattern',
-                    description: `Your ${parsedResults.strategic.primary} strategic thinking combined with ${parsedResults.decision.primary} decision-making suggests a ${parsedResults.decision.primary === 'Analytical' ? 'data-driven' : 'balanced'} approach to important choices.`
+                    title: '♟️ Strategic Decision Architecture',
+                    description: `Your ${p.strategic.primary} strategic orientation combined with ${p.decision.primary} decision-making style shapes how you approach important choices. ${
+                        p.decision.primary === 'Analytical' ?
+                        'You likely prefer data-driven strategies backed by thorough analysis. Ensure you don\'t over-analyze at the expense of timely action—sometimes "good enough" information is sufficient for strategic moves.' :
+                        p.decision.primary === 'Conceptual' ?
+                        'You combine big-picture strategic thinking with creative, conceptual decision-making. This positions you well for innovation and long-term vision, though you may need partners who excel at operational execution.' :
+                        p.decision.primary === 'Behavioral' ?
+                        'You balance strategic thinking with strong attention to people impact in decisions. This stakeholder-aware approach builds buy-in but may sometimes delay difficult choices.' :
+                        'You tend toward efficient, practical strategic decisions. While this enables quick action, ensure important strategic choices receive adequate deliberation.'
+                    }`
                 });
             }
             
-            // Motivation + Grit
-            if (parsedResults.motivation && parsedResults.grit) {
+            // Motivation + Grit - deep analysis
+            if (p.motivation && p.grit) {
+                const gritScore = p.grit.score || 3.5;
                 insights.push({
-                    title: '🔥 Drive & Persistence',
-                    description: `Need for ${parsedResults.motivation.primary} combined with ${parsedResults.grit.level || 'your grit level'} suggests ${parsedResults.motivation.primary === 'Achievement' ? 'strong goal pursuit capability' : 'relationship-oriented persistence'}.`
+                    title: '🔥 Drive & Persistence Profile',
+                    description: `Your ${p.motivation.primary} motivation combined with ${gritScore >= 4.0 ? 'exceptional' : gritScore >= 3.5 ? 'solid' : 'developing'} grit creates ${
+                        p.motivation.primary === 'Achievement' && gritScore >= 4.0 ?
+                        'a powerful engine for accomplishment. You have both the drive to excel and the staying power to persist through challenges. Channel this carefully to avoid burnout.' :
+                        p.motivation.primary === 'Affiliation' && gritScore >= 4.0 ?
+                        'an interesting profile: you\'re motivated by relationships yet have strong perseverance. You likely persist particularly well when pursuing goals that benefit your team or community.' :
+                        p.motivation.primary === 'Power' && gritScore >= 4.0 ?
+                        'significant potential for impact. Your drive to influence combined with persistence means you\'ll likely achieve positions where you can make a real difference.' :
+                        gritScore < 3.5 ?
+                        'an area for development. Your motivation is clear, but building greater perseverance will help you achieve your goals when obstacles arise.' :
+                        'a foundation for sustained success. Understanding what motivates you helps you choose goals worth persisting toward.'
+                    }`
                 });
             }
             
-            // Change + Innovation
-            if (parsedResults.change && parsedResults.innovation) {
+            // Change + Innovation readiness
+            if (p.change && p.innovation) {
                 insights.push({
-                    title: '🚀 Change & Innovation Readiness',
-                    description: `As a ${parsedResults.change.level || 'change adapter'} with ${parsedResults.innovation.primary} innovation strength, you're positioned to ${parsedResults.change.level && parsedResults.change.level.includes('Champion') ? 'lead transformation initiatives' : 'contribute meaningfully to change efforts'}.`
+                    title: '🚀 Change & Innovation Posture',
+                    description: `Your change readiness profile (${p.change.level || 'assessed'}) combined with ${p.innovation.primary} innovation strength indicates ${
+                        p.change.level && p.change.level.includes('Champion') ?
+                        'you\'re naturally positioned to lead transformation. You embrace change and can help others navigate uncertainty through creative problem-solving.' :
+                        p.change.level && p.change.level.includes('Ready') ?
+                        'solid adaptability. You can work effectively in changing environments and contribute meaningfully to innovation efforts.' :
+                        p.change.level && p.change.level.includes('Resistant') ?
+                        'an area for growth. While change resistance often reflects valuable caution and stability-seeking, today\'s environment rewards adaptability. Start with small experiments.' :
+                        'capabilities that will serve you as organizations increasingly require innovation and adaptability from their leaders.'
+                    }`
                 });
             }
             
-            // Learning style insight
-            if (parsedResults.learning) {
+            // Learning style insight - expanded
+            if (p.learning) {
                 insights.push({
-                    title: '📚 Optimal Learning Approach',
-                    description: `Your ${parsedResults.learning.primary} learning style means you learn best through ${parsedResults.learning.primary === 'Diverging' ? 'observation and brainstorming' : parsedResults.learning.primary === 'Assimilating' ? 'logical theories and models' : parsedResults.learning.primary === 'Converging' ? 'practical application' : 'hands-on experimentation'}.`
+                    title: '📚 Optimizing Your Learning',
+                    description: `As a ${p.learning.primary} learner, you develop best through ${
+                        p.learning.primary === 'Diverging' ? 
+                        'observation, reflection, and brainstorming. You\'re at your best when given time to consider multiple perspectives before acting. Seek learning experiences that include reflection time, diverse viewpoints, and creative exploration.' :
+                        p.learning.primary === 'Assimilating' ? 
+                        'logical analysis, theoretical frameworks, and organized information. You prefer to understand the "why" before the "how." Seek learning experiences with strong conceptual foundations, reading materials, and time to integrate ideas into your mental models.' :
+                        p.learning.primary === 'Converging' ? 
+                        'practical application and problem-solving. You learn fastest when you can test ideas and see immediate results. Seek hands-on projects, simulations, and opportunities to apply concepts to real problems.' :
+                        'hands-on experimentation and learning by doing. You prefer action over analysis and learn from trial and error. Seek immersive experiences, stretch assignments, and environments that reward initiative.'
+                    }`
                 });
             }
             
-            // Team Player + Conflict pattern
-            if (parsedResults.teamplayer && parsedResults.conflict) {
+            // Team Player + Conflict pattern - expanded
+            if (p.teamplayer && p.conflict) {
                 insights.push({
-                    title: '🤝 Team Collaboration Style',
-                    description: `Your ${parsedResults.teamplayer.primary} team role combined with ${parsedResults.conflict.primary} conflict style creates a ${parsedResults.teamplayer.primary === 'Contributor' ? 'task-focused' : parsedResults.teamplayer.primary === 'Collaborator' ? 'goal-oriented' : parsedResults.teamplayer.primary === 'Communicator' ? 'relationship-building' : 'quality-focused'} approach to teamwork.`
+                    title: '🤝 Team Collaboration Signature',
+                    description: `Your ${p.teamplayer.primary} team orientation combined with ${p.conflict.primary} conflict style shapes your team presence. ${
+                        p.teamplayer.primary === 'Contributor' ?
+                        'You likely focus on delivering quality work and may step back from team process issues. Your task excellence is valued, but ensure your voice is heard in team decisions.' :
+                        p.teamplayer.primary === 'Collaborator' ?
+                        'You focus on keeping the team aligned on goals. Your big-picture focus helps teams stay on track, especially when combined with your approach to managing disagreements.' :
+                        p.teamplayer.primary === 'Communicator' ?
+                        'You prioritize team dynamics and relationships. This people-awareness combines with your conflict style to shape how disagreements unfold on your teams.' :
+                        'You push teams to question assumptions and improve. This valuable contribution is most effective when balanced with relationship-building.'
+                    }`
                 });
             }
             
-            // Business Ethics + Values
-            if (parsedResults.ethics && parsedResults.values) {
+            // Business Ethics + Values - expanded
+            if (p.ethics && p.values) {
                 insights.push({
-                    title: '⚖️ Ethical Foundation',
-                    description: `Your ${parsedResults.ethics.primary} ethical framework aligns with your core value of ${parsedResults.values.primary}, suggesting a consistent moral compass for decision-making.`
+                    title: '⚖️ Ethical Foundation & Core Values',
+                    description: `Your ${p.ethics.primary} ethical framework aligns with your core value of ${p.values.primary}, creating a consistent moral compass. This alignment suggests you make ethical decisions ${
+                        p.ethics.primary === 'Consequentialist' ?
+                        'by evaluating outcomes against your values. When facing dilemmas, you ask "what action will produce results most aligned with what I truly value?"' :
+                        p.ethics.primary === 'Deontologist' ?
+                        'by applying principle-based rules derived from your values. You have clear lines you won\'t cross, regardless of circumstances.' :
+                        p.ethics.primary === 'Virtue Ethicist' ?
+                        'by asking what a person who embodies your values would do. Your character and values are inseparable from your ethical reasoning.' :
+                        'by considering your responsibilities to people you\'re in relationship with. Your values inform how you balance competing relational obligations.'
+                    } Ethical clarity is a leadership strength—use it to guide difficult decisions with confidence.`
                 });
             }
             
-            // Management Personality + Leadership
-            if (parsedResults.personality && parsedResults.leadership) {
+            // Management Personality + Leadership - expanded
+            if (p.personality && p.leadership) {
                 insights.push({
-                    title: '🧠 Management DNA',
-                    description: `Your ${parsedResults.personality.primary} management personality combined with ${parsedResults.leadership.primary} leadership style reveals a ${parsedResults.personality.primary === 'Director' ? 'results-driven' : parsedResults.personality.primary === 'Innovator' ? 'creative' : parsedResults.personality.primary === 'Visionary' ? 'big-picture' : 'developmental'} management approach.`
+                    title: '🧠 Your Management DNA',
+                    description: `Your ${p.personality.primary} management personality combined with ${p.leadership.primary} leadership style reveals your core management approach. ${
+                        p.personality.primary === 'Director' ?
+                        'You\'re results-focused and direct. Combined with your leadership style, this creates a clear, accountable environment. Ensure you balance drive with development.' :
+                        p.personality.primary === 'Innovator' ?
+                        'You prioritize creativity and new approaches. Combined with your leadership style, you likely create environments where experimentation is encouraged. Balance innovation with execution.' :
+                        p.personality.primary === 'Visionary' ?
+                        'You focus on big-picture direction and inspiring futures. Combined with your leadership style, you help others see beyond current constraints. Partner with detail-oriented colleagues.' :
+                        'You invest in growing others and building capability. Combined with your leadership style, you likely create loyal, developing teams. Balance development with performance expectations.'
+                    }`
                 });
             }
             
-            // Values + Motivation synergy
-            if (parsedResults.values && parsedResults.motivation) {
+            // Values + Motivation synergy - expanded
+            if (p.values && p.motivation) {
                 insights.push({
                     title: '💎 Values-Motivation Alignment',
-                    description: `Your core value of ${parsedResults.values.primary} paired with ${parsedResults.motivation.primary} motivation suggests you're driven by ${parsedResults.motivation.primary === 'Achievement' ? 'excellence and accomplishment' : parsedResults.motivation.primary === 'Affiliation' ? 'meaningful connections' : 'making an impact'} in alignment with your values.`
+                    description: `Your core value of ${p.values.primary} paired with ${p.motivation.primary} motivation reveals what drives you at the deepest level. ${
+                        p.motivation.primary === 'Achievement' ?
+                        'You\'re driven to excel in ways that express your values. Seek goals that allow you to achieve excellence in domains that genuinely matter to you.' :
+                        p.motivation.primary === 'Affiliation' ?
+                        'You\'re driven to build connections with people who share your values. Seek communities and teams where your values are celebrated.' :
+                        'You\'re driven to have impact in ways that express your values. Seek influence in domains where your values can shape outcomes for others.'
+                    } This values-motivation alignment is the foundation of authentic leadership.`
                 });
             }
             
-            // Overall pattern
-            if (results.length >= 5) {
+            // Overall Emerging Profile
+            if (results.length >= 8) {
+                const primaryStyles = Object.values(p).filter(r => r && r.primary).map(r => r.primary).slice(0, 5);
                 insights.push({
-                    title: '🎯 Your Emerging Leadership Profile',
-                    description: `Based on ${results.length} assessments, you show a pattern of ${results.filter(r => r.primary).slice(0, 3).map(r => r.primary).join(', ')} tendencies. This suggests a leadership style that values these approaches - consider how to leverage them while developing complementary skills.`
+                    title: '🎯 Your Leadership Profile Synthesis',
+                    description: `Based on ${results.length} assessments, a clear leadership profile emerges. Your dominant patterns include: ${primaryStyles.join(', ')}. This combination suggests a leader who ${
+                        p.personality?.primary === 'Director' || p.motivation?.primary === 'Achievement' ?
+                        'is driven by results and excellence, bringing high standards and clear direction to teams.' :
+                        p.personality?.primary === 'Developer' || p.motivation?.primary === 'Affiliation' ?
+                        'prioritizes people and relationships, creating environments where others can thrive and grow.' :
+                        p.personality?.primary === 'Innovator' || p.leadership?.primary === 'Delegating' ?
+                        'empowers creativity and autonomy, trusting others to find their own paths to success.' :
+                        'brings a unique combination of strengths that should be leveraged consciously in leadership situations.'
+                    } Remember: these patterns are tendencies, not limitations. The best leaders expand their range while staying authentic to their core.`
+                });
+            }
+            
+            // Stress + EQ resilience insight
+            if (p.stress && p.eq) {
+                insights.push({
+                    title: '🧘 Stress & Emotional Resilience',
+                    description: `Your ${p.stress.primary} stress management approach combined with ${p.eq.primary} emotional intelligence strength shapes how you handle pressure. ${
+                        p.stress.primary === 'Problem-Focused' ?
+                        'You tackle stressors head-on by addressing root causes. Your emotional awareness can help you know when direct action is possible versus when adaptation is wiser.' :
+                        p.stress.primary === 'Emotion-Focused' ?
+                        'You manage stress by regulating your emotional response. This approach works well when stressors can\'t be directly controlled, and your EQ supports sophisticated emotional regulation.' :
+                        p.stress.primary === 'Support-Seeking' ?
+                        'You turn to others when stressed. This social coping strategy builds connection and shares burdens—your EQ helps you ask for help in ways that strengthen relationships.' :
+                        'You may tend to distance from stressors. While this protects short-term wellbeing, developing more active coping strategies will serve your long-term resilience.'
+                    }`
                 });
             }
             
@@ -1083,131 +2021,494 @@
             var blueColor = [21, 101, 192];
             var orangeColor = [230, 81, 0];
             
-            // Page 1: Header and Overview
+            // Helper function for text wrapping
+            function addWrappedText(text, x, startY, maxWidth, lineHeight, fontSize) {
+                doc.setFontSize(fontSize || 9);
+                var lines = doc.splitTextToSize(text, maxWidth);
+                var currentY = startY;
+                lines.forEach(function(line) {
+                    if (currentY > 275) { 
+                        doc.addPage(); 
+                        currentY = 25; 
+                    }
+                    doc.text(line, x, currentY);
+                    currentY += lineHeight || 4.5;
+                });
+                return currentY;
+            }
+            
+            // =====================
+            // PAGE 1: COVER & EXECUTIVE SUMMARY
+            // =====================
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.rect(0, 0, 210, 45, 'F');
+            doc.rect(0, 0, 210, 55, 'F');
             doc.setFontSize(10);
             doc.setTextColor(255, 255, 255);
-            doc.text('CHAPMAN UNIVERSITY', 105, 12, { align: 'center' });
+            doc.text('CHAPMAN UNIVERSITY', 105, 15, { align: 'center' });
             doc.setFontSize(9);
             doc.setTextColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
-            doc.text('Argyros College of Business and Economics', 105, 18, { align: 'center' });
-            doc.setFontSize(16);
+            doc.text('Argyros College of Business and Economics', 105, 22, { align: 'center' });
+            doc.setFontSize(18);
             doc.setTextColor(255, 255, 255);
-            doc.text('MGMT 316 Assessment Portfolio', 105, 30, { align: 'center' });
-            doc.setFontSize(10);
-            doc.text('Comprehensive Self-Awareness Profile', 105, 38, { align: 'center' });
-            doc.setFillColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
-            doc.rect(0, 45, 210, 2, 'F');
-            
-            var y = 55;
+            doc.text('Leadership Self-Assessment Portfolio', 105, 36, { align: 'center' });
             doc.setFontSize(11);
-            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
-            doc.text('Student: ' + studentName, 20, y);
-            doc.text('Date: ' + new Date().toLocaleDateString(), 140, y);
+            doc.text('Comprehensive Self-Awareness Profile', 105, 45, { align: 'center' });
+            doc.setFillColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.rect(0, 55, 210, 3, 'F');
+            
+            var y = 68;
+            doc.setFontSize(14);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text(studentName, 105, y, { align: 'center' });
             y += 8;
-            doc.setFontSize(9);
+            doc.setFontSize(10);
             doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
-            doc.text('Assessments Completed: ' + completedCount + ' of 22 (' + Math.round((completedCount/22)*100) + '%)', 20, y);
+            doc.text('MGMT 316: Management in Organizations', 105, y, { align: 'center' });
+            y += 6;
+            doc.text('Professor Chip Monaco • ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 105, y, { align: 'center' });
+            y += 6;
+            doc.text('Assessments Completed: ' + completedCount + ' of 22', 105, y, { align: 'center' });
+            
+            y += 15;
+            
+            // Executive Summary Box
+            doc.setFillColor(240, 244, 248);
+            doc.roundedRect(15, y, 180, 45, 3, 3, 'F');
+            doc.setDrawColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.setLineWidth(0.5);
+            doc.roundedRect(15, y, 180, 45, 3, 3, 'S');
+            
+            y += 8;
+            doc.setFontSize(11);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('EXECUTIVE SUMMARY', 20, y);
+            y += 7;
+            
+            // Build executive summary based on results
+            var execSummary = 'This portfolio represents your comprehensive leadership self-assessment across ' + completedCount + ' dimensions. ';
+            if (parsedResults.leadership && parsedResults.personality) {
+                execSummary += 'Your profile reveals a ' + parsedResults.personality.primary + '-oriented leader with a ' + parsedResults.leadership.primary + ' style. ';
+            }
+            if (parsedResults.motivation) {
+                execSummary += 'You are primarily motivated by ' + parsedResults.motivation.primary + '. ';
+            }
+            if (parsedResults.eq && parsedResults.eq.level) {
+                execSummary += 'Your emotional intelligence is at the ' + parsedResults.eq.level + ' level. ';
+            }
+            execSummary += 'The insights in this document will help you leverage your strengths, address growth areas, and develop as a more effective leader.';
+            
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(execSummary, 20, y, 170, 4.5, 9);
+            
             y += 12;
             
-            // Summary Box
+            // Primary Styles Summary
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
-            doc.setFontSize(11);
+            doc.roundedRect(15, y, 180, 10, 2, 2, 'F');
+            doc.setFontSize(10);
             doc.setTextColor(255, 255, 255);
-            doc.text('PRIMARY STYLES & STRENGTHS', 105, y + 8, { align: 'center' });
-            y += 18;
+            doc.text('YOUR PRIMARY STYLES AT A GLANCE', 105, y + 7, { align: 'center' });
+            y += 16;
             
-            // List all primary results
             doc.setFontSize(9);
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
-            var results = Object.values(parsedResults);
-            results.forEach(function(r) {
-                if (y > 270) { doc.addPage(); y = 20; }
-                var text = r.assessment + ': ' + (r.primary || 'N/A');
-                if (r.secondary) text += ' / ' + r.secondary;
-                if (r.level) text += ' (' + r.level + ')';
-                if (r.score) text += ' - Score: ' + r.score;
-                doc.text(text, 25, y);
-                y += 5;
-            });
+            var col1X = 20, col2X = 110;
+            var rowHeight = 5;
             
-            // Page 2: SWOT Analysis
+            var stylesList = [
+                { label: 'Leadership Style', value: parsedResults.leadership ? parsedResults.leadership.primary : '—' },
+                { label: 'Communication Style', value: parsedResults.communication ? parsedResults.communication.primary : '—' },
+                { label: 'Conflict Approach', value: parsedResults.conflict ? parsedResults.conflict.primary : '—' },
+                { label: 'Decision-Making', value: parsedResults.decision ? parsedResults.decision.primary : '—' },
+                { label: 'Management Personality', value: parsedResults.personality ? parsedResults.personality.primary : '—' },
+                { label: 'Primary Motivation', value: parsedResults.motivation ? parsedResults.motivation.primary : '—' },
+                { label: 'Team Role', value: parsedResults.teamplayer ? parsedResults.teamplayer.primary : '—' },
+                { label: 'Learning Style', value: parsedResults.learning ? parsedResults.learning.primary : '—' },
+                { label: 'Ethical Framework', value: parsedResults.ethics ? parsedResults.ethics.primary : '—' },
+                { label: 'Core Value', value: parsedResults.values ? parsedResults.values.primary : '—' },
+            ];
+            
+            for (var i = 0; i < stylesList.length; i += 2) {
+                if (y > 270) { doc.addPage(); y = 25; }
+                doc.setFont(undefined, 'bold');
+                doc.text(stylesList[i].label + ':', col1X, y);
+                doc.setFont(undefined, 'normal');
+                doc.text(stylesList[i].value, col1X + 45, y);
+                if (stylesList[i + 1]) {
+                    doc.setFont(undefined, 'bold');
+                    doc.text(stylesList[i + 1].label + ':', col2X, y);
+                    doc.setFont(undefined, 'normal');
+                    doc.text(stylesList[i + 1].value, col2X + 45, y);
+                }
+                y += rowHeight;
+            }
+            
+            // =====================
+            // PAGE 2: SWOT ANALYSIS
+            // =====================
             doc.addPage();
             y = 20;
             
             doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
-            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
-            doc.setFontSize(11);
+            doc.roundedRect(15, y, 180, 12, 2, 2, 'F');
+            doc.setFontSize(12);
             doc.setTextColor(255, 255, 255);
-            doc.text('COMBINED SWOT ANALYSIS', 105, y + 7, { align: 'center' });
-            y += 18;
+            doc.text('COMPREHENSIVE SWOT ANALYSIS', 105, y + 8, { align: 'center' });
+            y += 20;
             
-            var swot = generateSWOT(results);
+            var swot = generateSWOT(Object.values(parsedResults));
             
-            // Strengths
+            // STRENGTHS
+            doc.setFillColor(232, 245, 233);
+            doc.roundedRect(15, y, 180, 8, 2, 2, 'F');
             doc.setFontSize(10);
             doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
-            doc.text('STRENGTHS', 20, y);
-            y += 6;
+            doc.text('💪 STRENGTHS', 20, y + 5.5);
+            y += 12;
+            
             doc.setFontSize(8);
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
-            swot.strengths.forEach(function(s) {
-                var lines = doc.splitTextToSize('- ' + s, 165);
-                lines.forEach(function(line) {
-                    doc.text(line, 25, y);
-                    y += 4;
-                });
+            swot.strengths.slice(0, 5).forEach(function(s) {
+                if (y > 265) { doc.addPage(); y = 25; }
+                y = addWrappedText('• ' + s, 20, y, 170, 4, 8);
+                y += 2;
             });
-            y += 6;
+            y += 5;
             
-            // Weaknesses
+            // GROWTH AREAS
+            if (y > 200) { doc.addPage(); y = 25; }
+            doc.setFillColor(255, 235, 238);
+            doc.roundedRect(15, y, 180, 8, 2, 2, 'F');
             doc.setFontSize(10);
             doc.setTextColor(redColor[0], redColor[1], redColor[2]);
-            doc.text('AREAS FOR GROWTH', 20, y);
-            y += 6;
+            doc.text('🎯 AREAS FOR GROWTH', 20, y + 5.5);
+            y += 12;
+            
             doc.setFontSize(8);
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
-            swot.weaknesses.forEach(function(w) {
-                var lines = doc.splitTextToSize('- ' + w, 165);
-                lines.forEach(function(line) {
-                    doc.text(line, 25, y);
-                    y += 4;
-                });
+            swot.weaknesses.slice(0, 4).forEach(function(w) {
+                if (y > 265) { doc.addPage(); y = 25; }
+                y = addWrappedText('• ' + w, 20, y, 170, 4, 8);
+                y += 2;
             });
-            y += 6;
+            y += 5;
             
-            // Opportunities
+            // OPPORTUNITIES
+            if (y > 200) { doc.addPage(); y = 25; }
+            doc.setFillColor(227, 242, 253);
+            doc.roundedRect(15, y, 180, 8, 2, 2, 'F');
             doc.setFontSize(10);
             doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
-            doc.text('OPPORTUNITIES', 20, y);
-            y += 6;
+            doc.text('🚀 OPPORTUNITIES', 20, y + 5.5);
+            y += 12;
+            
             doc.setFontSize(8);
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
-            swot.opportunities.forEach(function(o) {
-                var lines = doc.splitTextToSize('- ' + o, 165);
-                lines.forEach(function(line) {
-                    doc.text(line, 25, y);
-                    y += 4;
-                });
+            swot.opportunities.slice(0, 4).forEach(function(o) {
+                if (y > 265) { doc.addPage(); y = 25; }
+                y = addWrappedText('• ' + o, 20, y, 170, 4, 8);
+                y += 2;
             });
-            y += 6;
+            y += 5;
             
-            // Threats
+            // THREATS
+            if (y > 200) { doc.addPage(); y = 25; }
+            doc.setFillColor(255, 243, 224);
+            doc.roundedRect(15, y, 180, 8, 2, 2, 'F');
             doc.setFontSize(10);
             doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
-            doc.text('WATCH OUT FOR', 20, y);
-            y += 6;
+            doc.text('⚠️ WATCH OUT FOR', 20, y + 5.5);
+            y += 12;
+            
             doc.setFontSize(8);
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
-            swot.threats.forEach(function(t) {
-                var lines = doc.splitTextToSize('- ' + t, 165);
-                lines.forEach(function(line) {
-                    doc.text(line, 25, y);
-                    y += 4;
-                });
+            swot.threats.slice(0, 4).forEach(function(t) {
+                if (y > 265) { doc.addPage(); y = 25; }
+                y = addWrappedText('• ' + t, 20, y, 170, 4, 8);
+                y += 2;
             });
+            
+            // =====================
+            // PAGE 3: CROSS-ASSESSMENT INSIGHTS
+            // =====================
+            doc.addPage();
+            y = 20;
+            
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(15, y, 180, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('INTEGRATED LEADERSHIP INSIGHTS', 105, y + 8, { align: 'center' });
+            y += 18;
+            
+            var insights = generateInsights(Object.values(parsedResults));
+            
+            insights.forEach(function(insight, index) {
+                if (y > 240) { doc.addPage(); y = 25; }
+                
+                // Insight box
+                doc.setFillColor(248, 249, 250);
+                doc.roundedRect(15, y, 180, 6, 1, 1, 'F');
+                doc.setFontSize(9);
+                doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+                doc.setFont(undefined, 'bold');
+                doc.text(insight.title, 20, y + 4);
+                y += 9;
+                
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y = addWrappedText(insight.description, 20, y, 170, 4, 8);
+                y += 8;
+            });
+            
+            // =====================
+            // PAGE 4: DEEP PROFILE ANALYSIS
+            // =====================
+            doc.addPage();
+            y = 20;
+            
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(15, y, 180, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('DEEP PROFILE ANALYSIS', 105, y + 8, { align: 'center' });
+            y += 18;
+            
+            doc.setFontSize(8);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            y = addWrappedText('Detailed behavioral insights based on your primary assessment results', 20, y, 170, 4, 8);
+            y += 10;
+            
+            // Deep profiles from leadership, conflict, motivation
+            var deepProfiles = [];
+            
+            if (parsedResults.leadership && deepProfileData.leadership && deepProfileData.leadership[parsedResults.leadership.primary]) {
+                deepProfiles.push({
+                    title: 'Leadership: ' + parsedResults.leadership.primary,
+                    data: deepProfileData.leadership[parsedResults.leadership.primary]
+                });
+            }
+            if (parsedResults.conflict && deepProfileData.conflict && deepProfileData.conflict[parsedResults.conflict.primary]) {
+                deepProfiles.push({
+                    title: 'Conflict Style: ' + parsedResults.conflict.primary,
+                    data: deepProfileData.conflict[parsedResults.conflict.primary]
+                });
+            }
+            if (parsedResults.motivation && deepProfileData.motivation && deepProfileData.motivation[parsedResults.motivation.primary]) {
+                deepProfiles.push({
+                    title: 'Motivation: ' + parsedResults.motivation.primary,
+                    data: deepProfileData.motivation[parsedResults.motivation.primary]
+                });
+            }
+            
+            deepProfiles.forEach(function(profile) {
+                if (y > 200) { doc.addPage(); y = 25; }
+                
+                // Profile header
+                doc.setFillColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+                doc.roundedRect(15, y, 180, 7, 1, 1, 'F');
+                doc.setFontSize(10);
+                doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+                doc.setFont(undefined, 'bold');
+                doc.text(profile.title, 20, y + 5);
+                y += 12;
+                
+                doc.setFont(undefined, 'normal');
+                doc.setFontSize(8);
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                
+                // Profile Summary
+                doc.setFont(undefined, 'bold');
+                doc.text('Profile Summary:', 20, y);
+                doc.setFont(undefined, 'normal');
+                y += 4;
+                y = addWrappedText(profile.data.profileSummary, 20, y, 170, 3.5, 8);
+                y += 6;
+                
+                // Decision Style
+                if (y > 260) { doc.addPage(); y = 25; }
+                doc.setFont(undefined, 'bold');
+                doc.text('Decision Style:', 20, y);
+                doc.setFont(undefined, 'normal');
+                y += 4;
+                y = addWrappedText(profile.data.decisionStyle, 20, y, 170, 3.5, 8);
+                y += 6;
+                
+                // Communication Style
+                if (y > 260) { doc.addPage(); y = 25; }
+                doc.setFont(undefined, 'bold');
+                doc.text('Communication Style:', 20, y);
+                doc.setFont(undefined, 'normal');
+                y += 4;
+                y = addWrappedText(profile.data.communicationStyle, 20, y, 170, 3.5, 8);
+                y += 6;
+                
+                // Motivated By
+                if (y > 260) { doc.addPage(); y = 25; }
+                doc.setFont(undefined, 'bold');
+                doc.text('Motivated By:', 20, y);
+                doc.setFont(undefined, 'normal');
+                y += 4;
+                y = addWrappedText(profile.data.motivatedBy, 20, y, 170, 3.5, 8);
+                y += 6;
+                
+                // Stress Response
+                if (y > 260) { doc.addPage(); y = 25; }
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+                doc.text('Under Stress:', 20, y);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y += 4;
+                y = addWrappedText(profile.data.stressResponse, 20, y, 170, 3.5, 8);
+                y += 6;
+                
+                // Blind Spots
+                if (y > 260) { doc.addPage(); y = 25; }
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(200, 40, 40);
+                doc.text('Blind Spots:', 20, y);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y += 4;
+                y = addWrappedText(profile.data.blindSpots, 20, y, 170, 3.5, 8);
+                y += 12;
+            });
+            
+            // =====================
+            // PAGE 5: DEVELOPMENT RECOMMENDATIONS
+            // =====================
+            doc.addPage();
+            y = 20;
+            
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(15, y, 180, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('DEVELOPMENT RECOMMENDATIONS', 105, y + 8, { align: 'center' });
+            y += 18;
+            
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            
+            // Generate personalized recommendations
+            var recommendations = [];
+            
+            recommendations.push({
+                title: '📖 Leverage Your Strengths',
+                content: 'Your assessment results reveal clear strengths. Rather than focusing solely on weaknesses, find ways to apply these strengths more intentionally. Strengths used in new contexts become even more powerful.'
+            });
+            
+            if (parsedResults.learning) {
+                var learnRec = parsedResults.learning.primary === 'Diverging' ?
+                    'Seek experiences that allow reflection and creative exploration. Join brainstorming sessions, take on projects requiring multiple perspectives, and build in time to observe before acting.' :
+                    parsedResults.learning.primary === 'Assimilating' ?
+                    'Pursue learning with strong theoretical foundations. Read extensively, attend lectures, and seek mentors who can explain the "why" behind practices. Create your own frameworks.' :
+                    parsedResults.learning.primary === 'Converging' ?
+                    'Focus on practical application. Seek hands-on projects, simulations, and stretch assignments. You learn best by testing ideas in real situations.' :
+                    'Immerse yourself in new experiences. Volunteer for challenging assignments, learn by doing, and don\'t be afraid to experiment and iterate.';
+                recommendations.push({ title: '📚 Optimize Your Learning', content: learnRec });
+            }
+            
+            if (parsedResults.conflict) {
+                var conflictRec = parsedResults.conflict.primary === 'Avoiding' ?
+                    'Practice addressing small conflicts directly. Start with low-stakes disagreements to build comfort. Remember: unaddressed issues often grow larger.' :
+                    parsedResults.conflict.primary === 'Competing' ?
+                    'Experiment with collaborative approaches. Before asserting your position, genuinely explore others\' concerns. You may find integrative solutions that exceed your original goals.' :
+                    parsedResults.conflict.primary === 'Accommodating' ?
+                    'Practice advocating for your own needs and ideas. Your perspective has value—ensure it\'s represented in important decisions.' :
+                    'Continue developing your conflict resolution skills. Consider when each style is most appropriate and expand your range.';
+                recommendations.push({ title: '⚔️ Develop Conflict Skills', content: conflictRec });
+            }
+            
+            if (parsedResults.eq && parsedResults.eq.level && (parsedResults.eq.level.includes('Developing') || parsedResults.eq.level.includes('Building'))) {
+                recommendations.push({
+                    title: '❤️ Build Emotional Intelligence',
+                    content: 'Your EQ assessment suggests room for growth. Focus on: (1) Pause before reacting—create space between stimulus and response. (2) Name emotions precisely—"frustrated" is more useful than "upset." (3) Seek feedback on how others experience your emotional presence.'
+                });
+            }
+            
+            if (parsedResults.grit && parsedResults.grit.score < 3.5) {
+                recommendations.push({
+                    title: '💪 Build Perseverance',
+                    content: 'Your grit score suggests opportunities to build perseverance. Try: (1) Set process goals, not just outcome goals. (2) Celebrate small wins along the way. (3) Reframe setbacks as learning opportunities. (4) Connect daily tasks to long-term meaning.'
+                });
+            }
+            
+            recommendations.push({
+                title: '🎯 Expand Your Range',
+                content: 'While your primary styles are strengths, leadership effectiveness requires flexibility. Identify one style opposite to your preference and consciously practice it in low-stakes situations. Versatile leaders adapt to what each situation requires.'
+            });
+            
+            recommendations.push({
+                title: '🔄 Revisit Periodically',
+                content: 'Self-awareness is not a destination but a journey. Consider retaking these assessments in 6-12 months to track your development. Your profiles will evolve as you grow as a leader.'
+            });
+            
+            recommendations.forEach(function(rec) {
+                if (y > 240) { doc.addPage(); y = 25; }
+                
+                doc.setFillColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+                doc.roundedRect(15, y, 180, 6, 1, 1, 'F');
+                doc.setFontSize(9);
+                doc.setTextColor(255, 255, 255);
+                doc.setFont(undefined, 'bold');
+                doc.text(rec.title, 20, y + 4);
+                y += 9;
+                
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y = addWrappedText(rec.content, 20, y, 170, 4, 8);
+                y += 8;
+            });
+            
+            // =====================
+            // FINAL PAGE: ASSESSMENT DETAILS
+            // =====================
+            doc.addPage();
+            y = 20;
+            
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(15, y, 180, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('DETAILED ASSESSMENT RESULTS', 105, y + 8, { align: 'center' });
+            y += 18;
+            
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            
+            activeAssessments.forEach(function(assessment) {
+                var result = parsedResults[assessment.id];
+                if (!result) return;
+                
+                if (y > 265) { doc.addPage(); y = 25; }
+                
+                doc.setFont(undefined, 'bold');
+                doc.text(assessment.icon + ' ' + assessment.name, 20, y);
+                doc.setFont(undefined, 'normal');
+                
+                var details = [];
+                if (result.primary) details.push('Primary: ' + result.primary);
+                if (result.secondary) details.push('Secondary: ' + result.secondary);
+                if (result.level) details.push('Level: ' + result.level);
+                if (result.score) details.push('Score: ' + result.score);
+                
+                doc.text(details.join(' | '), 55, y);
+                y += 6;
+            });
+            
+            y += 10;
+            
+            // Closing note
+            doc.setFillColor(240, 244, 248);
+            doc.roundedRect(15, y, 180, 25, 2, 2, 'F');
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.setFont(undefined, 'italic');
+            y = addWrappedText('"The unexamined life is not worth living." — Socrates. Self-awareness is the foundation of leadership. Use these insights not as labels but as starting points for growth.', 20, y, 170, 4.5, 9);
             
             // Footer on all pages
             var pageCount = doc.internal.getNumberOfPages();
@@ -1215,11 +2516,12 @@
                 doc.setPage(i);
                 doc.setFontSize(8);
                 doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+                doc.setFont(undefined, 'normal');
                 doc.text('Page ' + i + ' of ' + pageCount, 105, 287, { align: 'center' });
-                doc.text('Chapman University - MGMT 316 - Professor Chip Monaco', 105, 292, { align: 'center' });
+                doc.text('Chapman University • MGMT 316 • Professor Chip Monaco • ' + new Date().getFullYear(), 105, 292, { align: 'center' });
             }
             
-            doc.save('MGMT316_Portfolio_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+            doc.save('Leadership_Portfolio_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
         }
         
         // Initialize on load
