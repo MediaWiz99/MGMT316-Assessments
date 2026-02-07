@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Ethics Assessment | Chapman University</title>
+    <style>
+        :root {
+            --chapman-blue: #00205B;
+            --chapman-gold: #C4A000;
+            --gold-light: #F5E6A3;
+            --blue-light: #E8EDF5;
+            --blue-medium: #1A3A7A;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --white: #ffffff;
+            --success: #2E7D32;
+            --shadow-subtle: 0 2px 8px rgba(0, 32, 91, 0.08);
+            --shadow-medium: 0 4px 20px rgba(0, 32, 91, 0.12);
+            --shadow-strong: 0 8px 32px rgba(0, 32, 91, 0.18);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 50%, var(--chapman-blue) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-strong);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--chapman-gold) 0%, var(--gold-light) 50%, var(--chapman-gold) 100%);
+        }
+        .institution { font-size: 0.95em; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; margin-bottom: 5px; font-weight: 500; }
+        .college { font-size: 1.1em; color: var(--chapman-gold); margin-bottom: 20px; font-weight: 600; }
+        h1 { font-size: 2.4em; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .subtitle { font-size: 1.15em; font-style: italic; opacity: 0.95; color: var(--gold-light); }
+        .content { padding: 35px; }
+        .intro-section {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f8f9fc 100%);
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--chapman-blue);
+        }
+        .intro-section h2 { color: var(--chapman-blue); font-size: 1.4em; margin-bottom: 15px; }
+        .intro-section p { color: var(--text-secondary); margin-bottom: 15px; }
+        .assessment-meta { display: flex; gap: 25px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0, 32, 91, 0.1); flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 0.95em; }
+        .meta-icon { width: 28px; height: 28px; background: var(--chapman-blue); color: var(--white); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.85em; }
+        .student-info { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 35px; }
+        .input-group { display: flex; flex-direction: column; }
+        .input-group label { font-weight: 600; margin-bottom: 8px; color: var(--chapman-blue); font-size: 0.95em; }
+        .input-group input { padding: 14px 16px; border: 2px solid #e1e5eb; border-radius: 10px; font-size: 16px; transition: all 0.3s ease; background: #fafbfc; }
+        .input-group input:focus { outline: none; border-color: var(--chapman-blue); background: var(--white); box-shadow: 0 0 0 4px rgba(0, 32, 91, 0.08); }
+        .progress-container { margin-bottom: 30px; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9em; color: var(--text-secondary); }
+        .progress-bar { width: 100%; height: 10px; background: #e8ecf0; border-radius: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--chapman-blue) 0%, var(--chapman-gold) 100%); width: 0%; transition: width 0.5s ease; }
+        .section-header {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin: 40px 0 25px 0;
+            font-size: 1.2em;
+            font-weight: 600;
+            box-shadow: var(--shadow-medium);
+        }
+        .question-container {
+            margin-bottom: 28px;
+            padding: 28px;
+            background: var(--white);
+            border-radius: 14px;
+            border: 2px solid #f0f2f5;
+            transition: all 0.3s ease;
+        }
+        .question-container:hover { border-color: var(--chapman-blue); box-shadow: var(--shadow-medium); }
+        .question-container.answered { border-color: var(--chapman-gold); background: linear-gradient(135deg, #fffef8 0%, var(--white) 100%); }
+        .question-title { font-size: 1.1em; font-weight: 600; color: var(--text-primary); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f5f6f8; line-height: 1.5; }
+        .question-number { color: var(--chapman-blue); font-weight: 700; margin-right: 8px; }
+        .scenario-box { background: var(--blue-light); border-radius: 10px; padding: 18px; margin-bottom: 20px; border-left: 4px solid var(--chapman-blue); font-style: italic; color: var(--text-secondary); }
+        .options { display: grid; gap: 14px; }
+        .option {
+            position: relative;
+            cursor: pointer;
+            padding: 16px 20px;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            transition: all 0.25s ease;
+            background: #fafbfc;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .option:hover { border-color: var(--chapman-blue); background: var(--blue-light); transform: translateX(4px); }
+        .option input[type="radio"] {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccd0d5;
+            border-radius: 50%;
+            margin-top: 2px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .option input[type="radio"]:checked { border-color: var(--chapman-blue); background: var(--chapman-blue); }
+        .option input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            border-radius: 50%;
+        }
+        .option:has(input:checked) { border-color: var(--chapman-blue); background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); }
+        .option-content { flex: 1; }
+        .option-label { font-weight: 700; font-size: 1em; color: var(--chapman-blue); margin-right: 6px; }
+        .option-text { font-size: 0.98em; line-height: 1.5; color: var(--text-secondary); }
+        .button-container { text-align: center; margin: 40px 0; }
+        .btn { border: none; padding: 18px 45px; font-size: 1.1em; font-weight: 600; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
+        .btn-primary { background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%); color: var(--white); box-shadow: 0 4px 15px rgba(0, 32, 91, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 32, 91, 0.4); }
+        .btn-secondary { background: linear-gradient(135deg, var(--chapman-gold) 0%, #d4b000 100%); color: var(--chapman-blue); box-shadow: 0 4px 15px rgba(196, 160, 0, 0.3); }
+        .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(196, 160, 0, 0.4); }
+        .results { display: none; margin-top: 40px; }
+        .results-header { background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%); color: var(--white); padding: 35px; border-radius: 16px 16px 0 0; text-align: center; }
+        .results-header h2 { font-size: 1.8em; margin-bottom: 10px; }
+        .results-header .student-name { font-size: 1.3em; color: var(--chapman-gold); margin-bottom: 8px; }
+        .results-header .date { font-size: 0.95em; opacity: 0.9; }
+        .score-display { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .score-item { background: rgba(255, 255, 255, 0.15); padding: 12px 18px; border-radius: 10px; text-align: center; min-width: 100px; }
+        .score-item.primary { background: var(--chapman-gold); color: var(--chapman-blue); }
+        .score-label { font-size: 0.85em; opacity: 0.9; margin-bottom: 4px; }
+        .score-item.primary .score-label { opacity: 1; }
+        .score-count { font-size: 1.5em; font-weight: 700; }
+        .results-body { background: var(--blue-light); padding: 35px; border-radius: 0 0 16px 16px; }
+        .type-card { background: var(--white); border-radius: 16px; padding: 35px; margin-bottom: 25px; box-shadow: var(--shadow-medium); border-top: 5px solid var(--chapman-blue); }
+        .type-card.secondary { border-top-color: var(--chapman-gold); }
+        .type-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .type-icon { font-size: 3.5em; }
+        .type-info h3 { font-size: 1.8em; color: var(--chapman-blue); margin-bottom: 5px; }
+        .type-info .type-subtitle { font-size: 1.15em; color: var(--chapman-gold); font-weight: 600; }
+        .type-label { display: inline-block; background: var(--chapman-blue); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.8em; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .type-card.secondary .type-label { background: var(--chapman-gold); color: var(--chapman-blue); }
+        .type-description { color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+        .result-section { background: var(--white); border-radius: 14px; padding: 28px; margin-bottom: 20px; border-left: 5px solid var(--chapman-blue); box-shadow: var(--shadow-subtle); }
+        .result-section.gold-accent { border-left-color: var(--chapman-gold); }
+        .result-section h4 { color: var(--chapman-blue); font-size: 1.2em; margin-bottom: 18px; }
+        .result-section p { color: var(--text-secondary); line-height: 1.7; }
+        .result-section ul { list-style: none; padding: 0; }
+        .result-section li { padding: 12px 0 12px 32px; position: relative; color: var(--text-secondary); border-bottom: 1px solid #f0f2f5; }
+        .result-section li:last-child { border-bottom: none; }
+        .result-section li::before { content: '✓'; position: absolute; left: 0; color: var(--chapman-gold); font-weight: bold; font-size: 1.1em; }
+        .result-section.growth li::before { content: '→'; color: var(--chapman-blue); }
+        .framework-comparison { background: var(--white); border-radius: 14px; padding: 28px; margin: 25px 0; box-shadow: var(--shadow-subtle); }
+        .framework-comparison h4 { color: var(--chapman-blue); margin-bottom: 20px; font-size: 1.2em; text-align: center; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .framework-column { background: var(--blue-light); border-radius: 10px; padding: 16px; text-align: center; transition: all 0.3s ease; }
+        .framework-column.active { background: var(--chapman-blue); color: var(--white); transform: scale(1.02); }
+        .framework-column h5 { font-size: 0.9em; margin-bottom: 8px; }
+        .framework-column .framework-score { font-size: 1.6em; font-weight: 700; color: var(--chapman-gold); }
+        .framework-column.active .framework-score { color: var(--white); }
+        .dilemma-response { background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%); border: 2px solid var(--chapman-gold); border-radius: 14px; padding: 28px; margin: 25px 0; }
+        .dilemma-response h4 { color: var(--chapman-blue); margin-bottom: 15px; }
+        .dilemma-response p { color: var(--text-secondary); line-height: 1.8; }
+        .reflection-section { background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 30px; margin-top: 25px; border: 2px solid var(--chapman-blue); }
+        .reflection-section h4 { color: var(--chapman-blue); font-size: 1.25em; margin-bottom: 20px; text-align: center; }
+        .reflection-questions { counter-reset: reflection; }
+        .reflection-question { padding: 18px 20px 18px 50px; position: relative; background: var(--white); border-radius: 10px; margin-bottom: 12px; box-shadow: var(--shadow-subtle); color: var(--text-secondary); }
+        .reflection-question::before { counter-increment: reflection; content: counter(reflection); position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 26px; height: 26px; background: var(--chapman-blue); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: 700; }
+        .takeaways { background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%); color: var(--white); border-radius: 14px; padding: 30px; margin-top: 25px; }
+        .takeaways h4 { color: var(--chapman-gold); font-size: 1.25em; margin-bottom: 18px; }
+        .takeaways p { line-height: 1.8; opacity: 0.95; }
+        .footer { text-align: center; padding: 25px; color: var(--text-secondary); font-size: 0.9em; border-top: 1px solid #e8ecf0; margin-top: 30px; }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .content { padding: 20px; }
+            .student-info { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8em; }
+            .comparison-grid { grid-template-columns: repeat(2, 1fr); }
+            .type-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="institution">Chapman University</div>
+            <div class="college">Argyros College of Business and Economics</div>
+            <h1>Business Ethics Assessment</h1>
+            <div class="subtitle">Discover Your Ethical Decision-Making Style</div>
+        </div>
+
+        <div class="content">
+            <div class="intro-section">
+                <h2>⚖️ Understanding Your Ethical Framework</h2>
+                <p>This assessment explores how you approach ethical dilemmas in business contexts. By examining your responses to various scenarios, you'll gain insight into your dominant ethical reasoning style and how it influences your decision-making.</p>
+                <p>Understanding your ethical framework is essential for effective leadership—it helps you make consistent decisions, communicate your reasoning to others, and recognize when different ethical perspectives might lead to different conclusions.</p>
+                <div class="assessment-meta">
+                    <div class="meta-item"><div class="meta-icon">⏱</div><span>15-20 minutes</span></div>
+                    <div class="meta-item"><div class="meta-icon">📝</div><span>20 scenario-based questions</span></div>
+                    <div class="meta-item"><div class="meta-icon">⚖️</div><span>4 ethical frameworks assessed</span></div>
+                </div>
+            </div>
+
+            <div class="student-info">
+                <div class="input-group">
+                    <label for="studentName">Your Full Name</label>
+                    <input type="text" id="studentName" placeholder="Enter your full name" required>
+                </div>
+                <div class="input-group">
+                    <label for="testDate">Assessment Date</label>
+                    <input type="date" id="testDate" required>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Assessment Progress</span>
+                    <span id="progressText">0 of 20 questions completed</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <form id="quizForm">
+                <div class="section-header">Part 1: Foundational Ethical Perspectives</div>
+
+                <!-- Questions 1-5 -->
+                <div class="question-container" data-question="1">
+                    <div class="question-title"><span class="question-number">Question 1:</span> When making a difficult business decision, what is your primary consideration?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q1" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">What outcome will produce the greatest benefit for the most people affected?</span></div></label>
+                        <label class="option"><input type="radio" name="q1" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">What action would I want everyone in a similar situation to take?</span></div></label>
+                        <label class="option"><input type="radio" name="q1" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">What would a person of good character do in this situation?</span></div></label>
+                        <label class="option"><input type="radio" name="q1" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">What do I owe to each person involved based on our relationships and commitments?</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="2">
+                    <div class="question-title"><span class="question-number">Question 2:</span> A company can either invest in employee wellness programs or increase shareholder dividends. How do you approach this decision?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q2" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Calculate which option creates more total value when considering all stakeholders</span></div></label>
+                        <label class="option"><input type="radio" name="q2" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Consider what principle should guide all companies in similar situations</span></div></label>
+                        <label class="option"><input type="radio" name="q2" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Ask what a wise and compassionate leader would choose</span></div></label>
+                        <label class="option"><input type="radio" name="q2" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Evaluate the specific obligations the company has to employees versus shareholders</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="3">
+                    <div class="question-title"><span class="question-number">Question 3:</span> What makes an action morally right?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q3" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">It produces more good consequences than harm overall</span></div></label>
+                        <label class="option"><input type="radio" name="q3" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">It follows a moral rule that could apply universally to everyone</span></div></label>
+                        <label class="option"><input type="radio" name="q3" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">It reflects virtuous character traits like honesty, courage, and compassion</span></div></label>
+                        <label class="option"><input type="radio" name="q3" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">It honors the legitimate claims and needs of those we're responsible for</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="4">
+                    <div class="question-title"><span class="question-number">Question 4:</span> You discover a colleague has been padding expense reports. What guides your response?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q4" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">What action will produce the best outcome for everyone involved?</span></div></label>
+                        <label class="option"><input type="radio" name="q4" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Dishonesty violates a fundamental moral rule that must be upheld</span></div></label>
+                        <label class="option"><input type="radio" name="q4" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Consider how a person of integrity would handle this situation</span></div></label>
+                        <label class="option"><input type="radio" name="q4" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Balance my loyalty to my colleague against my duty to the organization</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="5">
+                    <div class="question-title"><span class="question-number">Question 5:</span> How do you view the relationship between business success and ethical behavior?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q5" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Ethics and profit often align—doing good usually leads to doing well</span></div></label>
+                        <label class="option"><input type="radio" name="q5" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Ethical principles must be followed regardless of their impact on profits</span></div></label>
+                        <label class="option"><input type="radio" name="q5" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Building virtuous character creates sustainable success over time</span></div></label>
+                        <label class="option"><input type="radio" name="q5" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Success depends on how well we fulfill our responsibilities to all stakeholders</span></div></label>
+                    </div>
+                </div>
+
+                <div class="section-header">Part 2: Workplace Ethical Scenarios</div>
+
+                <!-- Questions 6-10 -->
+                <div class="question-container" data-question="6">
+                    <div class="question-title"><span class="question-number">Question 6:</span> Your company could save money by outsourcing jobs overseas, but this would lay off loyal employees. What's your approach?</div>
+                    <div class="scenario-box">The cost savings would benefit shareholders and allow lower prices for customers, but 50 employees would lose their jobs.</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q6" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Analyze the total impact on all affected parties and choose the option with greatest net benefit</span></div></label>
+                        <label class="option"><input type="radio" name="q6" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Consider whether treating employees as means to profit violates their dignity as persons</span></div></label>
+                        <label class="option"><input type="radio" name="q6" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Ask what decision reflects the character and values we want our company to embody</span></div></label>
+                        <label class="option"><input type="radio" name="q6" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Evaluate our specific obligations to employees who have served the company faithfully</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="7">
+                    <div class="question-title"><span class="question-number">Question 7:</span> A supplier offers you a personal gift worth $500 during contract negotiations. How do you decide whether to accept?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q7" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Consider whether accepting would actually influence my decisions or harm anyone</span></div></label>
+                        <label class="option"><input type="radio" name="q7" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Apply the rule that accepting gifts during negotiations is always inappropriate</span></div></label>
+                        <label class="option"><input type="radio" name="q7" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Ask whether accepting aligns with being a person of integrity and good judgment</span></div></label>
+                        <label class="option"><input type="radio" name="q7" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Consider my duty of loyalty to my employer and fairness to other suppliers</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="8">
+                    <div class="question-title"><span class="question-number">Question 8:</span> Your team has discovered a minor product defect. It's unlikely to cause harm but fixing it would delay launch.</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q8" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Weigh the probability and severity of harm against the costs of delay</span></div></label>
+                        <label class="option"><input type="radio" name="q8" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">We have a duty not to knowingly release defective products to customers</span></div></label>
+                        <label class="option"><input type="radio" name="q8" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Consider what decision reflects excellence and pride in our work</span></div></label>
+                        <label class="option"><input type="radio" name="q8" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Think about what we owe to customers who trust our products</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="9">
+                    <div class="question-title"><span class="question-number">Question 9:</span> You're asked to write a glowing reference for an underperforming employee who was let go. They really need the job.</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q9" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Consider whether helping this person outweighs potential harm to the new employer</span></div></label>
+                        <label class="option"><input type="radio" name="q9" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Writing a dishonest reference violates a fundamental duty to tell the truth</span></div></label>
+                        <label class="option"><input type="radio" name="q9" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Ask what an honest and compassionate person would do in this situation</span></div></label>
+                        <label class="option"><input type="radio" name="q9" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Balance my responsibilities to the former employee, the new employer, and my own reputation</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="10">
+                    <div class="question-title"><span class="question-number">Question 10:</span> Your company's marketing uses technically true but potentially misleading claims. What's your view?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q10" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">If customers aren't actually harmed and sales increase, the practice is justified</span></div></label>
+                        <label class="option"><input type="radio" name="q10" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Intentionally misleading people violates their right to make informed decisions</span></div></label>
+                        <label class="option"><input type="radio" name="q10" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">This practice undermines the integrity and trustworthiness we should cultivate</span></div></label>
+                        <label class="option"><input type="radio" name="q10" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">We have a responsibility to customers who place their trust in our communications</span></div></label>
+                    </div>
+                </div>
+
+                <div class="section-header">Part 3: Leadership & Stakeholder Dilemmas</div>
+
+                <!-- Questions 11-15 -->
+                <div class="question-container" data-question="11">
+                    <div class="question-title"><span class="question-number">Question 11:</span> A profitable decision would harm the local community. How do you weigh community interests?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q11" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Include community impact in a comprehensive cost-benefit analysis</span></div></label>
+                        <label class="option"><input type="radio" name="q11" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Consider whether the action respects the rights and dignity of community members</span></div></label>
+                        <label class="option"><input type="radio" name="q11" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Ask what a responsible and civic-minded organization would do</span></div></label>
+                        <label class="option"><input type="radio" name="q11" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Recognize our obligations to the community that has supported our business</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="12">
+                    <div class="question-title"><span class="question-number">Question 12:</span> You must choose between two qualified candidates—one is a friend, the other slightly more qualified.</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q12" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Hire whoever will produce better outcomes for the team and organization</span></div></label>
+                        <label class="option"><input type="radio" name="q12" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Apply a fair and impartial standard that treats both candidates equally</span></div></label>
+                        <label class="option"><input type="radio" name="q12" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Act as a fair and impartial person committed to doing the right thing</span></div></label>
+                        <label class="option"><input type="radio" name="q12" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Consider my duties to my friend, to the other candidate, and to my employer</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="13">
+                    <div class="question-title"><span class="question-number">Question 13:</span> Environmental regulations are changing. Should your company exceed current requirements?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q13" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Evaluate whether the benefits to society justify the additional costs</span></div></label>
+                        <label class="option"><input type="radio" name="q13" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">We have a duty not to harm the environment regardless of what regulations require</span></div></label>
+                        <label class="option"><input type="radio" name="q13" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Environmental stewardship reflects the kind of company we want to be</span></div></label>
+                        <label class="option"><input type="radio" name="q13" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Consider our responsibilities to future generations and the broader community</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="14">
+                    <div class="question-title"><span class="question-number">Question 14:</span> A high-performing employee consistently behaves disrespectfully to colleagues. How do you handle it?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q14" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Weigh their contribution against the negative impact on team morale and productivity</span></div></label>
+                        <label class="option"><input type="radio" name="q14" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Everyone deserves to be treated with respect—this is non-negotiable</span></div></label>
+                        <label class="option"><input type="radio" name="q14" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Model and require the respectful behavior that defines our workplace culture</span></div></label>
+                        <label class="option"><input type="radio" name="q14" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">I have a duty to protect my team members from disrespectful treatment</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="15">
+                    <div class="question-title"><span class="question-number">Question 15:</span> Your industry has questionable practices that are legal and common. Should your company follow suit?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q15" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">If the practices create value and don't cause significant harm, they're acceptable</span></div></label>
+                        <label class="option"><input type="radio" name="q15" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Legal and common doesn't make something right—principles matter</span></div></label>
+                        <label class="option"><input type="radio" name="q15" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">We should hold ourselves to higher standards than the industry norm</span></div></label>
+                        <label class="option"><input type="radio" name="q15" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Consider what we owe to stakeholders who expect us to act responsibly</span></div></label>
+                    </div>
+                </div>
+
+                <div class="section-header">Part 4: Personal Ethics & Professional Judgment</div>
+
+                <!-- Questions 16-20 -->
+                <div class="question-container" data-question="16">
+                    <div class="question-title"><span class="question-number">Question 16:</span> When you face an ethical gray area, what do you rely on most?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q16" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Careful analysis of who will be affected and how</span></div></label>
+                        <label class="option"><input type="radio" name="q16" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Clear moral principles that apply regardless of circumstances</span></div></label>
+                        <label class="option"><input type="radio" name="q16" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">My sense of what a good person would do</span></div></label>
+                        <label class="option"><input type="radio" name="q16" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Understanding the relationships and responsibilities involved</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="17">
+                    <div class="question-title"><span class="question-number">Question 17:</span> Is it ever acceptable to break a promise for a greater good?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q17" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Yes, if breaking it produces significantly better outcomes for everyone affected</span></div></label>
+                        <label class="option"><input type="radio" name="q17" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">No, promises create moral obligations that shouldn't be broken</span></div></label>
+                        <label class="option"><input type="radio" name="q17" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">It depends on what a person of good judgment and integrity would do</span></div></label>
+                        <label class="option"><input type="radio" name="q17" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Consider the specific relationship and what breaking this promise would mean to them</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="18">
+                    <div class="question-title"><span class="question-number">Question 18:</span> How important is consistency in ethical decision-making?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q18" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Each situation is unique—the right choice depends on the specific consequences</span></div></label>
+                        <label class="option"><input type="radio" name="q18" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Very important—moral principles should be applied consistently</span></div></label>
+                        <label class="option"><input type="radio" name="q18" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Consistency comes from acting according to our character, not rigid rules</span></div></label>
+                        <label class="option"><input type="radio" name="q18" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">It depends—different relationships may call for different responses</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="19">
+                    <div class="question-title"><span class="question-number">Question 19:</span> What's the most important quality for ethical leadership?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q19" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">The wisdom to make decisions that create the best outcomes for all</span></div></label>
+                        <label class="option"><input type="radio" name="q19" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">The commitment to uphold principles even when it's costly</span></div></label>
+                        <label class="option"><input type="radio" name="q19" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Strong personal character that inspires others to act ethically</span></div></label>
+                        <label class="option"><input type="radio" name="q19" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Deep awareness of one's responsibilities to all stakeholders</span></div></label>
+                    </div>
+                </div>
+
+                <div class="question-container" data-question="20">
+                    <div class="question-title"><span class="question-number">Question 20:</span> When ethical values conflict with company policy, what should an employee do?</div>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q20" value="a" required><div class="option-content"><span class="option-label">A.</span><span class="option-text">Assess whether following the policy or one's values produces better outcomes</span></div></label>
+                        <label class="option"><input type="radio" name="q20" value="b"><div class="option-content"><span class="option-label">B.</span><span class="option-text">Moral duties take precedence over organizational policies</span></div></label>
+                        <label class="option"><input type="radio" name="q20" value="c"><div class="option-content"><span class="option-label">C.</span><span class="option-text">Stay true to one's character while working to change the policy</span></div></label>
+                        <label class="option"><input type="radio" name="q20" value="d"><div class="option-content"><span class="option-label">D.</span><span class="option-text">Consider one's responsibilities to colleagues, the organization, and affected parties</span></div></label>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button type="button" class="btn btn-primary" onclick="calculateResults()">⚖️ Calculate My Ethical Profile</button>
+                </div>
+            </form>
+
+            <div id="results" class="results"></div>
+
+            <div class="button-container" id="pdfButtonContainer" style="display: none;">
+                <button type="button" class="btn btn-secondary" onclick="generatePDF()">📄 Download Professional PDF Report</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Business Ethics Assessment • Chapman University • Argyros College of Business and Economics</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • BUAD 216: Business Ethics</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('testDate').value = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    updateProgress();
+                    this.closest('.question-container').classList.add('answered');
+                });
+            });
+        });
+
+        function updateProgress() {
+            const inputs = document.querySelectorAll('input[type="radio"]:checked');
+            const progress = (inputs.length / 20) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${inputs.length} of 20 questions completed`;
+        }
+
+        function calculateResults() {
+            const form = document.getElementById('quizForm');
+            const formData = new FormData(form);
+            const studentName = document.getElementById('studentName').value.trim();
+            const testDate = document.getElementById('testDate').value;
+            
+            if (!studentName) { alert('Please enter your name.'); return; }
+            if (!testDate) { alert('Please select a date.'); return; }
+            
+            let missingQuestions = [];
+            for (let i = 1; i <= 20; i++) {
+                if (!formData.get(`q${i}`)) missingQuestions.push(i);
+            }
+            if (missingQuestions.length > 0) {
+                alert(`Please answer all questions. Missing: ${missingQuestions.join(', ')}`);
+                return;
+            }
+
+            let counts = { a: 0, b: 0, c: 0, d: 0 };
+            for (let i = 1; i <= 20; i++) {
+                const answer = formData.get(`q${i}`);
+                if (answer) counts[answer]++;
+            }
+
+            const typeMap = { a: 'Consequentialist', b: 'Deontologist', c: 'Virtue Ethicist', d: 'Care Ethicist' };
+            let maxCount = Math.max(counts.a, counts.b, counts.c, counts.d);
+            let primaryType = '', secondaryType = '', secondaryCount = 0;
+            
+            for (let key of ['a', 'b', 'c', 'd']) {
+                if (counts[key] === maxCount && !primaryType) primaryType = typeMap[key];
+                else if (counts[key] > secondaryCount) { secondaryCount = counts[key]; secondaryType = typeMap[key]; }
+            }
+
+            displayResults(primaryType, secondaryType, counts, studentName, testDate);
+        }
+
+        function displayResults(primaryType, secondaryType, counts, studentName, testDate) {
+            const typeData = {
+                'Consequentialist': {
+                    icon: '📊', subtitle: 'Outcome-Focused Ethical Reasoner',
+                    description: 'You approach ethical decisions by carefully analyzing their consequences. You believe the right action is the one that produces the greatest good for the greatest number of people affected. This utilitarian perspective makes you skilled at weighing costs and benefits across multiple stakeholders.',
+                    profileSummary: 'You are a pragmatic ethical thinker who evaluates decisions by their outcomes. You naturally ask "What are the consequences?" and seek to maximize overall well-being.',
+                    decisionProcess: 'You identify stakeholders, forecast outcomes, weigh benefits against harms, and choose the action that produces the best overall result.',
+                    ethicalStrength: 'Your ability to consider broad impact and make tough trade-offs when they serve the greater good.',
+                    framework: 'Utilitarianism / Consequentialism', philosopher: 'Jeremy Bentham, John Stuart Mill',
+                    keyQuestion: '"What action will produce the best overall outcomes?"',
+                    strengths: ['Excellent at comprehensive stakeholder analysis', 'Skilled at weighing competing interests objectively', 'Pragmatic approach that considers real-world impact', 'Flexible reasoning that adapts to situational factors', 'Strong ability to justify decisions with measurable outcomes'],
+                    challenges: ['May undervalue individual rights when they conflict with majority benefit', 'Difficulty when outcomes are uncertain or hard to measure', 'Risk of "ends justify means" reasoning in edge cases', 'May struggle with decisions where harm to few benefits many'],
+                    workplace: 'You excel at cost-benefit analysis, strategic decision-making, and finding solutions that maximize value for multiple stakeholders. Your approach is particularly valuable in resource allocation, policy development, and complex negotiations.',
+                    development: 'Consider incorporating rights-based constraints into your analysis. Ask not only "what produces the best outcome?" but also "are there any actions that would be wrong regardless of their consequences?"',
+                    communicationStyle: "Data-driven and analytical. You persuade through impact analysis, stakeholder mapping, and evidence of outcomes. You speak in terms of costs, benefits, and net effects.",
+                    motivatedBy: "Maximizing overall benefit, making a measurable positive difference, solving problems efficiently, and achieving outcomes that help the most people.",
+                    stressResponse: "Under pressure, you may over-rely on quantifiable factors while dismissing harder-to-measure concerns, or rationalize questionable means by pointing to good ends.",
+                    blindSpots: "May not recognize when certain actions are wrong regardless of outcome; can miss the importance of principles when focused on results; may undervalue individual rights.",
+                    worksWith: {
+                        Deontologist: "They provide principled guardrails for your outcome focus; help them see when flexibility serves justice",
+                        'Virtue Ethicist': "They help you consider character implications; you help them translate virtues into measurable action",
+                        'Care Ethicist': "They highlight relationship costs your analysis might miss; you help them scale care to larger stakeholders"
+                    },
+                    swotStrength: 'Analytical decision-making that maximizes overall benefit',
+                    swotWeakness: 'May overlook individual rights in pursuit of aggregate good',
+                    swotOpportunity: 'Develop ethical guardrails that protect individuals regardless of outcomes',
+                    swotThreat: 'Ethical blind spots when outcomes are uncertain or unmeasurable'
+                },
+                'Deontologist': {
+                    icon: '📜', subtitle: 'Principle-Centered Ethical Reasoner',
+                    description: 'You approach ethical decisions by applying universal moral principles and duties. You believe certain actions are inherently right or wrong, regardless of their consequences. This principled perspective makes you a strong advocate for rights, fairness, and consistent moral standards.',
+                    profileSummary: 'You are a principled ethical thinker who evaluates decisions by their adherence to moral rules. You refuse to compromise on core principles even when consequences might be favorable.',
+                    decisionProcess: 'You identify the relevant moral rules, determine your duties to all parties, and choose the action that fulfills your obligations regardless of outcome.',
+                    ethicalStrength: 'Your unwavering commitment to principles and consistency. People trust you because you will not compromise values for convenience.',
+                    framework: 'Deontological Ethics / Duty-Based Ethics', philosopher: 'Immanuel Kant, John Rawls',
+                    keyQuestion: '"What is my moral duty in this situation?"',
+                    strengths: ['Strong commitment to moral principles and consistency', 'Excellent at protecting individual rights and dignity', 'Clear moral boundaries that aren\'t compromised by circumstances', 'Trustworthy and predictable ethical decision-making', 'Strong advocate for fairness and equal treatment'],
+                    challenges: ['May struggle when moral duties conflict with each other', 'Can appear inflexible when context seems to matter', 'Difficulty when following rules produces harmful outcomes', 'May prioritize abstract principles over practical concerns'],
+                    workplace: 'You excel at establishing clear ethical guidelines, ensuring fair treatment, and maintaining organizational integrity. Your approach is particularly valuable in compliance, HR policy, contracts, and situations requiring consistent standards.',
+                    development: 'Consider how consequences inform which principles should apply. When duties conflict, examine which principle a rational person would prioritize and why.',
+                    communicationStyle: "Principled and rule-referenced. You frame arguments in terms of duties, rights, fairness, and universal standards. You speak with moral clarity and consistency.",
+                    motivatedBy: "Doing the right thing regardless of cost, upholding principles, protecting rights, maintaining integrity, and being someone whose word can be trusted.",
+                    stressResponse: "Under pressure, you may become more rigid in applying rules, struggle when duties conflict, or appear inflexible when others want situational exceptions.",
+                    blindSpots: "May not recognize when rigid rule-following causes more harm than good; can miss nuance that context provides; may appear self-righteous to more pragmatic colleagues.",
+                    worksWith: {
+                        Consequentialist: "You provide ethical guardrails for their pragmatism; let them help you see when flexibility serves justice",
+                        'Virtue Ethicist': "Natural allies on character and integrity; together you can define ethical culture",
+                        'Care Ethicist': "They soften rule-application with relationship awareness; you help them be consistent across relationships"
+                    },
+                    swotStrength: 'Consistent, principled decision-making that builds trust',
+                    swotWeakness: 'May appear inflexible when situations require nuanced judgment',
+                    swotOpportunity: 'Develop situational awareness to apply principles appropriately',
+                    swotThreat: 'Conflict with outcome-oriented colleagues; rigid application causing unintended harm'
+                },
+                'Virtue Ethicist': {
+                    icon: '🌟', subtitle: 'Character-Based Ethical Reasoner',
+                    description: 'You approach ethical decisions by asking what a person of good character would do. You believe ethics is about developing virtues like honesty, courage, compassion, and integrity. This character-based perspective makes you focused on personal excellence and moral growth.',
+                    profileSummary: 'You are a character-focused ethical thinker who evaluates decisions by what they reveal about the actor. You focus on developing virtuous habits and traits.',
+                    decisionProcess: 'You consider what virtues are relevant, reflect on what a person of excellent character would do, and choose the action that expresses and cultivates virtue.',
+                    ethicalStrength: 'Your focus on moral development and leading by example. You inspire others through character and help create ethical cultures.',
+                    framework: 'Virtue Ethics / Character-Based Ethics', philosopher: 'Aristotle, Alasdair MacIntyre',
+                    keyQuestion: '"What would a person of good character do?"',
+                    strengths: ['Focus on developing and modeling ethical character', 'Holistic view that integrates emotions, reason, and action', 'Emphasis on moral growth and continuous improvement', 'Natural ability to inspire ethical behavior in others', 'Strong moral intuition developed through practice'],
+                    challenges: ['Different cultures may define virtues differently', 'Can be difficult to apply in novel situations', 'May lack clear guidance when virtues conflict', 'Relies on judgment that takes time to develop'],
+                    workplace: 'You excel at building ethical culture, mentoring others, and leading by example. Your approach is particularly valuable in leadership development, organizational culture, and situations requiring moral courage and integrity.',
+                    development: 'Consider how your virtuous intentions translate into measurable outcomes. Reflect on which virtues are most relevant in business contexts and how to balance competing virtues.',
+                    communicationStyle: "Character-focused and exemplary. You appeal to ideals, reference role models, and frame decisions in terms of who we want to be and what excellence looks like.",
+                    motivatedBy: "Being a person of integrity, developing moral excellence, inspiring others through example, and creating environments where virtuous character can flourish.",
+                    stressResponse: "Under pressure, you may become judgmental of others' character flaws, struggle to provide clear action guidance, or retreat into idealistic thinking.",
+                    blindSpots: "May struggle to translate character ideals into specific actions; can appear vague to more analytical colleagues; may focus on the actor's character while missing situational factors.",
+                    worksWith: {
+                        Consequentialist: "They help translate virtues into measurable outcomes; you help them see character implications of their choices",
+                        Deontologist: "Natural allies on integrity and principle; together you define what ethical excellence looks like",
+                        'Care Ethicist': "You both value relationships; you provide the virtue framework for caring excellently"
+                    },
+                    swotStrength: 'Moral leadership and ability to build ethical cultures',
+                    swotWeakness: 'May struggle with clear guidance in complex, novel situations',
+                    swotOpportunity: 'Develop frameworks for applying virtue ethics in business contexts',
+                    swotThreat: 'Perceived as vague or subjective by more analytical colleagues'
+                },
+                'Care Ethicist': {
+                    icon: '🤝', subtitle: 'Relationship-Focused Ethical Reasoner',
+                    description: 'You approach ethical decisions through the lens of relationships and responsibilities. You believe ethics emerges from our connections to others and our duties to those who depend on us. This relational perspective makes you attuned to context, care, and the particular needs of individuals.',
+                    profileSummary: 'You are a relationship-focused ethical thinker who evaluates decisions by their impact on the web of relationships involved. You attend to context and particular circumstances.',
+                    decisionProcess: 'You consider the relationships involved, understand the specific context and needs of those affected, and choose the action that maintains and nurtures important relationships.',
+                    ethicalStrength: 'Your attunement to relational dynamics and ability to consider context. You build trust and loyalty through genuine care.',
+                    framework: 'Care Ethics / Relational Ethics', philosopher: 'Carol Gilligan, Nel Noddings',
+                    keyQuestion: '"What do I owe to those I\'m in relationship with?"',
+                    strengths: ['Strong awareness of relationship dynamics and responsibilities', 'Excellent at considering context and particular circumstances', 'Natural empathy and attunement to others\' needs', 'Skilled at balancing competing stakeholder relationships', 'Values loyalty, trust, and sustained commitment'],
+                    challenges: ['May prioritize close relationships over broader fairness', 'Can be difficult to scale to large organizations', 'Risk of favoritism or inconsistent treatment', 'May struggle with decisions affecting strangers equally'],
+                    workplace: 'You excel at stakeholder management, team leadership, and building trust-based relationships. Your approach is particularly valuable in customer relations, team development, negotiations, and situations requiring empathy and relational intelligence.',
+                    development: 'Consider how to extend care-based reasoning to those outside your immediate relationships. Develop frameworks for balancing competing relational obligations fairly.',
+                    communicationStyle: "Relational and context-aware. You frame discussions around relationships, responsibilities, and particular circumstances. You speak with empathy and attention to how decisions affect specific people.",
+                    motivatedBy: "Maintaining important relationships, fulfilling responsibilities to those who depend on you, creating caring environments, and ensuring no one is harmed by neglect.",
+                    stressResponse: "Under pressure, you may prioritize close relationships over fairness to others, struggle with decisions affecting strangers, or feel paralyzed when relationships conflict.",
+                    blindSpots: "May not apply consistent standards across relationships; can miss when care for some comes at unfair cost to others; may struggle to scale care-based reasoning to organizational level.",
+                    worksWith: {
+                        Consequentialist: "They help you see broader stakeholder impact; you highlight the relationship costs their analysis might miss",
+                        Deontologist: "They help you be consistent across relationships; you soften their rule-application with relationship awareness",
+                        'Virtue Ethicist': "Natural allies—you both value relationships; they provide the virtue framework for caring excellently"
+                    },
+                    swotStrength: 'Building trust and navigating complex relationship dynamics',
+                    swotWeakness: 'May show favoritism or inconsistency across relationships',
+                    swotOpportunity: 'Develop principles for extending care equitably to broader stakeholders',
+                    swotThreat: 'Perceived as biased by those outside close relationships'
+                }
+            };
+
+            const primary = typeData[primaryType];
+            const secondary = secondaryType ? typeData[secondaryType] : null;
+            const total = counts.a + counts.b + counts.c + counts.d;
+            
+            // Calculate percentages
+            const pctConseq = Math.round((counts.a / total) * 100);
+            const pctDeont = Math.round((counts.b / total) * 100);
+            const pctVirtue = Math.round((counts.c / total) * 100);
+            const pctCare = Math.round((counts.d / total) * 100);
+            
+            // Determine framework clarity
+            const maxPct = Math.max(pctConseq, pctDeont, pctVirtue, pctCare);
+            const frameworkClarity = maxPct >= 50 ? 'Strong' : maxPct >= 35 ? 'Moderate' : 'Balanced';
+            
+            // Generate tracker code with 2-letter abbreviations
+            const typeAbbrev = { 'Consequentialist': 'Co', 'Deontologist': 'De', 'Virtue Ethicist': 'Vi', 'Care Ethicist': 'Ca' };
+            const trackerCode = 'BEA-' + typeAbbrev[primaryType] + (secondaryType ? typeAbbrev[secondaryType] : 'XX') + '-' + frameworkClarity.charAt(0);
+            const codeExplanation = `Ethics Framework: ${primaryType} (primary)${secondaryType ? ` + ${secondaryType} (secondary)` : ''} | ${frameworkClarity}`;
+            
+            const resultsDiv = document.getElementById('results');
+
+            resultsDiv.innerHTML = `
+                <div class="results-header">
+                    <h2>⚖️ Your Ethical Profile</h2>
+                    <div class="student-name">${studentName}</div>
+                    <div class="date">Completed: ${new Date(testDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                    <div class="score-display">
+                        <div class="score-item ${primaryType === 'Consequentialist' ? 'primary' : ''}"><div class="score-label">Consequentialist</div><div class="score-count">${counts.a}</div></div>
+                        <div class="score-item ${primaryType === 'Deontologist' ? 'primary' : ''}"><div class="score-label">Deontologist</div><div class="score-count">${counts.b}</div></div>
+                        <div class="score-item ${primaryType === 'Virtue Ethicist' ? 'primary' : ''}"><div class="score-label">Virtue Ethicist</div><div class="score-count">${counts.c}</div></div>
+                        <div class="score-item ${primaryType === 'Care Ethicist' ? 'primary' : ''}"><div class="score-label">Care Ethicist</div><div class="score-count">${counts.d}</div></div>
+                    </div>
+                </div>
+                
+                <!-- TRACKER SUMMARY SECTION -->
+                <div style="background: linear-gradient(135deg, #1a3a7a 0%, #00205B 100%); color: white; padding: 25px; border-radius: 14px; margin: 20px 0;">
+                    <h3 style="color: #C4A000; margin-bottom: 15px; font-size: 1.3em;">📋 Assessment Tracker Summary</h3>
+                    <p style="font-size: 0.9em; opacity: 0.9; margin-bottom: 15px;">Copy this information into your Assessment Tracker at the end of the semester.</p>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Primary Framework</div>
+                                <div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${primaryType}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Secondary Framework</div>
+                                <div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${secondaryType || 'None'}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Framework Clarity</div>
+                                <div style="font-size: 1.2em; font-weight: 600;">${frameworkClarity} (${maxPct}%)</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Key Question</div>
+                                <div style="font-size: 0.95em; font-style: italic;">${primary.keyQuestion}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Framework Distribution</div>
+                        <div style="font-family: monospace; font-size: 1em;">
+                            Consequentialist: ${counts.a}/20 (${pctConseq}%) | Deontologist: ${counts.b}/20 (${pctDeont}%) | Virtue: ${counts.c}/20 (${pctVirtue}%) | Care: ${counts.d}/20 (${pctCare}%)
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(196, 160, 0, 0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #C4A000;">
+                        <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Key Characteristics for SWOT Analysis</div>
+                        <div style="font-size: 0.95em; line-height: 1.6;">
+                            <strong>Profile:</strong> ${primary.profileSummary}<br>
+                            <strong>Decision Process:</strong> ${primary.decisionProcess}<br>
+                            <strong>Ethical Strength:</strong> ${primary.ethicalStrength}<br>
+                            <strong>Primary Challenge:</strong> ${primary.challenges[0]}
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Ethical Framework</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${primaryType}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Ethical Framework</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${secondaryType || 'None'}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Style Clarity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${frameworkClarity}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Ethical Strength</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${primary.ethicalStrength || 'Values-Driven'}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Framework Scores:</strong> Consequentialist: ${counts.a} | Deontologist: ${counts.b} | Virtue Ethicist: ${counts.c} | Care Ethicist: ${counts.d}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="results-body">
+                    <div class="type-card">
+                        <div class="type-label">Primary Ethical Framework</div>
+                        <div class="type-header">
+                            <div class="type-icon">${primary.icon}</div>
+                            <div class="type-info"><h3>The ${primaryType}</h3><div class="type-subtitle">${primary.subtitle}</div></div>
+                        </div>
+                        <p class="type-description">${primary.description}</p>
+                        
+                        <!-- Enhanced Profile Section -->
+                        <div style="background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%); padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #C4A000;">
+                            <h5 style="color: var(--chapman-blue); margin-bottom: 12px;">📋 Your Ethical Decision Profile</h5>
+                            <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.7;">${primary.profileSummary}</p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div style="padding: 12px; background: rgba(0,32,91,0.05); border-radius: 8px;">
+                                    <strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">Decision Process</strong>
+                                    <p style="margin-top: 5px; font-size: 0.9em; color: var(--text-secondary);">${primary.decisionProcess}</p>
+                                </div>
+                                <div style="padding: 12px; background: rgba(0,32,91,0.05); border-radius: 8px;">
+                                    <strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">Core Ethical Strength</strong>
+                                    <p style="margin-top: 5px; font-size: 0.9em; color: var(--text-secondary);">${primary.ethicalStrength}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-section" style="background: var(--blue-light); border-left-color: var(--chapman-gold);">
+                            <h4>🔑 Your Key Ethical Question</h4>
+                            <p style="font-size: 1.15em; font-style: italic; color: var(--chapman-blue); font-weight: 600;">${primary.keyQuestion}</p>
+                        </div>
+                    </div>
+                    ${secondary ? `<div class="type-card secondary"><div class="type-label">Secondary Framework</div><div class="type-header"><div class="type-icon">${secondary.icon}</div><div class="type-info"><h3>The ${secondaryType}</h3><div class="type-subtitle">${secondary.subtitle}</div></div></div><p class="type-description">${secondary.description}</p></div>` : ''}
+                    <div class="result-section"><h4>📚 Philosophical Foundation</h4><p><strong>Framework:</strong> ${primary.framework}</p><p style="margin-top: 10px;"><strong>Key Philosophers:</strong> ${primary.philosopher}</p></div>
+                    <div class="result-section"><h4>💪 Your Ethical Strengths</h4><ul>${primary.strengths.map(s => `<li>${s}</li>`).join('')}</ul></div>
+                    <div class="result-section growth gold-accent"><h4>🎯 Potential Blind Spots</h4><ul>${primary.challenges.map(c => `<li>${c}</li>`).join('')}</ul></div>
+                    
+                    <!-- SWOT Preview Section -->
+                    <div style="background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 25px; margin: 20px 0; border: 2px solid var(--chapman-blue);">
+                        <h4 style="color: var(--chapman-blue); margin-bottom: 15px; font-size: 1.2em;">📊 SWOT Analysis Preview (For Assessment Tracker)</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 15px;">This preview shows how your Ethical Framework will contribute to your comprehensive SWOT analysis.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="background: #E8F5E9; padding: 15px; border-radius: 10px; border-left: 4px solid #2E7D32;">
+                                <strong style="color: #2E7D32; font-size: 0.9em;">STRENGTH</strong>
+                                <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">${primary.swotStrength}</p>
+                            </div>
+                            <div style="background: #FFEBEE; padding: 15px; border-radius: 10px; border-left: 4px solid #C62828;">
+                                <strong style="color: #C62828; font-size: 0.9em;">WEAKNESS</strong>
+                                <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">${primary.swotWeakness}</p>
+                            </div>
+                            <div style="background: #E3F2FD; padding: 15px; border-radius: 10px; border-left: 4px solid #1565C0;">
+                                <strong style="color: #1565C0; font-size: 0.9em;">OPPORTUNITY</strong>
+                                <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">${primary.swotOpportunity}</p>
+                            </div>
+                            <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 4px solid #E65100;">
+                                <strong style="color: #E65100; font-size: 0.9em;">THREAT</strong>
+                                <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">${primary.swotThreat}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="framework-comparison"><h4>📊 Your Ethical Framework Distribution</h4><div class="comparison-grid">
+                        <div class="framework-column ${primaryType === 'Consequentialist' ? 'active' : ''}"><h5>📊 Consequentialist</h5><div class="framework-score">${pctConseq}%</div></div>
+                        <div class="framework-column ${primaryType === 'Deontologist' ? 'active' : ''}"><h5>📜 Deontologist</h5><div class="framework-score">${pctDeont}%</div></div>
+                        <div class="framework-column ${primaryType === 'Virtue Ethicist' ? 'active' : ''}"><h5>🌟 Virtue Ethicist</h5><div class="framework-score">${pctVirtue}%</div></div>
+                        <div class="framework-column ${primaryType === 'Care Ethicist' ? 'active' : ''}"><h5>🤝 Care Ethicist</h5><div class="framework-score">${pctCare}%</div></div>
+                    </div></div>
+                    <div class="result-section"><h4>💼 In the Workplace</h4><p>${primary.workplace}</p></div>
+                    <div class="dilemma-response"><h4>🌱 For Your Development</h4><p>${primary.development}</p></div>
+                    <div class="reflection-section"><h4>🤔 Reflection Questions</h4><div class="reflection-questions">
+                        <div class="reflection-question">Think of a recent ethical dilemma you faced. How does your primary framework explain the reasoning you used?</div>
+                        <div class="reflection-question">When might your ethical approach lead to a different conclusion than someone using a different framework?</div>
+                        <div class="reflection-question">What aspects of other ethical frameworks might strengthen your decision-making?</div>
+                        <div class="reflection-question">How might you explain your ethical reasoning to someone who approaches ethics differently?</div>
+                        <div class="reflection-question">What situations might challenge your primary ethical framework the most?</div>
+                        <div class="reflection-question">How can you develop greater ethical flexibility while maintaining your core values?</div>
+                    </div></div>
+                    <div class="takeaways"><h4>✨ Key Insights</h4>
+                        <p><strong>All four ethical frameworks offer valuable perspectives.</strong> Consequentialism helps us consider impact, deontology protects rights and duties, virtue ethics builds character, and care ethics honors relationships. The most effective ethical leaders develop fluency in multiple frameworks and know when each perspective is most relevant.</p>
+                        <p style="margin-top: 15px;">Your primary framework of <strong>${primaryType}</strong> reflects your natural ethical intuition. Use this self-awareness to make more deliberate decisions, communicate your reasoning more effectively, and recognize when other perspectives might reveal blind spots in your thinking.</p>
+                    </div>
+                </div>`;
+
+            resultsDiv.style.display = 'block';
+            
+            // Store results for PDF generation
+            window.ethicsResults = {
+                primaryType: primaryType,
+                secondaryType: secondaryType,
+                counts: counts,
+                typeData: typeData
+            };
+            document.getElementById('pdfButtonContainer').style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const studentName = document.getElementById('studentName').value;
+            const testDate = new Date(document.getElementById('testDate').value).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            
+            // Get stored results
+            if (!window.ethicsResults) { alert('Please calculate your results first.'); return; }
+            const { primaryType, secondaryType, counts, typeData } = window.ethicsResults;
+            const primary = typeData[primaryType];
+            const secondary = secondaryType ? typeData[secondaryType] : null;
+            
+            const chapmanBlue = [0, 32, 91];
+            const chapmanGold = [196, 160, 0];
+            const textDark = [26, 26, 46];
+            const textMuted = [100, 100, 110];
+            const greenColor = [46, 125, 50];
+            const redColor = [198, 40, 40];
+            const blueColor = [21, 101, 192];
+            const orangeColor = [230, 81, 0];
+            
+            // Calculate metrics
+            const total = counts.a + counts.b + counts.c + counts.d;
+            const typeAbbrev = { 'Consequentialist': 'Co', 'Deontologist': 'De', 'Virtue Ethicist': 'Vi', 'Care Ethicist': 'Ca' };
+            const maxScore = Math.max(counts.a, counts.b, counts.c, counts.d);
+            const maxPct = Math.round((maxScore / total) * 100);
+            const frameworkClarity = maxPct >= 50 ? 'Strong' : maxPct >= 35 ? 'Moderate' : 'Balanced';
+            const trackerCode = 'BEA-' + typeAbbrev[primaryType] + (secondaryType ? typeAbbrev[secondaryType] : 'XX') + '-' + frameworkClarity.charAt(0);
+            const codeExplanation = primaryType + ' (primary)' + (secondaryType ? ' + ' + secondaryType + ' (secondary)' : '') + ' | ' + frameworkClarity;
+
+            // Helper function
+            function addWrappedText(text, x, startY, maxWidth, lineHeight) {
+                const lines = doc.splitTextToSize(text, maxWidth);
+                let currentY = startY;
+                lines.forEach(function(line) {
+                    if (currentY > 275) { doc.addPage(); currentY = 20; }
+                    doc.text(line, x, currentY);
+                    currentY += lineHeight;
+                });
+                return currentY;
+            }
+
+            // ===== PAGE 1: Header and Primary Framework =====
+            doc.setFillColor(...chapmanBlue);
+            doc.rect(0, 0, 210, 45, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('CHAPMAN UNIVERSITY', 105, 12, { align: 'center' });
+            doc.setFontSize(9);
+            doc.setTextColor(...chapmanGold);
+            doc.text('Argyros College of Business and Economics', 105, 18, { align: 'center' });
+            doc.setFontSize(18);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Business Ethics Assessment', 105, 30, { align: 'center' });
+            doc.setFontSize(10);
+            doc.text('Official Results Report', 105, 38, { align: 'center' });
+            doc.setFillColor(...chapmanGold);
+            doc.rect(0, 45, 210, 2, 'F');
+
+            let y = 55;
+            doc.setFontSize(11);
+            doc.setTextColor(...textDark);
+            doc.text('Student: ' + studentName, 20, y);
+            doc.text('Date: ' + testDate, 120, y);
+            y += 10;
+            
+            // Primary Framework Banner
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(13);
+            doc.setTextColor(255, 255, 255);
+            doc.text('PRIMARY: ' + primaryType.toUpperCase(), 105, y + 11, { align: 'center' });
+            y += 22;
+
+            doc.setFontSize(10);
+            doc.setTextColor(...chapmanGold);
+            doc.text(primary.subtitle, 105, y, { align: 'center' });
+            y += 6;
+            if (secondaryType) {
+                doc.setFontSize(9);
+                doc.setTextColor(...textMuted);
+                doc.text('Secondary: ' + secondaryType, 105, y, { align: 'center' });
+                y += 8;
+            }
+
+            // Score Distribution
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 20, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('SCORE DISTRIBUTION', 25, y + 6);
+            doc.setTextColor(...textDark);
+            doc.text('Consequentialist: ' + counts.a + '/20', 25, y + 13);
+            doc.text('Deontologist: ' + counts.b + '/20', 70, y + 13);
+            doc.text('Virtue: ' + counts.c + '/20', 115, y + 13);
+            doc.text('Care: ' + counts.d + '/20', 155, y + 13);
+            y += 26;
+
+            // Tracker Code Box
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Your Result: ' + codeExplanation, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Framework Clarity: ' + frameworkClarity + ' (' + maxPct + '%)', 105, y + 12, { align: 'center' });
+            y += 22;
+
+            // Profile Summary
+            doc.setFontSize(10);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('YOUR ETHICAL PROFILE', 20, y);
+            y += 6;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.profileSummary, 20, y, 170, 4.5);
+            y += 4;
+
+            // Decision Process
+            doc.setFontSize(10);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('Decision Process', 20, y);
+            y += 5;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.decisionProcess, 20, y, 170, 4.5);
+            y += 4;
+
+            // Ethical Strength
+            doc.setFontSize(10);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('Ethical Strength', 20, y);
+            y += 5;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.ethicalStrength, 20, y, 170, 4.5);
+            y += 4;
+
+            // Framework & Philosopher
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 18, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('Framework: ' + primary.framework, 25, y + 6);
+            doc.text('Key Philosophers: ' + primary.philosopher, 25, y + 12);
+            doc.setTextColor(...textMuted);
+            doc.text('Key Question: ' + primary.keyQuestion, 25, y + 17);
+            y += 24;
+
+            // Strengths & Challenges
+            doc.setFontSize(10);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('Strengths', 20, y);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('Challenges', 115, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(...textDark);
+            const maxItems = Math.max(primary.strengths.length, primary.challenges.length);
+            for (let i = 0; i < maxItems; i++) {
+                if (y > 275) { doc.addPage(); y = 20; }
+                if (primary.strengths[i]) {
+                    const sLines = doc.splitTextToSize('• ' + primary.strengths[i], 85);
+                    sLines.forEach(function(line) { doc.text(line, 22, y); y += 4; });
+                    y -= 4 * sLines.length;
+                }
+                if (primary.challenges[i]) {
+                    const cLines = doc.splitTextToSize('• ' + primary.challenges[i], 85);
+                    cLines.forEach(function(line, idx) { doc.text(line, 117, y + (idx * 4)); });
+                }
+                y += 8;
+            }
+
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage();
+            y = 20;
+
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' });
+            y += 18;
+
+            doc.setFontSize(9);
+            doc.setTextColor(...textMuted);
+            doc.text('Understanding how your ' + primaryType + ' framework manifests in workplace behaviors', 105, y, { align: 'center' });
+            y += 10;
+
+            // Communication Style
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('COMMUNICATION STYLE', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.communicationStyle, 20, y, 170, 4.5);
+            y += 6;
+
+            // Motivated By
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('MOTIVATED BY', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.motivatedBy, 20, y, 170, 4.5);
+            y += 6;
+
+            // Stress Response
+            doc.setFillColor(255, 243, 224);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('STRESS RESPONSE', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.stressResponse, 20, y, 170, 4.5);
+            y += 6;
+
+            // Blind Spots
+            doc.setFillColor(255, 235, 238);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('BLIND SPOTS', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.blindSpots, 20, y, 170, 4.5);
+            y += 6;
+
+            // Workplace Application
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('WORKPLACE APPLICATION', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.workplace, 20, y, 170, 4.5);
+            y += 6;
+
+            // Development Recommendation
+            doc.setFillColor(227, 242, 253);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.text('DEVELOPMENT RECOMMENDATION', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            y = addWrappedText(primary.development, 20, y, 170, 4.5);
+            y += 10;
+
+            // Working With Other Frameworks
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('WORKING WITH OTHER ETHICAL FRAMEWORKS', 105, y + 7, { align: 'center' });
+            y += 16;
+
+            doc.setFontSize(9);
+            Object.keys(primary.worksWith).forEach(function(framework) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                doc.setTextColor(...chapmanBlue);
+                doc.text('With ' + framework + 's:', 20, y);
+                y += 5;
+                doc.setTextColor(...textDark);
+                y = addWrappedText(primary.worksWith[framework], 25, y, 165, 4.5);
+                y += 4;
+            });
+
+            // ===== PAGE 3: SWOT Analysis =====
+            doc.addPage();
+            y = 20;
+
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(11);
+            doc.setTextColor(255, 255, 255);
+            doc.text('SWOT ANALYSIS - ' + primaryType + ' Framework', 105, y + 7, { align: 'center' });
+            y += 18;
+
+            const boxW = 82, boxH = 32;
+
+            // Strength
+            doc.setFillColor(232, 245, 233);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.setLineWidth(0.5);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('STRENGTH', 25, y + 7);
+            doc.setFontSize(8);
+            doc.setTextColor(...textDark);
+            const sLines = doc.splitTextToSize(primary.swotStrength, boxW - 10);
+            sLines.forEach(function(line, i) { if (i < 4) doc.text(line, 25, y + 13 + (i * 4)); });
+
+            // Weakness
+            doc.setFillColor(255, 235, 238);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(redColor[0], redColor[1], redColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('WEAKNESS', 113, y + 7);
+            doc.setFontSize(8);
+            doc.setTextColor(...textDark);
+            const wLines = doc.splitTextToSize(primary.swotWeakness, boxW - 10);
+            wLines.forEach(function(line, i) { if (i < 4) doc.text(line, 113, y + 13 + (i * 4)); });
+
+            y += boxH + 5;
+
+            // Opportunity
+            doc.setFillColor(227, 242, 253);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.text('OPPORTUNITY', 25, y + 7);
+            doc.setFontSize(8);
+            doc.setTextColor(...textDark);
+            const oLines = doc.splitTextToSize(primary.swotOpportunity, boxW - 10);
+            oLines.forEach(function(line, i) { if (i < 4) doc.text(line, 25, y + 13 + (i * 4)); });
+
+            // Threat
+            doc.setFillColor(255, 243, 224);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('THREAT', 113, y + 7);
+            doc.setFontSize(8);
+            doc.setTextColor(...textDark);
+            const tLines = doc.splitTextToSize(primary.swotThreat, boxW - 10);
+            tLines.forEach(function(line, i) { if (i < 4) doc.text(line, 113, y + 13 + (i * 4)); });
+
+            y += boxH + 15;
+
+            // Ethical Frameworks Comparison
+            doc.setFontSize(11);
+            doc.setTextColor(...chapmanBlue);
+            doc.text('THE FOUR ETHICAL FRAMEWORKS', 20, y);
+            y += 8;
+
+            const frameworks = [
+                { name: 'Consequentialism', key: 'What produces the best outcomes?', focus: 'Results & impact on stakeholders' },
+                { name: 'Deontology', key: 'What is my moral duty?', focus: 'Principles & universal rules' },
+                { name: 'Virtue Ethics', key: 'What would a person of good character do?', focus: 'Character & moral excellence' },
+                { name: 'Care Ethics', key: 'What do I owe to those in relationship with me?', focus: 'Relationships & responsibilities' }
+            ];
+
+            doc.setFontSize(8);
+            frameworks.forEach(function(f) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                doc.setTextColor(...chapmanBlue);
+                doc.text(f.name + ':', 25, y);
+                doc.setTextColor(...textMuted);
+                doc.text(f.key, 60, y);
+                y += 4;
+                doc.setTextColor(...textDark);
+                doc.text('Focus: ' + f.focus, 30, y);
+                y += 6;
+            });
+
+            y += 8;
+
+            // Reflection Questions
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('REFLECTION QUESTIONS', 105, y + 7, { align: 'center' });
+            y += 16;
+
+            const questions = [
+                'How does your primary framework explain your recent ethical decisions?',
+                'When might your approach lead to different conclusions than other frameworks?',
+                'What aspects of other frameworks might strengthen your decision-making?',
+                'How can you explain your reasoning to someone who thinks differently?',
+                'What situations might challenge your primary framework the most?'
+            ];
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            questions.forEach(function(q, i) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                const qLines = doc.splitTextToSize((i + 1) + '. ' + q, 165);
+                qLines.forEach(function(line) { doc.text(line, 25, y); y += 5; });
+                y += 4;
+            });
+
+            // Footer on all pages
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(...textMuted);
+                doc.text('Page ' + i + ' of ' + pageCount, 105, 287, { align: 'center' });
+                doc.text('Chapman University • Argyros College of Business and Economics • BUAD 216', 105, 292, { align: 'center' });
+            }
+
+            doc.save('Ethics_Assessment_' + studentName.replace(/\\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influence Style Assessment | Chapman University</title>
+    <style>
+        :root {
+            --chapman-blue: #00205B;
+            --chapman-gold: #C4A000;
+            --gold-light: #F5E6A3;
+            --blue-light: #E8EDF5;
+            --blue-medium: #1A3A7A;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --white: #ffffff;
+            --rationalizing: #1565C0;
+            --asserting: #C62828;
+            --negotiating: #7B1FA2;
+            --inspiring: #E65100;
+            --bridging: #2E7D32;
+            --shadow-subtle: 0 2px 8px rgba(0, 32, 91, 0.08);
+            --shadow-medium: 0 4px 20px rgba(0, 32, 91, 0.12);
+            --shadow-strong: 0 8px 32px rgba(0, 32, 91, 0.18);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 50%, var(--chapman-blue) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-strong);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--chapman-gold) 0%, var(--gold-light) 50%, var(--chapman-gold) 100%);
+        }
+        .institution { font-size: 0.95em; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; margin-bottom: 5px; }
+        .college { font-size: 1.1em; color: var(--chapman-gold); margin-bottom: 20px; font-weight: 600; }
+        h1 { font-size: 2.4em; font-weight: 700; margin-bottom: 12px; }
+        .subtitle { font-size: 1.15em; font-style: italic; color: var(--gold-light); }
+        .content { padding: 35px; }
+        .hidden { display: none !important; }
+
+        /* Intro Section */
+        .intro-section {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f8f9fc 100%);
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--chapman-blue);
+        }
+        .intro-section h2 { color: var(--chapman-blue); font-size: 1.4em; margin-bottom: 15px; }
+        .intro-section p { color: var(--text-secondary); margin-bottom: 15px; }
+
+        /* Style Preview Cards */
+        .styles-preview {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+        }
+        .style-preview-card {
+            padding: 18px 10px;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+        .style-preview-card.rationalizing { background: linear-gradient(135deg, var(--rationalizing), #1976D2); }
+        .style-preview-card.asserting { background: linear-gradient(135deg, var(--asserting), #D32F2F); }
+        .style-preview-card.negotiating { background: linear-gradient(135deg, var(--negotiating), #9C27B0); }
+        .style-preview-card.inspiring { background: linear-gradient(135deg, var(--inspiring), #F57C00); }
+        .style-preview-card.bridging { background: linear-gradient(135deg, var(--bridging), #43A047); }
+        .style-preview-card .icon { font-size: 1.8em; margin-bottom: 6px; }
+        .style-preview-card .name { font-size: 0.75em; }
+
+        /* Framework Box */
+        .framework-box {
+            background: var(--white);
+            border: 2px solid var(--chapman-gold);
+            border-radius: 14px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .framework-box h3 { color: var(--chapman-blue); text-align: center; margin-bottom: 20px; }
+        .framework-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .framework-category {
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--blue-light);
+        }
+        .framework-category h4 { color: var(--chapman-blue); margin-bottom: 12px; font-size: 1em; }
+        .framework-category ul { list-style: none; padding: 0; margin: 0; }
+        .framework-category li { padding: 8px 0; color: var(--text-secondary); font-size: 0.9em; display: flex; align-items: center; gap: 10px; }
+
+        .assessment-meta {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 32, 91, 0.1);
+            flex-wrap: wrap;
+        }
+        .meta-item { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
+        .meta-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--chapman-blue);
+            color: var(--white);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+        }
+
+        /* Student Info */
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .input-group { display: flex; flex-direction: column; }
+        .input-group label { font-weight: 600; margin-bottom: 8px; color: var(--chapman-blue); }
+        .input-group input {
+            padding: 14px 16px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--chapman-blue);
+            box-shadow: 0 0 0 4px rgba(0, 32, 91, 0.08);
+        }
+
+        /* Instructions */
+        .instructions-box {
+            background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%);
+            border: 2px solid var(--chapman-gold);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .instructions-box h3 { color: var(--chapman-blue); margin-bottom: 15px; }
+        .instructions-box p { color: var(--text-secondary); margin-bottom: 10px; }
+        .scale-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--blue-light);
+            border-radius: 10px;
+        }
+        .scale-item { text-align: center; flex: 1; }
+        .scale-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            background: var(--chapman-blue);
+            color: var(--white);
+            border-radius: 50%;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .scale-label { font-size: 0.65em; color: var(--text-secondary); }
+
+        /* Progress */
+        .progress-container { margin-bottom: 25px; }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e8ecf0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--chapman-blue) 0%, var(--chapman-gold) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Question Container */
+        .question-container {
+            background: var(--white);
+            border-radius: 14px;
+            border: 2px solid #e8ecf0;
+            padding: 25px;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+        }
+        .question-container:hover {
+            border-color: var(--chapman-blue);
+            box-shadow: var(--shadow-medium);
+        }
+        .question-container.answered {
+            border-color: var(--chapman-gold);
+            background: linear-gradient(135deg, #fffef8 0%, var(--white) 100%);
+        }
+        .question-text {
+            font-size: 1.02em;
+            color: var(--text-primary);
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+        .question-number {
+            color: var(--chapman-blue);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Likert Scale */
+        .likert-scale {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+        }
+        .likert-option {
+            flex: 1;
+            text-align: center;
+        }
+        .likert-option input[type="radio"] { display: none; }
+        .likert-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 6px;
+            border: 2px solid #e8ecf0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+        .likert-option label:hover {
+            border-color: var(--chapman-blue);
+            background: var(--blue-light);
+        }
+        .likert-option input[type="radio"]:checked + label {
+            border-color: var(--chapman-blue);
+            background: var(--chapman-blue);
+            color: var(--white);
+        }
+        .likert-number {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .likert-label {
+            font-size: 0.55em;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Buttons */
+        .controls { text-align: center; margin: 30px 0; }
+        .btn {
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(0, 32, 91, 0.3);
+        }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 32, 91, 0.4); }
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--chapman-gold) 0%, #d4b000 100%);
+            color: var(--chapman-blue);
+        }
+        .btn-secondary:hover { transform: translateY(-3px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--chapman-blue);
+            color: var(--chapman-blue);
+        }
+
+        /* Results */
+        .results { display: none; margin-top: 30px; }
+        .results-header {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 40px;
+            text-align: center;
+            border-radius: 16px 16px 0 0;
+        }
+        .results-header h2 { font-size: 1.8em; margin-bottom: 10px; }
+        .results-header .student-name { font-size: 1.3em; color: var(--chapman-gold); margin-bottom: 8px; }
+        .results-header .date { opacity: 0.9; }
+
+        /* Score Cards */
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            padding: 25px;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+        .score-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px 12px;
+            border-radius: 14px;
+            text-align: center;
+            color: var(--white);
+            transition: transform 0.3s ease;
+        }
+        .score-card:hover { transform: scale(1.03); }
+        .score-card.primary { transform: scale(1.08); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        .score-card.rationalizing.primary { background: linear-gradient(135deg, var(--rationalizing), #1976D2); }
+        .score-card.asserting.primary { background: linear-gradient(135deg, var(--asserting), #D32F2F); }
+        .score-card.negotiating.primary { background: linear-gradient(135deg, var(--negotiating), #9C27B0); }
+        .score-card.inspiring.primary { background: linear-gradient(135deg, var(--inspiring), #F57C00); }
+        .score-card.bridging.primary { background: linear-gradient(135deg, var(--bridging), #43A047); }
+        .score-card.secondary { border: 2px solid var(--chapman-gold); }
+        .score-card .icon { font-size: 1.6em; margin-bottom: 6px; }
+        .score-card h3 { font-size: 0.75em; margin-bottom: 6px; opacity: 0.95; }
+        .score-card .score { font-size: 1.8em; font-weight: 700; }
+        .score-card .max { font-size: 0.7em; opacity: 0.8; }
+
+        .results-body { background: var(--blue-light); padding: 35px; border-radius: 0 0 16px 16px; }
+
+        /* Category Summary */
+        .category-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .category-card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: var(--shadow-subtle);
+        }
+        .category-card h4 { color: var(--chapman-blue); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .category-score {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--chapman-blue);
+        }
+        .category-bar {
+            height: 10px;
+            background: #e8ecf0;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .category-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        /* Type Cards */
+        .type-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-medium);
+            border-top: 5px solid var(--chapman-blue);
+        }
+        .type-card.rationalizing { border-top-color: var(--rationalizing); }
+        .type-card.asserting { border-top-color: var(--asserting); }
+        .type-card.negotiating { border-top-color: var(--negotiating); }
+        .type-card.inspiring { border-top-color: var(--inspiring); }
+        .type-card.bridging { border-top-color: var(--bridging); }
+
+        .type-header { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
+        .type-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2em;
+            color: var(--white);
+        }
+        .type-icon.rationalizing { background: var(--rationalizing); }
+        .type-icon.asserting { background: var(--asserting); }
+        .type-icon.negotiating { background: var(--negotiating); }
+        .type-icon.inspiring { background: var(--inspiring); }
+        .type-icon.bridging { background: var(--bridging); }
+        .type-info h3 { font-size: 1.5em; color: var(--chapman-blue); margin-bottom: 4px; }
+        .type-info .type-subtitle { color: var(--chapman-gold); font-weight: 600; }
+        .type-label {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        .type-label.primary { background: var(--chapman-blue); }
+        .type-label.secondary { background: var(--chapman-gold); color: var(--chapman-blue); }
+        .type-description { color: var(--text-secondary); line-height: 1.8; }
+
+        /* Characteristics */
+        .char-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .char-box {
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .char-box.strengths { background: #E8F5E9; border-left: 4px solid var(--bridging); }
+        .char-box.challenges { background: #FFF3E0; border-left: 4px solid var(--inspiring); }
+        .char-box h5 { margin-bottom: 12px; font-size: 1em; color: var(--text-primary); }
+        .char-box ul { list-style: none; padding: 0; margin: 0; }
+        .char-box li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 0.95em;
+            color: var(--text-secondary);
+        }
+        .char-box.strengths li::before { content: '✓'; position: absolute; left: 0; color: var(--bridging); font-weight: bold; }
+        .char-box.challenges li::before { content: '!'; position: absolute; left: 0; color: var(--inspiring); font-weight: bold; }
+
+        /* Result Sections */
+        .result-section {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--chapman-blue);
+            box-shadow: var(--shadow-subtle);
+        }
+        .result-section.gold-accent { border-left-color: var(--chapman-gold); }
+        .result-section h4 { color: var(--chapman-blue); margin-bottom: 18px; }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.85em;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #e8ecf0;
+        }
+        .comparison-table th {
+            background: var(--blue-light);
+            color: var(--chapman-blue);
+            font-weight: 600;
+        }
+        .comparison-table td { color: var(--text-secondary); }
+        .comparison-table tr:hover { background: #f8f9fc; }
+
+        /* Strategies Grid */
+        .strategies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .strategy-card {
+            padding: 18px;
+            border-radius: 10px;
+            background: var(--blue-light);
+        }
+        .strategy-card h5 { color: var(--chapman-blue); margin-bottom: 8px; font-size: 0.95em; }
+        .strategy-card p { font-size: 0.9em; color: var(--text-secondary); margin: 0; line-height: 1.5; }
+
+        /* Reflection */
+        .reflection-section {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%);
+            border-radius: 14px;
+            padding: 30px;
+            margin-top: 25px;
+            border: 2px solid var(--chapman-blue);
+        }
+        .reflection-section h4 { color: var(--chapman-blue); margin-bottom: 20px; text-align: center; }
+        .reflection-questions { counter-reset: reflection; }
+        .reflection-question {
+            padding: 18px 20px 18px 50px;
+            position: relative;
+            background: var(--white);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+        .reflection-question::before {
+            counter-increment: reflection;
+            content: counter(reflection);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 26px;
+            height: 26px;
+            background: var(--chapman-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 700;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            border-top: 1px solid #e8ecf0;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .styles-preview { grid-template-columns: repeat(3, 1fr); }
+            .score-grid { grid-template-columns: repeat(2, 1fr); }
+            .category-summary, .framework-grid { grid-template-columns: 1fr; }
+            .student-info, .char-grid, .strategies-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8em; }
+            .type-header { flex-direction: column; text-align: center; }
+            .likert-scale { flex-wrap: wrap; }
+            .likert-option { min-width: 55px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="institution">Chapman University</div>
+            <div class="college">Argyros College of Business and Economics</div>
+            <h1>Influence Style Assessment</h1>
+            <div class="subtitle">Based on the Influence Framework by Cohen & Bradford</div>
+        </div>
+
+        <div class="content">
+            <!-- Intro Section -->
+            <div id="intro-section">
+                <div class="intro-section">
+                    <h2>🎯 How Do You Influence Others?</h2>
+                    <p>Leadership is fundamentally about influence—the ability to move people toward shared goals without relying solely on authority. Effective influencers adapt their approach to different people and situations.</p>
+                    <p>This assessment measures your preferred influence styles based on research by <strong>Cohen and Bradford</strong>, helping you understand your natural approach and develop a broader influence repertoire.</p>
+
+                    <div class="styles-preview">
+                        <div class="style-preview-card rationalizing">
+                            <div class="icon">📊</div>
+                            <div class="name">Rationalizing</div>
+                        </div>
+                        <div class="style-preview-card asserting">
+                            <div class="icon">⚡</div>
+                            <div class="name">Asserting</div>
+                        </div>
+                        <div class="style-preview-card negotiating">
+                            <div class="icon">🤝</div>
+                            <div class="name">Negotiating</div>
+                        </div>
+                        <div class="style-preview-card inspiring">
+                            <div class="icon">🔥</div>
+                            <div class="name">Inspiring</div>
+                        </div>
+                        <div class="style-preview-card bridging">
+                            <div class="icon">🌉</div>
+                            <div class="name">Bridging</div>
+                        </div>
+                    </div>
+
+                    <div class="framework-box">
+                        <h3>📚 Two Categories of Influence</h3>
+                        <div class="framework-grid">
+                            <div class="framework-category">
+                                <h4>💪 Push Styles (Direct)</h4>
+                                <p style="font-size: 0.85em; color: var(--text-secondary); margin-bottom: 10px;">You advocate your position and push others toward acceptance.</p>
+                                <ul>
+                                    <li><span style="font-size: 1.2em;">📊</span> <strong>Rationalizing:</strong> Logic, data, expertise</li>
+                                    <li><span style="font-size: 1.2em;">⚡</span> <strong>Asserting:</strong> Direct requests, expectations, consequences</li>
+                                </ul>
+                            </div>
+                            <div class="framework-category">
+                                <h4>🧲 Pull Styles (Indirect)</h4>
+                                <p style="font-size: 0.85em; color: var(--text-secondary); margin-bottom: 10px;">You draw others toward your position through engagement.</p>
+                                <ul>
+                                    <li><span style="font-size: 1.2em;">🤝</span> <strong>Negotiating:</strong> Exchange, compromise, mutual benefit</li>
+                                    <li><span style="font-size: 1.2em;">🔥</span> <strong>Inspiring:</strong> Vision, values, shared purpose</li>
+                                    <li><span style="font-size: 1.2em;">🌉</span> <strong>Bridging:</strong> Relationships, listening, involvement</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="assessment-meta">
+                        <div class="meta-item"><div class="meta-icon">⏱</div><span>10-15 minutes</span></div>
+                        <div class="meta-item"><div class="meta-icon">📝</div><span>40 self-assessment items</span></div>
+                        <div class="meta-item"><div class="meta-icon">🎯</div><span>5 influence styles</span></div>
+                    </div>
+                </div>
+
+                <div class="student-info">
+                    <div class="input-group">
+                        <label for="studentName">Your Full Name</label>
+                        <input type="text" id="studentName" placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <label for="testDate">Assessment Date</label>
+                        <input type="date" id="testDate">
+                    </div>
+                </div>
+
+                <div class="instructions-box">
+                    <h3>📌 How to Complete This Assessment</h3>
+                    <p>Rate each statement based on how frequently you use that approach when trying to influence others at work or school. Think about your actual behavior, not how you think you should behave.</p>
+                    <div class="scale-display">
+                        <div class="scale-item"><div class="scale-number">1</div><div class="scale-label">Never</div></div>
+                        <div class="scale-item"><div class="scale-number">2</div><div class="scale-label">Rarely</div></div>
+                        <div class="scale-item"><div class="scale-number">3</div><div class="scale-label">Sometimes</div></div>
+                        <div class="scale-item"><div class="scale-number">4</div><div class="scale-label">Often</div></div>
+                        <div class="scale-item"><div class="scale-number">5</div><div class="scale-label">Always</div></div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="startAssessment()">Begin Assessment →</button>
+                </div>
+            </div>
+
+            <!-- Assessment Section -->
+            <div id="assessment-section" class="hidden">
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Assessment Progress</span>
+                        <span id="progressText">0 of 40 questions completed</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div id="questions-container"></div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" id="submitBtn" onclick="calculateResults()" disabled>View My Influence Profile →</button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="results"></div>
+
+            <div id="downloadSection" class="hidden controls">
+                <button class="btn btn-secondary" onclick="generatePDF()">📄 Download PDF Report</button>
+                <button class="btn btn-outline" onclick="restartAssessment()">Take Assessment Again</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Influence Style Assessment • Based on Cohen & Bradford's Influence Framework</p>
+            <p>Chapman University • Argyros College of Business and Economics</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • MGMT 316</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Questions organized by style (8 per style)
+        const questions = {
+            rationalizing: [
+                { id: 1, text: "I present data and evidence to support my proposals.", style: "rationalizing" },
+                { id: 2, text: "I use logical arguments to make my case.", style: "rationalizing" },
+                { id: 3, text: "I cite research, best practices, or expert opinions to strengthen my position.", style: "rationalizing" },
+                { id: 4, text: "I prepare thoroughly with facts and figures before important discussions.", style: "rationalizing" },
+                { id: 5, text: "I appeal to others' sense of reason and objectivity.", style: "rationalizing" },
+                { id: 6, text: "I demonstrate how my ideas will produce measurable results.", style: "rationalizing" },
+                { id: 7, text: "I explain the rationale and thinking behind my recommendations.", style: "rationalizing" },
+                { id: 8, text: "I use analysis and frameworks to convince others.", style: "rationalizing" }
+            ],
+            asserting: [
+                { id: 9, text: "I clearly state what I want or need from others.", style: "asserting" },
+                { id: 10, text: "I set clear expectations and follow up on them.", style: "asserting" },
+                { id: 11, text: "I'm direct about consequences if expectations aren't met.", style: "asserting" },
+                { id: 12, text: "I use my position or authority when necessary to get things done.", style: "asserting" },
+                { id: 13, text: "I'm persistent when I believe strongly in something.", style: "asserting" },
+                { id: 14, text: "I push back firmly when I disagree with a decision.", style: "asserting" },
+                { id: 15, text: "I take charge in situations that need leadership.", style: "asserting" },
+                { id: 16, text: "I'm comfortable applying pressure to drive results.", style: "asserting" }
+            ],
+            negotiating: [
+                { id: 17, text: "I look for ways both parties can benefit from an agreement.", style: "negotiating" },
+                { id: 18, text: "I'm willing to compromise to reach a workable solution.", style: "negotiating" },
+                { id: 19, text: "I offer something of value in exchange for what I need.", style: "negotiating" },
+                { id: 20, text: "I explore trade-offs to find mutually acceptable outcomes.", style: "negotiating" },
+                { id: 21, text: "I build alliances by exchanging favors and support.", style: "negotiating" },
+                { id: 22, text: "I identify what others want and find ways to address it.", style: "negotiating" },
+                { id: 23, text: "I frame proposals in terms of what's in it for the other person.", style: "negotiating" },
+                { id: 24, text: "I create win-win solutions whenever possible.", style: "negotiating" }
+            ],
+            inspiring: [
+                { id: 25, text: "I paint a compelling picture of what we could achieve together.", style: "inspiring" },
+                { id: 26, text: "I connect proposals to larger values and purpose.", style: "inspiring" },
+                { id: 27, text: "I appeal to people's aspirations and ideals.", style: "inspiring" },
+                { id: 28, text: "I generate enthusiasm and excitement about possibilities.", style: "inspiring" },
+                { id: 29, text: "I help others see how they can make a meaningful contribution.", style: "inspiring" },
+                { id: 30, text: "I share stories that illustrate the impact of our work.", style: "inspiring" },
+                { id: 31, text: "I express confidence in others' abilities to achieve great things.", style: "inspiring" },
+                { id: 32, text: "I articulate a vision that motivates people to action.", style: "inspiring" }
+            ],
+            bridging: [
+                { id: 33, text: "I invest time in understanding others' perspectives before advocating my own.", style: "bridging" },
+                { id: 34, text: "I build relationships with people before I need their support.", style: "bridging" },
+                { id: 35, text: "I actively listen to understand others' concerns and interests.", style: "bridging" },
+                { id: 36, text: "I involve others in developing solutions rather than presenting finished ideas.", style: "bridging" },
+                { id: 37, text: "I find common ground as a foundation for influence.", style: "bridging" },
+                { id: 38, text: "I adapt my communication style to connect with different people.", style: "bridging" },
+                { id: 39, text: "I acknowledge others' contributions and expertise.", style: "bridging" },
+                { id: 40, text: "I create trust by being open and transparent.", style: "bridging" }
+            ]
+        };
+
+        // Style data
+        const styleData = {
+            rationalizing: {
+                name: "Rationalizing",
+                icon: "📊",
+                color: "#1565C0",
+                category: "Push",
+                subtitle: "Logic, Data & Expertise",
+                description: "Rationalizers influence through logic, data, and expertise. You build compelling cases based on evidence, research, and sound reasoning. This style is highly effective with analytical people and in environments that value data-driven decisions.",
+                profileSummary: "You influence through evidence and logic. You build compelling, well-researched cases that appeal to reason and analysis.",
+                decisionStyle: "Evidence-based and analytical. You evaluate influence strategies based on what the data supports and what logical arguments can be made.",
+                communicationStyle: "Structured, fact-based, and professional. You present information systematically and let the evidence speak for itself.",
+                motivatedBy: "Being credible, making sound arguments, influencing through expertise, and being seen as knowledgeable and objective.",
+                stressResponse: "Under pressure, you may rely too heavily on data when emotional connection is needed, or struggle when evidence is ambiguous.",
+                blindSpots: "May not recognize when people decide emotionally rather than rationally; can miss the relational dimension of influence.",
+                worksWith: {
+                    asserting: "They bring urgency; you bring evidence—combine for compelling action",
+                    negotiating: "They understand interests; you provide the rationale for agreements",
+                    inspiring: "They create emotional commitment; you provide the logical foundation",
+                    bridging: "They build relationships; you contribute substantive expertise"
+                },
+                strengths: [
+                    "Builds credible, well-supported arguments",
+                    "Effective with analytical decision-makers",
+                    "Creates lasting buy-in through understanding",
+                    "Maintains objectivity and professionalism",
+                    "Valuable in data-driven cultures"
+                ],
+                challenges: [
+                    "May overlook emotional factors in decisions",
+                    "Can seem cold or detached",
+                    "Less effective when data is unavailable",
+                    "May overwhelm with too much information",
+                    "Struggles with people who decide intuitively"
+                ],
+                whenToUse: "Technical decisions, analytical audiences, when you have strong evidence, early in formal processes",
+                tactics: ["Present cost-benefit analyses", "Use case studies and precedents", "Cite credible sources", "Build logical argument chains"],
+                swotStrength: "Builds credible, well-researched arguments that create lasting understanding",
+                swotWeakness: "May miss emotional and relational dimensions of influence",
+                swotOpportunity: "Develop inspiring and bridging skills to complement analytical strength",
+                swotThreat: "Risk of being ineffective with intuitive decision-makers or in low-data situations"
+            },
+            asserting: {
+                name: "Asserting",
+                icon: "⚡",
+                color: "#C62828",
+                category: "Push",
+                subtitle: "Direct Requests & Expectations",
+                description: "Asserters influence through direct communication, clear expectations, and appropriate use of authority or consequences. You're straightforward about what you want and persistent in pursuing it. This style is effective when clarity and urgency are needed.",
+                profileSummary: "You influence through direct communication and clear expectations. You're straightforward about what you want and persistent in pursuing it.",
+                decisionStyle: "Directive and decisive. You make clear what you want and expect, and you're willing to use authority when appropriate.",
+                communicationStyle: "Direct, clear, and action-oriented. You state expectations explicitly and follow through on consequences.",
+                motivatedBy: "Getting results, cutting through ambiguity, being respected for directness, and seeing action taken quickly.",
+                stressResponse: "Under pressure, you may become too aggressive, damage relationships through excessive directness, or create resistance.",
+                blindSpots: "May not recognize when directness creates resistance; can underestimate the importance of buy-in and relationship.",
+                worksWith: {
+                    rationalizing: "They provide evidence for your assertions; combine for credible directness",
+                    negotiating: "They find mutual benefit; you ensure clarity about bottom lines",
+                    inspiring: "They create voluntary commitment; you ensure accountability",
+                    bridging: "They repair relationships you may strain; learn from their patience"
+                },
+                strengths: [
+                    "Creates clarity about expectations",
+                    "Effective in urgent situations",
+                    "Cuts through ambiguity quickly",
+                    "Shows confidence and conviction",
+                    "Gets results when action is needed"
+                ],
+                challenges: [
+                    "Can create resistance and resentment",
+                    "May damage relationships if overused",
+                    "Less effective with peers or superiors",
+                    "Can be perceived as aggressive or domineering",
+                    "May shut down dialogue and ideas"
+                ],
+                whenToUse: "Crisis situations, clear authority relationships, when stakes are high, correcting performance issues",
+                tactics: ["Make direct requests", "Set clear expectations", "State consequences clearly", "Follow through consistently"],
+                swotStrength: "Creates clarity and gets action in urgent situations",
+                swotWeakness: "May damage relationships and create resistance through excessive directness",
+                swotOpportunity: "Develop pull styles to create willing compliance rather than forced compliance",
+                swotThreat: "Risk of being seen as domineering and creating covert resistance"
+            },
+            negotiating: {
+                name: "Negotiating",
+                icon: "🤝",
+                color: "#7B1FA2",
+                category: "Pull",
+                subtitle: "Exchange & Mutual Benefit",
+                description: "Negotiators influence through exchange, compromise, and creating mutual benefit. You understand what others want and find ways to address their interests while meeting your own. This style builds alliances and creates sustainable agreements.",
+                profileSummary: "You influence by finding mutual benefit and making strategic exchanges. You understand what others value and craft agreements that work for all parties.",
+                decisionStyle: "Interest-focused and pragmatic. You evaluate options based on what trades can be made and what agreements are sustainable.",
+                communicationStyle: "Diplomatic and interest-aware. You probe for others' needs, propose exchanges, and frame solutions as mutually beneficial.",
+                motivatedBy: "Crafting good deals, building reciprocal relationships, finding creative solutions, and creating sustainable agreements.",
+                stressResponse: "Under pressure, you may settle too quickly, make unnecessary concessions, or become overly transactional.",
+                blindSpots: "May be seen as political or transactional; can miss when others want inspiration rather than exchange.",
+                worksWith: {
+                    rationalizing: "They provide the logic; you craft the deals—combine for justified agreements",
+                    asserting: "They hold the line; you find creative solutions within constraints",
+                    inspiring: "They create commitment beyond transactions; learn to inspire, not just negotiate",
+                    bridging: "Natural allies—you both value relationships; together you build strong coalitions"
+                },
+                strengths: [
+                    "Creates sustainable agreements",
+                    "Builds reciprocal relationships",
+                    "Finds creative solutions to conflicts",
+                    "Effective across organizational boundaries",
+                    "Balances multiple stakeholder interests"
+                ],
+                challenges: [
+                    "May be seen as transactional",
+                    "Can result in suboptimal compromises",
+                    "Requires knowing what others value",
+                    "May take longer to reach agreements",
+                    "Less effective when you have nothing to offer"
+                ],
+                whenToUse: "Cross-functional collaboration, resource allocation, resolving conflicts, building coalitions",
+                tactics: ["Identify others' interests", "Make strategic concessions", "Build favor banks", "Frame win-win proposals"],
+                swotStrength: "Creates sustainable agreements through mutual benefit and strategic exchange",
+                swotWeakness: "May be seen as political or overly transactional",
+                swotOpportunity: "Develop inspiring skills to create commitment beyond exchange",
+                swotThreat: "Risk of suboptimal compromises or being seen as lacking conviction"
+            },
+            inspiring: {
+                name: "Inspiring",
+                icon: "🔥",
+                color: "#E65100",
+                category: "Pull",
+                subtitle: "Vision, Values & Purpose",
+                description: "Inspirers influence by connecting proposals to larger values, vision, and purpose. You generate enthusiasm by helping others see meaningful possibilities and their role in achieving something significant. This style creates deep commitment and discretionary effort.",
+                profileSummary: "You influence by connecting to purpose and vision. You help others see meaningful possibilities and generate enthusiasm for significant goals.",
+                decisionStyle: "Values-driven and visionary. You evaluate options based on their alignment with larger purpose and their potential to inspire.",
+                communicationStyle: "Passionate, visionary, and story-based. You paint compelling pictures of the future and connect work to meaning.",
+                motivatedBy: "Making a difference, creating meaning, inspiring others to achieve more than they thought possible, and building shared purpose.",
+                stressResponse: "Under pressure, you may become unrealistic, overlook practical concerns, or lose credibility by over-promising.",
+                blindSpots: "May not recognize when practical concerns need addressing before inspiration; can seem naive to skeptics.",
+                worksWith: {
+                    rationalizing: "They ground your vision in evidence; together you create compelling and credible cases",
+                    asserting: "They ensure accountability; you ensure commitment—both are needed",
+                    negotiating: "They handle the practical exchanges; you provide the larger purpose",
+                    bridging: "Natural allies—you both pull rather than push; together you build committed communities"
+                },
+                strengths: [
+                    "Creates deep emotional commitment",
+                    "Motivates discretionary effort",
+                    "Aligns people around shared purpose",
+                    "Effective for transformational change",
+                    "Inspires innovation and risk-taking"
+                ],
+                challenges: [
+                    "Can seem unrealistic or naive",
+                    "May lack practical implementation details",
+                    "Less effective with skeptical audiences",
+                    "Requires authentic passion",
+                    "Vision fatigue if overused"
+                ],
+                whenToUse: "Major change initiatives, building culture, motivating teams, articulating strategy",
+                tactics: ["Paint compelling future pictures", "Connect to values and purpose", "Use storytelling", "Express genuine passion"],
+                swotStrength: "Creates deep commitment through connection to purpose and meaning",
+                swotWeakness: "May lack practical grounding and lose credibility with skeptics",
+                swotOpportunity: "Pair inspiring vision with rationalizing evidence for maximum impact",
+                swotThreat: "Risk of being dismissed as unrealistic or losing credibility through over-promising"
+            },
+            bridging: {
+                name: "Bridging",
+                icon: "🌉",
+                color: "#2E7D32",
+                category: "Pull",
+                subtitle: "Relationships & Understanding",
+                description: "Bridgers influence by building relationships, listening deeply, and involving others in developing solutions. You create trust through genuine interest in others' perspectives and find common ground as a foundation for influence.",
+                profileSummary: "You influence by building relationships and finding common ground. You create trust through genuine interest in others and collaborative problem-solving.",
+                decisionStyle: "Collaborative and inclusive. You involve others in developing solutions and make decisions that preserve relationships.",
+                communicationStyle: "Warm, listening-focused, and inclusive. You ask questions, acknowledge perspectives, and involve others in shaping outcomes.",
+                motivatedBy: "Building relationships, understanding others, creating trust, and finding solutions that everyone can support.",
+                stressResponse: "Under pressure, you may over-accommodate, avoid necessary conflict, or take too long seeking consensus.",
+                blindSpots: "May sacrifice important outcomes to preserve relationships; can be too slow when urgency is needed.",
+                worksWith: {
+                    rationalizing: "They bring expertise; you build the relationships needed for that expertise to be heard",
+                    asserting: "They create urgency when needed; learn when to borrow their directness",
+                    negotiating: "Natural allies—you both value relationships; together you build lasting agreements",
+                    inspiring: "Natural allies—you both pull; they provide vision, you build the relationships to realize it"
+                },
+                strengths: [
+                    "Builds strong, lasting relationships",
+                    "Creates trust and psychological safety",
+                    "Surfaces important concerns early",
+                    "Generates genuine buy-in",
+                    "Effective across cultural differences"
+                ],
+                challenges: [
+                    "Can be time-consuming",
+                    "May be seen as indecisive",
+                    "Risk of over-accommodating others",
+                    "Less effective in urgent situations",
+                    "Requires patience and emotional intelligence"
+                ],
+                whenToUse: "Building new relationships, cross-cultural situations, sensitive topics, long-term collaboration",
+                tactics: ["Listen before advocating", "Find common ground", "Involve others in solutions", "Acknowledge contributions"],
+                swotStrength: "Builds trust and lasting relationships that create sustainable influence",
+                swotWeakness: "May be too slow and over-accommodating when urgency is needed",
+                swotOpportunity: "Develop comfort with asserting when situations require directness",
+                swotThreat: "Risk of being seen as indecisive or unable to take difficult positions"
+            }
+        };
+
+        let responses = {};
+        let studentName = '';
+        let surveyDate = '';
+
+        // Robust auto-date initialization with multiple fallbacks
+        function setTodayDate() {
+            var dateField = document.getElementById('testDate');
+            if (dateField && !dateField.value) {
+                dateField.value = new Date().toISOString().split('T')[0];
+            }
+        }
+        setTodayDate();
+        document.addEventListener('DOMContentLoaded', setTodayDate);
+        window.addEventListener('load', setTodayDate);
+        requestAnimationFrame(setTodayDate);
+        setTimeout(setTodayDate, 0);
+        setTimeout(setTodayDate, 100);
+        setTimeout(setTodayDate, 500);
+
+        function startAssessment() {
+            studentName = document.getElementById('studentName').value.trim();
+            surveyDate = document.getElementById('testDate').value;
+            if (!studentName) { alert('Please enter your name.'); return; }
+            if (!surveyDate) { alert('Please select a date.'); return; }
+            
+            document.getElementById('intro-section').classList.add('hidden');
+            document.getElementById('assessment-section').classList.remove('hidden');
+            renderQuestions();
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            let html = '';
+            let questionNum = 1;
+
+            // Combine and shuffle questions
+            const allQuestions = [
+                ...questions.rationalizing,
+                ...questions.asserting,
+                ...questions.negotiating,
+                ...questions.inspiring,
+                ...questions.bridging
+            ].sort(() => Math.random() - 0.5);
+
+            allQuestions.forEach(q => {
+                html += `
+                    <div class="question-container" id="q-container-${q.id}">
+                        <div class="question-text">
+                            <span class="question-number">${questionNum}.</span>
+                            ${q.text}
+                        </div>
+                        <div class="likert-scale">
+                            ${[1,2,3,4,5].map(val => `
+                                <div class="likert-option">
+                                    <input type="radio" name="q${q.id}" id="q${q.id}_${val}" value="${val}" data-style="${q.style}" onchange="handleResponse(${q.id}, ${val}, '${q.style}')">
+                                    <label for="q${q.id}_${val}">
+                                        <span class="likert-number">${val}</span>
+                                        <span class="likert-label">${['Never', 'Rarely', 'Sometimes', 'Often', 'Always'][val-1]}</span>
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                questionNum++;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function handleResponse(questionId, value, style) {
+            responses[questionId] = { value, style };
+            document.getElementById(`q-container-${questionId}`).classList.add('answered');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answered = Object.keys(responses).length;
+            const total = 40;
+            const progress = (answered / total) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${answered} of ${total} questions completed`;
+            document.getElementById('submitBtn').disabled = answered < total;
+        }
+
+        function calculateResults() {
+            if (Object.keys(responses).length < 40) {
+                alert('Please answer all questions before viewing results.');
+                return;
+            }
+
+            const scores = {
+                rationalizing: 0,
+                asserting: 0,
+                negotiating: 0,
+                inspiring: 0,
+                bridging: 0
+            };
+
+            Object.values(responses).forEach(r => {
+                scores[r.style] += r.value;
+            });
+
+            displayResults(scores);
+        }
+
+        function displayResults(scores) {
+            const maxScore = 40; // 8 questions × 5 max
+
+            // Sort styles by score
+            const sortedStyles = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const primaryStyle = sortedStyles[0][0];
+            const secondaryStyle = sortedStyles[1][0];
+            const primary = styleData[primaryStyle];
+            const secondary = styleData[secondaryStyle];
+
+            // Calculate push vs pull scores
+            const pushScore = scores.rationalizing + scores.asserting;
+            const pullScore = scores.negotiating + scores.inspiring + scores.bridging;
+            const pushMax = 80;
+            const pullMax = 120;
+            const pushPct = Math.round((pushScore / pushMax) * 100);
+            const pullPct = Math.round((pullScore / pullMax) * 100);
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div class="results-header">
+                    <h2>🎯 Your Influence Style Profile</h2>
+                    <div class="student-name">${studentName}</div>
+                    <div class="date">Completed: ${new Date(surveyDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                </div>
+
+                <div class="score-grid">
+                    ${Object.entries(scores).map(([style, score]) => {
+                        const data = styleData[style];
+                        return `
+                            <div class="score-card ${style} ${style === primaryStyle ? 'primary' : style === secondaryStyle ? 'secondary' : ''}">
+                                <div class="icon">${data.icon}</div>
+                                <h3>${data.name}</h3>
+                                <div class="score">${score}</div>
+                                <div class="max">of ${maxScore}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- TRACKER SUMMARY SECTION -->
+                <div style="background: linear-gradient(135deg, #1a3a7a 0%, #00205B 100%); color: white; padding: 25px; border-radius: 14px; margin: 20px 0;">
+                    <h3 style="color: #C4A000; margin-bottom: 15px; font-size: 1.3em;">📋 Assessment Tracker Summary</h3>
+                    <p style="font-size: 0.9em; opacity: 0.9; margin-bottom: 15px;">Copy this code into your Assessment Tracker.</p>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Primary Style</div>
+                                <div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${primary.name}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Secondary Style</div>
+                                <div style="font-size: 1.4em; font-weight: 700; color: #F5E6A3;">${secondary.name}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Push Score</div>
+                                <div style="font-size: 1.2em; font-weight: 600;">${pushScore} / ${pushMax} (${pushPct}%)</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Pull Score</div>
+                                <div style="font-size: 1.2em; font-weight: 600;">${pullScore} / ${pullMax} (${pullPct}%)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Primary Influence Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${primary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Secondary Influence Style</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${secondary.name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Push Style Score</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${pushScore} / ${pushMax} (${pushPct}%)</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Pull Style Score</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${pullScore} / ${pullMax} (${pullPct}%)</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Style Scores:</strong> Rationalizing: ${scores.rationalizing} | Asserting: ${scores.asserting} | Negotiating: ${scores.negotiating} | Inspiring: ${scores.inspiring} | Bridging: ${scores.bridging}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Influence Style: ${styleData[primaryStyle].name} (primary) + ${styleData[secondaryStyle].name} (secondary) | Score: ${scores[primaryStyle]}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">ISA-${primaryStyle === 'rationalizing' ? 'Ra' : primaryStyle === 'asserting' ? 'As' : primaryStyle === 'negotiating' ? 'Ne' : primaryStyle === 'inspiring' ? 'In' : 'Br'}${secondaryStyle === 'rationalizing' ? 'Ra' : secondaryStyle === 'asserting' ? 'As' : secondaryStyle === 'negotiating' ? 'Ne' : secondaryStyle === 'inspiring' ? 'In' : 'Br'}-${scores[primaryStyle]}</code></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-body">
+                    <div class="category-summary">
+                        <div class="category-card">
+                            <h4>💪 Push Styles</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 10px;">Direct advocacy: Rationalizing + Asserting</p>
+                            <div class="category-score">${pushScore} <span style="font-size: 0.5em; color: var(--text-secondary);">/ ${pushMax}</span></div>
+                            <div class="category-bar">
+                                <div class="category-bar-fill" style="width: ${pushPct}%; background: linear-gradient(90deg, var(--rationalizing), var(--asserting));"></div>
+                            </div>
+                        </div>
+                        <div class="category-card">
+                            <h4>🧲 Pull Styles</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 10px;">Engagement: Negotiating + Inspiring + Bridging</p>
+                            <div class="category-score">${pullScore} <span style="font-size: 0.5em; color: var(--text-secondary);">/ ${pullMax}</span></div>
+                            <div class="category-bar">
+                                <div class="category-bar-fill" style="width: ${pullPct}%; background: linear-gradient(90deg, var(--negotiating), var(--inspiring), var(--bridging));"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-card ${primaryStyle}">
+                        <div class="type-label primary">Primary Influence Style</div>
+                        <div class="type-header">
+                            <div class="type-icon ${primaryStyle}">${primary.icon}</div>
+                            <div class="type-info">
+                                <h3>${primary.name}</h3>
+                                <div class="type-subtitle">${primary.subtitle}</div>
+                            </div>
+                        </div>
+                        <span style="display: inline-block; background: ${primary.category === 'Push' ? '#FFEBEE' : '#E8F5E9'}; color: ${primary.category === 'Push' ? 'var(--asserting)' : 'var(--bridging)'}; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 15px;">${primary.category} Style</span>
+                        <p class="type-description">${primary.description}</p>
+                        <div class="char-grid">
+                            <div class="char-box strengths">
+                                <h5>✓ Strengths</h5>
+                                <ul>${primary.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
+                            </div>
+                            <div class="char-box challenges">
+                                <h5>⚠️ Watch Out For</h5>
+                                <ul>${primary.challenges.map(c => `<li>${c}</li>`).join('')}</ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-section gold-accent">
+                        <h4>⏱️ When to Use ${primary.name}</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.8;">${primary.whenToUse}</p>
+                        <div style="margin-top: 15px;">
+                            <strong style="color: var(--chapman-blue);">Key Tactics:</strong>
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                                ${primary.tactics.map(t => `<span style="background: var(--blue-light); padding: 8px 14px; border-radius: 20px; font-size: 0.9em; color: var(--text-secondary);">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type-card ${secondaryStyle}" style="border-top-width: 3px;">
+                        <div class="type-label secondary">Secondary Influence Style</div>
+                        <div class="type-header">
+                            <div class="type-icon ${secondaryStyle}">${secondary.icon}</div>
+                            <div class="type-info">
+                                <h3>${secondary.name}</h3>
+                                <div class="type-subtitle">${secondary.subtitle}</div>
+                            </div>
+                        </div>
+                        <p class="type-description">${secondary.description}</p>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>📋 Comparing All Five Styles</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Style</th>
+                                    <th>Type</th>
+                                    <th>Best For</th>
+                                    <th>Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong style="color: var(--rationalizing);">📊 Rationalizing</strong></td>
+                                    <td>Push</td>
+                                    <td>Analytical audiences, data-rich contexts</td>
+                                    <td>Ignoring emotions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--asserting);">⚡ Asserting</strong></td>
+                                    <td>Push</td>
+                                    <td>Urgent situations, clear authority</td>
+                                    <td>Creating resistance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--negotiating);">🤝 Negotiating</strong></td>
+                                    <td>Pull</td>
+                                    <td>Cross-functional, resource conflicts</td>
+                                    <td>Appearing transactional</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--inspiring);">🔥 Inspiring</strong></td>
+                                    <td>Pull</td>
+                                    <td>Major change, building commitment</td>
+                                    <td>Seeming unrealistic</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--bridging);">🌉 Bridging</strong></td>
+                                    <td>Pull</td>
+                                    <td>Building trust, sensitive topics</td>
+                                    <td>Taking too long</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>📊 Your Influence Style Distribution</h4>
+                        <div style="display: grid; gap: 12px; margin-top: 15px;">
+                            ${Object.entries(scores).map(([style, score]) => {
+                                const data = styleData[style];
+                                const pct = (score / maxScore) * 100;
+                                return `
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <span style="width: 120px; font-weight: 600; color: var(--text-secondary); font-size: 0.9em;">${data.icon} ${data.name}</span>
+                                        <div style="flex: 1; height: 26px; background: #e8ecf0; border-radius: 13px; overflow: hidden;">
+                                            <div style="height: 100%; width: ${pct}%; background: ${data.color}; border-radius: 13px; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; color: white; font-weight: 600; font-size: 0.85em; min-width: 40px;">${score}</div>
+                                        </div>
+                                        <span style="width: 50px; text-align: right; color: var(--text-secondary); font-size: 0.9em;">${pct.toFixed(0)}%</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>🎯 Expanding Your Influence Repertoire</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Your lowest-scoring style represents the biggest opportunity for development:</p>
+                        <div class="strategies-grid">
+                            ${getDevelopmentStrategies(sortedStyles[4][0]).map((s, i) => `
+                                <div class="strategy-card">
+                                    <h5>${styleData[sortedStyles[4][0]].icon} ${s.title}</h5>
+                                    <p>${s.tip}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="result-section gold-accent">
+                        <h4>💡 Key Insight: Situational Influence</h4>
+                        <div style="background: linear-gradient(135deg, #fffef8, #fef9e7); padding: 20px; border-radius: 12px; border-left: 4px solid var(--chapman-gold);">
+                            <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 15px;">
+                                <strong>The most effective influencers are versatile.</strong> They adapt their style based on:
+                            </p>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0;">👤</span><strong>The person</strong> — What style resonates with them? (Analytical? Relational? Vision-driven?)</li>
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0;">📋</span><strong>The situation</strong> — Is this urgent? Complex? Sensitive? Political?</li>
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0;">🎯</span><strong>The goal</strong> — Quick compliance? Lasting commitment? Creative collaboration?</li>
+                                <li style="padding: 10px 0 10px 35px; position: relative; color: var(--text-secondary);"><span style="position: absolute; left: 0;">⚖️</span><strong>Your relationship</strong> — Do you have authority? Trust? History?</li>
+                            </ul>
+                            <p style="color: var(--text-secondary); line-height: 1.8; margin-top: 15px;">
+                                <em>Relying too heavily on one style—even an effective one—limits your influence potential.</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="reflection-section">
+                        <h4>🤔 Reflection Questions</h4>
+                        <div class="reflection-questions">
+                            <div class="reflection-question">Think of a recent influence attempt. Which style(s) did you use? Was it effective?</div>
+                            <div class="reflection-question">Who do you find difficult to influence? What style might work better with them?</div>
+                            <div class="reflection-question">When has your primary style (${primary.name}) backfired? What would you do differently?</div>
+                            <div class="reflection-question">What situation in your life right now would benefit from a different influence approach?</div>
+                            <div class="reflection-question">How does your influence style affect your ability to lead without formal authority?</div>
+                            <div class="reflection-question">What one influence tactic will you practice this week?</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('assessment-section').classList.add('hidden');
+            resultsDiv.style.display = 'block';
+            document.getElementById('downloadSection').classList.remove('hidden');
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+
+            window.influenceResults = { scores, primaryStyle, secondaryStyle, pushScore, pullScore };
+        }
+
+        function getDevelopmentStrategies(style) {
+            const strategies = {
+                rationalizing: [
+                    { title: "Prepare Data", tip: "Before your next proposal, gather 3 data points that support your case." },
+                    { title: "Use Frameworks", tip: "Structure arguments using pros/cons, cost-benefit, or decision matrices." },
+                    { title: "Cite Sources", tip: "Reference research, experts, or successful precedents to build credibility." },
+                    { title: "Explain Reasoning", tip: "Walk through your logic step-by-step rather than just stating conclusions." }
+                ],
+                asserting: [
+                    { title: "Be Direct", tip: "Practice stating what you want clearly: 'I need X by Y date.'" },
+                    { title: "Set Expectations", tip: "Explicitly communicate standards and follow up on commitments." },
+                    { title: "Name Consequences", tip: "Be clear about what will happen if expectations aren't met." },
+                    { title: "Take Charge", tip: "Volunteer to lead when situations need direction and clarity." }
+                ],
+                negotiating: [
+                    { title: "Understand Interests", tip: "Before proposing, ask what matters most to the other person." },
+                    { title: "Create Options", tip: "Brainstorm multiple ways to meet both parties' core needs." },
+                    { title: "Make Trades", tip: "Offer something you value less for something you value more." },
+                    { title: "Build Favor Banks", tip: "Do favors without immediate expectation—it creates future influence." }
+                ],
+                inspiring: [
+                    { title: "Paint the Picture", tip: "Describe the future state vividly—what will success look and feel like?" },
+                    { title: "Connect to Values", tip: "Link your proposal to purpose, meaning, and what people care about." },
+                    { title: "Tell Stories", tip: "Use narratives and examples to make abstract ideas concrete." },
+                    { title: "Show Genuine Enthusiasm", tip: "Let your authentic passion for the idea come through." }
+                ],
+                bridging: [
+                    { title: "Listen First", tip: "Spend more time understanding before advocating your position." },
+                    { title: "Find Common Ground", tip: "Start from shared interests or values before raising differences." },
+                    { title: "Involve Others", tip: "Ask people to help develop solutions rather than presenting finished ideas." },
+                    { title: "Build Relationships", tip: "Invest in connections before you need to make influence attempts." }
+                ]
+            };
+            return strategies[style] || [];
+        }
+
+        function generatePDF() {
+            var jsPDF = window.jspdf.jsPDF;
+            var doc = new jsPDF();
+            var scores = window.influenceResults.scores;
+            var primaryStyle = window.influenceResults.primaryStyle;
+            var secondaryStyle = window.influenceResults.secondaryStyle;
+            var pushScore = window.influenceResults.pushScore;
+            var pullScore = window.influenceResults.pullScore;
+            var primary = styleData[primaryStyle];
+            var secondary = styleData[secondaryStyle];
+            var maxScore = 40;
+
+            // Colors
+            var chapmanBlue = [0, 32, 91];
+            var chapmanGold = [196, 160, 0];
+            var textDark = [26, 26, 46];
+            var textMuted = [100, 100, 110];
+            var greenColor = [46, 125, 50];
+            var redColor = [198, 40, 40];
+            var blueColor = [21, 101, 192];
+            var orangeColor = [230, 81, 0];
+            var purpleColor = [123, 31, 162];
+
+            // Tracker code generation
+            var styleAbbrev = { rationalizing: 'Ra', asserting: 'As', negotiating: 'Ne', inspiring: 'In', bridging: 'Br' };
+            var trackerCode = 'ISA-' + styleAbbrev[primaryStyle] + styleAbbrev[secondaryStyle] + '-' + scores[primaryStyle];
+
+            // Helper function
+            function addWrappedText(text, x, startY, maxWidth, lineHeight) {
+                var lines = doc.splitTextToSize(text, maxWidth);
+                var currentY = startY;
+                for (var i = 0; i < lines.length; i++) {
+                    if (currentY > 275) { doc.addPage(); currentY = 20; }
+                    doc.text(lines[i], x, currentY);
+                    currentY += lineHeight;
+                }
+                return currentY;
+            }
+
+            // ===== PAGE 1 =====
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.rect(0, 0, 210, 42, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('CHAPMAN UNIVERSITY', 105, 12, { align: 'center' });
+            doc.setFontSize(9);
+            doc.setTextColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.text('Argyros College of Business and Economics', 105, 18, { align: 'center' });
+            doc.setFontSize(15);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Influence Style Assessment', 105, 28, { align: 'center' });
+            doc.setFontSize(9);
+            doc.text("Based on Cohen & Bradford's Influence Framework", 105, 36, { align: 'center' });
+            doc.setFillColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.rect(0, 42, 210, 2, 'F');
+
+            var y = 52;
+            doc.setFontSize(10);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            doc.text('Student: ' + studentName, 20, y);
+            doc.text('Date: ' + new Date(surveyDate).toLocaleDateString(), 140, y);
+            y += 10;
+
+            // Primary Style Banner
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 18, 2, 2, 'F');
+            doc.setFontSize(14);
+            doc.setTextColor(255, 255, 255);
+            doc.text('PRIMARY STYLE: ' + primary.name.toUpperCase(), 105, y + 12, { align: 'center' });
+            y += 24;
+
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanGold[0], chapmanGold[1], chapmanGold[2]);
+            doc.text(primary.subtitle + ' (' + primary.category + ' Style)', 105, y, { align: 'center' });
+            y += 6;
+
+            doc.setFontSize(9);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('Secondary: ' + secondary.name + ' (' + secondary.category + ')', 105, y, { align: 'center' });
+            y += 8;
+
+            // Score Box
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 22, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('STYLE SCORES (8 questions each, max 40)', 25, y + 6);
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            doc.text('Rationalizing: ' + scores.rationalizing, 25, y + 12);
+            doc.text('Asserting: ' + scores.asserting, 70, y + 12);
+            doc.text('Negotiating: ' + scores.negotiating, 110, y + 12);
+            doc.text('Inspiring: ' + scores.inspiring, 150, y + 12);
+            doc.text('Bridging: ' + scores.bridging, 25, y + 18);
+            doc.text('PUSH Total: ' + pushScore + '/80', 80, y + 18);
+            doc.text('PULL Total: ' + pullScore + '/120', 140, y + 18);
+            y += 28;
+
+            // Tracker Code Box
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Your Result: ' + primary.name + ' (primary) + ' + secondary.name + ' (secondary)', 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode, 105, y + 12, { align: 'center' });
+            y += 16;
+
+            // Description
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(primary.description, 20, y, 170, 4);
+            y += 5;
+
+            // Strengths
+            doc.setFontSize(10);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('STRENGTHS', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < Math.min(4, primary.strengths.length); i++) {
+                doc.text('- ' + primary.strengths[i], 25, y);
+                y += 4;
+            }
+            y += 3;
+
+            // Challenges
+            doc.setFontSize(10);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('WATCH OUT FOR', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < Math.min(4, primary.challenges.length); i++) {
+                doc.text('- ' + primary.challenges[i], 25, y);
+                y += 4;
+            }
+            y += 3;
+
+            // When to Use
+            doc.setFontSize(10);
+            doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.text('WHEN TO USE', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(primary.whenToUse, 20, y, 170, 4);
+            y += 3;
+
+            // Tactics
+            doc.setFontSize(10);
+            doc.setTextColor(purpleColor[0], purpleColor[1], purpleColor[2]);
+            doc.text('KEY TACTICS', 20, y);
+            y += 5;
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < Math.min(4, primary.tactics.length); i++) {
+                doc.text('-> ' + primary.tactics[i], 25, y);
+                y += 4;
+            }
+
+            // ===== PAGE 2: SWOT and All Styles =====
+            doc.addPage();
+            y = 20;
+
+            // SWOT Header
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(11);
+            doc.setTextColor(255, 255, 255);
+            doc.text('SWOT ANALYSIS - Influence Profile', 105, y + 7, { align: 'center' });
+            y += 18;
+
+            // SWOT Grid
+            var boxW = 82;
+            var boxH = 26;
+
+            // Strength
+            doc.setFillColor(232, 245, 233);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.setLineWidth(0.5);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(greenColor[0], greenColor[1], greenColor[2]);
+            doc.text('STRENGTH', 25, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var sText = 'Strong ' + primary.name.toLowerCase() + ' style provides clear influence approach';
+            var sLines = doc.splitTextToSize(sText, boxW - 10);
+            for (var i = 0; i < Math.min(sLines.length, 3); i++) {
+                doc.text(sLines[i], 25, y + 12 + (i * 4));
+            }
+
+            // Weakness
+            doc.setFillColor(255, 235, 238);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(redColor[0], redColor[1], redColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('WEAKNESS', 113, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var wText = primary.challenges[0];
+            var wLines = doc.splitTextToSize(wText, boxW - 10);
+            for (var i = 0; i < Math.min(wLines.length, 3); i++) {
+                doc.text(wLines[i], 113, y + 12 + (i * 4));
+            }
+
+            y += boxH + 5;
+
+            // Opportunity
+            doc.setFillColor(227, 242, 253);
+            doc.roundedRect(20, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.line(20, y, 20, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(blueColor[0], blueColor[1], blueColor[2]);
+            doc.text('OPPORTUNITY', 25, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var oText = 'Develop ' + secondary.name.toLowerCase() + ' as complementary style for greater flexibility';
+            var oLines = doc.splitTextToSize(oText, boxW - 10);
+            for (var i = 0; i < Math.min(oLines.length, 3); i++) {
+                doc.text(oLines[i], 25, y + 12 + (i * 4));
+            }
+
+            // Threat
+            doc.setFillColor(255, 243, 224);
+            doc.roundedRect(108, y, boxW, boxH, 2, 2, 'F');
+            doc.setDrawColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.line(108, y, 108, y + boxH);
+            doc.setFontSize(9);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('THREAT', 113, y + 7);
+            doc.setFontSize(7);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            var tText = 'Over-reliance on one style limits effectiveness with diverse audiences';
+            var tLines = doc.splitTextToSize(tText, boxW - 10);
+            for (var i = 0; i < Math.min(tLines.length, 3); i++) {
+                doc.text(tLines[i], 113, y + 12 + (i * 4));
+            }
+
+            y += boxH + 12;
+
+            // Push vs Pull Framework
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 20, 2, 2, 'F');
+            doc.setFontSize(9);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('PUSH vs PULL INFLUENCE FRAMEWORK', 105, y + 6, { align: 'center' });
+            doc.setFontSize(7);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('PUSH (Rationalizing + Asserting): ' + pushScore + '/80 - Direct, logic-based influence', 105, y + 12, { align: 'center' });
+            doc.text('PULL (Negotiating + Inspiring + Bridging): ' + pullScore + '/120 - Relationship-based influence', 105, y + 17, { align: 'center' });
+            y += 26;
+
+            // All Five Styles
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('THE FIVE INFLUENCE STYLES', 20, y);
+            y += 7;
+
+            var styles = ['rationalizing', 'asserting', 'negotiating', 'inspiring', 'bridging'];
+            var styleColors = {
+                rationalizing: blueColor,
+                asserting: redColor,
+                negotiating: purpleColor,
+                inspiring: orangeColor,
+                bridging: greenColor
+            };
+
+            for (var s = 0; s < styles.length; s++) {
+                var style = styles[s];
+                var styleColor = styleColors[style];
+                var isYours = (style === primaryStyle);
+                
+                if (y > 255) { doc.addPage(); y = 20; }
+                
+                doc.setFontSize(8);
+                doc.setTextColor(styleColor[0], styleColor[1], styleColor[2]);
+                doc.text(styleData[style].name + (isYours ? ' (Your Primary)' : '') + ': ' + scores[style] + '/40 [' + styleData[style].category + ']', 25, y);
+                y += 4;
+                doc.setFontSize(7);
+                doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+                doc.text(styleData[style].subtitle, 25, y);
+                y += 5;
+            }
+
+            y += 6;
+
+            // Reflection Questions
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('REFLECTION QUESTIONS', 105, y + 7, { align: 'center' });
+            y += 16;
+
+            var reflectionQs = [
+                "Think of a recent influence attempt. Which style did you use? Was it effective?",
+                "Who do you find difficult to influence? What style might work better?",
+                "When has your primary style backfired? What would you do differently?",
+                "How can you develop your secondary style for greater flexibility?",
+                "What influence tactic will you practice this week?"
+            ];
+            doc.setFontSize(8);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            for (var i = 0; i < reflectionQs.length; i++) {
+                if (y > 275) { doc.addPage(); y = 20; }
+                var qLines = doc.splitTextToSize((i + 1) + '. ' + reflectionQs[i], 165);
+                for (var j = 0; j < qLines.length; j++) {
+                    doc.text(qLines[j], 25, y);
+                    y += 4;
+                }
+                y += 2;
+            }
+
+            // Footer on all pages
+            var pageCount = doc.internal.getNumberOfPages();
+            for (var i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+                doc.text('Page ' + i + ' of ' + pageCount, 105, 287, { align: 'center' });
+                doc.text('Chapman University - Argyros College of Business and Economics - MGMT 316', 105, 292, { align: 'center' });
+            }
+
+            doc.save('Influence_Style_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+
+        function restartAssessment() {
+            responses = {};
+            document.getElementById('studentName').value = '';
+            document.getElementById('testDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('assessment-section').classList.add('hidden');
+            document.getElementById('downloadSection').classList.add('hidden');
+            document.getElementById('intro-section').classList.remove('hidden');
+            document.getElementById('progressFill').style.width = '0%';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

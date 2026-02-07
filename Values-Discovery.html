@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Values Discovery Assessment | Chapman University</title>
+    <style>
+        :root {
+            --chapman-blue: #00205B;
+            --chapman-gold: #C4A000;
+            --gold-light: #F5E6A3;
+            --blue-light: #E8EDF5;
+            --blue-medium: #1A3A7A;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --white: #ffffff;
+            --success: #2E7D32;
+            --success-light: #E8F5E9;
+            --shadow-subtle: 0 2px 8px rgba(0, 32, 91, 0.08);
+            --shadow-medium: 0 4px 20px rgba(0, 32, 91, 0.12);
+            --shadow-strong: 0 8px 32px rgba(0, 32, 91, 0.18);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 50%, var(--chapman-blue) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-strong);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--chapman-gold) 0%, var(--gold-light) 50%, var(--chapman-gold) 100%);
+        }
+
+        .institution {
+            font-size: 0.95em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .college {
+            font-size: 1.1em;
+            color: var(--chapman-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.15em;
+            font-style: italic;
+            opacity: 0.95;
+            color: var(--gold-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 35px;
+        }
+
+        /* Progress */
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active {
+            opacity: 1;
+            color: var(--chapman-blue);
+            font-weight: 600;
+        }
+
+        .progress-step.completed {
+            opacity: 1;
+            color: var(--success);
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+
+        .progress-step.active .step-number {
+            background: var(--chapman-blue);
+            color: var(--white);
+        }
+
+        .progress-step.completed .step-number {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e8ecf0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--chapman-blue) 0%, var(--chapman-gold) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Steps */
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Instructions Box */
+        .instructions {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f8f9fc 100%);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 28px;
+            border-left: 5px solid var(--chapman-blue);
+        }
+
+        .instructions h2 {
+            color: var(--chapman-blue);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .instructions p, .instructions li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .instructions li {
+            margin-bottom: 12px;
+        }
+
+        /* Student Info */
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--chapman-blue);
+            font-size: 0.95em;
+        }
+
+        .form-group input {
+            padding: 14px 16px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--chapman-blue);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(0, 32, 91, 0.08);
+        }
+
+        /* Selection Counter */
+        .selection-counter {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            padding: 18px 28px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0;
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .selection-notice {
+            background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%);
+            border: 2px solid var(--chapman-gold);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 18px 0;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .value-card {
+            background: var(--white);
+            border: 2px solid #e8ecf0;
+            border-radius: 14px;
+            padding: 22px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--chapman-blue);
+        }
+
+        .value-card.selected {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            border-color: var(--chapman-blue);
+            transform: scale(1.02);
+        }
+
+        .value-card.custom {
+            border-color: var(--success);
+        }
+
+        .value-card.custom.selected {
+            background: linear-gradient(135deg, var(--success) 0%, #43A047 100%);
+            border-color: var(--success);
+        }
+
+        .value-card h3 {
+            font-size: 1.15em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .value-card p {
+            font-size: 0.9em;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        /* Custom Value Section */
+        .custom-value-section {
+            margin-top: 35px;
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f8f9fc 100%);
+            padding: 28px;
+            border-radius: 14px;
+            border-left: 5px solid var(--chapman-gold);
+        }
+
+        .custom-value-section h3 {
+            color: var(--chapman-blue);
+            margin-bottom: 12px;
+        }
+
+        .custom-value-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .custom-input-row {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .custom-values-display {
+            margin-top: 20px;
+        }
+
+        .custom-value-tag {
+            display: inline-block;
+            background: var(--white);
+            border: 2px solid var(--success);
+            border-radius: 10px;
+            padding: 12px 18px;
+            margin: 6px;
+            position: relative;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 1;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .remove-btn:hover {
+            background: #c82333;
+            transform: scale(1.1);
+        }
+
+        .value-card[draggable="true"] {
+            cursor: grab;
+        }
+        
+        .value-card[draggable="true"]:active {
+            cursor: grabbing;
+        }
+        
+        .value-card.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+
+        .value-card.ready-to-place {
+            border-color: var(--chapman-gold);
+            box-shadow: 0 0 0 3px rgba(196, 160, 0, 0.3);
+            animation: pulse 1s infinite;
+        }
+
+        .rank-column.awaiting-drop {
+            border-color: var(--chapman-gold);
+            border-style: solid;
+            background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Ranking Area */
+        .sorting-area {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .rank-column {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f5f7fa 100%);
+            border-radius: 16px;
+            padding: 25px;
+            min-height: 220px;
+            border: 3px dashed #ccd5e0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .rank-column.drag-over {
+            border-color: var(--chapman-blue);
+            background: linear-gradient(135deg, #d4e4f7 0%, #e8f0fa 100%);
+            transform: scale(1.02);
+            border-style: solid;
+        }
+
+        .rank-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .rank-column h3 {
+            color: var(--chapman-blue);
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .rank-column > p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .sorted-value {
+            background: var(--white);
+            border: 2px solid var(--chapman-blue);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            cursor: move;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .sorted-value:hover {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .sorted-value.custom {
+            border-color: var(--success);
+        }
+
+        .sorted-value h4 {
+            color: var(--chapman-blue);
+            margin-bottom: 5px;
+        }
+
+        .sorted-value.custom h4 {
+            color: var(--success);
+        }
+
+        .sorted-value p {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+
+        /* Ranking Instructions */
+        .ranking-instructions {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
+            border: 3px solid var(--chapman-blue);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 25px 0;
+        }
+
+        .ranking-instructions h3 {
+            color: var(--chapman-blue);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .instruction-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+        }
+
+        .instruction-step {
+            background: var(--white);
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--chapman-blue);
+        }
+
+        .instruction-step .icon {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            border: none;
+            padding: 16px 35px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(0, 32, 91, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 32, 91, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--chapman-gold) 0%, #d4b000 100%);
+            color: var(--chapman-blue);
+            box-shadow: 0 4px 15px rgba(196, 160, 0, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(196, 160, 0, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f2f5;
+        }
+
+        /* Results */
+        .results {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #f8f9fc 100%);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .results h2 {
+            color: var(--chapman-blue);
+            font-size: 1.8em;
+            margin-bottom: 12px;
+        }
+
+        .results > p {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            margin-bottom: 35px;
+        }
+
+        .top-values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .top-value {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-value::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--chapman-gold) 100%);
+        }
+
+        .top-value.custom::before {
+            background: linear-gradient(135deg, var(--success) 0%, #43A047 100%);
+        }
+
+        .value-rank {
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--chapman-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .top-value h3 {
+            color: var(--chapman-blue);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .top-value.custom h3 {
+            color: var(--success);
+        }
+
+        .top-value p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* All Values Summary */
+        .all-values-summary {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 28px;
+            margin-top: 30px;
+            text-align: left;
+            border: 2px solid var(--chapman-gold);
+        }
+
+        .all-values-summary h3 {
+            color: var(--chapman-blue);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .values-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .value-item {
+            background: var(--blue-light);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--chapman-blue);
+        }
+
+        .value-item.custom {
+            border-left-color: var(--success);
+            background: var(--success-light);
+        }
+
+        .value-item.ranked {
+            border-left-color: var(--chapman-gold);
+        }
+
+        .value-item h4 {
+            color: var(--chapman-blue);
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .value-item.custom h4 {
+            color: var(--success);
+        }
+
+        .value-item p {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+
+        .value-item .rank-badge {
+            display: inline-block;
+            background: var(--chapman-gold);
+            color: var(--chapman-blue);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* Reflection Section */
+        .reflection-section {
+            background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%);
+            border: 2px solid var(--chapman-gold);
+            border-radius: 14px;
+            padding: 28px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .reflection-section h3 {
+            color: var(--chapman-blue);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .reflection-questions {
+            counter-reset: reflection;
+        }
+
+        .reflection-question {
+            padding: 16px 18px 16px 50px;
+            position: relative;
+            background: var(--white);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-subtle);
+            color: var(--text-secondary);
+        }
+
+        .reflection-question::before {
+            counter-increment: reflection;
+            content: counter(reflection);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 26px;
+            height: 26px;
+            background: var(--chapman-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 700;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 32, 91, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 35px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-strong);
+            animation: modalPop 0.3s ease-out;
+        }
+
+        .modal h3 {
+            color: var(--chapman-blue);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .modal p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal button {
+            background: linear-gradient(135deg, var(--chapman-blue) 0%, var(--blue-medium) 100%);
+            color: var(--white);
+            border: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            border-top: 1px solid #e8ecf0;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .values-grid { grid-template-columns: 1fr; }
+            .sorting-area { grid-template-columns: 1fr; }
+            .top-values { grid-template-columns: 1fr; }
+            .custom-input-row { grid-template-columns: 1fr; }
+            .instruction-steps { grid-template-columns: 1fr; }
+            .progress-steps { display: none; }
+            h1 { font-size: 1.8em; }
+            .main-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="institution">Chapman University</div>
+            <div class="college">Argyros College of Business and Economics</div>
+            <h1>Values Discovery Assessment</h1>
+            <div class="subtitle">Understanding your core values helps guide important life and career decisions</div>
+        </div>
+
+        <div class="main-content">
+            <div class="progress-container">
+                <div class="progress-steps">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <span>Information</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <span>Instructions</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <span>Select Values</span>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <span>Rank Top 3</span>
+                    </div>
+                    <div class="progress-step" data-step="5">
+                        <div class="step-number">5</div>
+                        <span>Results</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Step 1: Student Information -->
+            <div class="step active" id="step1">
+                <div class="instructions">
+                    <h2>📋 Welcome to the Values Discovery Assessment</h2>
+                    <p>Values are the fundamental beliefs and principles that guide our decisions, shape our behavior, and define what matters most to us. This assessment will help you identify and prioritize your core values—a crucial foundation for effective leadership and meaningful career choices.</p>
+                    <p style="margin-top: 15px;">Understanding your values enables you to make decisions aligned with your authentic self, build stronger relationships, and navigate complex ethical situations with clarity.</p>
+                </div>
+                
+                <div class="student-info">
+                    <div class="form-group">
+                        <label for="studentName">Your Full Name</label>
+                        <input type="text" id="studentName" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="surveyDate">Assessment Date</label>
+                        <input type="date" id="surveyDate">
+                    </div>
+                </div>
+
+                <div class="step-navigation">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep()">Begin Assessment →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Instructions -->
+            <div class="step" id="step2">
+                <div class="instructions">
+                    <h2>📌 How This Assessment Works</h2>
+                    <ol>
+                        <li><strong>Select Your Values:</strong> You'll choose up to 8 values from a comprehensive list of 91 core values that resonate most strongly with who you are.</li>
+                        <li><strong>Add Custom Values:</strong> If something important to you isn't listed, you can create your own custom values to include in your selection.</li>
+                        <li><strong>Rank Your Top 3:</strong> From your selected values, you'll prioritize your top 3 in order of importance—the principles that should guide your most significant decisions.</li>
+                        <li><strong>Receive Your Results:</strong> Get a personalized report of your core values that you can download as a professional PDF document.</li>
+                    </ol>
+                </div>
+
+                <div class="selection-notice">
+                    💡 <strong>Tip:</strong> Trust your instincts. Choose values that feel genuinely important to who you are—not what you think others expect of you.
+                </div>
+
+                <div class="step-navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Start Selecting Values →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Value Selection -->
+            <div class="step" id="step3">
+                <div class="instructions">
+                    <h2>Step 1: Choose Your Values</h2>
+                    <p>Click on up to 6 values that resonate most deeply with you. These should reflect who you truly are and what matters most in your life.</p>
+                </div>
+
+                <div class="selection-notice">
+                    📌 <strong>Selection Limit:</strong> You may select a maximum of 8 values. To choose a different value, first deselect one of your current choices.
+                </div>
+
+                <div class="selection-counter" id="selectionCounter">🎯 Select up to 8 values that resonate with you</div>
+
+                <div class="values-grid" id="valuesGrid"></div>
+
+                <div class="custom-value-section">
+                    <h3>✨ Add Your Own Value</h3>
+                    <p>Don't see something that's important to you? Create your own custom value below.</p>
+                    
+                    <div class="custom-input-row">
+                        <div class="form-group">
+                            <label for="customValueName">Value Name</label>
+                            <input type="text" id="customValueName" placeholder="e.g., Innovation" maxlength="25">
+                        </div>
+                        <div class="form-group">
+                            <label for="customValueDescription">Description</label>
+                            <input type="text" id="customValueDescription" placeholder="What this value means to you" maxlength="100">
+                        </div>
+                        <button class="btn btn-gold" onclick="addCustomValue()">Add Value</button>
+                    </div>
+                    
+                    <div class="custom-values-display" id="customValuesDisplay"></div>
+                </div>
+
+                <div class="step-navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="continueBtn" disabled>Continue with Selected Values →</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Ranking -->
+            <div class="step" id="step4">
+                <div class="instructions">
+                    <h2>Step 2: Rank Your Top 3 Values</h2>
+                    <p>Now prioritize which of your selected values matter most. Your top 3 values should be the principles that guide your most important life and career decisions.</p>
+                </div>
+
+                <div class="ranking-instructions">
+                    <h3>📱 How to Rank Your Values</h3>
+                    <div class="instruction-steps">
+                        <div class="instruction-step">
+                            <div class="icon">1️⃣</div>
+                            <strong>Click a Value</strong><br>
+                            Select a value card from the pool below
+                        </div>
+                        <div class="instruction-step">
+                            <div class="icon">2️⃣</div>
+                            <strong>Click a Rank Box</strong><br>
+                            Click on rank #1, #2, or #3 to place it
+                        </div>
+                        <div class="instruction-step">
+                            <div class="icon">3️⃣</div>
+                            <strong>Repeat</strong><br>
+                            Fill all 3 rank positions with your top values
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 15px; color: var(--text-secondary);">💡 To remove a ranked value, simply click on it.</p>
+                </div>
+
+                <div class="selection-notice">
+                    💡 <strong>Think carefully:</strong> Which values would guide your most important life decisions? What principles would you never want to compromise?
+                </div>
+
+                <h3 style="color: var(--chapman-blue); margin: 25px 0 15px; text-align: center;">Your Selected Values — Drag to Rank:</h3>
+                <div class="values-grid" id="rankingPool"></div>
+
+                <h3 style="color: var(--chapman-blue); margin: 30px 0 15px; text-align: center;">Drop Values Here to Rank Them:</h3>
+                <div class="sorting-area">
+                    <div class="rank-column" data-rank="1">
+                        <div class="rank-number">1</div>
+                        <h3>Most Important</h3>
+                        <p>Your highest priority value</p>
+                    </div>
+                    <div class="rank-column" data-rank="2">
+                        <div class="rank-number">2</div>
+                        <h3>Second Most Important</h3>
+                        <p>Your second priority value</p>
+                    </div>
+                    <div class="rank-column" data-rank="3">
+                        <div class="rank-number">3</div>
+                        <h3>Third Most Important</h3>
+                        <p>Your third priority value</p>
+                    </div>
+                </div>
+
+                <div class="step-navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+                    <button class="btn btn-primary" onclick="showResults()" id="resultsBtn" disabled>View My Results →</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Results -->
+            <div class="step" id="step5">
+                <div class="results">
+                    <h2>🎯 Your Core Values</h2>
+                    <p>These are your top 3 values—the principles that should guide your most important decisions.</p>
+                    
+                    <!-- TRACKER SUMMARY SECTION - Dynamic content added by showResults() -->
+                    <div id="trackerSummary"></div>
+                    
+                    <div class="top-values" id="topValues"></div>
+
+                    <div class="all-values-summary">
+                        <h3>📋 All Your Selected Values</h3>
+                        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px;">These are all the values you identified as important. Keep this record to track how your values may evolve over time.</p>
+                        <div class="values-list" id="allValuesList"></div>
+                    </div>
+
+                    <!-- SWOT Preview Section -->
+                    <div id="swotPreview" style="background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 25px; margin: 20px 0; border: 2px solid var(--chapman-blue);"></div>
+
+                    <div class="reflection-section">
+                        <h3>🤔 Reflection Questions</h3>
+                        <div class="reflection-questions">
+                            <div class="reflection-question">How do your top 3 values currently show up in your daily life and decisions?</div>
+                            <div class="reflection-question">Can you recall a time when one of your core values was challenged? How did you respond?</div>
+                            <div class="reflection-question">How might your values influence the type of organization or career you pursue?</div>
+                            <div class="reflection-question">Are there any values you aspire to that aren't yet fully reflected in your behavior?</div>
+                            <div class="reflection-question">How might understanding your values help you navigate ethical dilemmas at work?</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 40px;">
+                        <button class="btn btn-gold" onclick="generatePDF()">📄 Download Professional PDF Report</button>
+                        <button class="btn btn-secondary" onclick="resetSurvey()" style="margin-left: 15px;">Take Assessment Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Values Discovery Assessment • Chapman University • Argyros College of Business and Economics</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • MGMT 316: Management in Organizations</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // All 91 values
+        const values = [
+            { name: "Achievement", description: "Accomplishing goals, succeeding, and reaching your potential" },
+            { name: "Adaptability", description: "Being flexible and adjusting well to changing circumstances" },
+            { name: "Adventure", description: "Seeking new experiences, taking risks, and embracing the unknown" },
+            { name: "Authenticity", description: "Being true to yourself and living according to your genuine beliefs" },
+            { name: "Authority", description: "Having influence, control, and the ability to lead others" },
+            { name: "Autonomy", description: "Independence, self-reliance, and freedom to make your own choices" },
+            { name: "Balance", description: "Maintaining harmony between different aspects of life" },
+            { name: "Beauty", description: "Appreciating and creating aesthetic experiences and environments" },
+            { name: "Belonging", description: "Feeling accepted and connected within groups and communities" },
+            { name: "Boldness", description: "Having courage to take risks and stand up for your beliefs" },
+            { name: "Challenge", description: "Embracing difficult tasks and pushing beyond comfort zones" },
+            { name: "Citizenship", description: "Contributing to society and fulfilling civic responsibilities" },
+            { name: "Community", description: "Belonging to and contributing to a group or society" },
+            { name: "Compassion", description: "Showing empathy, kindness, and care for others' wellbeing" },
+            { name: "Competency", description: "Developing skills and expertise in areas that matter to you" },
+            { name: "Connection", description: "Building meaningful bonds and relationships with others" },
+            { name: "Contribution", description: "Making a positive difference in the lives of others" },
+            { name: "Courage", description: "Facing fears and challenges with bravery and determination" },
+            { name: "Creativity", description: "Expressing imagination, innovation, and original thinking" },
+            { name: "Curiosity", description: "Having a strong desire to learn and explore new ideas" },
+            { name: "Determination", description: "Persistence and resolve in pursuing goals despite obstacles" },
+            { name: "Dignity", description: "Maintaining self-respect and treating others with honor" },
+            { name: "Diversity", description: "Valuing and embracing differences in people and perspectives" },
+            { name: "Efficiency", description: "Accomplishing tasks with minimal waste of time and resources" },
+            { name: "Equality", description: "Believing in fair treatment and equal opportunities for all" },
+            { name: "Excellence", description: "Striving for the highest quality and continuous improvement" },
+            { name: "Faith", description: "Spiritual beliefs, trust in higher purpose, and religious practice" },
+            { name: "Fame", description: "Being widely known and recognized for your achievements" },
+            { name: "Family", description: "Prioritizing relationships with loved ones and family bonds" },
+            { name: "Fairness", description: "Treating people justly and without bias or favoritism" },
+            { name: "Financial Stability", description: "Having secure financial resources and economic security" },
+            { name: "Freedom", description: "Liberty, choice, and the absence of unnecessary restrictions" },
+            { name: "Friendships", description: "Building and maintaining meaningful relationships with peers" },
+            { name: "Fun", description: "Enjoying life, humor, playfulness, and recreational activities" },
+            { name: "Generosity", description: "Giving freely of your time, resources, and kindness to others" },
+            { name: "Grace", description: "Showing elegance, kindness, and forgiveness in interactions" },
+            { name: "Gratitude", description: "Appreciating and being thankful for what you have" },
+            { name: "Growth", description: "Continuous learning, personal development, and self-improvement" },
+            { name: "Happiness", description: "Pursuing joy, contentment, and positive emotional well-being" },
+            { name: "Health", description: "Physical, mental, and emotional wellbeing and vitality" },
+            { name: "Home", description: "Creating a safe, comfortable, and nurturing living environment" },
+            { name: "Honesty", description: "Truthfulness, integrity, and transparent communication" },
+            { name: "Humility", description: "Being modest and not thinking you are better than others" },
+            { name: "Humor", description: "Finding and creating laughter, joy, and lightness in life" },
+            { name: "Influence", description: "Having the power to affect change and inspire others" },
+            { name: "Initiative", description: "Taking proactive steps and being self-motivated to act" },
+            { name: "Integrity", description: "Acting in accordance with moral principles and values" },
+            { name: "Intimacy", description: "Building close, personal, and meaningful relationships" },
+            { name: "Joy", description: "Experiencing and spreading happiness, delight, and celebration" },
+            { name: "Justice", description: "Fairness, equality, and standing up for what's right" },
+            { name: "Kindness", description: "Being considerate, helpful, and caring toward others" },
+            { name: "Knowledge", description: "Learning, understanding, and the pursuit of wisdom" },
+            { name: "Leadership", description: "Guiding others, taking initiative, and making important decisions" },
+            { name: "Learning", description: "Continuously acquiring new knowledge and skills" },
+            { name: "Leisure", description: "Enjoying relaxation, hobbies, and recreational activities" },
+            { name: "Love", description: "Giving and receiving deep affection and emotional connection" },
+            { name: "Loyalty", description: "Being faithful and committed to people and principles" },
+            { name: "Meaningful Work", description: "Engaging in work that has purpose and personal significance" },
+            { name: "Nature", description: "Connecting with and protecting the natural environment" },
+            { name: "Openness", description: "Being receptive to new ideas, experiences, and perspectives" },
+            { name: "Optimism", description: "Maintaining a positive outlook and hope for the future" },
+            { name: "Order", description: "Organizing life and environment in a structured, systematic way" },
+            { name: "Parenting", description: "Nurturing, guiding, and supporting the development of children" },
+            { name: "Patience", description: "Remaining calm and tolerant when facing delays or difficulties" },
+            { name: "Peace", description: "Seeking harmony, tranquility, and resolution of conflicts" },
+            { name: "Perseverance", description: "Continuing efforts despite difficulties or setbacks" },
+            { name: "Pleasure", description: "Enjoying life's pleasures and seeking enjoyable experiences" },
+            { name: "Poise", description: "Maintaining composure, dignity, and grace under pressure" },
+            { name: "Popularity", description: "Being well-liked and accepted by many people" },
+            { name: "Power", description: "Having control, influence, and authority over situations" },
+            { name: "Pride", description: "Taking satisfaction in your accomplishments and identity" },
+            { name: "Recognition", description: "Being acknowledged, appreciated, and respected by others" },
+            { name: "Reliability", description: "Being dependable and trustworthy in commitments and actions" },
+            { name: "Reputation", description: "Maintaining a good standing and respect in your community" },
+            { name: "Respect", description: "Treating others with consideration and earning their esteem" },
+            { name: "Responsibility", description: "Being accountable for your actions and obligations" },
+            { name: "Security", description: "Safety, stability, and protection from harm or uncertainty" },
+            { name: "Self-Discipline", description: "Having control over your actions, emotions, and desires" },
+            { name: "Self-Respect", description: "Valuing yourself and maintaining personal dignity" },
+            { name: "Service", description: "Helping others, contributing to society, and making a difference" },
+            { name: "Spirituality", description: "Connection to something greater than yourself and inner peace" },
+            { name: "Stability", description: "Consistency, predictability, and reliable foundations in life" },
+            { name: "Status", description: "Achieving a position of prestige and social standing" },
+            { name: "Stewardship", description: "Taking care of resources and responsibilities for future generations" },
+            { name: "Success", description: "Achieving goals and reaching desired outcomes" },
+            { name: "Teamwork", description: "Collaborating effectively with others toward common goals" },
+            { name: "Travel", description: "Exploring new places, cultures, and expanding horizons" },
+            { name: "Truth", description: "Seeking and upholding what is honest, genuine, and real" },
+            { name: "Trustworthiness", description: "Being reliable and deserving of others' confidence" },
+            { name: "Understanding", description: "Seeking to comprehend others and complex situations deeply" },
+            { name: "Wealth", description: "Accumulating financial resources and material prosperity" }
+        ];
+
+        let currentStep = 1;
+        let selectedValues = [];
+        let customValues = [];
+        let rankedValues = { 1: null, 2: null, 3: null };
+        let studentInfo = {};
+        
+        // For click-to-place functionality
+        let selectedCardForPlacement = null;
+
+        // Initialize
+        function initSurvey() {
+            document.getElementById('surveyDate').valueAsDate = new Date();
+            populateValuesGrid();
+            updateProgress();
+        }
+
+        // Navigation
+        function nextStep() {
+            if (currentStep === 1) {
+                const name = document.getElementById('studentName').value.trim();
+                const date = document.getElementById('surveyDate').value;
+                if (!name) {
+                    showModal('⚠️ Name Required', 'Please enter your full name to continue.');
+                    return;
+                }
+                studentInfo = { name, date };
+            }
+            
+            if (currentStep === 3 && selectedValues.length < 3) {
+                showModal('⚠️ More Values Needed', 'Please select at least 3 values to continue to the ranking step.');
+                return;
+            }
+
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep++;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            
+            if (currentStep === 4) {
+                setupRankingStep();
+            }
+            
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep--;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const progress = ((currentStep - 1) / 4) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                const stepNum = index + 1;
+                step.classList.remove('active', 'completed');
+                if (stepNum === currentStep) {
+                    step.classList.add('active');
+                } else if (stepNum < currentStep) {
+                    step.classList.add('completed');
+                }
+            });
+        }
+
+        // ============================================
+        // RANKING STEP - DRAG AND DROP + CLICK IMPLEMENTATION
+        // ============================================
+        
+        let draggedValue = null;
+        
+        function setupRankingStep() {
+            // Reset any previous selections
+            selectedCardForPlacement = null;
+            draggedValue = null;
+            
+            // Populate the pool with selected values
+            renderRankingPool();
+            
+            // Setup drag-and-drop AND click handlers on rank columns
+            document.querySelectorAll('.rank-column').forEach(column => {
+                // Drag events
+                column.ondragover = function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                };
+                
+                column.ondragleave = function(e) {
+                    this.classList.remove('drag-over');
+                };
+                
+                column.ondrop = function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    
+                    const rank = parseInt(this.dataset.rank);
+                    if (draggedValue) {
+                        placeValueInRank(draggedValue, rank);
+                        draggedValue = null;
+                    }
+                };
+                
+                // Click handler (backup for click-to-place)
+                column.onclick = function(e) {
+                    // Don't trigger if clicking on a sorted value
+                    if (e.target.closest('.sorted-value')) return;
+                    
+                    const rank = parseInt(this.dataset.rank);
+                    
+                    if (selectedCardForPlacement) {
+                        placeValueInRank(selectedCardForPlacement, rank);
+                        clearSelection();
+                    }
+                };
+            });
+            
+            // Setup drop handler on the pool (to return ranked values)
+            const pool = document.getElementById('rankingPool');
+            pool.ondragover = function(e) {
+                e.preventDefault();
+            };
+            pool.ondrop = function(e) {
+                e.preventDefault();
+                // If dragging from rank, the value is already removed, just re-render
+                if (draggedValue) {
+                    draggedValue = null;
+                    renderRankingPool();
+                    renderRankedValues();
+                    updateButtonStates();
+                }
+            };
+            
+            renderRankedValues();
+        }
+        
+        function renderRankingPool() {
+            const pool = document.getElementById('rankingPool');
+            pool.innerHTML = '';
+            
+            selectedValues.forEach((value, index) => {
+                // Check if already ranked
+                const isRanked = Object.values(rankedValues).some(rv => 
+                    rv && rv.name === value.name && Boolean(rv.isCustom) === Boolean(value.isCustom)
+                );
+                
+                if (isRanked) return; // Don't show ranked values in pool
+                
+                const card = document.createElement('div');
+                card.className = 'value-card';
+                if (value.isCustom) card.classList.add('custom');
+                card.dataset.index = index;
+                card.draggable = true;
+                card.style.cursor = 'grab';
+                
+                card.innerHTML = `
+                    <h3>${value.name}${value.isCustom ? ' ✨' : ''}</h3>
+                    <p>${value.description}</p>
+                    <small style="display: block; margin-top: 10px; color: var(--chapman-gold); font-weight: 600;">🖐️ Drag to rank OR click then click a rank box</small>
+                `;
+                
+                // Drag events
+                card.ondragstart = function(e) {
+                    draggedValue = value;
+                    this.style.opacity = '0.5';
+                    this.style.cursor = 'grabbing';
+                    // Highlight all rank columns
+                    document.querySelectorAll('.rank-column').forEach(col => {
+                        col.classList.add('awaiting-drop');
+                    });
+                };
+                
+                card.ondragend = function(e) {
+                    this.style.opacity = '1';
+                    this.style.cursor = 'grab';
+                    draggedValue = null;
+                    // Remove highlights
+                    document.querySelectorAll('.rank-column').forEach(col => {
+                        col.classList.remove('awaiting-drop');
+                        col.classList.remove('drag-over');
+                    });
+                };
+                
+                // Click handler (alternative to drag)
+                card.onclick = function() {
+                    selectCardForPlacement(value, this);
+                };
+                
+                pool.appendChild(card);
+            });
+        }
+        
+        function selectCardForPlacement(value, cardElement) {
+            // If clicking the same card, deselect it
+            if (selectedCardForPlacement && selectedCardForPlacement.name === value.name) {
+                clearSelection();
+                return;
+            }
+            
+            // Clear previous selection
+            document.querySelectorAll('#rankingPool .value-card').forEach(c => {
+                c.classList.remove('ready-to-place');
+            });
+            
+            // Select this card
+            selectedCardForPlacement = value;
+            cardElement.classList.add('ready-to-place');
+            
+            // Highlight rank columns
+            document.querySelectorAll('.rank-column').forEach(col => {
+                col.classList.add('awaiting-drop');
+            });
+        }
+        
+        function clearSelection() {
+            selectedCardForPlacement = null;
+            document.querySelectorAll('#rankingPool .value-card').forEach(c => {
+                c.classList.remove('ready-to-place');
+            });
+            document.querySelectorAll('.rank-column').forEach(col => {
+                col.classList.remove('awaiting-drop');
+            });
+        }
+        
+        function placeValueInRank(value, rank) {
+            // Remove this value from any other rank it might be in
+            for (let r = 1; r <= 3; r++) {
+                if (rankedValues[r] && rankedValues[r].name === value.name && 
+                    Boolean(rankedValues[r].isCustom) === Boolean(value.isCustom)) {
+                    rankedValues[r] = null;
+                }
+            }
+            
+            // Place in the new rank
+            rankedValues[rank] = {
+                name: value.name,
+                description: value.description,
+                isCustom: value.isCustom || false
+            };
+            
+            // Re-render everything
+            renderRankingPool();
+            renderRankedValues();
+            updateButtonStates();
+        }
+        
+        function removeFromRank(rank) {
+            rankedValues[rank] = null;
+            renderRankingPool();
+            renderRankedValues();
+            updateButtonStates();
+        }
+        
+        function renderRankedValues() {
+            document.querySelectorAll('.rank-column').forEach(column => {
+                const rank = parseInt(column.dataset.rank);
+                
+                // Remove existing sorted value
+                const existing = column.querySelector('.sorted-value');
+                if (existing) existing.remove();
+                
+                // Add new sorted value if exists
+                if (rankedValues[rank]) {
+                    const value = rankedValues[rank];
+                    const sortedDiv = document.createElement('div');
+                    sortedDiv.className = 'sorted-value';
+                    if (value.isCustom) sortedDiv.classList.add('custom');
+                    sortedDiv.draggable = true;
+                    sortedDiv.style.cursor = 'grab';
+                    
+                    sortedDiv.innerHTML = `
+                        <h4>${value.name}${value.isCustom ? ' ✨' : ''}</h4>
+                        <p>${value.description}</p>
+                        <small style="display: block; margin-top: 8px; color: var(--chapman-gold); font-weight: 600; cursor: pointer;">✕ Click to remove | 🖐️ Drag to move</small>
+                    `;
+                    
+                    // Drag events for reordering
+                    sortedDiv.ondragstart = function(e) {
+                        e.stopPropagation();
+                        draggedValue = value;
+                        // Remove from current rank
+                        rankedValues[rank] = null;
+                        this.style.opacity = '0.5';
+                        // Highlight all rank columns
+                        document.querySelectorAll('.rank-column').forEach(col => {
+                            col.classList.add('awaiting-drop');
+                        });
+                    };
+                    
+                    sortedDiv.ondragend = function(e) {
+                        this.style.opacity = '1';
+                        // If not dropped on a rank, put back in pool
+                        if (draggedValue) {
+                            renderRankingPool();
+                            renderRankedValues();
+                            updateButtonStates();
+                        }
+                        draggedValue = null;
+                        // Remove highlights
+                        document.querySelectorAll('.rank-column').forEach(col => {
+                            col.classList.remove('awaiting-drop');
+                            col.classList.remove('drag-over');
+                        });
+                    };
+                    
+                    sortedDiv.onclick = function(e) {
+                        e.stopPropagation();
+                        removeFromRank(rank);
+                    };
+                    
+                    column.appendChild(sortedDiv);
+                }
+            });
+        }
+
+        // Populate values grid
+        function populateValuesGrid() {
+            const grid = document.getElementById('valuesGrid');
+            grid.innerHTML = '';
+            
+            const allValues = [...values, ...customValues];
+            
+            allValues.forEach(value => {
+                const card = document.createElement('div');
+                card.className = 'value-card';
+                if (value.isCustom) card.classList.add('custom');
+                
+                const isSelected = selectedValues.some(v => 
+                    v.name === value.name && Boolean(v.isCustom) === Boolean(value.isCustom)
+                );
+                if (isSelected) card.classList.add('selected');
+                
+                card.innerHTML = `
+                    <h3>${value.name}${value.isCustom ? ' ✨' : ''}</h3>
+                    <p>${value.description}</p>
+                `;
+                
+                card.onclick = () => toggleValue(card, value);
+                grid.appendChild(card);
+            });
+        }
+
+        // Toggle value selection
+        function toggleValue(card, value) {
+            const isSelected = selectedValues.some(v => 
+                v.name === value.name && Boolean(v.isCustom) === Boolean(value.isCustom)
+            );
+            
+            if (isSelected) {
+                selectedValues = selectedValues.filter(v => 
+                    !(v.name === value.name && Boolean(v.isCustom) === Boolean(value.isCustom))
+                );
+                card.classList.remove('selected');
+            } else {
+                if (selectedValues.length >= 8) {
+                    showModal('🚫 Selection Limit Reached', 'You can only select up to 8 values. Please deselect a value first if you\'d like to choose a different one.');
+                    return;
+                }
+                selectedValues.push(value);
+                card.classList.add('selected');
+            }
+            
+            updateSelectionCounter();
+            updateButtonStates();
+        }
+
+        // Update selection counter
+        function updateSelectionCounter() {
+            const counter = document.getElementById('selectionCounter');
+            const count = selectedValues.length;
+            
+            if (count === 0) {
+                counter.textContent = '🎯 Select up to 8 values that resonate with you';
+            } else if (count < 3) {
+                counter.textContent = `🎯 ${count} of 8 values selected — select at least ${3 - count} more to continue`;
+            } else if (count < 8) {
+                counter.textContent = `✅ ${count} of 8 values selected — you can select ${8 - count} more or continue`;
+            } else {
+                counter.textContent = '✅ 8 values selected — maximum reached!';
+            }
+        }
+
+        // Update button states
+        function updateButtonStates() {
+            const continueBtn = document.getElementById('continueBtn');
+            if (continueBtn) {
+                continueBtn.disabled = selectedValues.length < 3;
+            }
+            
+            const resultsBtn = document.getElementById('resultsBtn');
+            if (resultsBtn) {
+                resultsBtn.disabled = !(rankedValues[1] && rankedValues[2] && rankedValues[3]);
+            }
+        }
+
+        // Add custom value
+        function addCustomValue() {
+            const nameInput = document.getElementById('customValueName');
+            const descInput = document.getElementById('customValueDescription');
+            
+            const name = nameInput.value.trim();
+            const description = descInput.value.trim();
+            
+            if (!name || !description) {
+                showModal('⚠️ Missing Information', 'Please provide both a name and description for your custom value.');
+                return;
+            }
+            
+            if (selectedValues.length >= 8) {
+                showModal('🚫 Selection Limit Reached', 'You have already selected 8 values. Please deselect one before adding a custom value.');
+                return;
+            }
+            
+            const allValues = [...values, ...customValues];
+            if (allValues.some(v => v.name.toLowerCase() === name.toLowerCase())) {
+                showModal('🔄 Duplicate Value', 'A value with this name already exists. Please choose a different name.');
+                return;
+            }
+            
+            const customValue = { name, description, isCustom: true };
+            customValues.push(customValue);
+            selectedValues.push(customValue);
+            
+            nameInput.value = '';
+            descInput.value = '';
+            
+            displayCustomValues();
+            populateValuesGrid();
+            updateSelectionCounter();
+            updateButtonStates();
+            
+            showModal('✨ Custom Value Added!', `"${name}" has been created and automatically selected for you.`);
+        }
+
+        // Display custom values
+        function displayCustomValues() {
+            const display = document.getElementById('customValuesDisplay');
+            
+            if (customValues.length === 0) {
+                display.innerHTML = '';
+                return;
+            }
+            
+            display.innerHTML = '<h4 style="color: var(--chapman-blue); margin-bottom: 15px;">Your Custom Values:</h4>';
+            
+            customValues.forEach((value, index) => {
+                const tag = document.createElement('div');
+                tag.className = 'custom-value-tag';
+                tag.innerHTML = `
+                    <strong>${value.name} ✨</strong><br>
+                    <small style="color: #666;">${value.description}</small>
+                    <button class="remove-btn" onclick="removeCustomValue(${index})">×</button>
+                `;
+                display.appendChild(tag);
+            });
+        }
+
+        // Remove custom value
+        function removeCustomValue(index) {
+            const valueToRemove = customValues[index];
+            
+            // Remove from ranked if present
+            for (let rank = 1; rank <= 3; rank++) {
+                if (rankedValues[rank] && rankedValues[rank].name === valueToRemove.name && rankedValues[rank].isCustom) {
+                    rankedValues[rank] = null;
+                }
+            }
+            
+            // Remove from selected
+            selectedValues = selectedValues.filter(v => 
+                !(v.name === valueToRemove.name && v.isCustom)
+            );
+            
+            // Remove from custom
+            customValues.splice(index, 1);
+            
+            displayCustomValues();
+            populateValuesGrid();
+            updateSelectionCounter();
+            updateButtonStates();
+        }
+
+        // Show results
+        function showResults() {
+            // Populate top 3
+            const topValuesContainer = document.getElementById('topValues');
+            topValuesContainer.innerHTML = '';
+            
+            [1, 2, 3].forEach(rank => {
+                const value = rankedValues[rank];
+                const card = document.createElement('div');
+                card.className = 'top-value';
+                if (value.isCustom) card.classList.add('custom');
+                
+                card.innerHTML = `
+                    <div class="value-rank">#${rank}</div>
+                    <h3>${value.name}${value.isCustom ? ' ✨' : ''}</h3>
+                    <p>${value.description}</p>
+                    ${value.isCustom ? '<div style="color: var(--success); font-weight: 600; margin-top: 12px; font-size: 0.9em;">Your Custom Value</div>' : ''}
+                `;
+                topValuesContainer.appendChild(card);
+            });
+            
+            // Populate all values list
+            const allValuesList = document.getElementById('allValuesList');
+            allValuesList.innerHTML = '';
+            
+            selectedValues.forEach(value => {
+                const item = document.createElement('div');
+                item.className = 'value-item';
+                if (value.isCustom) item.classList.add('custom');
+                
+                // Check if ranked
+                let rankBadge = '';
+                for (let rank = 1; rank <= 3; rank++) {
+                    if (rankedValues[rank] && rankedValues[rank].name === value.name && 
+                        Boolean(rankedValues[rank].isCustom) === Boolean(value.isCustom)) {
+                        item.classList.add('ranked');
+                        rankBadge = `<span class="rank-badge">Ranked #${rank}</span>`;
+                        break;
+                    }
+                }
+                
+                item.innerHTML = `
+                    <h4>${value.name}${value.isCustom ? ' ✨' : ''}${rankBadge}</h4>
+                    <p>${value.description}</p>
+                `;
+                allValuesList.appendChild(item);
+            });
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep = 5;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+            
+            // Generate Tracker Summary
+            const trackerCode = `VDA-${rankedValues[1].name.substring(0,3).toUpperCase()}-${selectedValues.length}`;
+            const clarity = selectedValues.length <= 5 ? 'High Focus' : selectedValues.length <= 7 ? 'Moderate Focus' : 'Broad Focus';
+            const codeExplanation = `Core Values: #1 ${rankedValues[1].name}, #2 ${rankedValues[2].name}, #3 ${rankedValues[3].name}`;
+            const customCount = selectedValues.filter(v => v.isCustom).length;
+            
+            // Determine value categories for the top 3
+            const valueCategories = {
+                // Achievement/Success oriented
+                achievement: {
+                    values: ['Achievement', 'Success', 'Excellence', 'Competency', 'Recognition', 'Fame', 'Status', 'Wealth', 'Power'],
+                    name: 'Achievement-Oriented',
+                    profileSummary: 'You are driven by accomplishment and success. You find meaning in achieving goals, demonstrating competence, and being recognized for your efforts.',
+                    decisionStyle: 'Goal-focused and results-oriented. You evaluate options based on their potential for achievement and advancement.',
+                    communicationStyle: 'Performance-focused and ambitious. You discuss goals, metrics, and achievements.',
+                    motivatedBy: 'Reaching goals, demonstrating excellence, earning recognition, and advancing toward success.',
+                    stressResponse: 'Under pressure, you may push too hard, sacrifice relationships for results, or feel inadequate when not achieving.',
+                    blindSpots: 'May neglect relationships and wellbeing in pursuit of achievement; can define self-worth too heavily through accomplishments.',
+                    swotStrength: 'Driven achievement creates results and demonstrates competence',
+                    swotWeakness: 'May sacrifice other important values for achievement',
+                    swotOpportunity: 'Define success broadly to include relationships and wellbeing',
+                    swotThreat: 'Risk of burnout or empty success without meaning'
+                },
+                // Relationship oriented
+                relationship: {
+                    values: ['Family', 'Friendships', 'Love', 'Intimacy', 'Belonging', 'Connection', 'Community', 'Loyalty', 'Teamwork'],
+                    name: 'Relationship-Oriented',
+                    profileSummary: 'You prioritize connections with others. You find meaning through deep relationships, belonging, and contributing to communities you care about.',
+                    decisionStyle: 'People-centered and loyalty-focused. You evaluate options based on their impact on relationships and community.',
+                    communicationStyle: 'Warm, inclusive, and relationship-focused. You prioritize connection and belonging in interactions.',
+                    motivatedBy: 'Building deep connections, supporting loved ones, belonging to meaningful communities, and maintaining loyalty.',
+                    stressResponse: 'Under pressure, you may sacrifice personal needs for relationships, or feel lost when disconnected from others.',
+                    blindSpots: 'May lose individual identity in relationships; can neglect personal goals for others; may struggle with necessary conflict.',
+                    swotStrength: 'Deep relationships create support, meaning, and belonging',
+                    swotWeakness: 'May neglect personal development for relationship maintenance',
+                    swotOpportunity: 'Maintain individual identity while nurturing relationships',
+                    swotThreat: 'Risk of codependency or loss of self in service of others'
+                },
+                // Personal Growth oriented
+                growth: {
+                    values: ['Growth', 'Learning', 'Knowledge', 'Curiosity', 'Wisdom', 'Challenge', 'Creativity', 'Openness'],
+                    name: 'Growth-Oriented',
+                    profileSummary: 'You are driven by continuous development and learning. You find meaning in expanding your knowledge, skills, and understanding of the world.',
+                    decisionStyle: 'Learning-focused and development-oriented. You evaluate options based on their potential for growth and new understanding.',
+                    communicationStyle: 'Curious, questioning, and exploratory. You seek to learn from others and share discoveries.',
+                    motivatedBy: 'Learning new things, developing skills, gaining wisdom, and continuously improving yourself.',
+                    stressResponse: 'Under pressure, you may retreat into learning rather than acting, or feel frustrated when growth is blocked.',
+                    blindSpots: 'May value learning over doing; can become a perpetual student without applying knowledge; may neglect practical realities.',
+                    swotStrength: 'Continuous growth creates adaptability and expanding capability',
+                    swotWeakness: 'May prioritize learning over action or practical results',
+                    swotOpportunity: 'Apply growth mindset to all life areas including relationships',
+                    swotThreat: 'Risk of endless preparation without execution'
+                },
+                // Service/Impact oriented
+                service: {
+                    values: ['Service', 'Contribution', 'Compassion', 'Generosity', 'Citizenship', 'Justice', 'Equality', 'Stewardship'],
+                    name: 'Service-Oriented',
+                    profileSummary: 'You are driven by making a positive difference. You find meaning through contributing to others and causes larger than yourself.',
+                    decisionStyle: 'Impact-focused and others-oriented. You evaluate options based on their potential to help others and improve the world.',
+                    communicationStyle: 'Compassionate, cause-driven, and inspiring. You rally others around meaningful purposes.',
+                    motivatedBy: 'Making a difference, helping others, contributing to worthy causes, and leaving the world better.',
+                    stressResponse: 'Under pressure, you may neglect self-care for service, or feel despair when unable to make an impact.',
+                    blindSpots: 'May neglect own needs in service of others; can burn out from giving too much; may judge those who seem less service-oriented.',
+                    swotStrength: 'Service creates meaning and positive impact on others and world',
+                    swotWeakness: 'May neglect self-care and personal needs',
+                    swotOpportunity: 'Sustain impact by maintaining personal wellbeing',
+                    swotThreat: 'Risk of burnout or martyrdom'
+                },
+                // Integrity oriented
+                integrity: {
+                    values: ['Honesty', 'Integrity', 'Authenticity', 'Truth', 'Trustworthiness', 'Reliability', 'Responsibility', 'Fairness'],
+                    name: 'Integrity-Oriented',
+                    profileSummary: 'You are driven by living according to your principles. You find meaning in being honest, authentic, and consistent in your values.',
+                    decisionStyle: 'Principle-driven and ethics-focused. You evaluate options based on their alignment with your moral standards.',
+                    communicationStyle: 'Honest, direct, and authentic. You speak truth and expect the same from others.',
+                    motivatedBy: 'Living consistently with principles, being trustworthy, acting fairly, and maintaining moral standards.',
+                    stressResponse: 'Under pressure, you may become rigid about principles, or feel deep distress when forced to compromise values.',
+                    blindSpots: 'May be inflexible when situations call for nuance; can judge others harshly; may struggle with necessary compromises.',
+                    swotStrength: 'Strong principles create trustworthiness and moral clarity',
+                    swotWeakness: 'May be inflexible when situations require nuance',
+                    swotOpportunity: 'Apply integrity while allowing for complexity and growth',
+                    swotThreat: 'Risk of rigidity or alienating others with judgment'
+                },
+                // Freedom oriented
+                freedom: {
+                    values: ['Freedom', 'Autonomy', 'Independence', 'Adventure', 'Boldness', 'Flexibility', 'Adaptability'],
+                    name: 'Freedom-Oriented',
+                    profileSummary: 'You are driven by independence and choice. You find meaning in having autonomy, pursuing adventure, and maintaining flexibility.',
+                    decisionStyle: 'Independence-focused and option-preserving. You evaluate choices based on how much freedom they maintain.',
+                    communicationStyle: 'Independent and boundary-setting. You advocate for choice and resist constraints on yourself and others.',
+                    motivatedBy: 'Having choices, maintaining independence, pursuing adventure, and avoiding unnecessary constraints.',
+                    stressResponse: 'Under pressure, you may resist reasonable commitments, or feel trapped by necessary responsibilities.',
+                    blindSpots: 'May avoid beneficial commitments; can struggle with interdependence; may resist structure that could help.',
+                    swotStrength: 'Independence creates flexibility and authentic living',
+                    swotWeakness: 'May avoid beneficial commitments and interdependence',
+                    swotOpportunity: 'Find freedom within chosen commitments',
+                    swotThreat: 'Risk of isolation or missed opportunities from avoiding commitment'
+                },
+                // Security oriented
+                security: {
+                    values: ['Security', 'Stability', 'Financial Stability', 'Health', 'Home', 'Order', 'Peace'],
+                    name: 'Security-Oriented',
+                    profileSummary: 'You are driven by stability and safety. You find meaning in creating secure foundations, maintaining order, and protecting what matters.',
+                    decisionStyle: 'Risk-aware and stability-focused. You evaluate options based on their safety and predictability.',
+                    communicationStyle: 'Cautious, planning-focused, and protective. You discuss risks and build in safeguards.',
+                    motivatedBy: 'Creating stability, protecting loved ones, maintaining health, and building secure foundations.',
+                    stressResponse: 'Under pressure, you may become overly cautious, or feel significant anxiety when stability is threatened.',
+                    blindSpots: 'May miss opportunities from excessive caution; can resist beneficial changes; may over-prepare for unlikely risks.',
+                    swotStrength: 'Security focus creates stable foundations for yourself and others',
+                    swotWeakness: 'May miss opportunities from excessive risk aversion',
+                    swotOpportunity: 'Take calculated risks while maintaining core security',
+                    swotThreat: 'Risk of stagnation or missed growth from excessive caution'
+                },
+                // Spiritual/Purpose oriented
+                spiritual: {
+                    values: ['Faith', 'Spirituality', 'Meaning', 'Purpose', 'Gratitude', 'Grace', 'Peace'],
+                    name: 'Spiritual-Oriented',
+                    profileSummary: 'You are driven by connection to something greater. You find meaning through spiritual practice, purpose, and inner peace.',
+                    decisionStyle: 'Purpose-driven and meaning-focused. You evaluate options based on their alignment with your deeper purpose.',
+                    communicationStyle: 'Reflective, grateful, and purpose-oriented. You bring depth and meaning to conversations.',
+                    motivatedBy: 'Finding deeper meaning, connecting to purpose, experiencing inner peace, and living with gratitude.',
+                    stressResponse: 'Under pressure, you may retreat into spiritual practice, or feel existential distress when meaning is unclear.',
+                    blindSpots: 'May seem disconnected from practical realities; can struggle with mundane necessities; may judge less spiritual approaches.',
+                    swotStrength: 'Spiritual orientation creates resilience, peace, and deeper meaning',
+                    swotWeakness: 'May neglect practical matters for spiritual pursuits',
+                    swotOpportunity: 'Integrate spirituality with practical living',
+                    swotThreat: 'Risk of disconnection from practical realities or relationships'
+                }
+            };
+            
+            // Determine primary value orientation
+            let valueOrientation = 'Balanced';
+            const top3Names = [rankedValues[1].name, rankedValues[2].name, rankedValues[3].name];
+            for (const [category, data] of Object.entries(valueCategories)) {
+                const vals = data.values || data;
+                const matches = top3Names.filter(n => vals.includes(n)).length;
+                if (matches >= 2) {
+                    valueOrientation = data.name || (category.charAt(0).toUpperCase() + category.slice(1) + '-Oriented');
+                    break;
+                }
+            }
+            
+            document.getElementById('trackerSummary').innerHTML = `
+                <div style="background: linear-gradient(135deg, #1a3a7a 0%, #00205B 100%); color: white; padding: 25px; border-radius: 14px; margin: 20px 0 30px 0;">
+                    <h3 style="color: #C4A000; margin-bottom: 15px; font-size: 1.3em;">📋 Assessment Tracker Summary</h3>
+                    <p style="font-size: 0.9em; opacity: 0.9; margin-bottom: 15px;">Copy this information into your Assessment Tracker at the end of the semester.</p>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">#1 Core Value</div>
+                                <div style="font-size: 1.3em; font-weight: 700; color: #F5E6A3;">${rankedValues[1].name}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">#2 Core Value</div>
+                                <div style="font-size: 1.3em; font-weight: 700; color: #F5E6A3;">${rankedValues[2].name}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">#3 Core Value</div>
+                                <div style="font-size: 1.3em; font-weight: 700; color: #F5E6A3;">${rankedValues[3].name}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Values Selected</div>
+                                <div style="font-size: 1.2em; font-weight: 600;">${selectedValues.length} Total</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Custom Values</div>
+                                <div style="font-size: 1.2em; font-weight: 600;">${customCount} Added</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">Value Orientation</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${valueOrientation}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(196, 160, 0, 0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #C4A000;">
+                        <div style="font-size: 0.8em; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Key Characteristics for SWOT Analysis</div>
+                        <div style="font-size: 0.95em; line-height: 1.6;">
+                            <strong>#1 ${rankedValues[1].name}:</strong> ${rankedValues[1].description}<br>
+                            <strong>#2 ${rankedValues[2].name}:</strong> ${rankedValues[2].description}<br>
+                            <strong>#3 ${rankedValues[3].name}:</strong> ${rankedValues[3].description}
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 18px; background: linear-gradient(135deg, rgba(196,160,0,0.25) 0%, rgba(196,160,0,0.15) 100%); border-radius: 10px; border: 1px solid rgba(196,160,0,0.3);">
+                        <h4 style="color: #F5E6A3; margin: 0 0 15px 0; font-size: 1.1em;">📋 Your Results Summary</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Top Core Value</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${rankedValues[1].name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Second Core Value</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${rankedValues[2].name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Third Core Value</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${rankedValues[3].name}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                                <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Values Clarity</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${clarity}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
+                            <strong>Your Top 3 Values:</strong> ${rankedValues[1].name} → ${rankedValues[2].name} → ${rankedValues[3].name}
+                        </div>
+                        <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> ${codeExplanation}</div>
+                            <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">${trackerCode}</code></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Generate SWOT Preview
+            document.getElementById('swotPreview').innerHTML = `
+                <h4 style="color: var(--chapman-blue); margin-bottom: 15px; font-size: 1.2em;">📊 SWOT Analysis Preview (For Assessment Tracker)</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 15px;">This preview shows how your Core Values will contribute to your comprehensive SWOT analysis.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div style="background: #E8F5E9; padding: 15px; border-radius: 10px; border-left: 4px solid #2E7D32;">
+                        <strong style="color: #2E7D32; font-size: 0.9em;">STRENGTH</strong>
+                        <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">Clear personal compass guided by ${rankedValues[1].name}, ${rankedValues[2].name}, and ${rankedValues[3].name}. Strong foundation for ethical decision-making.</p>
+                    </div>
+                    <div style="background: #FFEBEE; padding: 15px; border-radius: 10px; border-left: 4px solid #C62828;">
+                        <strong style="color: #C62828; font-size: 0.9em;">WEAKNESS</strong>
+                        <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">May experience tension when organizational demands conflict with core values. Potential difficulty in environments that don't align with your value orientation.</p>
+                    </div>
+                    <div style="background: #E3F2FD; padding: 15px; border-radius: 10px; border-left: 4px solid #1565C0;">
+                        <strong style="color: #1565C0; font-size: 0.9em;">OPPORTUNITY</strong>
+                        <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">Seek organizations and roles that align with your core values. Use ${rankedValues[1].name} as a guiding principle for career decisions and leadership approach.</p>
+                    </div>
+                    <div style="background: #FFF3E0; padding: 15px; border-radius: 10px; border-left: 4px solid #E65100;">
+                        <strong style="color: #E65100; font-size: 0.9em;">THREAT</strong>
+                        <p style="font-size: 0.9em; margin-top: 5px; color: var(--text-secondary);">Values-organization misalignment leading to job dissatisfaction. Potential for ethical conflicts if placed in environments that challenge your core principles.</p>
+                    </div>
+                </div>
+            `;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show modal
+        function showModal(title, message) {
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            overlay.innerHTML = `
+                <div class="modal">
+                    <h3>${title}</h3>
+                    <p>${message}</p>
+                    <button onclick="this.closest('.modal-overlay').remove()">OK</button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.remove();
+            });
+        }
+
+        // Generate PDF
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Colors
+            const chapmanBlue = [0, 32, 91];
+            const chapmanGold = [196, 160, 0];
+            const textDark = [26, 26, 46];
+            const textMuted = [100, 100, 110];
+            const successGreen = [46, 125, 50];
+
+            // Header
+            doc.setFillColor(...chapmanBlue);
+            doc.rect(0, 0, 210, 45, 'F');
+            
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('CHAPMAN UNIVERSITY', 105, 12, { align: 'center' });
+            
+            doc.setFontSize(9);
+            doc.setTextColor(...chapmanGold);
+            doc.text('Argyros College of Business and Economics', 105, 18, { align: 'center' });
+            
+            doc.setFontSize(18);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Values Discovery Assessment', 105, 30, { align: 'center' });
+            
+            doc.setFontSize(10);
+            doc.text('Official Results Report', 105, 38, { align: 'center' });
+
+            // Gold accent
+            doc.setFillColor(...chapmanGold);
+            doc.rect(0, 45, 210, 2, 'F');
+            
+            // Generate tracker code for PDF
+            const trackerCode = 'VDA-' + rankedValues[1].name.substring(0,3).toUpperCase() + '-' + selectedValues.length;
+
+            // Student info
+            let y = 55;
+            doc.setFontSize(11);
+            doc.setTextColor(...textDark);
+            doc.text(`Student: ${studentInfo.name}`, 20, y);
+            doc.text(`Date: ${new Date(studentInfo.date).toLocaleDateString()}`, 120, y);
+            y += 8;
+            
+            // Tracker Code Bar
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 16, 2, 2, 'F');
+            doc.setFontSize(8);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Your Result: Core Values - #1 ' + rankedValues[1].name + ', #2 ' + rankedValues[2].name + ', #3 ' + rankedValues[3].name, 105, y + 5, { align: 'center' });
+            doc.setFontSize(7);
+            doc.text('Tracker Code: ' + trackerCode + '  |  Values Selected: ' + selectedValues.length, 105, y + 12, { align: 'center' });
+            y += 17;
+
+            // Top 3 Header
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('YOUR TOP 3 CORE VALUES', 105, y + 8, { align: 'center' });
+            y += 20;
+
+            // Top 3 Values
+            [1, 2, 3].forEach(rank => {
+                const value = rankedValues[rank];
+                
+                doc.setFontSize(12);
+                doc.setTextColor(...chapmanBlue);
+                doc.text(`#${rank} — ${value.name}${value.isCustom ? ' (Custom)' : ''}`, 25, y);
+                y += 7;
+                
+                doc.setFontSize(9);
+                doc.setTextColor(...textMuted);
+                const lines = doc.splitTextToSize(value.description, 160);
+                lines.forEach(line => {
+                    doc.text(line, 30, y);
+                    y += 5;
+                });
+                y += 8;
+            });
+
+            // All Selected Values
+            y += 5;
+            doc.setFillColor(...chapmanGold);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(11);
+            doc.setTextColor(...chapmanBlue);
+            doc.text(`ALL SELECTED VALUES (${selectedValues.length} Total)`, 105, y + 7, { align: 'center' });
+            y += 18;
+
+            selectedValues.forEach((value, index) => {
+                if (y > 260) {
+                    doc.addPage();
+                    y = 20;
+                }
+                
+                // Check if ranked
+                let rankText = '';
+                for (let rank = 1; rank <= 3; rank++) {
+                    if (rankedValues[rank] && rankedValues[rank].name === value.name && 
+                        Boolean(rankedValues[rank].isCustom) === Boolean(value.isCustom)) {
+                        rankText = ` (Ranked #${rank})`;
+                        break;
+                    }
+                }
+                
+                doc.setFontSize(10);
+                doc.setTextColor(value.isCustom ? successGreen[0] : chapmanBlue[0], 
+                                 value.isCustom ? successGreen[1] : chapmanBlue[1], 
+                                 value.isCustom ? successGreen[2] : chapmanBlue[2]);
+                doc.text(`${value.name}${value.isCustom ? ' ✨' : ''}${rankText}`, 25, y);
+                y += 5;
+                
+                doc.setFontSize(8);
+                doc.setTextColor(...textMuted);
+                doc.text(value.description, 30, y);
+                y += 8;
+            });
+
+            // Reflection Questions
+            if (y > 200) {
+                doc.addPage();
+                y = 20;
+            }
+            
+            y += 10;
+            doc.setFillColor(...chapmanBlue);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(11);
+            doc.setTextColor(255, 255, 255);
+            doc.text('REFLECTION QUESTIONS', 105, y + 7, { align: 'center' });
+            y += 18;
+
+            const reflectionQuestions = [
+                'How do your top 3 values currently show up in your daily life and decisions?',
+                'Can you recall a time when one of your core values was challenged? How did you respond?',
+                'How might your values influence the type of organization or career you pursue?',
+                'Are there any values you aspire to that aren\'t yet fully reflected in your behavior?',
+                'How might understanding your values help you navigate ethical dilemmas at work?'
+            ];
+
+            doc.setFontSize(9);
+            doc.setTextColor(...textDark);
+            
+            reflectionQuestions.forEach((question, index) => {
+                if (y > 265) {
+                    doc.addPage();
+                    y = 20;
+                }
+                const lines = doc.splitTextToSize(`${index + 1}. ${question}`, 165);
+                lines.forEach(line => {
+                    doc.text(line, 25, y);
+                    y += 5;
+                });
+                y += 8;
+            });
+
+            // Footer
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(...textMuted);
+                doc.text(`Page ${i} of ${pageCount}`, 105, 287, { align: 'center' });
+                doc.text('Chapman University • Argyros College of Business and Economics • MGMT 316', 105, 292, { align: 'center' });
+            }
+
+            // Save
+            const fileName = `Values_Assessment_${studentInfo.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+            doc.save(fileName);
+        }
+
+        // Reset survey
+        function resetSurvey() {
+            currentStep = 1;
+            selectedValues = [];
+            customValues = [];
+            rankedValues = { 1: null, 2: null, 3: null };
+            studentInfo = {};
+            
+            document.getElementById('studentName').value = '';
+            document.getElementById('surveyDate').valueAsDate = new Date();
+            document.getElementById('customValueName').value = '';
+            document.getElementById('customValueDescription').value = '';
+            
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+            
+            displayCustomValues();
+            populateValuesGrid();
+            updateSelectionCounter();
+            updateButtonStates();
+            updateProgress();
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initSurvey);
+    </script>
+</body>
+</html>
