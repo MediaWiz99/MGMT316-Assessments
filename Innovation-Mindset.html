@@ -219,6 +219,12 @@
                 blindSpots: "May delay action with endless questioning; can frustrate action-oriented colleagues; may explore tangents instead of focusing.",
                 highBehaviors: ["Asks probing questions", "Explores widely", "Seeks first principles", "Embraces not knowing"], 
                 development: ["Practice asking 'Why?' 5 times", "Read outside your field", "Interview users and experts", "Keep a curiosity journal"],
+                workplace: "You thrive in research, market analysis, user research, and exploratory roles. Your natural inquisitiveness makes you invaluable in design thinking processes and customer discovery. Organizations benefit from your ability to ask questions others don't think to ask.",
+                worksWith: {
+                    'Experimentation': 'They test ideas while you generate questions worth testing. Together you drive evidence-based innovation.',
+                    'Resilience': 'They persist through failure while you discover new paths. Together you maintain momentum through setbacks.',
+                    'Collaboration': 'They build partnerships while you bring diverse questions. Together you explore ideas from multiple perspectives.'
+                },
                 swotStrength: "Deep understanding leads to better problem definition and solutions",
                 swotWeakness: "May delay action with excessive exploration",
                 swotOpportunity: "Pair curiosity with bias toward action",
@@ -237,6 +243,12 @@
                 blindSpots: "May experiment without clear hypotheses; can waste resources on poorly designed tests; may resist necessary planning.",
                 highBehaviors: ["Builds prototypes early", "Tests assumptions quickly", "Learns from failures", "Iterates rapidly"], 
                 development: ["Start with MVPs", "Set up small experiments", "Measure and learn", "Fail fast, learn faster"],
+                workplace: "You excel in product development, A/B testing, prototyping, and lean startup methodology. Your bias toward testing makes you effective in data-driven organizations. You naturally reduce risk by validating assumptions before committing resources.",
+                worksWith: {
+                    'Curiosity': 'They ask great questions while you design tests to answer them. Together you turn curiosity into validated insights.',
+                    'Resilience': 'They bounce back while you iterate designs. Together you treat each failure as data for the next experiment.',
+                    'Collaboration': 'They engage diverse partners while you design collaborative experiments. Together you test ideas at scale.'
+                },
                 swotStrength: "Rapid learning through action and iteration",
                 swotWeakness: "May experiment without sufficient planning",
                 swotOpportunity: "Design experiments more rigorously for better learning",
@@ -255,6 +267,12 @@
                 blindSpots: "May persist when pivoting would be wiser; can normalize failure instead of preventing it; may not adequately process setbacks.",
                 highBehaviors: ["Bounces back from setbacks", "Uses criticism constructively", "Tolerates ambiguity", "Maintains motivation"], 
                 development: ["Reframe failures as learning", "Build support networks", "Practice self-compassion", "Celebrate small wins"],
+                workplace: "You shine in startup environments, turnaround situations, and any role where setbacks are frequent. Your ability to bounce back makes you effective in high-failure-rate environments like venture capital, sales, and product innovation.",
+                worksWith: {
+                    'Curiosity': 'They explore new directions while you persist through obstacles. Together you maintain both breadth and depth.',
+                    'Experimentation': 'They test new approaches while you sustain effort through failed tests. Together you iterate without losing momentum.',
+                    'Collaboration': 'They build support networks while you model resilience for the team. Together you create psychologically safe innovation cultures.'
+                },
                 swotStrength: "Persistence through setbacks leads to eventual success",
                 swotWeakness: "May persist too long on failing approaches",
                 swotOpportunity: "Balance persistence with knowing when to pivot",
@@ -273,6 +291,12 @@
                 blindSpots: "May slow down for collaboration when speed is needed; can defer too much to group thinking; may struggle with independent work.",
                 highBehaviors: ["Seeks diverse input", "Builds on others' ideas", "Creates safety for ideas", "Shares openly"], 
                 development: ["Practice 'Yes, and...'", "Invite opposing views", "Credit others generously", "Build trust first"],
+                workplace: "You thrive in cross-functional teams, open innovation, strategic alliances, and any role requiring diverse perspectives. Your collaborative approach makes you effective at building innovation ecosystems and leveraging collective intelligence.",
+                worksWith: {
+                    'Curiosity': 'They ask probing questions while you gather diverse perspectives. Together you ensure no blind spots.',
+                    'Experimentation': 'They design tests while you engage stakeholders in the testing process. Together you build organizational buy-in for innovation.',
+                    'Resilience': 'They persist individually while you build team resilience. Together you create innovation cultures that survive setbacks.'
+                },
                 swotStrength: "Diverse input and psychological safety drive better innovation",
                 swotWeakness: "May slow innovation seeking consensus",
                 swotOpportunity: "Balance collaboration with decisive action",
@@ -577,7 +601,41 @@
                 y += 5;
             }
 
-            // ===== PAGE 2: SWOT and All Dimensions =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage(); y = 20;
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12); doc.setTextColor(255, 255, 255);
+            doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' }); y += 18;
+            doc.setFontSize(9); doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('How your ' + dimensionData[highestDim].name + ' strength shapes innovation behavior', 105, y, { align: 'center' }); y += 10;
+            var pSections = [
+                { label: 'PROFILE SUMMARY', text: dimensionData[highestDim].profileSummary, bg: [245,247,250], color: chapmanBlue },
+                { label: 'COMMUNICATION STYLE', text: dimensionData[highestDim].communicationStyle, bg: [245,247,250], color: chapmanBlue },
+                { label: 'MOTIVATED BY', text: dimensionData[highestDim].motivatedBy, bg: [245,247,250], color: chapmanBlue },
+                { label: 'STRESS RESPONSE', text: dimensionData[highestDim].stressResponse, bg: [255,243,224], color: orangeColor },
+                { label: 'BLIND SPOTS', text: dimensionData[highestDim].blindSpots, bg: [255,235,238], color: redColor },
+                { label: 'WORKPLACE APPLICATION', text: dimensionData[highestDim].workplace, bg: [245,247,250], color: chapmanBlue }
+            ];
+            for (var ps = 0; ps < pSections.length; ps++) {
+                if (y > 260) { doc.addPage(); y = 20; }
+                var sect = pSections[ps];
+                doc.setFillColor(sect.bg[0], sect.bg[1], sect.bg[2]); doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+                doc.setFontSize(10); doc.setTextColor(sect.color[0], sect.color[1], sect.color[2]); doc.text(sect.label, 25, y + 3); y += 8;
+                doc.setFontSize(9); doc.setTextColor(textDark[0], textDark[1], textDark[2]); y = addWrappedText(sect.text, 20, y, 170, 4.5); y += 6;
+            }
+            if (y > 240) { doc.addPage(); y = 20; }
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10); doc.setTextColor(255, 255, 255);
+            doc.text('WORKING WITH OTHER INNOVATION DIMENSIONS', 105, y + 7, { align: 'center' }); y += 16;
+            doc.setFontSize(9);
+            var wKeys = Object.keys(dimensionData[highestDim].worksWith);
+            for (var w = 0; w < wKeys.length; w++) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.text('With ' + wKeys[w] + ':', 20, y); y += 5;
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]); y = addWrappedText(dimensionData[highestDim].worksWith[wKeys[w]], 25, y, 165, 4.5); y += 4;
+            }
+            // ===== PAGE 3: SWOT and All Dimensions =====
             doc.addPage();
             y = 20;
 

@@ -175,7 +175,7 @@
         <div class="footer">
             <p>Strategic Thinking Assessment • Based on Strategic Management Frameworks</p>
             <p>Chapman University • Argyros College of Business and Economics</p>
-            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • MGMT 316</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2025 Professor Chip Monaco • MGMT 316</p>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -224,6 +224,12 @@
                 blindSpots: "May struggle with present realities while focused on future; can lose credibility if visions aren't grounded in execution capability.",
                 highBehaviors: ["Thinks in 5-10 year horizons", "Anticipates industry shifts", "Creates compelling futures", "Connects present to future"], 
                 development: ["Read about emerging trends", "Practice scenario planning", "Study disruptive innovations", "Talk to futurists and visionaries"],
+                workplace: "You excel in executive leadership, strategic planning, organizational transformation, and any role requiring long-range perspective. Your ability to see future possibilities makes you invaluable in setting organizational direction and inspiring others toward shared goals.",
+                worksWith: {
+                    'Analysis': 'They provide data-driven rigor while you set the direction. Together you create strategies that are both visionary and well-grounded.',
+                    'Agility': 'They adapt quickly while you maintain long-term focus. Together you navigate change without losing sight of the destination.',
+                    'Execution': 'They implement effectively while you define what matters. Together you translate vision into reality.'
+                },
                 swotStrength: "Sees future possibilities and inspires others with vision",
                 swotWeakness: "May struggle with present execution demands",
                 swotOpportunity: "Pair vision with analytical rigor and execution focus",
@@ -242,6 +248,12 @@
                 blindSpots: "May miss opportunities waiting for perfect data; can over-complicate decisions that need quick action.",
                 highBehaviors: ["Uses data to drive decisions", "Applies strategic frameworks", "Conducts competitive analysis", "Identifies root causes"], 
                 development: ["Learn strategic frameworks (SWOT, Porter's Five Forces)", "Practice data-driven decision making", "Study competitor strategies", "Develop analytical models"],
+                workplace: "You thrive in consulting, business intelligence, financial analysis, and any role requiring rigorous examination of complex data. Your analytical approach makes you effective at identifying patterns, testing assumptions, and building evidence-based strategies.",
+                worksWith: {
+                    'Vision': 'They set direction while you validate assumptions. Together you create strategies that are both ambitious and realistic.',
+                    'Agility': 'They adapt quickly while you provide analytical frameworks for change. Together you make smart pivots based on data.',
+                    'Execution': 'They implement while you measure progress. Together you ensure actions are aligned with strategic objectives.'
+                },
                 swotStrength: "Rigorous analysis leads to well-informed decisions",
                 swotWeakness: "May over-analyze or miss opportunities requiring speed",
                 swotOpportunity: "Balance analysis with bias toward action",
@@ -260,6 +272,12 @@
                 blindSpots: "May pivot too quickly without giving strategies time to work; can appear inconsistent or lacking conviction.",
                 highBehaviors: ["Embraces change and uncertainty", "Experiments and iterates", "Pivots without losing direction", "Stays calm in ambiguity"], 
                 development: ["Practice comfort with uncertainty", "Run small experiments", "Build contingency plans", "Study agile methodologies"],
+                workplace: "You excel in fast-changing industries, crisis management, startup environments, and any role requiring rapid adaptation. Your flexibility makes you effective at navigating uncertainty and turning disruption into opportunity.",
+                worksWith: {
+                    'Vision': 'They maintain long-term focus while you navigate short-term changes. Together you adapt without losing direction.',
+                    'Analysis': 'They provide data while you apply it quickly. Together you make fast, informed decisions under pressure.',
+                    'Execution': 'They implement plans while you adjust them in real time. Together you maintain momentum through changing conditions.'
+                },
                 swotStrength: "Thrives in uncertainty and adapts quickly to change",
                 swotWeakness: "May change direction too often or appear inconsistent",
                 swotOpportunity: "Balance agility with strategic persistence",
@@ -278,6 +296,12 @@
                 blindSpots: "May execute efficiently on wrong strategies; can be so focused on current execution that you miss needed pivots.",
                 highBehaviors: ["Creates clear action plans", "Aligns resources to priorities", "Makes difficult trade-offs", "Tracks and measures progress"], 
                 development: ["Break strategy into milestones", "Practice saying no to distractions", "Build accountability systems", "Connect daily work to strategy"],
+                workplace: "You thrive in operations management, project leadership, implementation roles, and any position requiring disciplined follow-through. Your execution focus makes you effective at turning strategies into measurable results.",
+                worksWith: {
+                    'Vision': 'They define goals while you achieve them. Together you bridge the strategy-execution gap that derails most organizations.',
+                    'Analysis': 'They generate insights while you translate them into action. Together you prevent analysis paralysis.',
+                    'Agility': 'They adapt plans while you maintain execution momentum. Together you balance flexibility with disciplined follow-through.'
+                },
                 swotStrength: "Translates strategy into measurable results",
                 swotWeakness: "May execute on outdated strategies or miss needed pivots",
                 swotOpportunity: "Pair execution focus with strategic sensing",
@@ -423,6 +447,10 @@
                             <div style="padding: 12px; background: rgba(123,31,162,0.08); border-radius: 8px; font-size: 0.85em;"><strong>Learn to say no</strong> — Strategy is about trade-offs</div>
                         </div>
                     </div>
+
+                    <div style="background: linear-gradient(135deg, #f8f9fc 0%, var(--blue-light) 100%); border-radius: 14px; padding: 30px; margin: 25px 0; border: 2px solid var(--chapman-blue);"><h4 style="color: var(--chapman-blue); margin-bottom: 20px; font-size: 1.3em; text-align: center;">🧠 Deep Behavioral Profile: ${dimensionData[highestDim].name}</h4><p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9em;">How your strategic strength shapes organizational impact</p><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;"><div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-blue);"><strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">💬 Communication Style</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].communicationStyle}</p></div><div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-gold);"><strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">🎯 Motivated By</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].motivatedBy}</p></div><div style="background: #FFF3E0; padding: 18px; border-radius: 10px; border-left: 4px solid #E65100;"><strong style="color: #E65100; font-size: 0.85em; text-transform: uppercase;">⚡ Stress Response</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].stressResponse}</p></div><div style="background: #FFEBEE; padding: 18px; border-radius: 10px; border-left: 4px solid #C62828;"><strong style="color: #C62828; font-size: 0.85em; text-transform: uppercase;">🔍 Blind Spots</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].blindSpots}</p></div></div></div>
+                    <div style="background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%); border-left: 4px solid var(--chapman-gold); padding: 20px; border-radius: 14px; margin: 20px 0;"><h4 style="color: var(--chapman-blue);">💼 Workplace Application</h4><p style="color: var(--text-secondary); line-height: 1.7;">${dimensionData[highestDim].workplace}</p></div>
+                    <div style="background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 25px; margin: 20px 0; border: 2px solid var(--chapman-blue);"><h4 style="color: var(--chapman-blue); margin-bottom: 15px; font-size: 1.2em;">🤝 Working With Other Strategic Dimensions</h4>${Object.entries(dimensionData[highestDim].worksWith).map(([key, value]) => `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--chapman-blue);"><strong style="color: var(--chapman-blue); font-size: 0.9em;">With ${key}:</strong><p style="font-size: 0.88em; margin-top: 5px; color: var(--text-secondary);">${value}</p></div>`).join('')}</div>
                     <div class="reflection-section"><h4>🤔 Reflection Questions</h4><div class="reflection-questions"><div class="reflection-question">Where do you want your career/organization to be in 5 years?</div><div class="reflection-question">What data would change your current strategy?</div><div class="reflection-question">What assumptions are you making that might be wrong?</div><div class="reflection-question">What are you saying "no" to in order to focus?</div></div></div>
                 </div>
             `;
@@ -570,7 +598,17 @@
                 y += 4;
             }
 
-            // ===== PAGE 2: SWOT and All Dimensions =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage(); y = 20;
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12); doc.setTextColor(255, 255, 255); doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' }); y += 18;
+            doc.setFontSize(9); doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('How your ' + dimensionData[highestDim].name + ' strength shapes strategic impact', 105, y, { align: 'center' }); y += 10;
+            var pS = [{label:'PROFILE SUMMARY',text:dimensionData[highestDim].profileSummary,bg:[245,247,250],color:chapmanBlue},{label:'COMMUNICATION STYLE',text:dimensionData[highestDim].communicationStyle,bg:[245,247,250],color:chapmanBlue},{label:'MOTIVATED BY',text:dimensionData[highestDim].motivatedBy,bg:[245,247,250],color:chapmanBlue},{label:'STRESS RESPONSE',text:dimensionData[highestDim].stressResponse,bg:[255,243,224],color:orangeColor},{label:'BLIND SPOTS',text:dimensionData[highestDim].blindSpots,bg:[255,235,238],color:redColor},{label:'WORKPLACE APPLICATION',text:dimensionData[highestDim].workplace,bg:[245,247,250],color:chapmanBlue}];
+            for(var ps=0;ps<pS.length;ps++){if(y>260){doc.addPage();y=20;}var s=pS[ps];doc.setFillColor(s.bg[0],s.bg[1],s.bg[2]);doc.roundedRect(20,y,170,4,1,1,'F');doc.setFontSize(10);doc.setTextColor(s.color[0],s.color[1],s.color[2]);doc.text(s.label,25,y+3);y+=8;doc.setFontSize(9);doc.setTextColor(textDark[0],textDark[1],textDark[2]);y=addWrappedText(s.text,20,y,170,4.5);y+=6;}
+            if(y>240){doc.addPage();y=20;}doc.setFillColor(chapmanBlue[0],chapmanBlue[1],chapmanBlue[2]);doc.roundedRect(20,y,170,10,2,2,'F');doc.setFontSize(10);doc.setTextColor(255,255,255);doc.text('WORKING WITH OTHER STRATEGIC DIMENSIONS',105,y+7,{align:'center'});y+=16;
+            doc.setFontSize(9);var wK=Object.keys(dimensionData[highestDim].worksWith);for(var w=0;w<wK.length;w++){if(y>270){doc.addPage();y=20;}doc.setTextColor(chapmanBlue[0],chapmanBlue[1],chapmanBlue[2]);doc.text('With '+wK[w]+':',20,y);y+=5;doc.setTextColor(textDark[0],textDark[1],textDark[2]);y=addWrappedText(dimensionData[highestDim].worksWith[wK[w]],25,y,165,4.5);y+=4;}
+            // ===== PAGE 3: SWOT and All Dimensions =====
             doc.addPage();
             y = 20;
 

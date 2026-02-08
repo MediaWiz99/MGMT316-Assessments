@@ -219,6 +219,12 @@
                 blindSpots: "May underestimate downside risks; can bet too much on uncertain outcomes; may not maintain adequate safety reserves.",
                 highBehaviors: ["Invests in volatile assets", "Comfortable with speculation", "Bets on uncertain outcomes", "Takes financial gambles"], 
                 considerations: ["Ensure adequate emergency fund", "Diversify investments", "Only risk what you can afford to lose", "Consider professional advice"],
+                workplace: "You excel in investment management, entrepreneurial finance, venture capital, and roles requiring financial decision-making under uncertainty. Your comfort with financial risk makes you effective at capital allocation, pricing strategies, and M&A evaluation.",
+                worksWith: {
+                    'Career': 'They take bold career moves while you manage financial risk. Together you balance professional ambition with financial prudence.',
+                    'Social': 'They navigate interpersonal risk while you handle financial exposure. Together you build well-rounded risk profiles.',
+                    'Physical': 'They embrace physical challenges while you manage financial stakes. Together you balance different risk domains effectively.'
+                },
                 swotStrength: "Willingness to pursue high-return opportunities others avoid",
                 swotWeakness: "May take excessive risks without adequate protection",
                 swotOpportunity: "Develop better risk assessment while maintaining risk tolerance",
@@ -237,6 +243,12 @@
                 blindSpots: "May underestimate reputational risks; can burn bridges unnecessarily; may not build adequate career safety nets.",
                 highBehaviors: ["Pursues unconventional paths", "Speaks truth to power", "Takes on challenging projects", "Changes careers boldly"], 
                 considerations: ["Build skills as safety net", "Network extensively", "Have backup plans", "Time risks strategically"],
+                workplace: "You thrive in dynamic industries, startup cultures, career transitions, and any environment rewarding bold professional moves. Your willingness to take career risks makes you effective at seizing opportunities others fear, driving innovation, and adapting to industry disruption.",
+                worksWith: {
+                    'Financial': 'They manage monetary risk while you take career leaps. Together you balance financial security with professional ambition.',
+                    'Social': 'They navigate social dynamics while you pursue unconventional career paths. Together you build networks that support bold moves.',
+                    'Physical': 'They embrace physical challenges while you push professional boundaries. Together you model well-rounded courage.'
+                },
                 swotStrength: "Bold career moves that accelerate growth and impact",
                 swotWeakness: "May take risks that damage reputation or relationships",
                 swotOpportunity: "Build stronger networks to support bold career moves",
@@ -255,6 +267,12 @@
                 blindSpots: "May underestimate social consequences; can alienate potential allies; may confuse being controversial with being right.",
                 highBehaviors: ["Voices unpopular opinions", "Initiates conversations", "Shows vulnerability", "Challenges norms"], 
                 considerations: ["Read social contexts", "Build psychological safety", "Choose battles wisely", "Practice assertiveness"],
+                workplace: "You excel in leadership, public speaking, negotiation, and any role requiring you to put your reputation on the line. Your comfort with social risk makes you effective at advocating for unpopular positions, giving honest feedback, and leading change in organizations.",
+                worksWith: {
+                    'Financial': 'They manage financial exposure while you navigate social dynamics. Together you take calculated risks across multiple domains.',
+                    'Career': 'They make bold career moves while you navigate the social implications. Together you advance professionally while maintaining relationships.',
+                    'Physical': 'They embrace physical challenges while you handle interpersonal risk. Together you demonstrate comprehensive courage.'
+                },
                 swotStrength: "Authenticity and courage to challenge consensus",
                 swotWeakness: "May damage relationships through excessive directness",
                 swotOpportunity: "Develop social intelligence to complement social courage",
@@ -273,6 +291,12 @@
                 blindSpots: "May underestimate physical dangers; can push beyond safe limits; may not adequately prepare or use safety measures.",
                 highBehaviors: ["Tries adventure sports", "Explores unknown places", "Pushes physical limits", "Embraces physical challenges"], 
                 considerations: ["Get proper training", "Use safety equipment", "Know your limits", "Have emergency plans"],
+                workplace: "You thrive in physically demanding roles, emergency management, field operations, and environments requiring comfort with bodily risk. Your willingness to accept physical challenges makes you effective in outdoor leadership, adventure industries, and high-stakes operational environments.",
+                worksWith: {
+                    'Financial': 'They manage monetary risk while you handle physical challenges. Together you balance different risk domains comprehensively.',
+                    'Career': 'They take career risks while you accept physical challenges. Together you model courage across professional and personal domains.',
+                    'Social': 'They navigate interpersonal risk while you embrace physical risk. Together you demonstrate multi-dimensional risk tolerance.'
+                },
                 swotStrength: "Embraces physical challenges that build experience and confidence",
                 swotWeakness: "May take unnecessary physical risks",
                 swotOpportunity: "Channel physical risk tolerance into calculated adventures",
@@ -556,7 +580,17 @@
                 y += 4;
             }
 
-            // ===== PAGE 2: SWOT and All Domains =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage(); y = 20;
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12); doc.setTextColor(255, 255, 255); doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' }); y += 18;
+            doc.setFontSize(9); doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('How your ' + dimensionData[highestDim].name + ' risk profile shapes decisions', 105, y, { align: 'center' }); y += 10;
+            var pS = [{label:'PROFILE SUMMARY',text:dimensionData[highestDim].profileSummary,bg:[245,247,250],color:chapmanBlue},{label:'COMMUNICATION STYLE',text:dimensionData[highestDim].communicationStyle,bg:[245,247,250],color:chapmanBlue},{label:'MOTIVATED BY',text:dimensionData[highestDim].motivatedBy,bg:[245,247,250],color:chapmanBlue},{label:'STRESS RESPONSE',text:dimensionData[highestDim].stressResponse,bg:[255,243,224],color:orangeColor},{label:'BLIND SPOTS',text:dimensionData[highestDim].blindSpots,bg:[255,235,238],color:redColor},{label:'WORKPLACE APPLICATION',text:dimensionData[highestDim].workplace,bg:[245,247,250],color:chapmanBlue}];
+            for(var ps=0;ps<pS.length;ps++){if(y>260){doc.addPage();y=20;}var s=pS[ps];doc.setFillColor(s.bg[0],s.bg[1],s.bg[2]);doc.roundedRect(20,y,170,4,1,1,'F');doc.setFontSize(10);doc.setTextColor(s.color[0],s.color[1],s.color[2]);doc.text(s.label,25,y+3);y+=8;doc.setFontSize(9);doc.setTextColor(textDark[0],textDark[1],textDark[2]);y=addWrappedText(s.text,20,y,170,4.5);y+=6;}
+            if(y>240){doc.addPage();y=20;}doc.setFillColor(chapmanBlue[0],chapmanBlue[1],chapmanBlue[2]);doc.roundedRect(20,y,170,10,2,2,'F');doc.setFontSize(10);doc.setTextColor(255,255,255);doc.text('WORKING WITH OTHER RISK DOMAINS',105,y+7,{align:'center'});y+=16;
+            doc.setFontSize(9);var wK=Object.keys(dimensionData[highestDim].worksWith);for(var w=0;w<wK.length;w++){if(y>270){doc.addPage();y=20;}doc.setTextColor(chapmanBlue[0],chapmanBlue[1],chapmanBlue[2]);doc.text('With '+wK[w]+':',20,y);y+=5;doc.setTextColor(textDark[0],textDark[1],textDark[2]);y=addWrappedText(dimensionData[highestDim].worksWith[wK[w]],25,y,165,4.5);y+=4;}
+            // ===== PAGE 3: SWOT and All Domains =====
             doc.addPage();
             y = 20;
 

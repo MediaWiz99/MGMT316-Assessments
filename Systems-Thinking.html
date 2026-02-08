@@ -175,7 +175,7 @@
         <div class="footer">
             <p>Systems Thinking Assessment • Based on Peter Senge's Fifth Discipline</p>
             <p>Chapman University • Argyros College of Business and Economics</p>
-            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • MGMT 316</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2025 Professor Chip Monaco • MGMT 316</p>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -224,6 +224,12 @@
                 blindSpots: "May struggle with detailed execution; can see so much context that decision-making becomes difficult.",
                 highBehaviors: ["Considers organizational context", "Takes multiple stakeholder views", "Avoids tunnel vision", "Sees forest and trees"], 
                 development: ["Practice zooming out before diving in", "Ask 'What else might be affected?'", "Create stakeholder maps", "Study how departments interconnect"],
+                workplace: "You excel in executive leadership, organizational design, strategic planning, and any role requiring big-picture understanding. Your ability to see the whole system makes you invaluable in preventing siloed thinking and ensuring cross-functional alignment.",
+                worksWith: {
+                    'Interconnections': 'They map specific connections while you see the whole. Together you create comprehensive system maps that are both broad and detailed.',
+                    'Dynamics': 'They track change patterns while you maintain the big picture. Together you anticipate how changes ripple through entire systems.',
+                    'Leverage': 'They find intervention points while you ensure interventions serve the whole. Together you create targeted changes with system-wide benefit.'
+                },
                 swotStrength: "Sees big picture and avoids narrow solutions",
                 swotWeakness: "May struggle with detailed implementation",
                 swotOpportunity: "Pair holistic view with execution focus",
@@ -242,6 +248,12 @@
                 blindSpots: "May miss simple solutions by looking for complex connections; can see relationships that aren't actually meaningful.",
                 highBehaviors: ["Traces problems to root causes", "Maps relationships between factors", "Sees hidden connections", "Understands ripple effects"], 
                 development: ["Draw causal loop diagrams", "Ask 'What led to this?'", "Look for patterns across situations", "Practice 'Five Whys' analysis"],
+                workplace: "You thrive in supply chain management, process improvement, network analysis, and roles requiring understanding of how parts relate. Your ability to map connections makes you effective at identifying hidden dependencies, bottlenecks, and unintended consequences.",
+                worksWith: {
+                    'Holistic': 'They see the big picture while you map the connections within it. Together you create comprehensive system understanding.',
+                    'Dynamics': 'They track how systems change while you identify what connects them. Together you predict how changes propagate through networks.',
+                    'Leverage': 'They find intervention points while you show what those points connect to. Together you prevent well-intended changes from causing unintended harm.'
+                },
                 swotStrength: "Sees relationships and root causes others miss",
                 swotWeakness: "May over-complicate simple situations",
                 swotOpportunity: "Use connection-mapping to prevent unintended consequences",
@@ -260,6 +272,12 @@
                 blindSpots: "May miss urgent present needs while focused on future dynamics; can over-weight worst-case scenarios.",
                 highBehaviors: ["Anticipates delayed effects", "Recognizes recurring patterns", "Understands feedback loops", "Thinks in time horizons"], 
                 development: ["Consider short and long-term effects", "Look for vicious and virtuous cycles", "Study how situations evolved historically", "Model scenarios over time"],
+                workplace: "You excel in change management, trend analysis, scenario planning, and roles requiring understanding of how systems evolve. Your ability to see patterns of change makes you effective at anticipating disruption, managing transitions, and timing strategic moves.",
+                worksWith: {
+                    'Holistic': 'They see the whole system while you track how it changes. Together you maintain both structural and temporal understanding.',
+                    'Interconnections': 'They map connections while you track how those connections evolve. Together you anticipate which relationships will strengthen or weaken.',
+                    'Leverage': 'They find intervention points while you predict how the system will respond. Together you time interventions for maximum effectiveness.'
+                },
                 swotStrength: "Anticipates how systems will evolve over time",
                 swotWeakness: "May miss present needs while focused on future dynamics",
                 swotOpportunity: "Use temporal thinking for better long-term planning",
@@ -278,6 +296,12 @@
                 blindSpots: "May dismiss necessary short-term fixes while searching for leverage; can miss simple solutions that work.",
                 highBehaviors: ["Finds high-impact intervention points", "Questions quick fixes", "Focuses on structure over blame", "Seeks sustainable solutions"], 
                 development: ["Ask 'Where is the real leverage here?'", "Challenge symptomatic solutions", "Look for structural causes", "Study Meadows' leverage points"],
+                workplace: "You thrive in consulting, process optimization, resource allocation, and any role requiring identification of high-impact intervention points. Your ability to find leverage makes you effective at achieving disproportionate results with limited resources.",
+                worksWith: {
+                    'Holistic': 'They see the whole while you find where to act. Together you ensure high-leverage interventions serve the broader system.',
+                    'Interconnections': 'They map connections while you identify which ones matter most. Together you focus effort on the relationships that drive outcomes.',
+                    'Dynamics': 'They predict system evolution while you find optimal timing. Together you make the right move at the right time for maximum impact.'
+                },
                 swotStrength: "Finds high-impact actions that create sustainable change",
                 swotWeakness: "May dismiss needed short-term fixes",
                 swotOpportunity: "Combine leverage thinking with pragmatic action",
@@ -436,6 +460,10 @@
                             <div style="padding: 12px; background: rgba(123,31,162,0.08); border-radius: 8px; font-size: 0.85em;"><strong>Small changes...</strong> can produce big results</div>
                         </div>
                     </div>
+
+                    <div style="background: linear-gradient(135deg, #f8f9fc 0%, var(--blue-light) 100%); border-radius: 14px; padding: 30px; margin: 25px 0; border: 2px solid var(--chapman-blue);"><h4 style="color: var(--chapman-blue); margin-bottom: 20px; font-size: 1.3em; text-align: center;">🧠 Deep Behavioral Profile: ${dimensionData[highestDim].name}</h4><p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9em;">How your systems thinking strength shapes organizational impact</p><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;"><div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-blue);"><strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">💬 Communication Style</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].communicationStyle}</p></div><div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-gold);"><strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">🎯 Motivated By</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].motivatedBy}</p></div><div style="background: #FFF3E0; padding: 18px; border-radius: 10px; border-left: 4px solid #E65100;"><strong style="color: #E65100; font-size: 0.85em; text-transform: uppercase;">⚡ Stress Response</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].stressResponse}</p></div><div style="background: #FFEBEE; padding: 18px; border-radius: 10px; border-left: 4px solid #C62828;"><strong style="color: #C62828; font-size: 0.85em; text-transform: uppercase;">🔍 Blind Spots</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].blindSpots}</p></div></div></div>
+                    <div style="background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%); border-left: 4px solid var(--chapman-gold); padding: 20px; border-radius: 14px; margin: 20px 0;"><h4 style="color: var(--chapman-blue);">💼 Workplace Application</h4><p style="color: var(--text-secondary); line-height: 1.7;">${dimensionData[highestDim].workplace}</p></div>
+                    <div style="background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 25px; margin: 20px 0; border: 2px solid var(--chapman-blue);"><h4 style="color: var(--chapman-blue); margin-bottom: 15px; font-size: 1.2em;">🤝 Working With Other Systems Dimensions</h4>${Object.entries(dimensionData[highestDim].worksWith).map(([key, value]) => `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--chapman-blue);"><strong style="color: var(--chapman-blue); font-size: 0.9em;">With ${key}:</strong><p style="font-size: 0.88em; margin-top: 5px; color: var(--text-secondary);">${value}</p></div>`).join('')}</div>
                     <div class="reflection-section"><h4>🤔 Reflection Questions</h4><div class="reflection-questions"><div class="reflection-question">Think of a recent problem. What connections to other issues did you miss?</div><div class="reflection-question">Where have you seen a 'quick fix' create new problems?</div><div class="reflection-question">What feedback loops operate in your organization?</div><div class="reflection-question">Where might small changes create large positive effects?</div></div></div>
                 </div>
             `;
@@ -598,7 +626,17 @@
                 y += 5;
             }
 
-            // ===== PAGE 2: SWOT and All Dimensions =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage(); y = 20;
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12); doc.setTextColor(255, 255, 255); doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' }); y += 18;
+            doc.setFontSize(9); doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('How your ' + dimensionData[highestDim].name + ' strength shapes systems thinking', 105, y, { align: 'center' }); y += 10;
+            var pS = [{label:'PROFILE SUMMARY',text:dimensionData[highestDim].profileSummary,bg:[245,247,250],color:chapmanBlue},{label:'COMMUNICATION STYLE',text:dimensionData[highestDim].communicationStyle,bg:[245,247,250],color:chapmanBlue},{label:'MOTIVATED BY',text:dimensionData[highestDim].motivatedBy,bg:[245,247,250],color:chapmanBlue},{label:'STRESS RESPONSE',text:dimensionData[highestDim].stressResponse,bg:[255,243,224],color:orangeColor},{label:'BLIND SPOTS',text:dimensionData[highestDim].blindSpots,bg:[255,235,238],color:redColor},{label:'WORKPLACE APPLICATION',text:dimensionData[highestDim].workplace,bg:[245,247,250],color:chapmanBlue}];
+            for(var ps=0;ps<pS.length;ps++){if(y>260){doc.addPage();y=20;}var s=pS[ps];doc.setFillColor(s.bg[0],s.bg[1],s.bg[2]);doc.roundedRect(20,y,170,4,1,1,'F');doc.setFontSize(10);doc.setTextColor(s.color[0],s.color[1],s.color[2]);doc.text(s.label,25,y+3);y+=8;doc.setFontSize(9);doc.setTextColor(textDark[0],textDark[1],textDark[2]);y=addWrappedText(s.text,20,y,170,4.5);y+=6;}
+            if(y>240){doc.addPage();y=20;}doc.setFillColor(chapmanBlue[0],chapmanBlue[1],chapmanBlue[2]);doc.roundedRect(20,y,170,10,2,2,'F');doc.setFontSize(10);doc.setTextColor(255,255,255);doc.text('WORKING WITH OTHER SYSTEMS DIMENSIONS',105,y+7,{align:'center'});y+=16;
+            doc.setFontSize(9);var wK=Object.keys(dimensionData[highestDim].worksWith);for(var w=0;w<wK.length;w++){if(y>270){doc.addPage();y=20;}doc.setTextColor(chapmanBlue[0],chapmanBlue[1],chapmanBlue[2]);doc.text('With '+wK[w]+':',20,y);y+=5;doc.setTextColor(textDark[0],textDark[1],textDark[2]);y=addWrappedText(dimensionData[highestDim].worksWith[wK[w]],25,y,165,4.5);y+=4;}
+            // ===== PAGE 3: SWOT and All Dimensions =====
             doc.addPage();
             y = 20;
 

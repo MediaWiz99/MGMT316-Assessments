@@ -198,7 +198,7 @@
         <div class="footer">
             <p>Psychological Safety Assessment • Based on Amy Edmondson's Research</p>
             <p>Chapman University • Argyros College of Business and Economics</p>
-            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • MGMT 316</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2025 Professor Chip Monaco • MGMT 316</p>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -243,6 +243,12 @@
                 blindSpots: "Without strong voice, leaders may not know what's really happening until problems are severe.",
                 highBehaviors: ["Raises concerns early and often", "Shares dissenting views respectfully", "Asks questions without hesitation", "Offers suggestions for improvement"], 
                 building: ["Invite quiet voices into discussions", "Thank people for sharing concerns", "Model vulnerability by sharing your own uncertainties", "Create explicit time for questions"],
+                workplace: "You excel in team leadership, facilitation, meeting management, and any role requiring open dialogue. Your comfort with speaking up makes you a natural advocate for ideas and concerns. Organizations benefit from your willingness to surface issues before they become crises.",
+                worksWith: {
+                    'Risk-Taking': 'They provide courage for experimentation while you ensure ideas get voiced. Together you create environments where bold thinking is both spoken and tested.',
+                    'Mistake Tolerance': 'They create safety around failure while you ensure lessons are shared. Together you build learning cultures where errors drive improvement.',
+                    'Inclusion': 'They welcome diverse perspectives while you amplify them. Together you ensure every voice contributes to the conversation.'
+                },
                 swotStrength: "Team has strong voice—members speak up freely, enabling early problem detection",
                 swotWeakness: "Limited voice creates blind spots; issues go unreported until they become crises",
                 swotOpportunity: "Create explicit mechanisms for surfacing concerns and dissenting views",
@@ -261,6 +267,12 @@
                 blindSpots: "Without risk-taking, teams may miss breakthrough opportunities and become stagnant.",
                 highBehaviors: ["Proposes innovative solutions", "Volunteers for challenging tasks", "Experiments without fear of failure", "Challenges conventional approaches"], 
                 building: ["Celebrate intelligent failures", "Reward effort and learning, not just outcomes", "Share your own failed experiments", "Create low-stakes opportunities to try new things"],
+                workplace: "You thrive in innovation teams, startup environments, R&D, and any role requiring experimentation. Your comfort with interpersonal risk makes you effective at proposing unconventional ideas and challenging the status quo without fear.",
+                worksWith: {
+                    'Voice': 'They speak up while you take risks. Together you create environments where bold ideas get both voiced and pursued.',
+                    'Mistake Tolerance': 'They normalize failure while you model risk-taking. Together you demonstrate that calculated risks are valued.',
+                    'Inclusion': 'They bring diverse perspectives while you create space for unconventional ideas. Together you ensure innovation comes from all directions.'
+                },
                 swotStrength: "Team embraces innovation—members try new approaches and challenge status quo",
                 swotWeakness: "Risk aversion limits innovation; team sticks to safe, proven approaches only",
                 swotOpportunity: "Create safe-to-fail experiments that encourage innovation",
@@ -279,6 +291,12 @@
                 blindSpots: "Without learning from mistakes, teams repeat errors and fail to improve processes.",
                 highBehaviors: ["Openly discusses mistakes", "Conducts blameless post-mortems", "Asks for help without embarrassment", "Views failures as data for improvement"], 
                 building: ["Conduct blame-free retrospectives", "Share your own mistakes openly", "Focus on systems, not individuals", "Ask 'What can we learn?' not 'Who's at fault?'"],
+                workplace: "You excel in continuous improvement, quality management, post-mortem facilitation, and learning-focused leadership. Your ability to treat errors as data rather than failures makes you invaluable in building no-blame cultures that drive organizational learning.",
+                worksWith: {
+                    'Voice': 'They ensure lessons get shared while you create safety around failure. Together you turn mistakes into organizational knowledge.',
+                    'Risk-Taking': 'They take bold risks while you normalize the failures that follow. Together you create the psychological safety for true experimentation.',
+                    'Inclusion': 'They ensure diverse participation while you reduce fear of judgment. Together you create environments where everyone can learn from mistakes.'
+                },
                 swotStrength: "Team learns rapidly—mistakes become fuel for continuous improvement",
                 swotWeakness: "Mistakes are hidden; team repeats errors and fails to improve processes",
                 swotOpportunity: "Implement blameless post-mortems to accelerate learning",
@@ -297,6 +315,12 @@
                 blindSpots: "Without inclusion, teams miss valuable perspectives and undermine diverse talent.",
                 highBehaviors: ["Actively includes all team members", "Shows genuine interest in others", "Gives credit generously", "Supports teammates' success"], 
                 building: ["Learn about team members as people", "Ensure everyone has a voice in meetings", "Recognize contributions publicly", "Address exclusionary behavior immediately"],
+                workplace: "You thrive in diversity and inclusion roles, team building, organizational development, and cross-cultural management. Your ability to create belonging makes you effective at building high-performing diverse teams where everyone contributes their best thinking.",
+                worksWith: {
+                    'Voice': 'They amplify ideas while you ensure everyone is heard. Together you prevent dominant voices from drowning out valuable perspectives.',
+                    'Risk-Taking': 'They model courage while you create belonging. Together you ensure all team members feel safe enough to take interpersonal risks.',
+                    'Mistake Tolerance': 'They reduce fear of failure while you reduce fear of judgment. Together you create comprehensive psychological safety.'
+                },
                 swotStrength: "Strong belonging—all members feel valued, driving retention and engagement",
                 swotWeakness: "Exclusion or favoritism damages morale and drives turnover",
                 swotOpportunity: "Build intentional inclusion practices into team routines",
@@ -500,6 +524,19 @@
                             <div style="padding: 15px; background: rgba(198,40,40,0.08); border-radius: 10px;"><div style="font-weight: 600; color: var(--inclusion); margin-bottom: 5px;">🤝 Better Retention</div><div style="font-size: 0.85em; color: var(--text-secondary);">People stay where they feel valued</div></div>
                         </div>
                     </div>
+
+                    <div style="background: linear-gradient(135deg, #f8f9fc 0%, var(--blue-light) 100%); border-radius: 14px; padding: 30px; margin: 25px 0; border: 2px solid var(--chapman-blue);">
+                        <h4 style="color: var(--chapman-blue); margin-bottom: 20px; font-size: 1.3em; text-align: center;">🧠 Deep Behavioral Profile: ${dimensionData[highestDim].name}</h4>
+                        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9em;">How your strongest psychological safety dimension shapes team dynamics</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-blue);"><strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">💬 Communication Style</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].communicationStyle}</p></div>
+                            <div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-gold);"><strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">🎯 Motivated By</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].motivatedBy}</p></div>
+                            <div style="background: #FFF3E0; padding: 18px; border-radius: 10px; border-left: 4px solid #E65100;"><strong style="color: #E65100; font-size: 0.85em; text-transform: uppercase;">⚡ Stress Response</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].stressResponse}</p></div>
+                            <div style="background: #FFEBEE; padding: 18px; border-radius: 10px; border-left: 4px solid #C62828;"><strong style="color: #C62828; font-size: 0.85em; text-transform: uppercase;">🔍 Blind Spots</strong><p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].blindSpots}</p></div>
+                        </div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%); border-left: 4px solid var(--chapman-gold); padding: 20px; border-radius: 14px; margin: 20px 0;"><h4 style="color: var(--chapman-blue);">💼 Workplace Application</h4><p style="color: var(--text-secondary); line-height: 1.7;">${dimensionData[highestDim].workplace}</p></div>
+                    <div style="background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 25px; margin: 20px 0; border: 2px solid var(--chapman-blue);"><h4 style="color: var(--chapman-blue); margin-bottom: 15px; font-size: 1.2em;">🤝 Working With Other Safety Dimensions</h4>${Object.entries(dimensionData[highestDim].worksWith).map(([key, value]) => `<div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--chapman-blue);"><strong style="color: var(--chapman-blue); font-size: 0.9em;">With ${key}:</strong><p style="font-size: 0.88em; margin-top: 5px; color: var(--text-secondary);">${value}</p></div>`).join('')}</div>
                     <div class="reflection-section"><h4>🤔 Reflection Questions</h4><div class="reflection-questions"><div class="reflection-question">When was the last time you held back an idea or concern? What stopped you?</div><div class="reflection-question">How does your team respond when someone makes a mistake?</div><div class="reflection-question">Who on your team might not feel safe speaking up? Why?</div><div class="reflection-question">What one action could you take this week to increase psychological safety?</div></div></div>
                 </div>
             `;
@@ -670,7 +707,38 @@
                 y += 4;
             });
 
-            // ===== PAGE 2: SWOT and Research =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage(); y = 20;
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12); doc.setTextColor(255, 255, 255); doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' }); y += 18;
+            doc.setFontSize(9); doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('How your ' + dimensionData[highestDim].name + ' strength shapes team safety behavior', 105, y, { align: 'center' }); y += 10;
+            var pSections = [
+                { label: 'PROFILE SUMMARY', text: dimensionData[highestDim].profileSummary, bg: [245,247,250], color: chapmanBlue },
+                { label: 'COMMUNICATION STYLE', text: dimensionData[highestDim].communicationStyle, bg: [245,247,250], color: chapmanBlue },
+                { label: 'MOTIVATED BY', text: dimensionData[highestDim].motivatedBy, bg: [245,247,250], color: chapmanBlue },
+                { label: 'STRESS RESPONSE', text: dimensionData[highestDim].stressResponse, bg: [255,243,224], color: orangeColor },
+                { label: 'BLIND SPOTS', text: dimensionData[highestDim].blindSpots, bg: [255,235,238], color: redColor },
+                { label: 'WORKPLACE APPLICATION', text: dimensionData[highestDim].workplace, bg: [245,247,250], color: chapmanBlue }
+            ];
+            for (var ps = 0; ps < pSections.length; ps++) {
+                if (y > 260) { doc.addPage(); y = 20; }
+                var sect = pSections[ps]; doc.setFillColor(sect.bg[0], sect.bg[1], sect.bg[2]); doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+                doc.setFontSize(10); doc.setTextColor(sect.color[0], sect.color[1], sect.color[2]); doc.text(sect.label, 25, y + 3); y += 8;
+                doc.setFontSize(9); doc.setTextColor(textDark[0], textDark[1], textDark[2]); y = addWrappedText(sect.text, 20, y, 170, 4.5); y += 6;
+            }
+            if (y > 240) { doc.addPage(); y = 20; }
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10); doc.setTextColor(255, 255, 255);
+            doc.text('WORKING WITH OTHER SAFETY DIMENSIONS', 105, y + 7, { align: 'center' }); y += 16;
+            doc.setFontSize(9);
+            var wKeys = Object.keys(dimensionData[highestDim].worksWith);
+            for (var w = 0; w < wKeys.length; w++) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]); doc.text('With ' + wKeys[w] + ':', 20, y); y += 5;
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]); y = addWrappedText(dimensionData[highestDim].worksWith[wKeys[w]], 25, y, 165, 4.5); y += 4;
+            }
+            // ===== PAGE 3: SWOT and Research =====
             doc.addPage();
             y = 20;
 

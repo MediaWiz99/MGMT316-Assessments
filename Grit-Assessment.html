@@ -205,7 +205,7 @@
         <div class="footer">
             <p>Grit Assessment • Based on Angela Duckworth's Grit Scale</p>
             <p>Chapman University • Argyros College of Business and Economics</p>
-            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • MGMT 316</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2025 Professor Chip Monaco • MGMT 316</p>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -244,6 +244,10 @@
                 blindSpots: "May persist with goals that should be revised; can miss opportunities by being too focused; may not recognize when it's wise to change direction.",
                 highSigns: ["Maintains focus on goals for years", "Doesn't get distracted by new shiny objects", "Has a clear sense of direction", "Connects daily tasks to long-term aspirations", "Remains committed when progress is slow"], 
                 development: ["Identify your ultimate concern or top-level goal", "Create a goal hierarchy connecting daily tasks to big goals", "Practice saying no to distractions", "Reflect regularly on why your goals matter", "Find mentors who model sustained passion"],
+                workplace: "You excel in roles requiring sustained strategic direction—long-term project leadership, research, entrepreneurship, and any position where maintaining focus through distractions is critical. Organizations value your ability to keep teams aligned with long-term objectives when short-term pressures mount.",
+                worksWith: {
+                    'Perseverance': 'Your consistency of interest provides the direction, while their effort provides the engine. Together you maintain both the compass heading and the energy to reach the destination. Help them channel their effort toward your sustained goals.'
+                },
                 swotStrength: "Sustained focus creates compound progress toward meaningful goals",
                 swotWeakness: "May persist when pivoting would be wiser; can miss adjacent opportunities",
                 swotOpportunity: "Pair consistency with regular reflection on whether goals still fit",
@@ -264,6 +268,10 @@
                 blindSpots: "May not recognize when working harder isn't the answer; can burn out by not knowing when to rest; may undervalue working smarter.",
                 highSigns: ["Finishes what they start", "Works hard without immediate rewards", "Bounces back quickly from setbacks", "Maintains effort when things get boring or hard", "Views obstacles as challenges to overcome"], 
                 development: ["Practice deliberate effort on difficult tasks", "Reframe setbacks as learning opportunities", "Build a growth mindset about effort", "Celebrate small wins", "Find accountability partners"],
+                workplace: "You thrive in high-pressure environments—sales, startup culture, emergency management, and turnaround situations. Your bounce-back ability makes you invaluable when organizations face setbacks, crises, or extended periods of difficulty that would cause others to disengage.",
+                worksWith: {
+                    'Passion': 'Their sustained direction gives your effort purpose, while your persistence powers through the obstacles on the path. Together you avoid both aimless effort and unfulfilled vision. Help them stay committed when the path gets hard.'
+                },
                 swotStrength: "Resilient effort that overcomes obstacles stopping others",
                 swotWeakness: "May work harder when working smarter would help; risk of burnout",
                 swotOpportunity: "Pair persistence with strategic thinking about when to persist vs. pivot",
@@ -399,6 +407,49 @@
                 <div class="results-body">
                     <div class="info-card ${strongerDim}"><div class="info-card-header"><div class="info-card-icon ${strongerDim}">${dimensionData[strongerDim].icon}</div><div class="info-card-info"><h3>Stronger: ${dimensionData[strongerDim].shortName}</h3><div class="subtitle">${dimensionData[strongerDim].subtitle}</div></div></div><p class="info-card-description">${dimensionData[strongerDim].description}</p><div class="char-grid"><div class="char-box signs"><h5>✓ Signs of High ${dimensionData[strongerDim].shortName}</h5><ul>${dimensionData[strongerDim].highSigns.map(s => `<li>${s}</li>`).join('')}</ul></div><div class="char-box develop"><h5>→ Leverage This Strength</h5><ul><li>Use this to support your weaker dimension</li><li>Model these behaviors for others</li><li>Take on challenges that use this capacity</li></ul></div></div></div>
                     <div class="info-card ${weakerDim}"><div class="info-card-header"><div class="info-card-icon ${weakerDim}">${dimensionData[weakerDim].icon}</div><div class="info-card-info"><h3>Growth Area: ${dimensionData[weakerDim].shortName}</h3><div class="subtitle">${dimensionData[weakerDim].subtitle}</div></div></div><p class="info-card-description">${dimensionData[weakerDim].description}</p><div class="char-grid"><div class="char-box signs"><h5>✓ Target Behaviors</h5><ul>${dimensionData[weakerDim].highSigns.slice(0,3).map(s => `<li>${s}</li>`).join('')}</ul></div><div class="char-box develop"><h5>→ Development Strategies</h5><ul>${dimensionData[weakerDim].development.slice(0,3).map(d => `<li>${d}</li>`).join('')}</ul></div></div></div>
+
+                    <!-- Deep Behavioral Profile -->
+                    <div style="background: linear-gradient(135deg, #f8f9fc 0%, var(--blue-light) 100%); border-radius: 14px; padding: 30px; margin: 25px 0; border: 2px solid var(--chapman-blue);">
+                        <h4 style="color: var(--chapman-blue); margin-bottom: 20px; font-size: 1.3em; text-align: center;">🧠 Deep Behavioral Profile: ${dimensionData[strongerDim].shortName}</h4>
+                        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9em;">Understanding how your stronger grit dimension shapes your approach to goals and challenges</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-blue);">
+                                <strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">💬 Communication Style</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[strongerDim].communicationStyle}</p>
+                            </div>
+                            <div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-gold);">
+                                <strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">🎯 Motivated By</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[strongerDim].motivatedBy}</p>
+                            </div>
+                            <div style="background: #FFF3E0; padding: 18px; border-radius: 10px; border-left: 4px solid #E65100;">
+                                <strong style="color: #E65100; font-size: 0.85em; text-transform: uppercase;">⚡ Stress Response</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[strongerDim].stressResponse}</p>
+                            </div>
+                            <div style="background: #FFEBEE; padding: 18px; border-radius: 10px; border-left: 4px solid #C62828;">
+                                <strong style="color: #C62828; font-size: 0.85em; text-transform: uppercase;">🔍 Blind Spots</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[strongerDim].blindSpots}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workplace Application -->
+                    <div class="result-section" style="background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%); border-left: 4px solid var(--chapman-gold); padding: 20px; border-radius: 14px; margin: 20px 0;">
+                        <h4 style="color: var(--chapman-blue);">💼 Workplace Application</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.7;">${dimensionData[strongerDim].workplace}</p>
+                    </div>
+
+                    <!-- Working With Other Dimension -->
+                    <div style="background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 25px; margin: 20px 0; border: 2px solid var(--chapman-blue);">
+                        <h4 style="color: var(--chapman-blue); margin-bottom: 15px; font-size: 1.2em;">🤝 Balancing Both Grit Dimensions</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 15px;">How your ${dimensionData[strongerDim].shortName} strength complements ${dimensionData[weakerDim].shortName}</p>
+                        ${Object.entries(dimensionData[strongerDim].worksWith).map(([key, value]) => `
+                            <div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--chapman-blue);">
+                                <strong style="color: var(--chapman-blue); font-size: 0.9em;">With ${key}:</strong>
+                                <p style="font-size: 0.88em; margin-top: 5px; color: var(--text-secondary);">${value}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
                     <div class="reflection-section"><h4>🤔 Reflection Questions</h4><div class="reflection-questions"><div class="reflection-question">What long-term goal have you been working toward for years?</div><div class="reflection-question">Think of a time you gave up. What contributed to that decision?</div><div class="reflection-question">Who is the grittiest person you know? What can you learn from them?</div><div class="reflection-question">What one action could you take this week to build your grit?</div></div></div>
                 </div>
             `;
@@ -561,7 +612,69 @@
             doc.text('- Angela Duckworth', 25, y + 15);
             doc.setFont(undefined, 'normal');
 
-            // ===== PAGE 2: SWOT and Details =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage();
+            y = 20;
+
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' });
+            y += 18;
+
+            doc.setFontSize(9);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('Understanding how your ' + dimensionData[strongerDim].shortName + ' strength shapes behavior', 105, y, { align: 'center' });
+            y += 10;
+
+            var profileSections = [
+                { label: 'PROFILE SUMMARY', text: dimensionData[strongerDim].profileSummary, bg: [245,247,250], color: chapmanBlue },
+                { label: 'COMMUNICATION STYLE', text: dimensionData[strongerDim].communicationStyle, bg: [245,247,250], color: chapmanBlue },
+                { label: 'DECISION STYLE', text: dimensionData[strongerDim].decisionStyle, bg: [245,247,250], color: chapmanBlue },
+                { label: 'MOTIVATED BY', text: dimensionData[strongerDim].motivatedBy, bg: [245,247,250], color: chapmanBlue },
+                { label: 'STRESS RESPONSE', text: dimensionData[strongerDim].stressResponse, bg: [255,243,224], color: orangeColor },
+                { label: 'BLIND SPOTS', text: dimensionData[strongerDim].blindSpots, bg: [255,235,238], color: redColor },
+                { label: 'WORKPLACE APPLICATION', text: dimensionData[strongerDim].workplace, bg: [245,247,250], color: chapmanBlue }
+            ];
+
+            for (var ps = 0; ps < profileSections.length; ps++) {
+                if (y > 260) { doc.addPage(); y = 20; }
+                var sect = profileSections[ps];
+                doc.setFillColor(sect.bg[0], sect.bg[1], sect.bg[2]);
+                doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+                doc.setFontSize(10);
+                doc.setTextColor(sect.color[0], sect.color[1], sect.color[2]);
+                doc.text(sect.label, 25, y + 3);
+                y += 8;
+                doc.setFontSize(9);
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y = addWrappedText(sect.text, 20, y, 170, 4.5);
+                y += 6;
+            }
+
+            // Working With Other Dimension
+            if (y > 240) { doc.addPage(); y = 20; }
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('BALANCING BOTH GRIT DIMENSIONS', 105, y + 7, { align: 'center' });
+            y += 16;
+
+            doc.setFontSize(9);
+            var wKeys = Object.keys(dimensionData[strongerDim].worksWith);
+            for (var w = 0; w < wKeys.length; w++) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+                doc.text('With ' + wKeys[w] + ':', 20, y);
+                y += 5;
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y = addWrappedText(dimensionData[strongerDim].worksWith[wKeys[w]], 25, y, 165, 4.5);
+                y += 4;
+            }
+
+            // ===== PAGE 3: SWOT and Details =====
             doc.addPage();
             y = 20;
 

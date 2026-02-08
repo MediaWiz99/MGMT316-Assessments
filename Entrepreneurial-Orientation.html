@@ -229,6 +229,13 @@
                 blindSpots: "May prioritize novelty over effectiveness; can struggle with routine execution; may alienate those who prefer proven approaches.",
                 highBehaviors: ["Generates novel ideas", "Experiments freely", "Champions change", "Embraces creativity"], 
                 development: ["Schedule brainstorming time", "Study design thinking", "Prototype quickly", "Learn from failures"],
+                workplace: "You thrive in R&D, product development, creative agencies, and innovation-focused roles. Your drive to create novel solutions makes you invaluable in industries undergoing disruption. You naturally push organizations beyond incremental improvements toward transformative change.",
+                worksWith: {
+                    'Proactiveness': 'They act on opportunities while you create novel solutions. Together you spot and capitalize on market gaps before competitors.',
+                    'Risk-Taking': 'They provide the courage to bet on your innovations. Together you move bold ideas from concept to market.',
+                    'Autonomy': 'They provide independence while you innovate. Together you create breakthrough solutions unconstrained by convention.',
+                    'Competitiveness': 'They drive market positioning while you create differentiation. Together you build sustainable competitive advantages.'
+                },
                 swotStrength: "Generates creative solutions and drives innovation",
                 swotWeakness: "May struggle with routine execution",
                 swotOpportunity: "Pair innovation with disciplined implementation",
@@ -247,6 +254,13 @@
                 blindSpots: "May act before fully understanding situations; can miss important details in rush to act; may exhaust resources on premature moves.",
                 highBehaviors: ["Anticipates trends", "Acts before forced", "Shapes markets", "Initiates change"], 
                 development: ["Scan for weak signals", "Act on opportunities early", "Build scenario plans", "Network for intelligence"],
+                workplace: "You excel in sales, business development, market research, and any role requiring anticipation of trends. Your forward-looking approach makes you a natural scout for emerging opportunities and threats. Organizations benefit from your early-warning capabilities.",
+                worksWith: {
+                    'Innovation': 'They create novel solutions while you identify opportunities to deploy them. Together you build first-mover advantages.',
+                    'Risk-Taking': 'They bet boldly while you identify which bets to make early. Together you take calculated risks ahead of competition.',
+                    'Autonomy': 'They work independently while you set the strategic direction. Together you move fast without bureaucratic drag.',
+                    'Competitiveness': 'They drive winning while you anticipate competitive moves. Together you stay multiple steps ahead of rivals.'
+                },
                 swotStrength: "Seizes opportunities before competitors",
                 swotWeakness: "May act too quickly without full information",
                 swotOpportunity: "Balance proactiveness with appropriate analysis",
@@ -265,6 +279,13 @@
                 blindSpots: "May underestimate downside risks; can bet too much on uncertain outcomes; may not adequately protect against failure.",
                 highBehaviors: ["Takes calculated risks", "Tolerates uncertainty", "Bets on potential", "Acts despite ambiguity"], 
                 development: ["Assess risk/reward ratios", "Start with small bets", "Build risk portfolio", "Learn from failures"],
+                workplace: "You shine in venture capital, entrepreneurial startups, turnaround management, and strategic decision-making under uncertainty. Your comfort with ambiguity makes you effective where others hesitate. Organizations value your willingness to act decisively when outcomes are unclear.",
+                worksWith: {
+                    'Innovation': 'They generate breakthrough ideas while you provide the courage to pursue them. Together you turn bold concepts into reality.',
+                    'Proactiveness': 'They spot opportunities early while you commit resources to them. Together you act decisively on emerging trends.',
+                    'Autonomy': 'They operate independently while you embrace uncertainty. Together you move quickly on unconventional paths.',
+                    'Competitiveness': 'They drive for market dominance while you bet big on winning strategies. Together you make aggressive moves competitors cannot match.'
+                },
                 swotStrength: "Willing to pursue opportunities others avoid",
                 swotWeakness: "May take excessive or poorly calculated risks",
                 swotOpportunity: "Develop better risk assessment while maintaining risk tolerance",
@@ -283,6 +304,13 @@
                 blindSpots: "May not seek valuable input; can alienate team members; may miss how your actions affect others.",
                 highBehaviors: ["Self-directed", "Takes ownership", "Decides independently", "Trusts own judgment"], 
                 development: ["Seek ownership opportunities", "Build decision confidence", "Take initiative on projects", "Develop self-reliance"],
+                workplace: "You thrive in remote work, consulting, freelance roles, and any position requiring self-direction. Your independence makes you effective in flat organizations and startup environments. You naturally resist bureaucracy and drive efficiency through self-management.",
+                worksWith: {
+                    'Innovation': 'They create solutions while you provide the independence to develop them freely. Together you bypass organizational constraints on creativity.',
+                    'Proactiveness': 'They identify opportunities while you act on them independently. Together you move faster than hierarchical competitors.',
+                    'Risk-Taking': 'They embrace uncertainty while you operate without needing constant approval. Together you take bold, independent action.',
+                    'Competitiveness': 'They drive market success while you maintain independent execution. Together you combine competitive intensity with operational freedom.'
+                },
                 swotStrength: "Takes ownership and acts decisively",
                 swotWeakness: "May not leverage others' input effectively",
                 swotOpportunity: "Balance autonomy with collaboration",
@@ -301,6 +329,13 @@
                 blindSpots: "May focus too much on competitors instead of customers; can create destructive competition; may burn relationships.",
                 highBehaviors: ["Monitors competitors", "Responds quickly", "Fights for position", "Drives to win"], 
                 development: ["Study competitors deeply", "Respond to threats quickly", "Build competitive intelligence", "Develop winning mindset"],
+                workplace: "You excel in sales, competitive strategy, market analysis, and any role where outperforming rivals is key. Your competitive drive makes you a natural closer, negotiator, and strategic planner. Organizations benefit from your relentless focus on market position and winning.",
+                worksWith: {
+                    'Innovation': 'They create differentiated solutions while you ensure they outperform competitors. Together you build products that win in the market.',
+                    'Proactiveness': 'They spot trends early while you exploit them competitively. Together you establish dominant market positions.',
+                    'Risk-Taking': 'They bet boldly while you focus those bets on winning. Together you make aggressive competitive moves that pay off.',
+                    'Autonomy': 'They operate independently while you channel that independence toward competitive goals. Together you outmaneuver larger, slower competitors.'
+                },
                 swotStrength: "Intense competitive drive that wins market battles",
                 swotWeakness: "May over-focus on competitors instead of creating value",
                 swotOpportunity: "Balance competitive focus with customer and innovation focus",
@@ -578,7 +613,61 @@
                 y += 4;
             }
 
-            // ===== PAGE 2: SWOT and All Dimensions =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage();
+            y = 20;
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' });
+            y += 18;
+            doc.setFontSize(9);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('How your ' + dimensionData[highestDim].name + ' strength shapes entrepreneurial behavior', 105, y, { align: 'center' });
+            y += 10;
+            var pSections = [
+                { label: 'PROFILE SUMMARY', text: dimensionData[highestDim].profileSummary, bg: [245,247,250], color: chapmanBlue },
+                { label: 'COMMUNICATION STYLE', text: dimensionData[highestDim].communicationStyle, bg: [245,247,250], color: chapmanBlue },
+                { label: 'MOTIVATED BY', text: dimensionData[highestDim].motivatedBy, bg: [245,247,250], color: chapmanBlue },
+                { label: 'STRESS RESPONSE', text: dimensionData[highestDim].stressResponse, bg: [255,243,224], color: orangeColor },
+                { label: 'BLIND SPOTS', text: dimensionData[highestDim].blindSpots, bg: [255,235,238], color: redColor },
+                { label: 'WORKPLACE APPLICATION', text: dimensionData[highestDim].workplace, bg: [245,247,250], color: chapmanBlue }
+            ];
+            for (var ps = 0; ps < pSections.length; ps++) {
+                if (y > 260) { doc.addPage(); y = 20; }
+                var sect = pSections[ps];
+                doc.setFillColor(sect.bg[0], sect.bg[1], sect.bg[2]);
+                doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+                doc.setFontSize(10);
+                doc.setTextColor(sect.color[0], sect.color[1], sect.color[2]);
+                doc.text(sect.label, 25, y + 3);
+                y += 8;
+                doc.setFontSize(9);
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y = addWrappedText(sect.text, 20, y, 170, 4.5);
+                y += 6;
+            }
+            if (y > 240) { doc.addPage(); y = 20; }
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('WORKING WITH OTHER ENTREPRENEURIAL DIMENSIONS', 105, y + 7, { align: 'center' });
+            y += 16;
+            doc.setFontSize(9);
+            var wKeys = Object.keys(dimensionData[highestDim].worksWith);
+            for (var w = 0; w < wKeys.length; w++) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+                doc.text('With ' + wKeys[w] + ':', 20, y);
+                y += 5;
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y = addWrappedText(dimensionData[highestDim].worksWith[wKeys[w]], 25, y, 165, 4.5);
+                y += 4;
+            }
+
+            // ===== PAGE 3: SWOT and All Dimensions =====
             doc.addPage();
             y = 20;
 

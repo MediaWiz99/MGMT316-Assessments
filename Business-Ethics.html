@@ -478,7 +478,7 @@
 
         <div class="footer">
             <p>Business Ethics Assessment • Chapman University • Argyros College of Business and Economics</p>
-            <p style="margin-top: 8px; font-size: 0.85em;">© 2024 Professor Chip Monaco • BUAD 216: Business Ethics</p>
+            <p style="margin-top: 8px; font-size: 0.85em;">© 2025 Professor Chip Monaco • MGMT 316</p>
         </div>
     </div>
 
@@ -1256,10 +1256,10 @@
                 doc.setFontSize(8);
                 doc.setTextColor(...textMuted);
                 doc.text('Page ' + i + ' of ' + pageCount, 105, 287, { align: 'center' });
-                doc.text('Chapman University • Argyros College of Business and Economics • BUAD 216', 105, 292, { align: 'center' });
+                doc.text('Chapman University • Argyros College of Business and Economics • MGMT 316', 105, 292, { align: 'center' });
             }
 
-            doc.save('Ethics_Assessment_' + studentName.replace(/\\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+            doc.save('Ethics_Assessment_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
         }
     </script>
 </body>

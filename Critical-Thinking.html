@@ -219,6 +219,12 @@
                 blindSpots: "May miss the forest for the trees; can over-complicate by breaking things down too much; may struggle with ambiguous situations.",
                 highBehaviors: ["Decomposes complex problems", "Identifies key components", "Distinguishes facts from opinions", "Clarifies concepts"], 
                 development: ["Practice breaking problems into parts", "Ask 'What are the key elements?'", "Create visual diagrams of relationships", "Define terms before using them"],
+                workplace: "You excel in roles requiring complex problem decomposition—project management, business analysis, consulting, and process improvement. You naturally create clarity from chaos, making you invaluable when teams face ambiguous or multifaceted challenges. Your ability to identify root causes prevents organizations from treating symptoms instead of problems.",
+                worksWith: {
+                    'Evaluation': 'You decompose problems while they assess evidence quality. Together you ensure thorough, well-supported analysis. Leverage their skepticism to validate your breakdowns.',
+                    'Inference': 'You identify components while they draw conclusions. Partner to ensure inferences are grounded in properly analyzed parts rather than surface observations.',
+                    'Open-Mindedness': 'You structure problems while they ensure diverse perspectives are included. Together you prevent tunnel vision in analysis.'
+                },
                 swotStrength: "Breaks down complexity to create clarity and understanding",
                 swotWeakness: "May over-analyze or miss big picture",
                 swotOpportunity: "Pair analysis with synthesis for complete thinking",
@@ -237,6 +243,12 @@
                 blindSpots: "May dismiss valid intuitions; can appear distrustful or overly critical; may struggle when evidence is unavailable.",
                 highBehaviors: ["Checks source credibility", "Questions evidence quality", "Identifies logical fallacies", "Weighs competing arguments"], 
                 development: ["Always check multiple sources", "Learn common logical fallacies", "Ask 'How do we know this?'", "Practice steelmanning arguments"],
+                workplace: "You thrive in roles requiring quality assurance, due diligence, risk assessment, and compliance. Your evidence-based approach makes you a natural auditor, fact-checker, and critical reviewer. Organizations benefit from your ability to spot flawed reasoning in proposals and strategic plans before costly commitments are made.",
+                worksWith: {
+                    'Analysis': 'They decompose problems while you assess the quality of each component. Together you ensure both thoroughness and rigor.',
+                    'Inference': 'You validate evidence while they draw conclusions. Partner to ensure inferences are based on credible, well-evaluated information.',
+                    'Open-Mindedness': 'You assess evidence quality while they ensure diverse sources are considered. Together you prevent both gullibility and closed-mindedness.'
+                },
                 swotStrength: "Rigorous evaluation prevents poor decisions based on weak evidence",
                 swotWeakness: "May be overly skeptical or slow to act",
                 swotOpportunity: "Balance skepticism with appropriate trust and action",
@@ -255,6 +267,12 @@
                 blindSpots: "May miss emotional or irrational factors; can be overconfident in logical conclusions; may overlook hidden assumptions.",
                 highBehaviors: ["Draws logical conclusions", "Considers alternatives", "Identifies assumptions", "Anticipates consequences"], 
                 development: ["Practice 'If...then' reasoning", "Ask 'What are we assuming?'", "Consider multiple explanations", "Think through implications"],
+                workplace: "You excel in strategic planning, forecasting, scenario analysis, and any role requiring you to connect dots and anticipate outcomes. Your ability to identify hidden assumptions makes you invaluable in negotiations, competitive analysis, and risk management. You help organizations see around corners.",
+                worksWith: {
+                    'Analysis': 'They break down problems while you draw conclusions from the parts. Together you move from decomposition to actionable insight.',
+                    'Evaluation': 'They validate your evidence while you reason toward conclusions. Partner to ensure your inferences rest on solid foundations.',
+                    'Open-Mindedness': 'You draw logical conclusions while they challenge your assumptions. Together you prevent both hasty conclusions and endless deliberation.'
+                },
                 swotStrength: "Sound reasoning leads to valid conclusions and good predictions",
                 swotWeakness: "May be overconfident in logic or miss non-logical factors",
                 swotOpportunity: "Test assumptions more rigorously before drawing conclusions",
@@ -273,6 +291,12 @@
                 blindSpots: "May be so open that you struggle to commit to positions; can appear wishy-washy; may defer too much to others.",
                 highBehaviors: ["Genuinely considers alternatives", "Changes mind with evidence", "Seeks challenging views", "Admits uncertainty"], 
                 development: ["Actively seek opposing views", "Practice saying 'I might be wrong'", "Steelman opposing arguments", "Cultivate intellectual humility"],
+                workplace: "You thrive in cross-functional teams, innovation labs, diversity initiatives, and any environment requiring intellectual humility. Your willingness to consider alternatives makes you an excellent mediator, facilitator, and change agent. Organizations benefit from your ability to bridge perspectives and prevent groupthink.",
+                worksWith: {
+                    'Analysis': 'You bring diverse perspectives while they create structure. Together you ensure comprehensive, well-organized thinking.',
+                    'Evaluation': 'You introduce new viewpoints while they assess their validity. Together you balance openness with rigor.',
+                    'Inference': 'You challenge assumptions while they draw conclusions. Together you ensure reasoning is both sound and inclusive of multiple perspectives.'
+                },
                 swotStrength: "Intellectual humility leads to better decisions and continuous learning",
                 swotWeakness: "May struggle to take firm positions when needed",
                 swotOpportunity: "Balance openness with confident action when evidence supports it",
@@ -408,6 +432,49 @@
                     <div class="result-section"><h4>Growth Area: ${dimensionData[lowestDim].name}</h4>
                         <div class="dim-detail ${lowestDim}"><h5 style="color: ${dimensionData[lowestDim].color};">${dimensionData[lowestDim].icon} ${dimensionData[lowestDim].name}</h5><p>${dimensionData[lowestDim].description}</p><p><strong>Development Strategies:</strong></p><ul>${dimensionData[lowestDim].development.map(d => `<li>${d}</li>`).join('')}</ul></div>
                     </div>
+
+                    <!-- Deep Behavioral Profile -->
+                    <div style="background: linear-gradient(135deg, #f8f9fc 0%, var(--blue-light) 100%); border-radius: 14px; padding: 30px; margin: 25px 0; border: 2px solid var(--chapman-blue);">
+                        <h4 style="color: var(--chapman-blue); margin-bottom: 20px; font-size: 1.3em; text-align: center;">🧠 Deep Behavioral Profile: ${dimensionData[highestDim].name}</h4>
+                        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9em;">Understanding how your strongest dimension shapes your thinking patterns and workplace behavior</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-blue);">
+                                <strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">💬 Communication Style</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].communicationStyle}</p>
+                            </div>
+                            <div style="background: white; padding: 18px; border-radius: 10px; border-left: 4px solid var(--chapman-gold);">
+                                <strong style="color: var(--chapman-blue); font-size: 0.85em; text-transform: uppercase;">🎯 Motivated By</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].motivatedBy}</p>
+                            </div>
+                            <div style="background: #FFF3E0; padding: 18px; border-radius: 10px; border-left: 4px solid #E65100;">
+                                <strong style="color: #E65100; font-size: 0.85em; text-transform: uppercase;">⚡ Stress Response</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].stressResponse}</p>
+                            </div>
+                            <div style="background: #FFEBEE; padding: 18px; border-radius: 10px; border-left: 4px solid #C62828;">
+                                <strong style="color: #C62828; font-size: 0.85em; text-transform: uppercase;">🔍 Blind Spots</strong>
+                                <p style="margin-top: 8px; font-size: 0.9em; color: var(--text-secondary); line-height: 1.6;">${dimensionData[highestDim].blindSpots}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workplace Application -->
+                    <div class="result-section" style="background: linear-gradient(135deg, #fffef8 0%, #fef9e7 100%); border-left: 4px solid var(--chapman-gold);">
+                        <h4 style="color: var(--chapman-blue);">💼 Workplace Application</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.7;">${dimensionData[highestDim].workplace}</p>
+                    </div>
+
+                    <!-- Working With Other Dimensions -->
+                    <div style="background: linear-gradient(135deg, var(--blue-light) 0%, #f0f4fa 100%); border-radius: 14px; padding: 25px; margin: 20px 0; border: 2px solid var(--chapman-blue);">
+                        <h4 style="color: var(--chapman-blue); margin-bottom: 15px; font-size: 1.2em;">🤝 Working With Other Thinking Dimensions</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 15px;">How your ${dimensionData[highestDim].name} strength complements other critical thinking dimensions</p>
+                        ${Object.entries(dimensionData[highestDim].worksWith).map(([key, value]) => `
+                            <div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid ${dimensionData[key.toLowerCase().replace('-mindedness','').replace('open','openness')]?.color || 'var(--chapman-blue)'};">
+                                <strong style="color: var(--chapman-blue); font-size: 0.9em;">With ${key} Thinkers:</strong>
+                                <p style="font-size: 0.88em; margin-top: 5px; color: var(--text-secondary);">${value}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
                     <div class="reflection-section"><h4>Reflection Questions</h4><div class="reflection-questions"><div class="reflection-question">When did you last change your mind based on evidence?</div><div class="reflection-question">What assumptions might you be making about a current challenge?</div><div class="reflection-question">How do you typically evaluate the credibility of information?</div><div class="reflection-question">What perspective have you not fully considered?</div></div></div>
                 </div>
             `;
@@ -550,7 +617,128 @@
                 y += 4;
             }
 
-            // ===== PAGE 2: SWOT and All Dimensions =====
+            // ===== PAGE 2: DEEP BEHAVIORAL PROFILE =====
+            doc.addPage();
+            y = 20;
+
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 12, 2, 2, 'F');
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text('DEEP BEHAVIORAL PROFILE', 105, y + 8, { align: 'center' });
+            y += 18;
+
+            doc.setFontSize(9);
+            doc.setTextColor(textMuted[0], textMuted[1], textMuted[2]);
+            doc.text('Understanding how your ' + dimensionData[highestDim].name + ' strength shapes workplace behavior', 105, y, { align: 'center' });
+            y += 10;
+
+            // Profile Summary
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('PROFILE SUMMARY', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].profileSummary, 20, y, 170, 4.5);
+            y += 6;
+
+            // Communication Style
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('COMMUNICATION STYLE', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].communicationStyle, 20, y, 170, 4.5);
+            y += 6;
+
+            // Decision Style
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('DECISION STYLE', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].decisionStyle, 20, y, 170, 4.5);
+            y += 6;
+
+            // Motivated By
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('MOTIVATED BY', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].motivatedBy, 20, y, 170, 4.5);
+            y += 6;
+
+            // Stress Response
+            doc.setFillColor(255, 243, 224);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(orangeColor[0], orangeColor[1], orangeColor[2]);
+            doc.text('STRESS RESPONSE', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].stressResponse, 20, y, 170, 4.5);
+            y += 6;
+
+            // Blind Spots
+            doc.setFillColor(255, 235, 238);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(redColor[0], redColor[1], redColor[2]);
+            doc.text('BLIND SPOTS', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].blindSpots, 20, y, 170, 4.5);
+            y += 6;
+
+            // Workplace Application
+            doc.setFillColor(245, 247, 250);
+            doc.roundedRect(20, y, 170, 4, 1, 1, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.text('WORKPLACE APPLICATION', 25, y + 3);
+            y += 8;
+            doc.setFontSize(9);
+            doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+            y = addWrappedText(dimensionData[highestDim].workplace, 20, y, 170, 4.5);
+            y += 10;
+
+            // Working With Other Dimensions
+            doc.setFillColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+            doc.roundedRect(20, y, 170, 10, 2, 2, 'F');
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text('WORKING WITH OTHER THINKING DIMENSIONS', 105, y + 7, { align: 'center' });
+            y += 16;
+
+            doc.setFontSize(9);
+            var worksWithData = dimensionData[highestDim].worksWith;
+            var worksWithKeys = Object.keys(worksWithData);
+            for (var w = 0; w < worksWithKeys.length; w++) {
+                if (y > 270) { doc.addPage(); y = 20; }
+                doc.setTextColor(chapmanBlue[0], chapmanBlue[1], chapmanBlue[2]);
+                doc.text('With ' + worksWithKeys[w] + ' Thinkers:', 20, y);
+                y += 5;
+                doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+                y = addWrappedText(worksWithData[worksWithKeys[w]], 25, y, 165, 4.5);
+                y += 4;
+            }
+
+            // ===== PAGE 3: SWOT and All Dimensions =====
             doc.addPage();
             y = 20;
 
