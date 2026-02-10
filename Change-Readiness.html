@@ -679,6 +679,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
+    // Fallback: if jsPDF didn't load from primary CDN, try alternate
+    if (!window.jspdf) {
+        var s = document.createElement('script');
+        s.src = 'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js';
+        document.head.appendChild(s);
+    }
+    </script>
+    <script>
         // Questions organized by dimension (10 per dimension)
         const questions = {
             cognitive: [
@@ -1091,7 +1099,7 @@
                             </div>
                             <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
                                 <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Total Score</div>
-                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${totalScore} / ${maxTotal}</div>
+                                <div style="font-size: 1.2em; font-weight: 700; color: #F5E6A3;">${totalScore} / ${maxTotalScore}</div>
                             </div>
                             <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
                                 <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Strongest Dimension</div>
@@ -1106,7 +1114,7 @@
                             <strong>Dimension Scores:</strong> Cognitive: ${scores.cognitive} | Emotional: ${scores.emotional} | Proactive: ${scores.proactive} | Learning: ${scores.learning}
                         </div>
                         <div style="font-size: 0.75em; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
-                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Change Profile: ${profile.name} | Strongest: ${dimensionData[strongestDim].name} | Score: ${totalScore}/${maxTotal}</div>
+                            <div style="margin-bottom: 6px;"><strong>Your Result:</strong> Change Profile: ${profile.name} | Strongest: ${dimensionData[strongestDim].name} | Score: ${totalScore}/${maxTotalScore}</div>
                             <div style="opacity: 0.7;"><span>Tracker Code:</span> <code style="background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px;">CRA-${strongestDim === 'cognitive' ? 'Co' : strongestDim === 'emotional' ? 'Em' : strongestDim === 'proactive' ? 'Pr' : 'Le'}-${profile.key === 'changeChampion' ? 'Ch' : profile.key === 'changeReady' ? 'Re' : profile.key === 'changeCapable' ? 'Ca' : 'Rs'}${totalScore}</code></div>
                         </div>
                     </div>
@@ -1303,6 +1311,19 @@
         }
 
         function generatePDF() {
+            // Check if jsPDF is loaded
+            if (!window.jspdf || !window.jspdf.jsPDF) {
+                alert('PDF library is still loading. Please wait a moment and try again.\n\nIf this persists, try refreshing the page or check that your browser allows scripts from cdnjs.cloudflare.com.');
+                return;
+            }
+
+            // Show loading indicator
+            var btn = document.querySelector('#downloadSection .btn-secondary');
+            var originalText = btn.textContent;
+            btn.textContent = 'Generating PDF...';
+            btn.disabled = true;
+
+            try {
             var jsPDF = window.jspdf.jsPDF;
             var doc = new jsPDF();
             var scores = window.changeResults.scores;
@@ -1614,6 +1635,18 @@
             }
 
             doc.save('Change_Readiness_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+
+            } catch(e) {
+                console.error('PDF generation error:', e);
+                alert('Error generating PDF: ' + e.message + '\n\nPlease try refreshing the page and generating again.');
+            } finally {
+                // Restore button
+                var btn = document.querySelector('#downloadSection .btn-secondary');
+                if (btn) {
+                    btn.textContent = originalText || 'Download PDF Report';
+                    btn.disabled = false;
+                }
+            }
         }
 
         function restartAssessment() {

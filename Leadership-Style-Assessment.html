@@ -746,6 +746,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
+    // Fallback: if jsPDF didn't load from primary CDN, try alternate
+    if (!window.jspdf) {
+        var s = document.createElement('script');
+        s.src = 'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js';
+        document.head.appendChild(s);
+    }
+    </script>
+    <script>
         // Leadership scenarios with 4 response options mapping to S1-S4
         const questions = [
             {
@@ -1269,7 +1277,7 @@
             const flexibilityLevel = flexibilityIndex >= 15 ? 'High' : flexibilityIndex >= 10 ? 'Moderate' : 'Low';
             
             // Generate tracker code with human-readable explanation
-            const styleAbbrev = { directing: 'S1', coaching: 'S2', supporting: 'S3', delegating: 'S4' };
+            const styleAbbrev = { directing: 'Di', coaching: 'Co', supporting: 'Su', delegating: 'De' };
             const styleNames = { directing: 'Directing', coaching: 'Coaching', supporting: 'Supporting', delegating: 'Delegating' };
             const trackerCode = `LSA-${styleAbbrev[primaryStyle]}${styleAbbrev[secondaryStyle]}-${styleClarity.charAt(0)}`;
             const codeExplanation = `Leadership Style: ${styleNames[primaryStyle]} (primary) + ${styleNames[secondaryStyle]} (secondary) | ${styleClarity}`;
@@ -1370,7 +1378,7 @@
                             </div>
                             <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
                                 <div style="font-size: 0.75em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Leadership Flexibility</div>
-                                <div style="font-size: 1.1em; font-weight: 600;">${flexibility}</div>
+                                <div style="font-size: 1.1em; font-weight: 600;">${flexibilityLevel}</div>
                             </div>
                         </div>
                         <div style="font-size: 0.85em; opacity: 0.9; margin-bottom: 10px;">
@@ -1597,6 +1605,19 @@
         }
 
         function generatePDF() {
+            // Check if jsPDF is loaded
+            if (!window.jspdf || !window.jspdf.jsPDF) {
+                alert('PDF library is still loading. Please wait a moment and try again.\n\nIf this persists, try refreshing the page or check that your browser allows scripts from cdnjs.cloudflare.com.');
+                return;
+            }
+
+            // Show loading indicator
+            var btn = document.querySelector('#downloadSection .btn-secondary');
+            var originalText = btn.textContent;
+            btn.textContent = 'Generating PDF...';
+            btn.disabled = true;
+
+            try {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const { scores, primaryStyle, secondaryStyle } = window.leadershipResults;
@@ -1622,7 +1643,7 @@
             const orientation = taskScore > relationshipScore ? 'Task-Focused' : 'Relationship-Focused';
             const flexIndex = 20 - (Math.max(...Object.values(scores)) - Math.min(...Object.values(scores)));
             const flexibility = flexIndex >= 15 ? 'High' : flexIndex >= 10 ? 'Moderate' : 'Low';
-            const styleAbbrev = { directing: 'S1', coaching: 'S2', supporting: 'S3', delegating: 'S4' };
+            const styleAbbrev = { directing: 'Di', coaching: 'Co', supporting: 'Su', delegating: 'De' };
             const styleNames = { directing: 'Directing', coaching: 'Coaching', supporting: 'Supporting', delegating: 'Delegating' };
             const trackerCode = 'LSA-' + styleAbbrev[primaryStyle] + styleAbbrev[secondaryStyle] + '-' + styleClarity.charAt(0);
             const codeExplanation = styleNames[primaryStyle] + ' (primary) + ' + styleNames[secondaryStyle] + ' (secondary) | ' + styleClarity;
@@ -2022,6 +2043,18 @@
             }
 
             doc.save('Leadership_Style_Assessment_' + studentName.replace(/\s+/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf');
+
+            } catch(e) {
+                console.error('PDF generation error:', e);
+                alert('Error generating PDF: ' + e.message + '\n\nPlease try refreshing the page and generating again.');
+            } finally {
+                // Restore button
+                var btn = document.querySelector('#downloadSection .btn-secondary');
+                if (btn) {
+                    btn.textContent = originalText || 'Download PDF Report';
+                    btn.disabled = false;
+                }
+            }
         }
 
         function restartAssessment() {

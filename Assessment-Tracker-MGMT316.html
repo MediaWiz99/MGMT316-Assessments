@@ -372,7 +372,7 @@
         // Active assessments for MGMT 316 with their tracker code patterns
         const activeAssessments = [
             { id: 'leadership', name: 'Leadership Style', icon: '👑', framework: 'Situational Leadership (Hersey & Blanchard)', code: 'LSA', dimensions: ['Directing', 'Coaching', 'Supporting', 'Delegating'], parser: parseLSA },
-            { id: 'communication', name: 'Communication Style', icon: '💬', framework: 'Communication Theory', code: 'CSA', dimensions: ['Analytical', 'Intuitive', 'Functional', 'Personal'], parser: parseCSA },
+            { id: 'communication', name: 'Communication Style', icon: '💬', framework: 'Communication Theory', code: 'CSA', dimensions: ['Assertive', 'Aggressive', 'Passive', 'Passive-Aggressive'], parser: parseCSA },
             { id: 'conflict', name: 'Conflict Management', icon: '⚔️', framework: 'Thomas-Kilmann TKI', code: 'CMA', dimensions: ['Competing', 'Collaborating', 'Compromising', 'Avoiding', 'Accommodating'], parser: parseCMA },
             { id: 'eq', name: 'Emotional Intelligence', icon: '❤️', framework: "Goleman's EQ Model", code: 'EIA', dimensions: ['Self-Awareness', 'Self-Regulation', 'Motivation', 'Empathy', 'Social Skills'], parser: parseEIA },
             { id: 'decision', name: 'Decision-Making Style', icon: '🎲', framework: 'Rowe & Boulgarides', code: 'DMS', dimensions: ['Directive', 'Analytical', 'Conceptual', 'Behavioral'], parser: parseDMS },
@@ -429,10 +429,10 @@
         }
         
         function parseCSA(code) {
-            // CSA-{Primary}{Secondary}-{Clarity} e.g., CSA-AnIn-S
+            // CSA-{Primary}{Secondary}-{Clarity} e.g., CSA-AsAg-S
             const match = code.match(/CSA-([A-Z][a-z])([A-Z][a-z])-([SMB])/i);
             if (!match) return null;
-            const styles = { An: 'Analytical', In: 'Intuitive', Fu: 'Functional', Pe: 'Personal' };
+            const styles = { As: 'Assertive', Ag: 'Aggressive', Pa: 'Passive', PA: 'Passive-Aggressive' };
             const levels = { S: 'Strong Clarity', M: 'Moderate Clarity', B: 'Balanced' };
             return { primary: styles[match[1]] || match[1], secondary: styles[match[2]] || match[2], level: levels[match[3].toUpperCase()] || match[3] };
         }
@@ -665,7 +665,7 @@
             const resultDiv = document.getElementById(`result-${assessmentId}`);
             const statusIcon = document.getElementById(`status-${assessmentId}`);
             const entryDiv = document.getElementById(`entry-${assessmentId}`);
-            const code = input.value.trim().toUpperCase();
+            const code = input.value.trim();
             
             if (!code) {
                 input.className = '';
@@ -678,8 +678,8 @@
                 return;
             }
             
-            // Check if code starts with correct prefix
-            if (!code.startsWith(assessment.code + '-')) {
+            // Check if code starts with correct prefix (case-insensitive)
+            if (!code.toUpperCase().startsWith(assessment.code + '-')) {
                 input.className = 'invalid';
                 resultDiv.style.display = 'none';
                 statusIcon.textContent = '❌';
